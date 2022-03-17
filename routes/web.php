@@ -19,4 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix'=>'admin'],function(){
+
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');
+
+
+
+});
