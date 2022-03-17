@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cliente;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
-class ClienteSeeder extends Seeder
+class TelefoneSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,14 +18,12 @@ class ClienteSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-
-        for ($i=0; $i < 15; $i++) {
-            DB::table('clientes')->insert([
-                'nome' => $faker->name,
-                'email' => $faker->email,
+        for ($i=0; $i < 50; $i++) {
+            DB::table('telefones')->insert([
+                'numero' => $faker->phoneNumber,
+                'ddd' => '85',
+                'cliente_id' => 2
             ]);
-
         }
-
     }
 }

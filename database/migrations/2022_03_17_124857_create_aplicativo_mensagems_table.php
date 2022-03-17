@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('aplicativo_mensagems', function (Blueprint $table) {
-            $table->id();
+        Schema::create('aplicativo_mensagens', function (Blueprint $table) {
+            $table->increments('id');
             $table->timestamps();
+            $table->string("nome");
+            $table->string("link");
+            $table->boolean("habilitado");
+            $table->string("icon");
+
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aplicativo_mensagems');
+        Schema::dropIfExists('aplicativo_mensagens');
     }
 };

@@ -13,9 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contatos', function (Blueprint $table) {
-            $table->id();
+        Schema::create('telefones', function (Blueprint $table) {
+            $table->increments("id");
             $table->timestamps();
+            $table->integer("cliente_id")->unsigned()->index();
+            $table->string("numero");
+            $table->string("ddd");
+
+            $table->foreign("cliente_id")
+                ->references("id")
+                ->on('clientes')
+                ->onDelete('cascade');
         });
     }
 
@@ -26,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contatos');
+        Schema::dropIfExists('telefones');
     }
 };
