@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AplicativoMensagem;
 use App\Models\Cliente;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
+use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
@@ -13,9 +15,11 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $r)
     {
-        $clientes = Cliente::paginate(15);
+        $clientes = Cliente::pesquisarPorNome($r->input('nome'))
+            ->pesquisarPorEmail($r->input('email'))
+            ->orderby('id','desc')->paginate(30);;
         $dados      =  [
             "titulo"    => "Clientes",
             "titulo_tabela" => "Lista de Clientes"
@@ -29,20 +33,49 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function novo()
     {
-        //
+
+        $dados      =  [
+            "titulo"    => "Cliente",
+            "titulo_formulario" =>'Novo'
+        ];
+        return view('admin.clientes.formulario',$dados);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreClienteRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreClienteRequest $request)
+    public function cadastrar()
     {
-        //
+        try{
+            $id = Cliente::gravar(\request());
+            return redirect()->route('cliente.editar',$id);
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+
+    }
+
+    public function editar($id)
+    {
+
+        $dados      =  [
+            "titulo"    => "Cliente",
+            "titulo_formulario" =>'Editar'
+        ];
+        $cliente    =   Cliente::find($id);
+        $app        =   AplicativoMensagem::all();
+
+        return view('admin.clientes.formulario',$dados)->with('cliente',$cliente)->with('app',$app);
+    }
+
+    public function atualizar()
+    {
+        try{
+            $id = Cliente::atualizar(\request());
+            return redirect()->route('cliente.editar',$id);
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -54,6 +87,18 @@ class ClienteController extends Controller
     public function show(Cliente $cliente)
     {
         //
+    }
+
+    public function pesquisa(Request $r)
+    {
+//        return route('cliente.pesquisa')->link();
+        $clientes =
+        $dados      =  [
+            "titulo"    => "Clientes",
+            "titulo_tabela" => "Lista de Clientes"
+        ];
+
+        return view('admin.clientes.index',$dados)->with('clientes',$clientes);
     }
 
     /**

@@ -16,9 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            AplicativoMensagemSeeder::class,
             ClienteSeeder::class,
-            TelefoneSeeder::class
         ]);
     }
 }

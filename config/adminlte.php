@@ -251,7 +251,7 @@ return [
             'text'        => 'Clientes',
             'url'         => "admin/clientes",
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
+            'label'       => "50",
             'label_color' => 'success',
         ]
         ,
@@ -378,7 +378,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -393,7 +393,7 @@ return [
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

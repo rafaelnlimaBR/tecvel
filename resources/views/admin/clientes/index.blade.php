@@ -11,19 +11,20 @@
                 <h3 class="card-title">{{$titulo_tabela}}</h3>
 
                 <div class="card-tools">
-                    <button type="button" class="btn btn-block btn-primary btn-xs left"><i class="fa fa-solid fa-plus"></i> Novo</button>
+                    <a href="{{route('cliente.novo')}}" type="button" class="btn btn-block btn-primary btn-xs left"><i class="fa fa-solid fa-plus"></i> Novo</a>
                 </div>
             </div>
 
 
             <div class="card-body">
                 <div class="" style="padding-bottom: 10px" >
-                    <form class="form-inline" action="#">
+                    <form class="form-inline" action="{{route('cliente.index')}}" method="get">
+
                         {{csrf_field()}}
                         <div class="input-group input-group-sm" style="width: 350px;">
 
-                            <input type="text" name="table_search" class="form-control float-right col-md-5" style="" placeholder="Nome">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Email">
+                            <input type="text" name="nome" class="form-control float-right col-md-5" style="" placeholder="Nome">
+                            <input type="text" name="email" class="form-control float-right" placeholder="Email">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default">
                                     <i class="fas fa-search"></i>
@@ -49,7 +50,12 @@
                             <td>{{$c->nome}}</td>
                             <td>{{$c->email}}</td>
                             <td><a href="" class=""><i class="fa fa-telegram" aria-hidden="true"></i>a</a></td>
-                            <td><span class="badge bg-danger">55%</span></td>
+                            <td>
+                                <a href="{{route('cliente.editar',$c->id)}}" class="btn btn-block btn-warning btn-xs">
+
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
 
