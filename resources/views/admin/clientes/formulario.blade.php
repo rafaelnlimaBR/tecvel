@@ -24,6 +24,23 @@
                             <label for="email">Email</label>
                             <input type="text" class="form-control" id="emai" name="email" placeholder="Email" value="{{isset($cliente)?$cliente->email:''}}">
                         </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>Whatsapp</label>
+                                    <input type="text" class="form-control" name="telefone01" placeholder="Numero" value="{{isset($cliente)?$cliente->telefone01:''}}">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Telefone</label>
+                                    <input type="text" name="telefone02" class="form-control" placeholder="Numero" value="{{isset($cliente)?$cliente->telefone02:''}}">
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
                     <div class="card-footer">
                         @if(isset($cliente))

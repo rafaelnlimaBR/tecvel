@@ -38,7 +38,8 @@
                     <tr>
                         <th style="width: 10px">#</th>
                         <th>Nome</th>
-                        <th>Email</th>
+                        <th>Whatsapp</th>
+                        <th>Telefone</th>
                         <th>App</th>
                         <th style="width: 40px">Ação</th>
                     </tr>
@@ -48,7 +49,8 @@
                         <tr>
                             <td>{{$c->id}}</td>
                             <td>{{$c->nome}}</td>
-                            <td>{{$c->email}}</td>
+                            <td><a href="https://wa.me/{{$c->telefone01}}" target="new">{{$c->telefone01}}</a> </td>
+                            <td>{{$c->telefone02}}</td>
                             <td><a href="" class=""><i class="fa fa-telegram" aria-hidden="true"></i>a</a></td>
                             <td>
                                 <a href="{{route('cliente.editar',$c->id)}}" class="btn btn-block btn-warning btn-xs">

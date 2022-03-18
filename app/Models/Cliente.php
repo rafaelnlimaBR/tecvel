@@ -27,6 +27,8 @@ class Cliente extends Model
         $cliente        =   new Cliente();
         $cliente->nome  =   $r->get('nome');
         $cliente->email =   $r->get('email');
+        $cliente->telefone01    =   $r->get('telefone01');
+        $cliente->telefone02    =   $r->get('telefone02');
         if($cliente->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
@@ -38,6 +40,8 @@ class Cliente extends Model
         $cliente        =   Cliente::find($r->get('id'));
         $cliente->nome  =   $r->input('nome');
         $cliente->email =   $r->input('email');
+        $cliente->telefone01    =   $r->get('telefone01');
+        $cliente->telefone02    =   $r->get('telefone02');
         if($cliente->save() == false){
             throw new \Exception('Não foi possível realizar a atualização',200);
         }

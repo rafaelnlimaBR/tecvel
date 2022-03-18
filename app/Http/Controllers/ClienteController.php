@@ -63,9 +63,8 @@ class ClienteController extends Controller
             "titulo_formulario" =>'Editar'
         ];
         $cliente    =   Cliente::find($id);
-        $app        =   AplicativoMensagem::all();
 
-        return view('admin.clientes.formulario',$dados)->with('cliente',$cliente)->with('app',$app);
+        return view('admin.clientes.formulario',$dados)->with('cliente',$cliente);
     }
 
     public function atualizar()

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nome');
             $table->string('email');
+            $table->string('telefone01');
+            $table->string('telefone02');
         });
     }
 
