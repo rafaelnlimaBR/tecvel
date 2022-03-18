@@ -15,8 +15,13 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::all();
-        return view('admin.clientes.index')->with('clientes',$clientes)->with('titulo','Clientes');
+        $clientes = Cliente::paginate(15);
+        $dados      =  [
+            "titulo"    => "Clientes",
+            "titulo_tabela" => "Lista de Clientes"
+        ];
+
+        return view('admin.clientes.index',$dados)->with('clientes',$clientes);
     }
 
     /**
