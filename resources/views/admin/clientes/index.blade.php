@@ -49,7 +49,7 @@
                         <tr>
                             <td>{{$c->id}}</td>
                             <td>{{$c->nome}}</td>
-                            <td><a href="https://wa.me/{{$c->telefone01}}" target="new">{{$c->telefone01}}</a> </td>
+                            <td><a href="https://wa.me/55{{$c->telefone01}}" target="new">{{$c->telefone01}}</a> </td>
                             <td>{{$c->telefone02}}</td>
                             <td><a href="" class=""><i class="fa fa-telegram" aria-hidden="true"></i>a</a></td>
                             <td>

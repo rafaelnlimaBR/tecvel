@@ -45,7 +45,9 @@
                     <div class="card-footer">
                         @if(isset($cliente))
                             <button type="submit" class="btn btn-warning">Editar</button>
-                            <button type="" class="btn btn-danger">Deletar</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir">
+                                Deletar
+                            </button>
                             <input type="hidden" class="form-control" id="id" name="id" value="{{$cliente->id}}">
                         @else
                             <button type="submit" class="btn btn-primary">Salva</button>
@@ -60,4 +62,30 @@
 
 
     </div>
+
+    @if(isset($cliente))
+        <form class="" action="{{route('cliente.excluir')}}" method="post">
+            <input name="id" value="{{$cliente->id}}" type="hidden">
+            {{csrf_field()}}
+        <div class="modal fade" id="excluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmação de exclusão</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Deseja excluir esse registro?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="input" class="btn btn-danger">Excluir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    @endif
 @stop

@@ -47,4 +47,12 @@ class Cliente extends Model
         }
         return $cliente->id;
     }
+
+    public static function excluir($id)
+    {
+        $cliente        =   Cliente::find($id);
+        if($cliente->delete() == false){
+            throw new \Exception('Não foi possível realizar a exclusão',200);
+        }
+    }
 }

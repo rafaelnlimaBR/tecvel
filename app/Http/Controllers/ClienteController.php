@@ -77,60 +77,15 @@ class ClienteController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cliente $cliente)
+    public function excluir()
     {
-        //
+        try{
+            $id = Cliente::excluir(\request()->get('id'));
+            return redirect()->route('cliente.index');
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
     }
 
-    public function pesquisa(Request $r)
-    {
-//        return route('cliente.pesquisa')->link();
-        $clientes =
-        $dados      =  [
-            "titulo"    => "Clientes",
-            "titulo_tabela" => "Lista de Clientes"
-        ];
 
-        return view('admin.clientes.index',$dados)->with('clientes',$clientes);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cliente $cliente)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateClienteRequest  $request
-     * @param  \App\Models\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateClienteRequest $request, Cliente $cliente)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Cliente $cliente)
-    {
-        //
-    }
 }

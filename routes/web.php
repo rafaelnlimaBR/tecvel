@@ -30,6 +30,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('/cliente/editar/{id}', [App\Http\Controllers\ClienteController::class, 'editar'])->name('cliente.editar');
     Route::post('/cliente/cadastrar', [ClienteController::class, 'cadastrar'])->name('cliente.cadastrar');
     Route::post('/cliente/atualizar', [ClienteController::class, 'atualizar'])->name('cliente.atualizar');
+    Route::post('/cliente/excluir', [ClienteController::class, 'excluir'])->name('cliente.excluir');
 
 //    Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'pesquisa'])->name('cliente.pesquisa');
 
