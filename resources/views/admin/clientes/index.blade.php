@@ -1,17 +1,16 @@
 @extends('admin.home')
 
-@section('content')
-
-
-
+@section('conteudo')
 
     <div class="col-md-12">
+
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">{{$titulo_tabela}}</h3>
 
+
                 <div class="card-tools">
-                    <a href="{{route('cliente.novo')}}" type="button" class="btn btn-block btn-primary btn-xs left"><i class="fa fa-solid fa-plus"></i> Novo</a>
+                    <a href="{{route('cliente.novo')}}" type="button" class="btn btn-block btn-primary btn-sm left"><i class="fa fa-solid fa-plus"></i> Novo</a>
                 </div>
             </div>
 
@@ -40,8 +39,7 @@
                         <th>Nome</th>
                         <th>Whatsapp</th>
                         <th>Telefone</th>
-                        <th>App</th>
-                        <th style="width: 40px">Ação</th>
+                        <th style="width: 40px">Editar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,7 +49,6 @@
                             <td>{{$c->nome}}</td>
                             <td><a href="https://wa.me/55{{$c->telefone01}}" target="new">{{$c->telefone01}}</a> </td>
                             <td>{{$c->telefone02}}</td>
-                            <td><a href="" class=""><i class="fa fa-telegram" aria-hidden="true"></i>a</a></td>
                             <td>
                                 <a href="{{route('cliente.editar',$c->id)}}" class="btn btn-block btn-warning btn-xs">
 

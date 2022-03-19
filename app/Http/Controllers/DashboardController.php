@@ -8,6 +8,6 @@ class DashboardController extends Controller
 {
     public function home()
     {
-        return view('home')->with('titulo','Dashboard');
+        return view('admin.home')->with('titulo','Dashboard');
     }
 }

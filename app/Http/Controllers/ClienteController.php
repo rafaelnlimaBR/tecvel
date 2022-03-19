@@ -48,9 +48,9 @@ class ClienteController extends Controller
     {
         try{
             $id = Cliente::gravar(\request());
-            return redirect()->route('cliente.editar',$id);
+            return redirect()->route('cliente.index')->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
-            return $e->getMessage();
+            return redirect()->route('cliente.novo')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
 
     }
@@ -71,9 +71,9 @@ class ClienteController extends Controller
     {
         try{
             $id = Cliente::atualizar(\request());
-            return redirect()->route('cliente.editar',$id);
+            return redirect()->route('cliente.index')->with('alerta',['tipo'=>'success','msg'=>"Editado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
-            return $e->getMessage();
+            return redirect()->route('cliente.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
     }
 
@@ -81,9 +81,9 @@ class ClienteController extends Controller
     {
         try{
             $id = Cliente::excluir(\request()->get('id'));
-            return redirect()->route('cliente.index');
+            return redirect()->route('cliente.index')->with('alerta',['tipo'=>'success','msg'=>"Editado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);;
         }catch (\Exception $e){
-            return $e->getMessage();
+            return redirect()->route('cliente.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
     }
 

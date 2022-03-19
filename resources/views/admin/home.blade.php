@@ -7,6 +7,10 @@
 @stop
 
 @section('content')
+
+    {{--Alerta--}}
+    @include('admin.includes.alertas')
+    {{--Conteudo--}}
     @yield('conteudo')
 @stop
 
