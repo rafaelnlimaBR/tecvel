@@ -15,6 +15,10 @@ class Status extends Model
     {
         return $query->where('nome','like','%'.$descricao.'%');
     }
+    public function scopePesquisarPorHabilitados($query)
+    {
+        return $query->where('habilitado',1);
+    }
 
     public function proximos()
     {
@@ -27,6 +31,7 @@ class Status extends Model
         $Status->nome  =   $r->get('nome');
         $Status->cor    =   $r->get('cor');
         $Status->orcamento    =   $r->get('orcamento');
+        $Status->habilitado    =   $r->get('habilitado');
 
         if($Status->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
@@ -40,6 +45,7 @@ class Status extends Model
         $Status->nome  =   $r->get('nome');
         $Status->cor    =   $r->get('cor');
         $Status->orcamento    =   $r->get('orcamento');
+        $Status->habilitado    =   $r->get('habilitado');
         if($Status->save() == false){
             throw new \Exception('Não foi possível realizar a atualização',200);
         }
@@ -52,5 +58,11 @@ class Status extends Model
         if($Status->delete() == false){
             throw new \Exception('Não foi possível realizar a exclusão',200);
         }
+    }
+
+    public static function adicionarRelacionamento(Request $r)
+    {
+        $status_atual    =   Status::find($r->get('status_atual_id'));
+        $status_atual->proximos()->attach($r->get('status_proximo_id'));
     }
 }

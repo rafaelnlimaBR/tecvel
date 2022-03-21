@@ -54,10 +54,12 @@ class StatusController extends Controller
             "titulo"    => "Status",
             "titulo_formulario" =>'Editar'
         ];
+       $todosStatusHabilitados = Status::PesquisarPorHabilitados();
+
         $Status    =   Status::find($id);
 
 
-        return view('admin.status.formulario',$dados)->with('status',$Status);
+        return view('admin.status.formulario',$dados)->with('status',$Status)->with('todos',$todosStatusHabilitados);
     }
 
     public function atualizar()
@@ -76,6 +78,17 @@ class StatusController extends Controller
         try{
             $id = Status::excluir(\request()->get('id'));
             return redirect()->route('status.index')->with('alerta',['tipo'=>'success','msg'=>"Excluido com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);;
+        }catch (\Exception $e){
+            return redirect()->route('status.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+        }
+    }
+
+    public function adicionarStatus()
+    {
+        try{
+
+            Status::adicionarRelacionamento(\request());
+            return redirect()->route('status.editar',\request()->get('status_atual_id'))->with('alerta',['tipo'=>'success','msg'=>"Vingulado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);;
         }catch (\Exception $e){
             return redirect()->route('status.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }

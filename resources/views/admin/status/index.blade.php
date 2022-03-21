@@ -38,6 +38,7 @@
                         <th>Nome</th>
                         <th style="width: 10%">Cor</th>
                         <th style="width: 10%">Orçamento</th>
+                        <th style="width: 10%">Habilitado</th>
                         <th style="width: 40px">Editar</th>
                     </tr>
                     </thead>
@@ -52,6 +53,7 @@
                                 </div>
                             </td>
                             <td>{{$c->orcamento}}</td>
+                            <td>{{$c->habilitado}}</td>
                             <td>
                                 <a href="{{route('status.editar',$c->id)}}" class="btn btn-block btn-warning btn-xs">
 

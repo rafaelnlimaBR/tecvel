@@ -73,8 +73,28 @@
                     <div class="card-header">
                         <h3 class="card-title">Relacionados</h3>
                     </div>
-
+                    <form class="" action="{{route('status.adicionar.relacionamento')}}" method="post">
                     <div class="card-body">
+                        <div class="row" >
+                            <div class="col-sm-4">
+                                {{csrf_field()}}
+                                <div class="form-group">
+                                    <label>Orçamento</label>
+                                    {{Form::select('status_proximo_id', $todos->pluck('nome','id'), '',['class'=>'form-control'])}}
+                                    <input value="{{$status->id}}" name="status_atual_id" type="hidden">
+                                    {{--<input  type="text" class="form-control" id="descricao" name="descricao" placeholder="Descricao" value="{{isset($status)?$status->descricao:''}}">--}}
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+
+                                <div class="form-group">
+                                    <label>Adicionar</label>
+                                    <input type="submit" class="form-control btn btn-primary" value="add">
+                                    {{--<input  type="text" class="form-control" id="descricao" name="descricao" placeholder="Descricao" value="{{isset($status)?$status->descricao:''}}">--}}
+                                </div>
+                            </div>
+                        </div>
+
                         <table class="table table-bordered">
                             <thead>
                             <tr>
@@ -100,7 +120,7 @@
                             </tbody>
                         </table>
                     </div>
-
+                    </form>
                 </div>
             </div>
 
