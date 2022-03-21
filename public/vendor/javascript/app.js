@@ -24,3 +24,4 @@ $('.placa').mask('AAA0U00', {
     }
 });
 $('.mod_ano').mask("00/00",{placeholder: "  /  "});
+$('.telefone').mask("(99)999999999");

@@ -251,7 +251,11 @@ return [
             'text'        => 'Clientes',
             'url'         => "admin/clientes",
             'icon'        => 'far fa-fw fa-file',
-            'label'       => "50",
+            'label_color' => 'success',
+        ],[
+            'text'        => 'Servicos',
+            'url'         => "admin/servicos",
+            'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
         ]
         ,
@@ -259,7 +263,7 @@ return [
             'text'        => 'Veiculos',
             'url'         => "admin/veiculos",
             'icon'        => 'far fa-fw fa-file',
-            'label'       => "50",
+
             'label_color' => 'success',
         ]
         ,
