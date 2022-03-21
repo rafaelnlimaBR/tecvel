@@ -17,7 +17,7 @@ class VeiculoSeeder extends Seeder
     public function run()
     {
 
-
+        $this->command->info("Criando veiculos");
 
         DB::table('veiculos')->insert([
             ['placa' => "HUI3024",

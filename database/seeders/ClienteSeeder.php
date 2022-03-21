@@ -16,9 +16,10 @@ class ClienteSeeder extends Seeder
      */
     public function run()
     {
+        $this->command->info("Criando clientes");
         $faker = Faker::create();
 
-        for ($i=0; $i < 500; $i++) {
+        for ($i=0; $i < 10; $i++) {
             DB::table('clientes')->insert([
                 'nome' => $faker->name,
                 'email' => $faker->email,

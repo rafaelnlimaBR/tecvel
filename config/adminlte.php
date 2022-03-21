@@ -266,6 +266,12 @@ return [
 
             'label_color' => 'success',
         ]
+        ,[
+            'text'        => 'Status',
+            'url'         => "admin/status",
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ]
         ,
         ['header' => 'account_settings'],
         [

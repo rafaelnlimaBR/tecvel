@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('veiculos', function (Blueprint $table) {
+        Schema::create('status', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->string('placa')->unique();
-            $table->string('modelo');
-            $table->string('montadora');
-            $table->string('cor');
-            $table->string('mod_ano');
             $table->timestamps();
-        });
+            $table->string('nome');
+            $table->string('cor');
+            $table->boolean('habilitado')->default(true);
+            $table->boolean('orcamento')->default(false);
 
+        });
     }
 
     /**
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('veiculos');
+        Schema::dropIfExists('status');
     }
 };

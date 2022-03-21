@@ -15,6 +15,7 @@ class ServicoSeeder extends Seeder
      */
     public function run()
     {
+        $this->command->info("Criando servicos");
         DB::table('servicos')->insert([
                 ['descricao' => "Conserto do display",
                     'valor' => 150.00]
