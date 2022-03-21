@@ -25,7 +25,6 @@ class ClienteSeeder extends Seeder
                 'telefone01' =>$faker->phoneNumber,
                 'telefone02' =>$faker->phoneNumber
             ]);
-
         }
 
     }

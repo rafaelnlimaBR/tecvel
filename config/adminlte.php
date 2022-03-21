@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -246,10 +247,17 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
-
         [
             'text'        => 'Clientes',
             'url'         => "admin/clientes",
+            'icon'        => 'far fa-fw fa-file',
+            'label'       => "50",
+            'label_color' => 'success',
+        ]
+        ,
+        [
+            'text'        => 'Veiculos',
+            'url'         => "admin/veiculos",
             'icon'        => 'far fa-fw fa-file',
             'label'       => "50",
             'label_color' => 'success',
@@ -434,6 +442,16 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
+        'app' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => asset('vendor/javascript/app.js'),
                 ],
             ],
         ],
