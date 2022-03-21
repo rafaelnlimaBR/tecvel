@@ -34,7 +34,7 @@ class Veiculo extends Model
     public static function atualizar(Request $r)
     {
         $Veiculo        =   Veiculo::find($r->get('id'));
-        $Veiculo->nome  =   $r->input('nome');
+        $Veiculo->placa  =   $r->input('placa');
         $Veiculo->mod_ano =   $r->input('mod_ano');
         $Veiculo->cor    =   $r->get('cor');
         $Veiculo->modelo    =   $r->get('modelo');

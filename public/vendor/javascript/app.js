@@ -1,4 +1,4 @@
-$('.placa').mask('AAA 0U00', {
+$('.placa').mask('AAA0U00', {
     translation: {
         'A': {
             pattern: /[A-Za-z]/

@@ -1,5 +1,5 @@
 <?php
-
+$root = "http://localhost/tecvel/public/";
 
 return [
 
@@ -451,7 +451,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => asset('vendor/javascript/app.js'),
+                    'location' =>$root."vendor/javascript/app.js",
                 ],
             ],
         ],
