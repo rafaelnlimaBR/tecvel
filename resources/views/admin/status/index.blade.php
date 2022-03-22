@@ -22,7 +22,7 @@
                         {{csrf_field()}}
                         <div class="input-group input-group-sm" style="width: 350px;">
 
-                            <input type="text" name="nome" class="form-control float-right col-md-5" style="" placeholder="Placa">
+                            <input type="text" name="nome" class="form-control float-right col-md-5" style="" placeholder="Nome">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default">
                                     <i class="fas fa-search"></i>
