@@ -25,6 +25,9 @@ Auth::routes();
 Route::group(['prefix'=>'admin'],function(){
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');
 
+    Route::get('/configuracao/', [App\Http\Controllers\ConfiguracaoController::class, 'editar'])->name('configuracao.editar');
+    Route::post('/configuracao/atualizar', [App\Http\Controllers\ConfiguracaoController::class, 'atualizar'])->name('configuracao.atualizar');
+
     Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente.index');
     Route::get('/cliente/novo', [App\Http\Controllers\ClienteController::class, 'novo'])->name('cliente.novo');
     Route::get('/cliente/editar/{id}', [App\Http\Controllers\ClienteController::class, 'editar'])->name('cliente.editar');

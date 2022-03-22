@@ -281,8 +281,8 @@ return [
         ,
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'Configuração',
+            'url'  => 'admin/configuracao',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

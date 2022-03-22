@@ -73,6 +73,7 @@ class ClienteController extends Controller
         try{
 //            return request();
                 $id = Cliente::atualizar(\request());
+
             return redirect()->route('cliente.index')->with('alerta',['tipo'=>'success','msg'=>"Editado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
             return redirect()->route('cliente.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
