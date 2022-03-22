@@ -20,7 +20,7 @@
 
                                 <div class="form-group">
                                     <label>Habilitado</label>
-                                    {{Form::select('habilitado', [0=>'Não',1=>'Sim'], $status->habilitado,['class'=>'form-control'])}}
+                                    {{Form::select('habilitado', [0=>'Não',1=>'Sim'], (isset($status)?$status->habilitado:1),['class'=>'form-control'])}}
 
                                     {{--<input  type="text" class="form-control" id="descricao" name="descricao" placeholder="Descricao" value="{{isset($status)?$status->descricao:''}}">--}}
                                 </div>
@@ -41,7 +41,7 @@
 
                                 <div class="form-group">
                                     <label>Orçamento</label>
-                                    {{Form::select('orcamento', [0=>'Não',1=>'Sim'], $status->orcamento,['class'=>'form-control'])}}
+                                    {{Form::select('orcamento', [0=>'Não',1=>'Sim'], (isset($status)?$status->orcamento:1),['class'=>'form-control'])}}
                                     {{--<input  type="text" class="form-control" id="descricao" name="descricao" placeholder="Descricao" value="{{isset($status)?$status->descricao:''}}">--}}
                                 </div>
                             </div>

@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             ClienteSeeder::class,
             VeiculoSeeder::class,
             ServicoSeeder::class,
-            StatusSeeder::class
+            StatusSeeder::class,
+            FornecedorSeeder::class
         ]);
     }
 }

@@ -252,6 +252,12 @@ return [
             'url'         => "admin/clientes",
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Fornecedores',
+            'url'         => "admin/fornecedores",
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
         ],[
             'text'        => 'Servicos',
             'url'         => "admin/servicos",
