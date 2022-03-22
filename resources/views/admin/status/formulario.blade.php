@@ -101,6 +101,7 @@
                                 <th style="width: 10px">#</th>
                                 <th>Nome</th>
                                 <th style="width: 10%">Cor</th>
+                                <th style="width: 10%">excluir</th>
 
                             </tr>
                             </thead>
@@ -113,6 +114,9 @@
                                     <div class="{{$s->cor}}" style="width: 80px; height: 20px; background-color: {{$s->cor}}; margin: 2px">
 
                                     </div>
+
+                                <td>
+                                    <a href="{{route('status.remover.relacionamento',['status_atual_id'=>$status->id,'status_proximo'=>$s->id])}}">e</a>
                                 </td>
 
                             </tr>

@@ -53,6 +53,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/status/atualizar', [App\Http\Controllers\StatusController::class, 'atualizar'])->name('status.atualizar');
     Route::post('/status/excluir', [App\Http\Controllers\StatusController::class, 'excluir'])->name('status.excluir');
     Route::post('/status/adicionar/relacionamento', [App\Http\Controllers\StatusController::class, 'adicionarStatus'])->name('status.adicionar.relacionamento');
+    Route::get('/status/remover/relacionamento/{status_atual_id}/{status_proximo}', [App\Http\Controllers\StatusController::class, 'removerStatus'])->name('status.remover.relacionamento');
 
 
 });

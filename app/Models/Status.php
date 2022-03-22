@@ -63,6 +63,12 @@ class Status extends Model
     public static function adicionarRelacionamento(Request $r)
     {
         $status_atual    =   Status::find($r->get('status_atual_id'));
-        $status_atual->proximos()->attach($r->get('status_proximo_id'));
+        $status_atual->proximos()->syncWithoutDetaching($r->get('status_proximo_id'));
+    }
+
+    public static function removerRelacionamento($id_atual,$id_proximo)
+    {
+        $status_atual    =   Status::find($id_atual);
+        $status_atual->proximos()->detach($id_proximo);
     }
 }

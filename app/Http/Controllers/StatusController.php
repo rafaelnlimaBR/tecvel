@@ -93,4 +93,15 @@ class StatusController extends Controller
             return redirect()->route('status.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
     }
+    public function removerStatus($status_atual_id,$status_proximo)
+    {
+        try{
+
+
+            Status::removerRelacionamento($status_atual_id,$status_proximo);
+            return redirect()->route('status.editar',$status_atual_id)->with('alerta',['tipo'=>'success','msg'=>"Desvingulado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);;
+        }catch (\Exception $e){
+            return redirect()->route('status.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+        }
+    }
 }
