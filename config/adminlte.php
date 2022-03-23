@@ -277,6 +277,12 @@ return [
             'url'         => "admin/status",
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Pedidos',
+            'url'         => "admin/pedidos",
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
         ]
         ,
         ['header' => 'account_settings'],

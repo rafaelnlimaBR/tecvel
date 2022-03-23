@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('status_status', function (Blueprint $table) {
-            $table->id();
+            $table->integerIncrements('id');
             $table->timestamps();
             $table->integer('status_atual_id')->unsigned();
             $table->integer('status_proximo_id')->unsigned();

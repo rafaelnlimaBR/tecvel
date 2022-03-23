@@ -65,5 +65,10 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/fornecedor/atualizar', [App\Http\Controllers\FornecedorController::class, 'atualizar'])->name('fornecedor.atualizar');
     Route::post('/fornecedor/excluir', [App\Http\Controllers\FornecedorController::class, 'excluir'])->name('fornecedor.excluir');
 
-
+    Route::get('/pedidos', [App\Http\Controllers\PedidoController::class, 'index'])->name('pedido.index');
+    Route::get('/pedido/novo', [App\Http\Controllers\PedidoController::class, 'novo'])->name('pedido.novo');
+    Route::get('/pedido/editar/{id}', [App\Http\Controllers\PedidoController::class, 'editar'])->name('pedido.editar');
+    Route::post('/pedido/cadastrar', [App\Http\Controllers\PedidoController::class, 'cadastrar'])->name('pedido.cadastrar');
+    Route::post('/pedido/atualizar', [App\Http\Controllers\PedidoController::class, 'atualizar'])->name('pedido.atualizar');
+    Route::post('/pedido/excluir', [App\Http\Controllers\PedidoController::class, 'excluir'])->name('pedido.excluir');
 });

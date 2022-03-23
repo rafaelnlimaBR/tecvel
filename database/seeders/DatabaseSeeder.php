@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Pedido;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,7 +23,12 @@ class DatabaseSeeder extends Seeder
             ServicoSeeder::class,
             StatusSeeder::class,
             FornecedorSeeder::class,
-            ContratoSeeder::class
+            ContratoSeeder::class,
+            PedidoSeeder::class,
+            HistoricoSeeder::class,
+            TerceirizadosSeeder::class,
+            PecasSeeder::class,
+            TrabalhoSeeder::class,
         ]);
     }
 }

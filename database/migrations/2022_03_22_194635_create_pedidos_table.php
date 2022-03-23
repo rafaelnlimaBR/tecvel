@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('servicos', function (Blueprint $table) {
+        Schema::create('pedidos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->decimal('valor',6,2);
-            $table->string('descricao');
+            $table->string('numero_pedido')->nullable();
+            $table->integer('fornecedor_id')->unsigned();
+            $table->dateTime('data');
+
+            $table->foreign('fornecedor_id')->references('id')->on('fornecedores')->onDelete('cascade');
         });
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('servico');
+        Schema::dropIfExists('pedidos');
     }
 };

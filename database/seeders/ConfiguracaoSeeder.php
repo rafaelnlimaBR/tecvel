@@ -23,10 +23,10 @@ $table->integer('ordem_servico')->nullable();*/
             'nome_empresa'      =>  "Tecvel - Eletrônica Automotiva",
             'cnpj'              =>  "28.727.291/0001-33",
             'endereco'          =>  'Rua Pinto Madeira, 750, Centro - Fortaleza/CE',
-            'telefone_fixo'     =>  '323232323',
+            'telefone_fixo'     =>  '8534921856',
             'telefone_movel'    =>  '85981067785',
             'email'             =>  'rafael@tecvelautomotiva.com.br',
-            'logo'              =>  'logo.jpg',
+            'logo'              =>  'logo.jpeg',
             'orcamento'         =>  1,
             'ordem_servico'     =>  2
 
