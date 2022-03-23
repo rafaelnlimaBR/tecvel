@@ -4,6 +4,7 @@
 
 @section('content_header')
     <h1>{{$titulo}}</h1>
+    <input type="hidden" value="{{URL::to('')}}" id="url">
 @stop
 
 @section('content')

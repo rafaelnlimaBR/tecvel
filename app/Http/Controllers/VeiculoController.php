@@ -38,9 +38,13 @@ class VeiculoController extends Controller
 
     public function cadastrar()
     {
-        try{
-            $id = Veiculo::gravar(\request());
-            return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
+        try {
+            Veiculo::gravar(\request());
+            if (\request()->get('modal') == 1) {
+                return redirect()->back()->with('alerta', ['tipo' => 'success', 'msg' => "Veículo cadastrado com sucesso", 'icon' => 'check', 'titulo' => "Sucesso"]);
+            } else{
+                return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
+            }
         }catch (\Exception $e){
             return redirect()->route('veiculo.novo')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
@@ -80,5 +84,22 @@ class VeiculoController extends Controller
             return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
     }
+    public function carregarSelect2()
+    {
+        if(request()->ajax()){
+            $veiculos   =   Veiculo::PesquisarPorPlaca(request()->get('q'))->limit(10)->orderBy('created_at','desc')->get();
+            $retorno    =   [];
 
+            foreach ($veiculos as $key => $value) {
+                $retorno[$key]['id'] = $value->id;
+                $retorno[$key]['text'] = $value->placa;
+                $retorno[$key]['modelo'] = $value->modelo." - ".$value->mod_ano;
+                $retorno[$key]['marca'] = $value->marca;
+            }
+
+            return response()->json($retorno);
+        }else{
+            return redirect()->route('cliente.index')->with('alerta',['tipo'=>'danger','msg'=>'Acesso negado.','icon'=>'ban']);
+        }
+    }
 }

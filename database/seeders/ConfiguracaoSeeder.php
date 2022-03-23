@@ -29,9 +29,6 @@ $table->integer('ordem_servico')->nullable();*/
             'logo'              =>  'logo.jpeg',
             'orcamento'         =>  1,
             'ordem_servico'     =>  2
-
-
-
         ]);
     }
 }

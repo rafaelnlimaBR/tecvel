@@ -1,4 +1,93 @@
 
+$(document).ready(function() {
+    var URL     =   $('#url').val();
+    $('.clientes_select2').select2({
+        //placeholder: 'Search for a category',
+        ajax: {
+            type: 'POST',
+            url: URL+"/admin/cliente/carregarSelect2",
+            dataType: 'json',
+            beforeSend: function (xhr) {
+                var token = $("input[name='_token']" ).val();
+
+                if (token) {
+                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                }
+            },
+            quietMillis: 400,
+            delay:400,
+            data: function (term, page) {
+                return {
+                    q: term.term, //search term
+                    // page size
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            },
+        },
+        templateResult: function (data) {
+
+            var html    =   $('<div class="select2-user-result"><h5>'+data.nome+'</h5>' +
+                '<h6>Telefone: <b>'+data.telefone+'</b></h6>'+
+
+                '</div>'
+            );
+            return html;
+        },
+        templateSelection:function (data) {
+            var html    =   $('<div class="select2-user-result"><b>Cliente: </b>'+data.text+'</div><br>'
+            );
+            return html;
+        },
+    });
+    $('.veiculo_select2').select2({
+        //placeholder: 'Search for a category',
+        ajax: {
+            type: 'POST',
+            url: URL+"/admin/veiculo/carregarSelect2",
+            dataType: 'json',
+            beforeSend: function (xhr) {
+                var token = $("input[name='_token']" ).val();
+
+                if (token) {
+                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                }
+            },
+            quietMillis: 400,
+            delay:400,
+            data: function (term, page) {
+                return {
+                    q: term.term, //search term
+                    // page size
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            },
+        },
+        templateResult: function (data) {
+            var html    =   $('<div class="select2-user-result"><h5>'+data.text+'</h5>' +
+                '<h6>Modelo: <b>'+data.modelo+'</b></h6>'+
+
+                '</div>'
+            );
+            return html;
+        },
+        templateSelection:function (data) {
+            var html    =   $('<div class="select2-user-result"><b>Veiculo: </b>'+data.text+'</div><br>'
+            );
+            return html;
+        },
+    });
+
+});
+
+
 $('.placa').mask('AAA0U00', {
     translation: {
         'A': {

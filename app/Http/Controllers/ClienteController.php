@@ -47,8 +47,14 @@ class ClienteController extends Controller
     public function cadastrar()
     {
         try{
+
             $id = Cliente::gravar(\request());
-            return redirect()->route('cliente.index')->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
+            if(\request()->get('modal') == 1){
+                return redirect()->back()->with('alerta',['tipo'=>'success','msg'=>"Cliente cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
+            }else{
+                return redirect()->route('cliente.index')->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
+            }
+
         }catch (\Exception $e){
             return redirect()->route('cliente.novo')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
@@ -90,5 +96,23 @@ class ClienteController extends Controller
         }
     }
 
+    public function carregarSelect2()
+    {
+        if(request()->ajax()){
+            $clientes   =   Cliente::PesquisarPorNome(request()->get('q'))->limit(10)->orderBy('created_at','desc')->get();
+            $retorno    =   [];
 
+            foreach ($clientes as $key => $value) {
+                $retorno[$key]['id'] = $value->id;
+                $retorno[$key]['text'] = $value->nome;
+                $retorno[$key]['nome'] = $value->nome;
+                $retorno[$key]['telefone'] = $value->telefone01;
+
+            }
+
+            return response()->json($retorno);
+        }else{
+            return redirect()->route('cliente.index')->with('alerta',['tipo'=>'danger','msg'=>'Acesso negado.','icon'=>'ban']);
+        }
+    }
 }

@@ -14,6 +14,7 @@ class Configuracao extends Model
     use HasFactory;
     protected $table        =   'configuracao';
 
+
     public static function atualizar (Request $r)
     {
 

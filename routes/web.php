@@ -23,10 +23,24 @@ Auth::routes();
 
 //Route::group(['prefix'=>'admin','middleware'=>'auth:web'],function(){
 Route::group(['prefix'=>'admin'],function(){
+
+    Route::get('/teste', function (){
+
+
+    });
+
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');
 
     Route::get('/configuracao/', [App\Http\Controllers\ConfiguracaoController::class, 'editar'])->name('configuracao.editar');
     Route::post('/configuracao/atualizar', [App\Http\Controllers\ConfiguracaoController::class, 'atualizar'])->name('configuracao.atualizar');
+
+    Route::get('/contratos', [App\Http\Controllers\ContratoController::class, 'index'])->name('contrato.index');
+    Route::get('/contrato/novo/ordem', [App\Http\Controllers\ContratoController::class, 'novo'])->name('contrato.novo.ordem');
+    Route::get('/contrato/novo/orcamento', [App\Http\Controllers\ContratoController::class, 'orcamento'])->name('contrato.novo.orcamento');
+    Route::get('/contrato/editar/{id}', [App\Http\Controllers\ContratoController::class, 'editar'])->name('contrato.editar');
+    Route::post('/contrato/cadastrar', [App\Http\Controllers\ContratoController::class, 'cadastrar'])->name('contrato.cadastrar');
+    Route::post('/contrato/atualizar', [App\Http\Controllers\ContratoController::class, 'atualizar'])->name('contrato.atualizar');
+    Route::post('/contrato/excluir', [App\Http\Controllers\ContratoController::class, 'excluir'])->name('contrato.excluir');
 
     Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente.index');
     Route::get('/cliente/novo', [App\Http\Controllers\ClienteController::class, 'novo'])->name('cliente.novo');
@@ -34,6 +48,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/cliente/cadastrar', [ClienteController::class, 'cadastrar'])->name('cliente.cadastrar');
     Route::post('/cliente/atualizar', [ClienteController::class, 'atualizar'])->name('cliente.atualizar');
     Route::post('/cliente/excluir', [ClienteController::class, 'excluir'])->name('cliente.excluir');
+    Route::post('/cliente/carregarSelect2', [ClienteController::class, 'carregarSelect2'])->name('cliente.carregarSelect2');
 
     Route::get('/veiculos', [App\Http\Controllers\VeiculoController::class, 'index'])->name('veiculo.index');
     Route::get('/veiculo/novo', [App\Http\Controllers\VeiculoController::class, 'novo'])->name('veiculo.novo');
@@ -41,6 +56,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/veiculo/cadastrar', [App\Http\Controllers\VeiculoController::class, 'cadastrar'])->name('veiculo.cadastrar');
     Route::post('/veiculo/atualizar', [App\Http\Controllers\VeiculoController::class, 'atualizar'])->name('veiculo.atualizar');
     Route::post('/veiculo/excluir', [App\Http\Controllers\VeiculoController::class, 'excluir'])->name('veiculo.excluir');
+    Route::post('/veiculo/carregarSelect2', [\App\Http\Controllers\VeiculoController::class, 'carregarSelect2'])->name('veiculo.carregarSelect2');
 
     Route::get('/servicos', [App\Http\Controllers\ServicoController::class, 'index'])->name('servico.index');
     Route::get('/servico/novo', [App\Http\Controllers\ServicoController::class, 'novo'])->name('servico.novo');

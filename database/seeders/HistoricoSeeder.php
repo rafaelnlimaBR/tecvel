@@ -25,6 +25,14 @@ class HistoricoSeeder extends Seeder
                 'autorizado'            =>  true,
                 'desconto_peca'         =>  10,
                 'desconto_servico'      =>  10
+            ],[
+                'contrato_id'           =>  2,
+                'status_id'             =>  4,
+                'data'                  =>  Carbon::now(),
+                'obs'                   =>  "Testado",
+                'autorizado'            =>  true,
+                'desconto_peca'         =>  5,
+                'desconto_servico'      =>  5
             ]
         ]);
     }
