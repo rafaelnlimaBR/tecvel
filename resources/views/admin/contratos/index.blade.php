@@ -8,13 +8,13 @@
             <div class="card-header">
                 <h3 class="card-title">{{$titulo_tabela}}</h3>
                 <div class="card-tools" style="padding-left: 10px">
-                    <a href="{{route('contrato.novo.ordem')}}" type="button" class="btn btn-block btn-primary btn-sm ">
+                    <a href="{{route('contrato.novo',['status'=>\App\Models\Configuracao::find(1)->ordem_servico])}}" type="button" class="btn btn-block btn-primary btn-sm ">
                         <i class="fa fa-solid fa-plus"></i> Nova Ordem
                     </a>
 
                 </div>
                 <div class="card-tools" style="padding-right: 10px">
-                    <a href="{{route('contrato.novo.orcamento',['status'=>\App\Models\Configuracao::find(1)->orcamento])}}" type="button" class="btn btn-block btn-primary btn-sm " >
+                    <a href="{{route('contrato.novo',['status'=>\App\Models\Configuracao::find(1)->orcamento])}}" type="button" class="btn btn-block btn-primary btn-sm " >
                         <i class="fa fa-solid fa-plus"></i> Orçamento
                     </a>
                 </div>

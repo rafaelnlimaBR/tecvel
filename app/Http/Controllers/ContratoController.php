@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Configuracao;
 use App\Models\Contrato;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class ContratoController extends Controller
@@ -20,20 +22,28 @@ class ContratoController extends Controller
 
     }
 
-    public function novo()
+    public function novo($status)
     {
+//        dd(Configuracao::find(1)->orcamento != $status);
+        $status     =   Status::find($status);
+
+        if(empty($status) ){
+//            FAZIO
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'warning','msg'=>"Status não encontrado",'icon'=>'check','titulo'=>"Não permitido"]);
+        }else{
+            if((Configuracao::find(1)->orcamento != $status->id) && (Configuracao::find(1)->ordem_servico != $status->id)){
+//                Status diferente do configurado no sistema
+                return redirect()->route('contrato.index')->with('alerta',['tipo'=>'warning','msg'=>"Status diferente do configurado",'icon'=>'check','titulo'=>"Não permitido"]);
+            }
+        }
 
         $dados      =  [
             "titulo"    => "Contrato",
-            "titulo_formulario" =>'Novo'
+            "titulo_formulario" =>'Novo',
+            'tipo_contrato'     =>  $status->id
         ];
         return view('admin.contratos.formulario',$dados);
 
-    }
-
-    public function orcamento()
-    {
-        return "deu";
     }
 
     public function cadastrar()

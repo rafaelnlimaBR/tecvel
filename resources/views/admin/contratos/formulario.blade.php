@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                     <label>Cliente <a class="" data-toggle="modal" data-target="#modalCliente"> Novo</a></label>
                                     {{ Form::select('cliente', (isset($contrato)?[$contrato->cliente->id=>$contrato->cliente->nome]:[null=>"Selecione um Cliente"]), null ,['class'=>'form-control clientes_select2']) }}
-
+                                    <input type="hidden" name="tipo_contrato" value="{{isset($tipo_contrato)?$tipo_contrato:''}}">
                                 </div>
                             </div>
                             <div class="col-sm-6">
