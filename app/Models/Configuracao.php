@@ -27,6 +27,11 @@ class Configuracao extends Model
         $configuracao->endereco          =   $r->get('endereco');
         $configuracao->orcamento         =   $r->get('orcamento_id');
         $configuracao->ordem_servico     =   $r->get('os_id');
+        $configuracao->aberto            =   $r->get('aberto');
+        $configuracao->concluido         =   $r->get('concluido');
+        $configuracao->nao_autorizado    =   $r->get('nao_autorizado');
+        $configuracao->retorno           =   $r->get('retorno');
+        $configuracao->autorizado        =   $r->get('autorizado');
 
         if(\request()->hasFile('logo_empresa')){
             if(File::exists(public_path().'/imagens/'.$configuracao->logo)){

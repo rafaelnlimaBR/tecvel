@@ -30,19 +30,21 @@
             <div class="card-body">
                 <div class="tab-content" id="custom-tabs-two-tabContent">
                     <div class="tab-pane fade show active" id="custom-tabs-two-home" role="tabpanel" aria-labelledby="custom-tabs-two-home-tab">
+                        <form action="{{route('contrato.cadastrar')}}" method="post">
                         <div class="row">
                             <div class="col-sm-6">
                                 {{csrf_field()}}
+
                                 <div class="form-group">
                                     <label>Cliente <a class="" data-toggle="modal" data-target="#modalCliente"> Novo</a></label>
-                                    {{ Form::select('cliente', (isset($contrato)?[$contrato->cliente->id=>$contrato->cliente->nome]:[null=>"Selecione um Cliente"]), null ,['class'=>'form-control clientes_select2']) }}
+                                    {{ Form::select('cliente', (isset($contrato)?[$contrato->cliente->id=>$contrato->cliente->nome]:[null=>"Selecione um Cliente"]), null ,['class'=>'form-control clientes_select2','required']) }}
                                     <input type="hidden" name="tipo_contrato" value="{{isset($tipo_contrato)?$tipo_contrato:''}}">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Veiculo <a class="" data-toggle="modal" data-target="#modalVeiculo"> Novo</a></label>
-                                    {{ Form::select('veiculo', (isset($contrato)?[$contrato->veiculo->id=>$contrato->veiculo->placa]:[0=>"Selecione um Veiculo"]), null ,['class'=>'form-control veiculo_select2']) }}
+                                    {{ Form::select('veiculo', (isset($contrato)?[$contrato->veiculo->id=>$contrato->veiculo->placa]:[null=>"Selecione um Veiculo"]), null ,['class'=>'form-control veiculo_select2','required']) }}
                                 </div>
                             </div>
                         </div>
@@ -50,22 +52,41 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Defeito</label>
-                                    <textarea  class="form-control" id="defeito" name="defeito"  value="{{isset($contrato)?$contrato->defeito:""}}">
-                                         {{isset($contrato)?$contrato->defeito:""}}
-                                    </textarea>
+                                    <textarea  class="form-control" id="defeito" name="defeito"  value="{{isset($contrato)?$contrato->defeito:""}}">{{isset($contrato)?$contrato->defeito:""}}</textarea>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Observações</label>
-                                    <textarea  class="form-control" id="obs" name="obs"  value="{{isset($contrato)?$contrato->obs:""}}">
-                                        {{isset($contrato)?$contrato->obs:""}}
-                                    </textarea>
+                                    <textarea  class="form-control" id="obs" name="obs"  value="{{isset($contrato)?$contrato->obs:""}}">{{isset($contrato)?$contrato->obs:""}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Data</label>
+                                    <div class="input-group date dataTempo" id="dataTempo" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" name="data" data-target=".dataTempo"  value="{{isset($contrato)?date('dd/mm/YYYY H:i',strtotime($contrato->data)):\Carbon\Carbon::now()->format('dd/mm/YYYY H:i')}}"/>
+                                        <div class="input-group-append" data-target=".dataTempo" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Garantia</label>
+
+                                    {{Form::select('garantia', [0=>"Sem Garantia",30=>'30 Dias',90=>'90 Dias',180=>'180 Dias'], (isset($contrato)?$contrato->garantia:90),['class'=>'form-control'])}}
+
                                 </div>
                             </div>
                         </div>
 
-                        <button class="btn btn-primary">Criar</button>
+                            <button type="submit" class="btn btn-primary">Gravar</button>
+                        </form>
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
                         Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
@@ -79,8 +100,47 @@
                 </div>
             </div>
             <div class="card-footer">
+                <a href="{{route('contrato.index')}}" class="btn btn-default" style="border-color: rgba(105,105,106,0.85); color: rgba(72,72,73,0.85); font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">Voltar</a>
+                @if(isset($contrato))
+
+                    @if($contrato->historicos->last()->tipo->id == \App\Models\Configuracao::find(1)->orcamento)
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#telaAutorizacao" style="background-color: {{\App\Models\Status::find(\App\Models\Configuracao::find(1)->autorizado)->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">
+                           Autorizadar
+                        </button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#telaNAutorizacao" style="background-color: {{\App\Models\Status::find(\App\Models\Configuracao::find(1)->nao_autorizado)->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">
+                            Não Autorizadar
+                        </button>
+
+                        <div class="modal fade" id="telaAutorizacao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    @include('admin.contratos.includes.modalNovoStatus',['titulo'=>"Autorizar","status_id"=>\App\Models\Configuracao::find(1)->autorizado])
+                                </div>
+                            </div>
+                        </div>
+
+                        {{--    Tela Não autorizado--}}
+                        <div class="modal fade" id="telaNAutorizacao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    @include('admin.contratos.includes.modalNovoStatus',['titulo'=>"Não Autorizar","status_id"=>\App\Models\Configuracao::find(1)->nao_autorizado])
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        @foreach($contrato->status->last()->proximos as $status)
+
+                            <a href="{{route('contrato.index')}}" class="btn btn-default" style="background-color: {{$status->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">{{$status->nome}}</a>
+
+                        @endforeach
+                    @endif
+
+
+                @endif
 
             </div>
+
         </div>
     </div>
 
@@ -90,7 +150,7 @@
 
 
 
-    <!-- Modal -->
+    <!-- Tela Cliente -->
     <div class="modal fade" id="modalCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -107,7 +167,7 @@
             </div>
         </div>
     </div>
-
+{{--    Tela Veiculo--}}
     <div class="modal fade" id="modalVeiculo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -124,4 +184,11 @@
             </div>
         </div>
     </div>
+
+
+
+{{--    Tela Atorização--}}
+
+
+
 @stop

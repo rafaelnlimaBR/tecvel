@@ -89,20 +89,52 @@
 
                         </div>
                         <div class="tab-pane fade" id="confi" role="tabpanel" aria-labelledby="confi">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Aberto</label>
+                                        {{Form::select('aberto', $status->pluck('nome','id'), $conf->aberto,['class'=>'form-control'])}}
 
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Concluido</label>
+                                        {{Form::select('concluido', $status->pluck('nome','id'), $conf->concluido,['class'=>'form-control'])}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Não Autorizado</label>
+                                        {{Form::select('nao_autorizado', $status->pluck('nome','id'), $conf->nao_autorizado,['class'=>'form-control'])}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Retorno</label>
+                                        {{Form::select('retorno', $status->pluck('nome','id'), $conf->retorno,['class'=>'form-control'])}}
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Autorizado</label>
+                                        {{Form::select('autorizado', $status->pluck('nome','id'), $conf->autorizado,['class'=>'form-control'])}}
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Orçamento</label>
-                                        {{Form::select('orcamento_id', $status->pluck('nome','id'), $conf->orcamento,['class'=>'form-control'])}}
+                                        {{Form::select('orcamento_id', $tipos->pluck('descricao','id'), $conf->orcamento,['class'=>'form-control'])}}
 
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Ordem de Serviço</label>
-                                        {{Form::select('os_id', $status->pluck('nome','id'), $conf->ordem_servico,['class'=>'form-control'])}}
+                                        {{Form::select('os_id', $tipos->pluck('descricao','id'), $conf->ordem_servico,['class'=>'form-control'])}}
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

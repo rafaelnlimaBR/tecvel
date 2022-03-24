@@ -18,14 +18,15 @@ return new class extends Migration
             $table->timestamps();
             $table->bigInteger('contrato_id')->unsigned();
             $table->integer('status_id')->unsigned();
+            $table->integer('tipo_id')->unsigned();
             $table->dateTime('data');
             $table->text('obs');
-            $table->boolean('autorizado')->default(true);
             $table->integer('desconto_peca');
             $table->integer('desconto_servico');
 
             $table->foreign('contrato_id')->references('id')->on('contratos')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('status')->onDelete('cascade');
+            $table->foreign('tipo_id')->references('id')->on('tipo_contratos')->onDelete('cascade');
         });
     }
 

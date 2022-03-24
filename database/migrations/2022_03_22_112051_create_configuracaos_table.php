@@ -25,6 +25,11 @@ return new class extends Migration
             $table->string('logo');
             $table->integer('orcamento')->nullable();
             $table->integer('ordem_servico')->nullable();
+            $table->integer('aberto')->nullable();
+            $table->integer('concluido')->nullable();
+            $table->integer('retorno')->nullable();
+            $table->integer('nao_autorizado')->nullable();
+            $table->integer('autorizado')->nullable();
         });
     }
 

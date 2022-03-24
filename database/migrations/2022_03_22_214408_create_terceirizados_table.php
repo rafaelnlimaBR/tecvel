@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('terceirizados', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integerIncrements('id');
             $table->timestamps();
             $table->string('servico');
             $table->decimal('valor',8,2);

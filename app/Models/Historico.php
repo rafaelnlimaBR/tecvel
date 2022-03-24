@@ -9,4 +9,9 @@ class Historico extends Model
 {
     use HasFactory;
     protected $table    =   "historicos";
+
+    public function tipo()
+    {
+        return $this->belongsTo(TipoContrato::class,'tipo_id');
+    }
 }

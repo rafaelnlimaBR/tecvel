@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('cor');
             $table->boolean('habilitado')->default(true);
-            $table->boolean('orcamento')->default(false);
+
 
         });
     }

@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
 
@@ -25,7 +26,9 @@ Auth::routes();
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('/teste', function (){
+        $contrato       =   \App\Models\Contrato::find(1);
 
+        return $contrato->historicos->last()->tipo->descricao;
 
     });
 
@@ -35,7 +38,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/configuracao/atualizar', [App\Http\Controllers\ConfiguracaoController::class, 'atualizar'])->name('configuracao.atualizar');
 
     Route::get('/contratos', [App\Http\Controllers\ContratoController::class, 'index'])->name('contrato.index');
-    Route::get('/contrato/novo/{status}', [App\Http\Controllers\ContratoController::class, 'novo'])->name('contrato.novo');
+    Route::get('/contrato/novo/{tipo}', [App\Http\Controllers\ContratoController::class, 'novo'])->name('contrato.novo');
     Route::get('/contrato/editar/{id}', [App\Http\Controllers\ContratoController::class, 'editar'])->name('contrato.editar');
     Route::post('/contrato/cadastrar', [App\Http\Controllers\ContratoController::class, 'cadastrar'])->name('contrato.cadastrar');
     Route::post('/contrato/atualizar', [App\Http\Controllers\ContratoController::class, 'atualizar'])->name('contrato.atualizar');

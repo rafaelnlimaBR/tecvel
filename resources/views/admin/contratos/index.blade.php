@@ -8,13 +8,13 @@
             <div class="card-header">
                 <h3 class="card-title">{{$titulo_tabela}}</h3>
                 <div class="card-tools" style="padding-left: 10px">
-                    <a href="{{route('contrato.novo',['status'=>\App\Models\Configuracao::find(1)->ordem_servico])}}" type="button" class="btn btn-block btn-primary btn-sm ">
+                    <a href="{{route('contrato.novo',['tipo'=>\App\Models\Configuracao::find(1)->ordem_servico])}}" type="button" class="btn btn-block btn-primary btn-sm ">
                         <i class="fa fa-solid fa-plus"></i> Nova Ordem
                     </a>
 
                 </div>
                 <div class="card-tools" style="padding-right: 10px">
-                    <a href="{{route('contrato.novo',['status'=>\App\Models\Configuracao::find(1)->orcamento])}}" type="button" class="btn btn-block btn-primary btn-sm " >
+                    <a href="{{route('contrato.novo',['tipo'=>\App\Models\Configuracao::find(1)->orcamento])}}" type="button" class="btn btn-block btn-primary btn-sm " >
                         <i class="fa fa-solid fa-plus"></i> Orçamento
                     </a>
                 </div>
@@ -42,6 +42,7 @@
                         <th style="width: 40%">Cliente</th>
                         <th style="width: 20%">Veículo</th>
                         <th style="width: 20%">Data</th>
+                        <th style="width: 20%">Tipo</th>
                         <th style="width: 10%">Status</th>
                         <th style="width: 5%">Editar</th>
                     </tr>
@@ -55,6 +56,7 @@
                             <td>{{$c->cliente->nome}}</td>
                             <td>{{$c->veiculo->placa}}</td>
                             <td>{{date('d/m/Y H:m', strtotime($c->data))}}</td>
+                            <td>{{$c->historicos->last()->tipo->descricao}}</td>
                             <td>{{$c->status->last()->nome}}</td>
                             <td>
                                 <a href="{{route('contrato.editar',$c->id)}}" class="btn btn-block btn-warning btn-xs">

@@ -30,7 +30,6 @@ class Status extends Model
         $Status        =   new Status();
         $Status->nome  =   $r->get('nome');
         $Status->cor    =   $r->get('cor');
-        $Status->orcamento    =   $r->get('orcamento');
         $Status->habilitado    =   $r->get('habilitado');
 
         if($Status->save() == false){
@@ -44,7 +43,6 @@ class Status extends Model
         $Status        =   Status::find($r->get('id'));
         $Status->nome  =   $r->get('nome');
         $Status->cor    =   $r->get('cor');
-        $Status->orcamento    =   $r->get('orcamento');
         $Status->habilitado    =   $r->get('habilitado');
         if($Status->save() == false){
             throw new \Exception('Não foi possível realizar a atualização',200);

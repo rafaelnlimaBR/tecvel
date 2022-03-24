@@ -25,7 +25,7 @@
                                     {{--<input  type="text" class="form-control" id="descricao" name="descricao" placeholder="Descricao" value="{{isset($status)?$status->descricao:''}}">--}}
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-8">
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <label>Descricao</label>
@@ -37,16 +37,6 @@
                                 <input type="color" class="form-control" data-original-title="" title="" name="cor" value="{{isset($status)?$status->cor:'fff'}}">
 
                             </div>
-                            <div class="col-sm-2">
-
-                                <div class="form-group">
-                                    <label>Orçamento</label>
-                                    {{Form::select('orcamento', [0=>'Não',1=>'Sim'], (isset($status)?$status->orcamento:1),['class'=>'form-control'])}}
-                                    {{--<input  type="text" class="form-control" id="descricao" name="descricao" placeholder="Descricao" value="{{isset($status)?$status->descricao:''}}">--}}
-                                </div>
-                            </div>
-
-
                         </div>
 
                     </div>

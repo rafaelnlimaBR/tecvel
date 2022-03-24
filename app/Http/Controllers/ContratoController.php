@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Configuracao;
 use App\Models\Contrato;
 use App\Models\Status;
+use App\Models\TipoContrato;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isEmpty;
 
 class ContratoController extends Controller
 {
@@ -22,16 +24,16 @@ class ContratoController extends Controller
 
     }
 
-    public function novo($status)
+    public function novo($tipo)
     {
 //        dd(Configuracao::find(1)->orcamento != $status);
-        $status     =   Status::find($status);
+        $tipo           =   TipoContrato::find($tipo);
 
-        if(empty($status) ){
+        if(empty($tipo) ){
 //            FAZIO
-            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'warning','msg'=>"Status não encontrado",'icon'=>'check','titulo'=>"Não permitido"]);
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'warning','msg'=>"Tipo de contrato não encontrado",'icon'=>'check','titulo'=>"Não permitido"]);
         }else{
-            if((Configuracao::find(1)->orcamento != $status->id) && (Configuracao::find(1)->ordem_servico != $status->id)){
+            if((Configuracao::find(1)->orcamento != $tipo->id) && (Configuracao::find(1)->ordem_servico != $tipo->id)){
 //                Status diferente do configurado no sistema
                 return redirect()->route('contrato.index')->with('alerta',['tipo'=>'warning','msg'=>"Status diferente do configurado",'icon'=>'check','titulo'=>"Não permitido"]);
             }
@@ -40,7 +42,7 @@ class ContratoController extends Controller
         $dados      =  [
             "titulo"    => "Contrato",
             "titulo_formulario" =>'Novo',
-            'tipo_contrato'     =>  $status->id
+            'tipo_contrato'     =>  $tipo->id
         ];
         return view('admin.contratos.formulario',$dados);
 
@@ -48,11 +50,12 @@ class ContratoController extends Controller
 
     public function cadastrar()
     {
+//        return \request()->all();
         try{
             $id = Contrato::gravar(\request());
-            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
+            return redirect()->route('contrato.editar',['id'=>$id])->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
-            return redirect()->route('contrato.novo')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+            return redirect()->route('contrato.novo',['status'=>\request()->get('tipo_contrato')])->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
 
     }
@@ -65,6 +68,9 @@ class ContratoController extends Controller
             "titulo_formulario" =>'Editar'
         ];
         $contrato    =   Contrato::find($id);
+        if($contrato == null){
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'warning','msg'=>"Nenhum registro foi encontrado",'icon'=>'ban','titulo'=>"Erro"]);
+        }
 
 
         return view('admin.contratos.formulario',$dados)->with('contrato',$contrato);

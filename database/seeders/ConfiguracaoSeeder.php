@@ -27,8 +27,13 @@ $table->integer('ordem_servico')->nullable();*/
             'telefone_movel'    =>  '85981067785',
             'email'             =>  'rafael@tecvelautomotiva.com.br',
             'logo'              =>  'logo.jpeg',
-            'orcamento'         =>  5,
-            'ordem_servico'     =>  1
+            'orcamento'         =>  1,
+            'ordem_servico'     =>  2,
+            'aberto'                =>  1,
+            'concluido'             =>  2,
+            'nao_autorizado'        =>  3,
+            'retorno'               =>  4,
+            'autorizado'            =>  5,
         ]);
     }
 }

@@ -23,6 +23,7 @@ class ContratoSeeder extends Seeder
                'obs'            =>  'observações',
                'defeito'        =>  "defeitos",
                'data'           =>  Carbon::now(),
+               'garantia'       =>  90,
                'created_at'     =>  Carbon::now(),
                'updated_at'     =>  Carbon::now(),
            ],[
@@ -30,6 +31,7 @@ class ContratoSeeder extends Seeder
                 'veiculo_id'     =>  1,
                 'obs'            =>  'observações 2',
                 'defeito'        =>  "defeitos 2",
+                'garantia'       =>  30,
                 'data'           =>  Carbon::now(),
                 'created_at'     =>  Carbon::now(),
                 'updated_at'     =>  Carbon::now(),

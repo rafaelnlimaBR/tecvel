@@ -85,33 +85,39 @@ $(document).ready(function() {
         },
     });
 
-});
 
+    $('.dataTempo').datetimepicker({
+        locale :"pt-br",
+        format: 'DD/MM/YYYY HH:mm',
+    });
 
-$('.placa').mask('AAA0U00', {
-    translation: {
-        'A': {
-            pattern: /[A-Za-z]/
+    $('.placa').mask('AAA0U00', {
+        translation: {
+            'A': {
+                pattern: /[A-Za-z]/
+            },
+            'U': {
+                pattern: /[A-Za-z0-9]/
+            },
         },
-        'U': {
-            pattern: /[A-Za-z0-9]/
-        },
-    },
-    onKeyPress: function (value, e, field, options) {
-        // Convert to uppercase
-        e.currentTarget.value = value.toUpperCase();
+        onKeyPress: function (value, e, field, options) {
+            // Convert to uppercase
+            e.currentTarget.value = value.toUpperCase();
 
-        // Get only valid characters
-        let val = value.replace(/[^\w]/g, '');
+            // Get only valid characters
+            let val = value.replace(/[^\w]/g, '');
 
-        // Detect plate format
-        let isNumeric = !isNaN(parseFloat(val[4])) && isFinite(val[4]);
-        let mask = 'AAA0U00';
-        if(val.length > 4 && isNumeric) {
-            mask = 'AAA0000';
+            // Detect plate format
+            let isNumeric = !isNaN(parseFloat(val[4])) && isFinite(val[4]);
+            let mask = 'AAA0U00';
+            if(val.length > 4 && isNumeric) {
+                mask = 'AAA0000';
+            }
+            $(field).mask(mask, options);
         }
-        $(field).mask(mask, options);
-    }
+    });
+    $('.mod_ano').mask("00/00",{placeholder: "  /  "});
+    $('.telefone').mask("(99)999999999");
+
 });
-$('.mod_ano').mask("00/00",{placeholder: "  /  "});
-$('.telefone').mask("(99)999999999");
+

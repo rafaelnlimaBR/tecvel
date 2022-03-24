@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Configuracao;
 use App\Models\Fornecedor;
 use App\Models\Status;
+use App\Models\TipoContrato;
 use Illuminate\Http\Request;
 use mysql_xdevapi\Exception;
 use function Symfony\Component\HttpFoundation\File\getErrorMessage;
@@ -18,7 +19,8 @@ class ConfiguracaoController extends Controller
         $dados      =  [
             "titulo"    => "Configuração",
             'titulo_formulario' => 'Alterar configuração',
-            'status'            => Status::PesquisarPorHabilitados()
+            'status'            => Status::PesquisarPorHabilitados(),
+            'tipos'             =>  TipoContrato::all()
         ];
 
         return view('admin.configuracao.formulario',$dados)->with('conf',$configuracao);
