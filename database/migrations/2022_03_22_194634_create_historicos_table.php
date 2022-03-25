@@ -18,11 +18,11 @@ return new class extends Migration
             $table->timestamps();
             $table->bigInteger('contrato_id')->unsigned();
             $table->integer('status_id')->unsigned();
-            $table->integer('tipo_id')->unsigned();
+            $table->integer('tipo_id')->unsigned()->nullable();
             $table->dateTime('data');
-            $table->text('obs');
-            $table->integer('desconto_peca');
-            $table->integer('desconto_servico');
+            $table->text('obs')->nullable();
+            $table->integer('desconto_peca')->nullable();
+            $table->integer('desconto_servico')->nullable();
 
             $table->foreign('contrato_id')->references('id')->on('contratos')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('status')->onDelete('cascade');

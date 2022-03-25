@@ -26,9 +26,8 @@ Auth::routes();
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('/teste', function (){
-        $contrato       =   \App\Models\Contrato::find(1);
-
-        return $contrato->historicos->last()->tipo->descricao;
+        $co         =   \App\Models\Contrato::find(1);
+        return $co->historicos->last()->tipo_id;
 
     });
 
@@ -43,6 +42,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/contrato/cadastrar', [App\Http\Controllers\ContratoController::class, 'cadastrar'])->name('contrato.cadastrar');
     Route::post('/contrato/atualizar', [App\Http\Controllers\ContratoController::class, 'atualizar'])->name('contrato.atualizar');
     Route::post('/contrato/excluir', [App\Http\Controllers\ContratoController::class, 'excluir'])->name('contrato.excluir');
+    Route::post('/contrato/atualizar/status', [App\Http\Controllers\ContratoController::class, 'atualizarStatus'])->name('contrato.atualizar.status');
 
     Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente.index');
     Route::get('/cliente/novo', [App\Http\Controllers\ClienteController::class, 'novo'])->name('cliente.novo');

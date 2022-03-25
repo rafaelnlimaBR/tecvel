@@ -50,7 +50,7 @@ class ContratoController extends Controller
 
     public function cadastrar()
     {
-//        return \request()->all();
+
         try{
             $id = Contrato::gravar(\request());
             return redirect()->route('contrato.editar',['id'=>$id])->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
@@ -62,10 +62,11 @@ class ContratoController extends Controller
 
     public function editar($id)
     {
-
+        $contrato    =   Contrato::find($id);
         $dados      =  [
             "titulo"    => "Contrato",
             "titulo_formulario" =>'Editar'
+
         ];
         $contrato    =   Contrato::find($id);
         if($contrato == null){
@@ -79,7 +80,6 @@ class ContratoController extends Controller
     public function atualizar()
     {
         try{
-//            return request();
             $id = Contrato::atualizar(\request());
             return redirect()->route('contrato.index')->with('alerta',['tipo'=>'success','msg'=>"Editado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
@@ -92,6 +92,17 @@ class ContratoController extends Controller
         try{
             $id = Contrato::excluir(\request()->get('id'));
             return redirect()->route('contrato.index')->with('alerta',['tipo'=>'success','msg'=>"Excluido com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);;
+        }catch (\Exception $e){
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+        }
+    }
+
+    public function atualizarStatus()
+    {
+        try{
+            $contrato   =   Contrato::find(\request()->get('contrato_id'));
+            $contrato->atualizarStatus(\request());
+            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'success','msg'=>"Editado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
             return redirect()->route('contrato.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }

@@ -25,6 +25,11 @@ class Status extends Model
         return $this->belongsToMany(Status::class,'status_status','status_atual_id','status_proximo_id');
     }
 
+    public function historicos()
+    {
+        return $this->hasMany(Historico::class,'status_id');
+    }
+
     public static function gravar(Request $r)
     {
         $Status        =   new Status();

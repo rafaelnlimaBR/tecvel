@@ -38,7 +38,7 @@ class Contrato extends Model
 
     public static function gravar(Request $r)
     {
-
+        $conf                   =   Configuracao::find(1);
         $contrato               =   new Contrato();
         $contrato->obs          =   $r->get('obs');
         $contrato->defeito      =   $r->get('defeito');
@@ -52,7 +52,14 @@ class Contrato extends Model
         if($contrato->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
-        $contrato->status()->attach(Configuracao::find(1)->aberto,
+
+        $status = null;
+        if(\request()->get('tipo_contrato') == $conf->orcamento){
+            $status =   $conf->aberto;
+        }else{
+            $status =   $conf->autorizado;
+        }
+        $contrato->status()->attach($status,
             [
                 'obs'           =>   'Criado em '.\request()->get('data'),
                 'data'          =>  Carbon::createFromFormat('d/m/Y H:i',$r->get('data')),
@@ -66,10 +73,17 @@ class Contrato extends Model
 
     public static function atualizar(Request $r)
     {
-        $contrato                =   Contrato::find($r->get('id'));
-        $contrato->descricao     =   $r->get('descricao');
-        $contrato->valor         =   $r->get('valor');
+        $contrato                =   Contrato::find($r->get('contrato_id'));
+
+
+        $contrato->obs          =   $r->get('obs');
+        $contrato->defeito      =   $r->get('defeito');
+        $contrato->data         =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'));
+        $contrato->cliente_id   =   $r->get('cliente');
+        $contrato->veiculo_id   =   $r->get('veiculo');
         $contrato->garantia     =   $r->get('garantia');
+
+
         if($contrato->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
@@ -82,5 +96,25 @@ class Contrato extends Model
         if($contrato->delete() == false){
             throw new \Exception('Não foi possível realizar a exclusão',200);
         }
+    }
+
+    public function atualizarStatus(Request $r)
+    {
+        $tipo_id        =   null;
+        $conf           =   Configuracao::find(1);
+        if($conf->autorizado == $r->get('status_id')){
+            $tipo_id    =   $conf->ordem_servico;
+        }elseif($conf->nao_autorizado == $r->get('status_id')){
+            $tipo_id    =   $conf->orcamento;
+        }else{
+            $tipo_id    =   $this->historicos->last()->tipo->id;
+        }
+
+
+        $this->status()->attach($r->get('status_id'),[
+            'data'          =>  Carbon::createFromFormat('d/m/Y H:i',$r->get('data')),
+            'obs'           =>  $r->get('obs'),
+            'tipo_id'       =>  $tipo_id
+            ]);
     }
 }

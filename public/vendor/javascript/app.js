@@ -1,6 +1,14 @@
 
 $(document).ready(function() {
     var URL     =   $('#url').val();
+
+    $('.modalAtualizarStatus').click(function(){
+
+        var id   =   $(this).attr('status_id');
+
+        $('#status_id').val(id);
+        $('.texto-excluir').html('Deseja realmente excluir o registro com o id '+id);
+    });
     $('.clientes_select2').select2({
         //placeholder: 'Search for a category',
         ajax: {

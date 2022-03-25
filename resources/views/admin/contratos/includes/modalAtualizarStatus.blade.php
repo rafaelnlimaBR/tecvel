@@ -1,5 +1,10 @@
 
-            <form>
+
+<div class="modal fade" id="modalStatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="{{route('contrato.atualizar.status')}}" method="post">
+                {{csrf_field()}}
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">{{$titulo}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -26,14 +31,18 @@
                             <div class="form-group">
                                 <label>Observações</label>
                                 <textarea  class="form-control" id="obs" name="obs"  value=""></textarea>
-                                <input type="hidden" value="{{isset($status_id)?$status_id:""}}" name="status_id">
+                                <input type="hidden" value="{{isset($status_id)?$status_id:""}}" name="status_id" id="status_id">
+                                <input type="hidden" value="{{isset($contrato_id)?$contrato_id:""}}" name="contrato_id">
                             </div>
                         </div>
 
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Atualizar Status</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>

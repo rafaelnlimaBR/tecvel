@@ -11,11 +11,11 @@
                 <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
                     <li class="pt-2 px-3"><h3 class="card-title">{{isset($contrato)?$contrato->status->last()->nome:$titulo_formulario}}</h3></li>
                     <li class="nav-item">
-                        <a class="nav-link active" id="custom-tabs-two-home-tab" data-toggle="pill" href="#custom-tabs-two-home" role="tab" aria-controls="custom-tabs-two-home" aria-selected="true">Dados</a>
+                        <a class="nav-link active" id="dados-tab" data-toggle="pill" href="#dados" role="tab" aria-controls="custom-tabs-two-home" aria-selected="true">Dados</a>
                     </li>
                     @if(isset($contrato))
                     <li class="nav-item">
-                        <a class="nav-link" id="custom-tabs-two-profile-tab" data-toggle="pill" href="#custom-tabs-two-profile" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">Profile</a>
+                        <a class="nav-link" id="historicos-tab" data-toggle="pill" href="#historicos" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">Historicos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="custom-tabs-two-messages-tab" data-toggle="pill" href="#custom-tabs-two-messages" role="tab" aria-controls="custom-tabs-two-messages" aria-selected="false">Messages</a>
@@ -29,8 +29,8 @@
             </div>
             <div class="card-body">
                 <div class="tab-content" id="custom-tabs-two-tabContent">
-                    <div class="tab-pane fade show active" id="custom-tabs-two-home" role="tabpanel" aria-labelledby="custom-tabs-two-home-tab">
-                        <form action="{{route('contrato.cadastrar')}}" method="post">
+                    <div class="tab-pane fade show active" id="dados" role="tabpanel" aria-labelledby="dados-tab">
+                        <form action="{{isset($contrato)?route('contrato.atualizar'):route("contrato.cadastrar")}}" method="post">
                         <div class="row">
                             <div class="col-sm-6">
                                 {{csrf_field()}}
@@ -39,6 +39,7 @@
                                     <label>Cliente <a class="" data-toggle="modal" data-target="#modalCliente"> Novo</a></label>
                                     {{ Form::select('cliente', (isset($contrato)?[$contrato->cliente->id=>$contrato->cliente->nome]:[null=>"Selecione um Cliente"]), null ,['class'=>'form-control clientes_select2','required']) }}
                                     <input type="hidden" name="tipo_contrato" value="{{isset($tipo_contrato)?$tipo_contrato:''}}">
+                                    <input type="hidden" name="contrato_id" value="{{isset($contrato)?$contrato->id:''}}">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -84,12 +85,16 @@
                                 </div>
                             </div>
                         </div>
-
-                            <button type="submit" class="btn btn-primary">Gravar</button>
+                            @if(isset($contrato))
+                                <button type="submit" class="btn btn-warning">Atualizar</button>
+                            @else
+                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            @endif
                         </form>
                     </div>
-                    <div class="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
-                        Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                    @if(isset($contrato))
+                    <div class="tab-pane fade" id="historicos" role="tabpanel" aria-labelledby="historicos-tab">
+                        @include('admin.contratos.includes.tabelaHistoricos')
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-two-messages" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
                         Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
@@ -97,46 +102,40 @@
                     <div class="tab-pane fade" id="custom-tabs-two-settings" role="tabpanel" aria-labelledby="custom-tabs-two-settings-tab">
                         Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
                     </div>
+                    @endif
                 </div>
             </div>
             <div class="card-footer">
                 <a href="{{route('contrato.index')}}" class="btn btn-default" style="border-color: rgba(105,105,106,0.85); color: rgba(72,72,73,0.85); font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">Voltar</a>
                 @if(isset($contrato))
 
-                    @if($contrato->historicos->last()->tipo->id == \App\Models\Configuracao::find(1)->orcamento)
+                    @if($contrato->historicos->last()->tipo->id == \App\Models\Configuracao::find(1)->orcamento and $contrato->status->last()->id != \App\Models\Configuracao::find(1)->nao_autorizado)
 
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#telaAutorizacao" style="background-color: {{\App\Models\Status::find(\App\Models\Configuracao::find(1)->autorizado)->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">
+                        <button status_id="{{\App\Models\Configuracao::find(1)->autorizado}}" type="button" class="btn btn-primary modalAtualizarStatus" data-toggle="modal" data-target="#modalStatus" style="background-color: {{\App\Models\Status::find(\App\Models\Configuracao::find(1)->autorizado)->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">
                            Autorizadar
                         </button>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#telaNAutorizacao" style="background-color: {{\App\Models\Status::find(\App\Models\Configuracao::find(1)->nao_autorizado)->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">
+                        <button status_id="{{\App\Models\Configuracao::find(1)->nao_autorizado}}" type="button" class="btn btn-primary modalAtualizarStatus" data-toggle="modal" data-target="#modalStatus" style="background-color: {{\App\Models\Status::find(\App\Models\Configuracao::find(1)->nao_autorizado)->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">
                             Não Autorizadar
                         </button>
 
-                        <div class="modal fade" id="telaAutorizacao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    @include('admin.contratos.includes.modalNovoStatus',['titulo'=>"Autorizar","status_id"=>\App\Models\Configuracao::find(1)->autorizado])
-                                </div>
-                            </div>
-                        </div>
+
+                        <!-- Modal -->
+
 
                         {{--    Tela Não autorizado--}}
-                        <div class="modal fade" id="telaNAutorizacao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    @include('admin.contratos.includes.modalNovoStatus',['titulo'=>"Não Autorizar","status_id"=>\App\Models\Configuracao::find(1)->nao_autorizado])
-                                </div>
-                            </div>
-                        </div>
+
                     @else
                         @foreach($contrato->status->last()->proximos as $status)
 
-                            <a href="{{route('contrato.index')}}" class="btn btn-default" style="background-color: {{$status->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">{{$status->nome}}</a>
+                            <button status_id="{{$status->id}}" type="button" class="btn btn-primary modalAtualizarStatus" data-toggle="modal" data-target="#modalStatus" style="background-color: {{$status->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">
+                                {{$status->nome}}
+                            </button>
 
                         @endforeach
+
                     @endif
 
-
+                        @include('admin.contratos.includes.modalAtualizarStatus',['contrato_id'=>$contrato->id])
                 @endif
 
             </div>
@@ -148,44 +147,15 @@
 
 
 
+    <!-- Modal -->
+
+
 
 
     <!-- Tela Cliente -->
-    <div class="modal fade" id="modalCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Novo Cliente</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @include('admin.clientes.includes.form',['modal'=>1])
-                </div>
-
-            </div>
-        </div>
-    </div>
+    @include('admin.clientes.includes.modalNovoCliente')
 {{--    Tela Veiculo--}}
-    <div class="modal fade" id="modalVeiculo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Novo Cliente</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @include('admin.veiculos.includes.form',['modal'=>1])
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
+    @include('admin.veiculos.includes.modalNovoVeiculo')
 
 {{--    Tela Atorização--}}
 
