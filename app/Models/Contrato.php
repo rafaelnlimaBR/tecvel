@@ -22,6 +22,8 @@ class Contrato extends Model
             ->withTimestamps();
     }
 
+
+
     public function historicos()
     {
         return $this->hasMany(Historico::class,'contrato_id');
@@ -82,7 +84,7 @@ class Contrato extends Model
                 'desconto_servico'=>    0,
             ]);
 
-        return $contrato->id;
+        return $contrato;
     }
 
     public static function atualizar(Request $r)
@@ -134,4 +136,6 @@ class Contrato extends Model
             'tipo_id'       =>  $tipo_id
             ]);
     }
+
+
 }

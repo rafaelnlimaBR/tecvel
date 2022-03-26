@@ -1,6 +1,53 @@
 
 $(document).ready(function() {
     var URL     =   $('#url').val();
+    $('.dinheiro').mask("#.##0.00" , { reverse:true})
+    $('#selectServicos').select2({
+        //placeholder: 'Search for a category',
+        ajax: {
+            type: 'POST',
+            url: URL+"/admin/servico/carregarSelect2",
+            dataType: 'json',
+            beforeSend: function (xhr) {
+                var token = $("input[name='_token']" ).val();
+
+                if (token) {
+                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                }
+            },
+            quietMillis: 400,
+            delay:400,
+            data: function (term, page) {
+                return {
+                    q: term.term, //search term
+                    // page size
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            },
+        },
+        templateResult: function (data) {
+
+            var html    =   $('<div class="select2-user-result"><h5>'+data.nome+'</h5>' +
+                '<h6>Valor: <b>'+data.valor+'</b></h6>'+
+
+                '</div>'
+            );
+            return html;
+        },
+        templateSelection:function (data) {
+            var html    =   $('<div class="select2-user-result"><b></b>'+data.text+'</div><br>'
+
+            );
+            $('#valorServico').val(data.valor);
+            $('#valorServico').focus();
+
+            return html;
+        },
+    });
 
     $('.modalAtualizarStatus').click(function(){
 

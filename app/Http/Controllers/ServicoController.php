@@ -80,5 +80,24 @@ class ServicoController extends Controller
         }
     }
 
+    public function carregarSelect2()
+    {
+        if(request()->ajax()){
+            $servicos   =   Servico::PesquisarPorDescricao(request()->get('q'))->limit(10)->orderBy('created_at','desc')->get();
+            $retorno    =   [];
+
+            foreach ($servicos as $key => $value) {
+                $retorno[$key]['id'] = $value->id;
+                $retorno[$key]['text'] = $value->descricao." - Valor: ".$value->valor;
+                $retorno[$key]['nome'] = $value->descricao;
+                $retorno[$key]['valor'] = $value->valor;
+
+            }
+
+            return response()->json($retorno);
+        }else{
+            return redirect()->route('home')->with('alerta',['tipo'=>'danger','msg'=>'Acesso negado.','icon'=>'ban']);
+        }
+    }
 
 }

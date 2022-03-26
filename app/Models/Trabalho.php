@@ -9,4 +9,11 @@ class Trabalho extends Model
 {
     use HasFactory;
     protected $table    =   "trabalhos";
+
+    public function servico()
+    {
+        $this->belongsTo(Servico::class,'servico_id');
+    }
+
+
 }

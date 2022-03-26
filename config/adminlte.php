@@ -513,8 +513,13 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' =>$root."vendor/javascript/app.js",
+                    'asset' => true,
+                    'location' =>"vendor/javascript/app.js",
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/css/app.css',
                 ],
             ],
         ],

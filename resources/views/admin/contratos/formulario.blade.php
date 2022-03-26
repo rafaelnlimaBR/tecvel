@@ -2,7 +2,11 @@
 
 @section("conteudo")
 
-
+@if(Session::has('active'))
+    @php
+    $active = Session::get('active');
+    @endphp
+@endif
 
 
     <div class="col-12 col-sm-12">
@@ -11,14 +15,16 @@
                 <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
                     <li class="pt-2 px-3"><h3 class="card-title">{{isset($contrato)?$contrato->status->last()->nome:$titulo_formulario}}</h3></li>
                     <li class="nav-item">
-                        <a class="nav-link active" id="dados-tab" data-toggle="pill" href="#dados" role="tab" aria-controls="custom-tabs-two-home" aria-selected="true">Dados</a>
+                        <a class="nav-link {{isset($active)?'':"active"}}" id="dados-tab" data-toggle="pill" href="#dados" role="tab" aria-controls="custom-tabs-two-home" aria-selected="true">Dados</a>
                     </li>
                     @if(isset($contrato))
+
+
                     <li class="nav-item">
-                        <a class="nav-link" id="historicos-tab" data-toggle="pill" href="#historicos" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">Historicos</a>
+                        <a class="nav-link {{isset($active)?$active == "historicos"?"active":"":""}}" id="historicos-tab" data-toggle="pill" href="#historicos" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">Historicos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="custom-tabs-two-messages-tab" data-toggle="pill" href="#custom-tabs-two-messages" role="tab" aria-controls="custom-tabs-two-messages" aria-selected="false">Messages</a>
+                        <a class="nav-link {{isset($active)?$active == "servicos"?"active":"":""}}" id="custom-tabs-two-messages-tab" data-toggle="pill" href="#servicos" role="tab" aria-controls="custom-tabs-two-messages" aria-selected="false">Serviços</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="custom-tabs-two-settings-tab" data-toggle="pill" href="#custom-tabs-two-settings" role="tab" aria-controls="custom-tabs-two-settings" aria-selected="false">Settings</a>
@@ -29,7 +35,7 @@
             </div>
             <div class="card-body">
                 <div class="tab-content" id="custom-tabs-two-tabContent">
-                    <div class="tab-pane fade show active" id="dados" role="tabpanel" aria-labelledby="dados-tab">
+                    <div class="tab-pane fade {{isset($active)?'':"show active"}}" id="dados" role="tabpanel" aria-labelledby="dados-tab">
                         <form action="{{isset($contrato)?route('contrato.atualizar'):route("contrato.cadastrar")}}" method="post">
                         <div class="row">
                             <div class="col-sm-6">
@@ -93,11 +99,11 @@
                         </form>
                     </div>
                     @if(isset($contrato))
-                    <div class="tab-pane fade" id="historicos" role="tabpanel" aria-labelledby="historicos-tab">
+                    <div class="tab-pane fade {{isset($active)?$active == "historicos"?"show active":"":""}}" id="historicos" role="tabpanel" aria-labelledby="historicos-tab">
                         @include('admin.contratos.includes.tabelaHistoricos')
                     </div>
-                    <div class="tab-pane fade" id="custom-tabs-two-messages" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
-                        Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+                    <div class="tab-pane fade {{isset($active)?$active == "servicos"?"show active":"":""}}" id="servicos" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
+                        @include('admin.contratos.includes.tabelaServicos')
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-two-settings" role="tabpanel" aria-labelledby="custom-tabs-two-settings-tab">
                         Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.

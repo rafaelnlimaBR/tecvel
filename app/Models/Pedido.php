@@ -15,6 +15,11 @@ class Pedido extends Model
         return $this->belongsTo(Fornecedor::class,'fornecedor_id','id');
     }
 
+    public function historicos()
+    {
+
+    }
+
     /*public static function gravar(Request $r)
     {
         $pedido                =   new Pedido();

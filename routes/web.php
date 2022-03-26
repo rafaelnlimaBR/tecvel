@@ -38,11 +38,13 @@ Route::group(['prefix'=>'admin'],function(){
 
     Route::get('/contratos', [App\Http\Controllers\ContratoController::class, 'index'])->name('contrato.index');
     Route::get('/contrato/novo/{tipo}', [App\Http\Controllers\ContratoController::class, 'novo'])->name('contrato.novo');
-    Route::get('/contrato/editar/{id}', [App\Http\Controllers\ContratoController::class, 'editar'])->name('contrato.editar');
+    Route::get('/contrato/editar/{id}/historico/{historico_id}', [App\Http\Controllers\ContratoController::class, 'editar'])->name('contrato.editar');
     Route::post('/contrato/cadastrar', [App\Http\Controllers\ContratoController::class, 'cadastrar'])->name('contrato.cadastrar');
     Route::post('/contrato/atualizar', [App\Http\Controllers\ContratoController::class, 'atualizar'])->name('contrato.atualizar');
     Route::post('/contrato/excluir', [App\Http\Controllers\ContratoController::class, 'excluir'])->name('contrato.excluir');
     Route::post('/contrato/atualizar/status', [App\Http\Controllers\ContratoController::class, 'atualizarStatus'])->name('contrato.atualizar.status');
+
+    Route::post('/historico/atualizar/servico', [App\Http\Controllers\HistoricoController::class, 'cadastrarServico'])->name('historico.cadastrar.servico');
 
     Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente.index');
     Route::get('/cliente/novo', [App\Http\Controllers\ClienteController::class, 'novo'])->name('cliente.novo');
@@ -66,6 +68,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/servico/cadastrar', [App\Http\Controllers\ServicoController::class, 'cadastrar'])->name('servico.cadastrar');
     Route::post('/servico/atualizar', [App\Http\Controllers\ServicoController::class, 'atualizar'])->name('servico.atualizar');
     Route::post('/servico/excluir', [App\Http\Controllers\ServicoController::class, 'excluir'])->name('servico.excluir');
+    Route::post('/servico/carregarSelect2', [App\Http\Controllers\ServicoController::class, 'carregarSelect2'])->name('servico.carregarSelect2');
 
     Route::get('/status', [App\Http\Controllers\StatusController::class, 'index'])->name('status.index');
     Route::get('/status/novo', [App\Http\Controllers\StatusController::class, 'novo'])->name('status.novo');

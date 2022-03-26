@@ -64,7 +64,7 @@
                             <td>{{$c->historicos->last()->tipo->descricao}}</td>
                             <td>{{$c->status->last()->nome}}</td>
                             <td>
-                                <a href="{{route('contrato.editar',$c->id)}}" class="btn btn-block btn-warning btn-xs">
+                                <a href="{{route('contrato.editar',['id'=>$c->id,'historico_id'=>$c->historicos->last()->id])}}" class="btn btn-block btn-warning btn-xs">
 
                                     <i class="fas fa-edit"></i>
                                 </a>
