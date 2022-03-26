@@ -36,6 +36,20 @@ class Contrato extends Model
         return $this->belongsTo(Veiculo::class,'veiculo_id');
     }
 
+    public function scopePesquisarPorCliente($query, $nome)
+    {
+        return $query->whereHas('cliente', function ($query) use ($nome) {
+            $query->where('nome', 'like', '%' . $nome . '%');
+        });
+    }
+
+    public function scopePesquisarPorVeiculo($query, $placa)
+    {
+        return $query->whereHas('veiculo', function ($query) use ($placa) {
+            $query->where('placa', 'like', '%' . $placa . '%');
+        });
+    }
+
     public static function gravar(Request $r)
     {
         $conf                   =   Configuracao::find(1);
@@ -102,14 +116,17 @@ class Contrato extends Model
     {
         $tipo_id        =   null;
         $conf           =   Configuracao::find(1);
-        if($conf->autorizado == $r->get('status_id')){
-            $tipo_id    =   $conf->ordem_servico;
-        }elseif($conf->nao_autorizado == $r->get('status_id')){
-            $tipo_id    =   $conf->orcamento;
-        }else{
-            $tipo_id    =   $this->historicos->last()->tipo->id;
-        }
 
+        switch ($r->get('status_id')){
+            case  $conf->autorizado:
+                $tipo_id    =   $conf->ordem_servico;
+                break;
+            case $conf->nao_autorizado:
+                $tipo_id    =   $conf->orcamento;
+                break;
+            default:
+                $tipo_id    =   $r->get('status_id');
+        };
 
         $this->status()->attach($r->get('status_id'),[
             'data'          =>  Carbon::createFromFormat('d/m/Y H:i',$r->get('data')),

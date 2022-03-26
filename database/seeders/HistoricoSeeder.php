@@ -22,7 +22,7 @@ class HistoricoSeeder extends Seeder
                 'status_id'             =>  1,
                 'data'                  =>  Carbon::now(),
                 'obs'                   =>  "Reparo realizado com sucesso",
-                'tipo_id'               =>  1,
+                'tipo_id'               =>  2,
                 'desconto_peca'         =>  10,
                 'desconto_servico'      =>  10,
             ],[

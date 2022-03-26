@@ -52,11 +52,11 @@ class StatusSeeder extends Seeder
                 'status_proximo_id'      =>  4
             ],
             [
-                'status_atual_id'        =>  3,
+                'status_atual_id'        =>  4,
                 'status_proximo_id'      =>  2
             ],
             [
-                'status_atual_id'        =>  4,
+                'status_atual_id'        =>  5,
                 'status_proximo_id'      =>  2
             ]
 

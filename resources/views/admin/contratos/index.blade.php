@@ -26,7 +26,12 @@
                         {{csrf_field()}}
                         <div class="input-group input-group-sm" style="width: 350px;">
 
-                            <input type="text" name="descricao" class="form-control float-right col-md-5" style="" placeholder="Descrição">
+                            <input type="text" name="cliente" class="form-control float-right col-md-4" style="" placeholder="Cliente">
+
+                        </div>
+                        <div class="input-group input-group-sm" style="width: 350px;">
+
+                            <input type="text" name="veiculo" class="form-control float-right col-md-4" style="" placeholder="Placa">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default">
                                     <i class="fas fa-search"></i>

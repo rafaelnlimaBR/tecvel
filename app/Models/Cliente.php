@@ -25,8 +25,8 @@ class Cliente extends Model
     public static function gravar(Request $r)
     {
         $cliente        =   new Cliente();
-        $cliente->nome  =   $r->get('nome');
-        $cliente->email =   $r->get('email');
+        $cliente->nome  =   strtoupper($r->get('nome'));
+        $cliente->email =   strtolower($r->get('email'));
         $cliente->telefone01    =   $r->get('telefone01');
         $cliente->telefone02    =   $r->get('telefone02');
         if($cliente->save() == false){
@@ -38,8 +38,8 @@ class Cliente extends Model
     public static function atualizar(Request $r)
     {
         $cliente        =   Cliente::find($r->get('id'));
-        $cliente->nome  =   $r->input('nome');
-        $cliente->email =   $r->input('email');
+        $cliente->nome  =   strtoupper($r->get('nome'));
+        $cliente->email =   strtolower($r->get('email'));
         $cliente->telefone01    =   $r->get('telefone01');
         $cliente->telefone02    =   $r->get('telefone02');
         if($cliente->save() == false){
