@@ -15,7 +15,7 @@
             <td>{{$s->nome}}</td>
             <td>{{\App\Models\TipoContrato::find($s->pivot->tipo_id)->descricao}}</td>
 
-            <td>des.</td>
+            <td><a href="{{route('contrato.editar',['id'=>$contrato->id,'historico_id'=>$s->pivot->id])}}">Ir</a></td>
         </tr>
         <tr class="expandable-body d-none">
             <td colspan="5">

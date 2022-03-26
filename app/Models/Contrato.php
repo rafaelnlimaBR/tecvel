@@ -19,6 +19,7 @@ class Contrato extends Model
             ->withPivot('desconto_peca')
             ->withPivot('desconto_servico')
             ->withPivot('tipo_id')
+            ->withPivot('id')
             ->withTimestamps();
     }
 
@@ -127,7 +128,7 @@ class Contrato extends Model
                 $tipo_id    =   $conf->orcamento;
                 break;
             default:
-                $tipo_id    =   $r->get('status_id');
+                $tipo_id    =   $r->get('tipo_id');
         };
 
         $this->status()->attach($r->get('status_id'),[

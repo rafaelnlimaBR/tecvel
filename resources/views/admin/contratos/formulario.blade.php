@@ -13,7 +13,7 @@
         <div class="card card-secondary card-tabs">
             <div class="card-header p-0 pt-1">
                 <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
-                    <li class="pt-2 px-3"><h3 class="card-title">{{isset($contrato)?$contrato->status->last()->nome:$titulo_formulario}}</h3></li>
+                    <li class="pt-2 px-3"><h3 class="card-title">{{isset($contrato)?$historico->status->nome:$titulo_formulario}}</h3></li>
                     <li class="nav-item">
                         <a class="nav-link {{isset($active)?'':"active"}}" id="dados-tab" data-toggle="pill" href="#dados" role="tab" aria-controls="custom-tabs-two-home" aria-selected="true">Dados</a>
                     </li>

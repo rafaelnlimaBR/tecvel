@@ -17,6 +17,11 @@ class Historico extends Model
         return $this->belongsTo(TipoContrato::class,'tipo_id');
     }
 
+    public function status()
+    {
+        return $this->belongsTo(Status::class,'status_id');
+    }
+
     public function servicos()
     {
         return $this->belongsToMany(Servico::class,'trabalhos','historico_id','servico_id')

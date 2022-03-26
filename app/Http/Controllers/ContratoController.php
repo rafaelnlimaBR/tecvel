@@ -46,7 +46,7 @@ class ContratoController extends Controller
 
         $dados      =  [
             "titulo"    => "Contrato",
-            "titulo_formulario" =>'Novo',
+            "titulo_formulario" =>$tipo->descricao,
             'tipo_contrato'     =>  $tipo->id
         ];
         return view('admin.contratos.formulario',$dados);
@@ -101,6 +101,7 @@ class ContratoController extends Controller
     public function atualizar()
     {
         try{
+
             $id = Contrato::atualizar(\request());
             return redirect()->route('contrato.index')
                 ->with('alerta',['tipo'=>'success','msg'=>"Editado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
@@ -123,6 +124,7 @@ class ContratoController extends Controller
     {
         try{
             $contrato   =   Contrato::find(\request()->get('contrato_id'));
+//            dd(\request()->all());
             $contrato->atualizarStatus(\request());
             return redirect()->route('contrato.index')->with('alerta',['tipo'=>'success','msg'=>"Editado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
