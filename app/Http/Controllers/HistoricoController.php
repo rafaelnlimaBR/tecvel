@@ -17,11 +17,10 @@ class HistoricoController extends Controller
             }
 //            dd(\request()->all());
             $historico->cadastrarServico(\request());
-            return redirect()->route('contrato.editar',['id'=>\request()->get('contrato_id'),'historico_id'=>$historico->id])
-                ->with('active','servicos')
-                ->with('alerta',['tipo'=>'success','msg'=>"Editado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
+            return response()->json(['html'=>view('admin.contratos.includes.tabelaServicos')->with('historico',$historico)->render()]);
         }catch (\Exception $e){
-            return redirect()->route('contrato.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+            return response()->json(['erro'=>$e->getMessage()]);
         }
     }
+
 }

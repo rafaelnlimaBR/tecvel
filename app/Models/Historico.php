@@ -34,7 +34,7 @@ class Historico extends Model
     {
         $this->servicos()->attach($r->get('servico_id'),[
             'valor'         =>  $r->get('valor'),
-            'autorizado'    =>  1,
+            'autorizado'    =>  $r->get('autorizado'),
             'data'          =>  Carbon::now()
         ]);
     }

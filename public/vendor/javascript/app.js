@@ -48,6 +48,37 @@ $(document).ready(function() {
                     var option  =   '<option value="'+data.veiculo.id+'" selected>'+data.veiculo.placa;
                     $("select[name='veiculo']").html(option);
                     $("#modalVeiculo").modal('hide');
+
+                }
+            }
+        });
+        return false;
+    });
+
+    $("form[name='form-adicionar-servico']").submit(function(){
+
+        var dados   = $(this).serialize();
+        var rota    =   this.action;
+
+
+        $.ajax({
+            type: "POST",
+            url: rota,
+            data: dados,
+            success: function( data )
+            {
+
+                if('erro' in data){
+                    alert(data.erro);
+                }else{
+
+                    $('#form-modal-servicos').html(data.html);
+                    var option  =   '<option value="'+data.servico.id+'" selected>'+data.servico.descricao+" - Valor: "+data.servico.valor;
+
+                    $("select[name='servico_id']").html(option);
+                    $('#valorServico').val(data.servico.valor);
+                    $("#modalServico").modal('hide');
+
                 }
             }
         });
@@ -97,7 +128,7 @@ $(document).ready(function() {
 
             );
             $('#valorServico').val(data.valor);
-            $('#valorServico').focus();
+            // $('#valorServico').focus();
 
             return html;
         },

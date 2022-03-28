@@ -13,7 +13,7 @@
                 </div>
 
 
-                @include('admin.veiculos.includes.form')
+                @include('admin.veiculos.includes.form',['modal'=>0])
             </div>
         </div>
 

@@ -1,37 +1,9 @@
 
 
 
-    <form action="{{route('historico.cadastrar.servico')}}" method="post">
 
 
-
-        <div class="row">
-            <div class="col-sm-5">
-
-                <div class="form-group">
-                    <label>Serviços</label>
-                    {{ Form::select('servico_id', [], null ,['class'=>'form-control selectServicos ','id'=>'selectServicos','required']) }}
-                    {{csrf_field()}}
-                    <input type="hidden" name="historico_id" value="{{$historico->id}}">
-                    <input type="hidden" name="contrato_id" value="{{$contrato->id}}">
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label>Valor</label>
-                    <input class="form-control dinheiro" type="text" name="valor" id="valorServico" placeholder="Valor">
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label>Adicionar</label>
-                    <button class="form-control btn btn-primary" type="submit"  >Adicionar</button>
-                </div>
-            </div>
-        </div>
-    </form>
-
-<table class="table table-bordered">
+<table class="table table-bordered " id="tabela-historico-servicos">
     <thead>
     <tr>
         <th style="width: 50%">Serviço</th>

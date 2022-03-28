@@ -10,6 +10,20 @@ class Servico extends Model
 {
     use HasFactory;
     protected $table = "servicos";
+
+    private static $restricao = [
+        'descricao'       =>     'required|unique:servicos',
+        'valor'             =>   'required',
+    ];
+    private static $mensagem = [
+        'required'    => 'O campo :attribute é obrigado.',
+        'unique'    =>  'Já possui registro com esse :attribute ',
+    ];
+    public static function validacao($dados)
+    {
+        return \Validator::make($dados,static::$restricao,static::$mensagem);
+    }
+
     public function scopePesquisarPorDescricao($query, $nome)
     {
         return $query->where('descricao','like','%'.$nome.'%');
@@ -23,7 +37,7 @@ class Servico extends Model
         if($servico->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
-        return $servico->id;
+        return $servico;
     }
 
     public static function atualizar(Request $r)
@@ -44,5 +58,5 @@ class Servico extends Model
             throw new \Exception('Não foi possível realizar a exclusão',200);
         }
     }
-    
+
 }

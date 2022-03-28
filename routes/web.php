@@ -15,8 +15,8 @@ use App\Http\Controllers\ClienteController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/teste', function () {
+
 });
 
 Auth::routes();
@@ -26,8 +26,7 @@ Auth::routes();
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('/teste', function (){
-        $co         =   \App\Models\Contrato::find(1);
-        return $co->historicos->last()->tipo_id;
+        return date('y').date('m').date('d').date('h');
 
     });
 

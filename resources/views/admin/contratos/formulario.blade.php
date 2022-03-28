@@ -103,6 +103,45 @@
                         @include('admin.contratos.includes.tabelaHistoricos')
                     </div>
                     <div class="tab-pane fade {{isset($active)?$active == "servicos"?"show active":"":""}}" id="servicos" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
+                        <form action="{{route('historico.cadastrar.servico')}}" method="post" name="form-adicionar-servico">
+
+
+
+                            <div class="row">
+                                <div class="col-sm-5">
+
+                                    <div class="form-group">
+                                        <label>Serviços <a class="" data-toggle="modal" data-target="#modalServico"> Novo</a></label>
+                                        {{ Form::select('servico_id', [], null ,['class'=>'form-control selectServicos ','id'=>'selectServicos','required']) }}
+                                        {{csrf_field()}}
+                                        <input type="hidden" name="historico_id" value="{{$historico->id}}">
+                                        <input type="hidden" name="contrato_id" value="{{$contrato->id}}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Valor</label>
+                                        <input class="form-control dinheiro" type="text" name="valor" id="valorServico" placeholder="Valor">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Valor</label>
+                                        <select class="form-control "  name="autorizado"  >
+                                            <option value="1">Sim</option>
+                                            <option value="0">Não</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Adicionar</label>
+                                        <button class="form-control btn btn-primary" type="submit"  >Adicionar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
                         @include('admin.contratos.includes.tabelaServicos')
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-two-settings" role="tabpanel" aria-labelledby="custom-tabs-two-settings-tab">
@@ -163,8 +202,8 @@
 {{--    Tela Veiculo--}}
     @include('admin.veiculos.includes.modalNovoVeiculo')
 
-{{--    Tela Atorização--}}
-
+{{--    Tela de Servicos--}}
+    @include('admin.servicos.includes.modalNovoServico')
 
 
 @stop
