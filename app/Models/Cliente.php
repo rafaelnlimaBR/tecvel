@@ -10,8 +10,23 @@ class Cliente extends Model
 {
     use HasFactory;
     protected $table = "clientes";
+    private static $restricao = [
+        'email'      =>     'required|unique:clientes',
+        'nome'       =>     'required',
+        'telefone01' =>     'required',
+    ];
+    private static $mensagem = [
+        'required'    => 'O campo :attribute é obrigado.',
+        'unique'    =>  'Já possui registro com esse :attribute ',
+    ];
+    public static function validacao($dados)
+    {
+        if(array_key_exists('id',$dados)){
+            static::$restricao['email'] .= ',email,'.$dados['id'];
 
-
+        }
+        return \Validator::make($dados,static::$restricao,static::$mensagem);
+    }
 
     public function scopePesquisarPorNome($query, $nome)
     {
@@ -32,7 +47,7 @@ class Cliente extends Model
         if($cliente->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
-        return $cliente->id;
+        return $cliente;
     }
 
     public static function atualizar(Request $r)

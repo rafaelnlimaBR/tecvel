@@ -1,12 +1,13 @@
-<form class="" action="{{isset($veiculo)?route('veiculo.atualizar'):route('veiculo.cadastrar')}}" method="post">
+<form class="" action="{{isset($veiculo)?route('veiculo.atualizar'):route('veiculo.cadastrar')}}" method="post" name="form-veiculo" id="form-veiculo">
     <div class="card-body">
         <div class="row">
             <div class="col-sm-6">
                 {{csrf_field()}}
-                <input type="hidden" name="modal" value="{{isset($modal)?1:0}}">
+                <input type="hidden" name="modal" value="{{$modal}}">
                 <div class="form-group">
                     <label>Placa</label>
                     <input  type="text" class="form-control placa" id="placa" name="placa" placeholder="Placa" value="{{isset($veiculo)?$veiculo->placa:''}}">
+                    <p class="error">{{ $errors->first('placa', ":message") }}</p>
                 </div>
             </div>
             <div class="col-sm-6">

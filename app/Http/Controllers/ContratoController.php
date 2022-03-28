@@ -29,7 +29,7 @@ class ContratoController extends Controller
 
     public function novo($tipo)
     {
-//        dd(Configuracao::find(1)->orcamento != $status);
+
         $tipo           =   TipoContrato::find($tipo);
 
         if(empty($tipo) ){
@@ -55,7 +55,6 @@ class ContratoController extends Controller
 
     public function cadastrar()
     {
-
         try{
             $contrato = Contrato::gravar(\request());
             return redirect()->route('contrato.editar',['id'=>$contrato->id,'historico_id'=>$contrato->historicos->last()->id])->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);

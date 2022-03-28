@@ -1,5 +1,59 @@
 
 $(document).ready(function() {
+
+
+    $("form[name='form-cliente']").submit(function(){
+
+        var dados   = $(this).serialize();
+        var rota    =   this.action;
+
+
+        $.ajax({
+            type: "POST",
+            url: rota,
+            data: dados,
+            success: function( data )
+            {
+                if('erro' in data){
+                    alert(data.erro);
+                }else{
+
+                    $('#form-cliente').html(data.html);
+                    var option  =   '<option value="'+data.cliente.id+'" selected>'+data.cliente.nome;
+                    $("select[name='cliente']").html(option);
+                    $("#modalCliente").modal('hide');
+                }
+            }
+        });
+        return false;
+    });
+
+    $("form[name='form-veiculo']").submit(function(){
+
+        var dados   = $(this).serialize();
+        var rota    =   this.action;
+
+
+        $.ajax({
+            type: "POST",
+            url: rota,
+            data: dados,
+            success: function( data )
+            {
+                if('erro' in data){
+                    alert(data.erro);
+                }else{
+
+                    $('#form-veiculo').html(data.html);
+                    var option  =   '<option value="'+data.veiculo.id+'" selected>'+data.veiculo.placa;
+                    $("select[name='veiculo']").html(option);
+                    $("#modalVeiculo").modal('hide');
+                }
+            }
+        });
+        return false;
+    });
+
     var URL     =   $('#url').val();
     $('.dinheiro').mask("#.##0.00" , { reverse:true})
     $('#selectServicos').select2({

@@ -13,7 +13,8 @@ class VeiculoController extends Controller
             ->orderby('id','desc')->paginate(30);;
         $dados      =  [
             "titulo"    => "Veiculos",
-            "titulo_tabela" => "Lista de Veiculos"
+            "titulo_tabela" => "Lista de Veiculos",
+            'modal'         =>  0
         ];
 
         return view('admin.veiculos.index',$dados)->with('veiculos',$veiculos);
@@ -39,14 +40,33 @@ class VeiculoController extends Controller
     public function cadastrar()
     {
         try {
-            Veiculo::gravar(\request());
+            $modal = request()->get("modal");
+            $validacao  =   Veiculo::validacao(request()->all());
+
+
+            $validacao  =   Veiculo::validacao(request()->all());
+
+            if($validacao->fails()){
+                if($modal == 1){
+                    return response()->json(['html'=>view('admin.veiculos.includes.form')->with('modal',true)->withErrors($validacao)->render()]);
+                }else{
+                    return redirect()->route('veiculos.novo')->withErrors($validacao)->withInput();
+                }
+            }
+
+            $veiculo = Veiculo::gravar(\request());
             if (\request()->get('modal') == 1) {
-                return redirect()->back()->with('alerta', ['tipo' => 'success', 'msg' => "Veículo cadastrado com sucesso", 'icon' => 'check', 'titulo' => "Sucesso"]);
+                return response()->json(['html'=>view('admin.veiculos.includes.form')->with('modal',true)->with('sucesso',"Registro realizado com sucesso")->render(),'veiculo'=>$veiculo]);
             } else{
                 return redirect()->route('veiculo.index')->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
             }
         }catch (\Exception $e){
-            return redirect()->route('veiculo.novo')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+            if($modal == 1){
+                return response()->json(['erro'=>$e->getMessage()]);
+            }else{
+                return redirect()->route('veiculo.novo')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+            }
+
         }
 
     }

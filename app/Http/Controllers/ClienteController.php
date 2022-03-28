@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
 use Illuminate\Http\Request;
+use function Symfony\Component\HttpFoundation\all;
 
 class ClienteController extends Controller
 {
@@ -38,7 +39,8 @@ class ClienteController extends Controller
 
         $dados      =  [
             "titulo"    => "Cliente",
-            "titulo_formulario" =>'Novo'
+            "titulo_formulario" =>'Novo',
+            'modal'             => 0
         ];
         return view('admin.clientes.formulario',$dados);
 
@@ -46,17 +48,34 @@ class ClienteController extends Controller
 
     public function cadastrar()
     {
-        try{
 
-            $id = Cliente::gravar(\request());
-            if(\request()->get('modal') == 1){
-                return redirect()->back()->with('alerta',['tipo'=>'success','msg'=>"Cliente cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
+        try{
+            $modal = request()->get("modal");
+            $validacao  =   Cliente::validacao(request()->all());
+
+
+            $validacao  =   Cliente::validacao(request()->all());
+
+            if($validacao->fails()){
+                if($modal == 1){
+                    return response()->json(['html'=>view('admin.clientes.includes.form')->with('modal',true)->withErrors($validacao)->render()]);
+                }else{
+                    return redirect()->route('cliente.novo')->withErrors($validacao)->withInput();
+                }
+            }
+            $cliente = Cliente::gravar(\request());
+            if($modal){
+                return response()->json(['html'=>view('admin.clientes.includes.form')->with('modal',true)->with('sucesso',"Registro realizado com sucesso")->render(),'cliente'=>$cliente]);
             }else{
-                return redirect()->route('cliente.index')->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
+                return redirect()->route('cliente.index')->with('alerta',['tipo'=>'success','msg'=>"Registro realizado com sucesso",'titulo'=>'Sucesso!','icon'=>'check']);
             }
 
         }catch (\Exception $e){
-            return redirect()->route('cliente.novo')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+            if($modal == 1){
+                    return response()->json(['erro'=>$e->getMessage()]);
+            }else{
+                return redirect()->route('cliente.novo')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+            }
         }
 
     }
@@ -66,7 +85,8 @@ class ClienteController extends Controller
 
         $dados      =  [
             "titulo"    => "Cliente",
-            "titulo_formulario" =>'Editar'
+            "titulo_formulario" =>'Editar',
+            'modal'             =>  false
         ];
         $cliente    =   Cliente::find($id);
 

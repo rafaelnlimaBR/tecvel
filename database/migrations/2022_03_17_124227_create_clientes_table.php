@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integerIncrements('id');
             $table->timestamps();
             $table->string('nome');
-            $table->string('email')->nullable();
+            $table->string('email')->unique();
             $table->string('telefone01');
             $table->string('telefone02')->nullable();
         });
