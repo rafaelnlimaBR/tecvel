@@ -17,6 +17,7 @@ class HistoricoController extends Controller
             }
 //            dd(\request()->all());
             $historico->cadastrarServico(\request());
+
             return response()->json(['html'=>view('admin.contratos.includes.tabelaServicos')->with('historico',$historico)->render()]);
         }catch (\Exception $e){
             return response()->json(['erro'=>$e->getMessage()]);

@@ -1,6 +1,29 @@
 
 $(document).ready(function() {
 
+    $("form[name='form-adicionar-servico']").submit(function () {
+        var dados   = $(this).serialize();
+        var rota    =   this.action;
+
+
+        $.ajax({
+            type: "POST",
+            url: rota,
+            data: dados,
+            success: function( data )
+            {
+                if('erro' in data){
+                    alert(data.erro);
+                }else{
+
+                    $('#tabela-historico-servicos').html(data.html);
+                }
+            }
+        });
+        return false;
+
+
+    });
 
     $("form[name='form-cliente']").submit(function(){
 
@@ -55,7 +78,7 @@ $(document).ready(function() {
         return false;
     });
 
-    $("form[name='form-adicionar-servico']").submit(function(){
+    $("form[name='modal-adicionar-servico']").submit(function(){
 
         var dados   = $(this).serialize();
         var rota    =   this.action;
@@ -128,7 +151,7 @@ $(document).ready(function() {
 
             );
             $('#valorServico').val(data.valor);
-            // $('#valorServico').focus();
+            $('#valorServico').focus();
 
             return html;
         },

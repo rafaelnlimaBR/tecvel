@@ -32,7 +32,7 @@ class Servico extends Model
     public static function gravar(Request $r)
     {
         $servico                =   new Servico();
-        $servico->descricao     =   $r->get('descricao');
+        $servico->descricao     =   strtoupper($r->get('descricao'));
         $servico->valor         =   $r->get('valor');
         if($servico->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);

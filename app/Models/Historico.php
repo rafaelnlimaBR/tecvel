@@ -26,7 +26,7 @@ class Historico extends Model
     {
         return $this->belongsToMany(Servico::class,'trabalhos','historico_id','servico_id')
             ->withPivot([
-                'valor','autorizado','data'
+                'valor','autorizado','data',
             ]);
     }
 

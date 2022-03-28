@@ -10,9 +10,16 @@ class Trabalho extends Model
     use HasFactory;
     protected $table    =   "trabalhos";
 
+    public function scopePesquisarPorServico($query, $nome)
+    {
+        return $query->whereHas('servico', function ($query) use ($nome) {
+            $query->where('descricao', 'like', '%' . $nome . '%');
+        });
+    }
+
     public function servico()
     {
-        $this->belongsTo(Servico::class,'servico_id');
+        return $this->belongsTo(Servico::class,'servico_id');
     }
 
 

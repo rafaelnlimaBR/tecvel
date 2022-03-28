@@ -108,7 +108,7 @@
 
 
                             <div class="row">
-                                <div class="col-sm-5">
+                                <div class="col-sm-4">
 
                                     <div class="form-group">
                                         <label>Serviços <a class="" data-toggle="modal" data-target="#modalServico"> Novo</a></label>
@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
-                                        <label>Valor</label>
+                                        <label>Autorizado</label>
                                         <select class="form-control "  name="autorizado"  >
                                             <option value="1">Sim</option>
                                             <option value="0">Não</option>
@@ -137,6 +137,12 @@
                                     <div class="form-group">
                                         <label>Adicionar</label>
                                         <button class="form-control btn btn-primary" type="submit"  >Adicionar</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Todos</label>
+                                        <a class="form-control btn btn-default" href="{{route('trabalho.index',['id'=>$contrato->id,'historico_id'=>$historico->id])}}">Todos</a>
                                     </div>
                                 </div>
                             </div>

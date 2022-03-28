@@ -26,7 +26,11 @@ Auth::routes();
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('/teste', function (){
-        return date('y').date('m').date('d').date('h');
+//        return \App\Models\Historico::find(3);
+        foreach (\App\Models\Historico::find(3) as $h){
+            echo  $h->obs;
+
+        }
 
     });
 
@@ -42,6 +46,9 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/contrato/atualizar', [App\Http\Controllers\ContratoController::class, 'atualizar'])->name('contrato.atualizar');
     Route::post('/contrato/excluir', [App\Http\Controllers\ContratoController::class, 'excluir'])->name('contrato.excluir');
     Route::post('/contrato/atualizar/status', [App\Http\Controllers\ContratoController::class, 'atualizarStatus'])->name('contrato.atualizar.status');
+
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/servicos', [App\Http\Controllers\TrabalhoController::class, 'index'])->name('trabalho.index');
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/servico/editar/{$trabalho_id}', [App\Http\Controllers\TrabalhoController::class, 'editar'])->name('trabalho.editar');
 
     Route::post('/historico/atualizar/servico', [App\Http\Controllers\HistoricoController::class, 'cadastrarServico'])->name('historico.cadastrar.servico');
 

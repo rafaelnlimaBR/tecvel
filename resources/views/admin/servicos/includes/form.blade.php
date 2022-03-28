@@ -1,5 +1,5 @@
 
-<form class="" action="{{isset($servico)?route('servico.atualizar'):route('servico.cadastrar')}}" method="post" id="form-modal-servicos" name="{{$modal == 1?"form-adicionar-servico":""}}">
+<form class="" action="{{isset($servico)?route('servico.atualizar'):route('servico.cadastrar')}}" method="post" id="form-modal-servicos" name="{{$modal == 1?"modal-adicionar-servico":""}}">
     <div class="card-body">
         <div class="form-group">
             {{csrf_field()}}
