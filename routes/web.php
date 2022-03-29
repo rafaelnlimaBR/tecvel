@@ -26,8 +26,8 @@ Auth::routes();
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('/teste', function (){
-//        return \App\Models\Historico::find(3);
-        foreach (\App\Models\Historico::find(3) as $h){
+        dd(\App\Models\Historico::find(2)->pecas);
+        foreach (\App\Models\Historico::find(2)->pecas as $h){
             echo  $h->obs;
 
         }
@@ -50,7 +50,10 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('/contrato/editar/{id}/historico/{historico_id}/servicos', [App\Http\Controllers\TrabalhoController::class, 'index'])->name('trabalho.index');
     Route::get('/contrato/editar/{id}/historico/{historico_id}/servico/editar/{$trabalho_id}', [App\Http\Controllers\TrabalhoController::class, 'editar'])->name('trabalho.editar');
 
-    Route::post('/historico/atualizar/servico', [App\Http\Controllers\HistoricoController::class, 'cadastrarServico'])->name('historico.cadastrar.servico');
+    Route::post('/historico/atualizar/servico', [App\Http\Controllers\TrabalhoController::class, 'cadastrar'])->name('historico.cadastrar.servico');
+    Route::get('/historico/excluir/servico', [App\Http\Controllers\TrabalhoController::class, 'excluir'])->name('historico.excluir.servico');
+
+    Route::post('/cadastrar/peca', [App\Http\Controllers\PecasController::class, 'cadastrar'])->name('peca.cadastrar');
 
     Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente.index');
     Route::get('/cliente/novo', [App\Http\Controllers\ClienteController::class, 'novo'])->name('cliente.novo');

@@ -26,8 +26,13 @@ class Historico extends Model
     {
         return $this->belongsToMany(Servico::class,'trabalhos','historico_id','servico_id')
             ->withPivot([
-                'valor','autorizado','data',
+                'valor','autorizado','data','id'
             ]);
+    }
+
+    public function pecas()
+    {
+        return $this->hasMany(Peca::class,'historico_id');
     }
 
     public function cadastrarServico(Request $r)
@@ -38,4 +43,14 @@ class Historico extends Model
             'data'          =>  Carbon::now()
         ]);
     }
+    public function excluirServico($trabalho_id)
+    {
+        $tabalho        =   Trabalho::find($trabalho_id);
+        if($tabalho == null){
+            throw new \Exception('Não foi possível realizar a exclusão',200);
+        }
+        $tabalho->excluir();
+    }
+
+
 }

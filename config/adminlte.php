@@ -508,21 +508,7 @@ return [
                 ],
             ],
         ],
-        'app' => [
-            'active' => true,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' =>"vendor/javascript/app.js",
-                ],
-                [
-                    'type' => 'css',
-                    'asset' => true,
-                    'location' => 'vendor/css/app.css',
-                ],
-            ],
-        ],
+
     ],
 
     /*

@@ -2,25 +2,28 @@
 
 
 
-<table class="table table-bordered " id="tabela-historico-servicos">
+<table class="table table-bordered " id="tabela-historico-pecas">
     <thead>
     <tr>
-        <th style="width: 50%">Serviço</th>
-        <th style="width: 20%">Valor</th>
+        <th style="width: 50%">Peça</th>
+        <th style="width: 10%">Valor</th>
+        <th style="width: 10%">Qnt</th>
+        <th style="width: 10%">Total</th>
         <th style="width: 10%">Autorizado</th>
         <th style="width: 10%">Editar</th>
     </tr>
     </thead>
     <tbody>
 
-    @foreach($historico->servicos as $s)
+    @foreach($historico->pecas as $s)
         <tr>
             <td>{{$s->descricao}}</td>
-            <td>{{$s->pivot->valor}}</td>
-
-            <td>{{($s->pivot->autorizado?"Sim":"Não")}}
+            <td>{{$s->valor}}</td>
+            <td>{{$s->qnt}}</td>
+            <td>{{$s->qnt*$s->valor}}</td>
+            <td>{{($s->autorizado?"Sim":"Não")}}
             </td>
-            <td><a href="" class="excluir_trabalho" trabalho="{{$s->pivot->id}}" historico="{{$historico->id}}">e</a></td>
+            <td><a href="" class="excluir_peca" trabalho="{{$s->id}}" historico="{{$historico->id}}">e</a></td>
         </tr>
     @endforeach
 

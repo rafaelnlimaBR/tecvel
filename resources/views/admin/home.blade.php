@@ -16,9 +16,9 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    @include('admin.includes.css')
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    @include('admin.includes.scripts')
 @stop

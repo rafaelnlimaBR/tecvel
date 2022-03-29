@@ -27,8 +27,9 @@
                         <a class="nav-link {{isset($active)?$active == "servicos"?"active":"":""}}" id="custom-tabs-two-messages-tab" data-toggle="pill" href="#servicos" role="tab" aria-controls="custom-tabs-two-messages" aria-selected="false">Serviços</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="custom-tabs-two-settings-tab" data-toggle="pill" href="#custom-tabs-two-settings" role="tab" aria-controls="custom-tabs-two-settings" aria-selected="false">Settings</a>
+                        <a class="nav-link" id="custom-tabs-two-pecas-tab" data-toggle="pill" href="#custom-tabs-two-pecas" role="tab" aria-controls="custom-tabs-two-pecas" aria-selected="false">Peças</a>
                     </li>
+
                     @endif
                 </ul>
 
@@ -150,8 +151,53 @@
 
                         @include('admin.contratos.includes.tabelaServicos')
                     </div>
-                    <div class="tab-pane fade" id="custom-tabs-two-settings" role="tabpanel" aria-labelledby="custom-tabs-two-settings-tab">
-                        Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                    <div class="tab-pane fade" id="custom-tabs-two-pecas" role="tabpanel" aria-labelledby="custom-tabs-two-pecas-tab">
+                        <form action="{{route('peca.cadastrar')}}" method="post" name="form-adicionar-peca">
+
+
+
+                            <div class="row">
+                                <div class="col-sm-4">
+
+                                    <div class="form-group">
+                                        <label>Descrição </label>
+                                        <input type="text" class="form-control" name="descricao" placeholder="Descrição">
+                                        {{csrf_field()}}
+                                        <input type="hidden" name="historico_id" value="{{$historico->id}}">
+                                        <input type="hidden" name="contrato_id" value="{{$contrato->id}}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Valor</label>
+                                        <input class="form-control dinheiro" type="text" name="valor" id="valorPeca" placeholder="Valor">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Qnt</label>
+                                        <input class="form-control" type="number" name="qnt" placeholder="Qnt">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Autori</label>
+                                        <select class="form-control "  name="autorizado"  >
+                                            <option value="1">Sim</option>
+                                            <option value="0">Não</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Add</label>
+                                        <button class="form-control btn btn-primary" type="submit"  >Adicionar</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                        @include('admin.contratos.includes.tabelaPecas')
                     </div>
                     @endif
                 </div>
