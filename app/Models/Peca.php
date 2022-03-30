@@ -25,4 +25,10 @@ class Peca extends Model
         }
         return $peca;
     }
+    public function excluir()
+    {
+        if($this->delete() == false){
+            throw new \Exception('Não foi possível realizar a exclusão',200);
+        }
+    }
 }

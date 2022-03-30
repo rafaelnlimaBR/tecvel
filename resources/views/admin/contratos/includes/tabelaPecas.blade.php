@@ -23,7 +23,7 @@
             <td>{{$s->qnt*$s->valor}}</td>
             <td>{{($s->autorizado?"Sim":"Não")}}
             </td>
-            <td><a href="" class="excluir_peca" trabalho="{{$s->id}}" historico="{{$historico->id}}">e</a></td>
+            <td><a href="" class="excluir_peca" peca="{{$s->id}}" historico="{{$historico->id}}">e</a></td>
         </tr>
     @endforeach
 
@@ -31,21 +31,21 @@
 </table>
 
 <script type="text/javascript">
-    $(".excluir_trabalho").click(function () {
+    $(".excluir_peca").click(function () {
 
-        var trabalho    =   $(this).attr('trabalho');
+        var peca    =   $(this).attr('peca');
         var historico   =   $(this).attr('historico');
 
         $.ajax({
             type: "get",
-            url: '{{route('historico.excluir.servico')}}',
-            data: {'trabalho':trabalho,'historico':historico},
+            url: '{{route('peca.excluir')}}',
+            data: {'peca':peca,'historico':historico},
             success: function( data )
             {
                 if('erro' in data){
                     alert(data.erro);
                 }else{
-                    $('#tabela-historico-servicos').html(data.html);
+                    $('#tabela-historico-pecas').html(data.html);
                 }
             }
         });

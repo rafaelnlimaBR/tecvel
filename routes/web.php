@@ -53,7 +53,8 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/historico/atualizar/servico', [App\Http\Controllers\TrabalhoController::class, 'cadastrar'])->name('historico.cadastrar.servico');
     Route::get('/historico/excluir/servico', [App\Http\Controllers\TrabalhoController::class, 'excluir'])->name('historico.excluir.servico');
 
-    Route::post('/cadastrar/peca', [App\Http\Controllers\PecasController::class, 'cadastrar'])->name('peca.cadastrar');
+    Route::post('/peca/cadastrar', [App\Http\Controllers\PecasController::class, 'cadastrar'])->name('peca.cadastrar');
+    Route::get('/peca/excluir', [App\Http\Controllers\PecasController::class, 'excluir'])->name('peca.excluir');
 
     Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente.index');
     Route::get('/cliente/novo', [App\Http\Controllers\ClienteController::class, 'novo'])->name('cliente.novo');
