@@ -14,7 +14,7 @@ class Peca extends Model
     public static function cadastrar(Request $r)
     {
         $peca               =   new Peca();
-        $peca->descricao    =   $r->get('descricao');
+        $peca->descricao    =   strtoupper($r->get('descricao'));
         $peca->valor        =   $r->get('valor');
         $peca->valor_fornecedor        =   $r->get('valor_fornecedor');
         $peca->qnt          =   $r->get('qnt');
@@ -36,12 +36,12 @@ class Peca extends Model
     public function atualizar(Request $r)
     {
         $peca               =   $this;
-        $peca->descricao    =   $r->get('descricao');
+        $peca->descricao    =   strtoupper($r->get('descricao'));
         $peca->valor        =   $r->get('valor');
         $peca->valor_fornecedor        =   $r->get('valor_fornecedor');
         $peca->qnt          =   $r->get('qnt');
         $peca->autorizado   =   $r->get('autorizado');
-        $peca->historico_id =   $r->get('historico');
+        $peca->historico_id =   $r->get('historico_id');
 
         if($peca->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);

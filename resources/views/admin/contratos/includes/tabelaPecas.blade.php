@@ -18,63 +18,33 @@
     <tbody>
 
     @foreach($historico->pecas as $s)
-        <form action="{{route('peca.atualizar')}}" method="POST" name="form-atualizar-peca-{{$s->id}}" class="form-atualizar-peca">
-            {{csrf_field()}}
+
+
             <tr>
 
-                <input type="hidden" name="id" value="{{$s->id}}" class="form-control">
-                <input type="hidden" name="historico" value="{{$historico->id}}" class="form-control">
-                <td><input name="descricao" value="{{$s->descricao}}" class="form-control"></td>
-                <td><input name="valor" value="{{$s->valor}}" class="form-control"></td>
-                <td><input name="valor_fornecedor" value="{{$s->valor_fornecedor}}" class="form-control"></td>
-                <td><input name="qnt" value="{{$s->qnt}}" class="form-control"></td>
-                <td><input name="qnt" value="{{$s->qnt*$s->valor}}" class="form-control"></td>
+                {{csrf_field()}}
 
-                <td>{{Form::select('autorizado', [0=>"Não",1=>"Sim"], $s->autorizado,['class'=>'form-control'])}}</td>
-                <td><input type="submit" class="atualizar_peca btn btn-warning" peca="{{$s->id}}" historico="{{$historico->id}}" value="e"></td>
+                <td><input id="descricao-{{$s->id}}" name="descricao-{{$s->id}}" value="{{$s->descricao}}" class="form-control"></td>
+                <td><input id="valor-{{$s->id}}" name="valor-{{$s->id}}" value="{{$s->valor}}" class="form-control"></td>
+                <td><input id="valor_fornecedor-{{$s->id}}" name="valor_fornecedor-{{$s->id}}" value="{{$s->valor_fornecedor}}" class="form-control"></td>
+                <td><input  id="qnt-{{$s->id}}" name="qnt-{{$s->id}}" value="{{$s->qnt}}" class="form-control"></td>
+                <td><input disabled name="total-{{$s->id}}" value="{{$s->qnt*$s->valor}}" class="form-control"></td>
+
+                <td>{{Form::select('autorizado', [0=>"Não",1=>"Sim"], $s->autorizado,['class'=>'form-control','id'=>'autorizado-'.$s->id])}}</td>
+                <td><a class="btn-atualizar-peca btn btn-warning" peca="{{$s->id}}" historico="{{$historico->id}}" >{{$s->id}}</a></td>
                 <td><a href="" class="excluir_peca btn btn-danger" peca="{{$s->id}}" historico="{{$historico->id}}">e</a></td>
+
             </tr>
-        </form>
+
     @endforeach
 
     </tbody>
 </table>
 
 <script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $("form[class='form-atualizar-peca']").submit(function () {
 
 
-        var dados   = $(this).serialize();
-        console.info(dados);
-        var rota    =   this.action;
 
-        alert(rota);
-        $.ajax({
-            type: "POST",
-            url: rota,
-            data: {dados},
-            dataType: 'JSON',
-            contentType: 'application/json',
-            success: function( data )
-            {
-                if('erro' in data){
-                    alert(data.erro);
-                }else{
-                    $('#tabela-historico-pecas').html(data.html);
-                }
-            },
-            error:function (data) {
-                alert(data.responseJSON);
-                console.info(data);
-            }
-        });
-        return false;
-    });
     $(".excluir_peca").click(function () {
 
         var peca    =   $(this).attr('peca');
@@ -89,12 +59,55 @@
                 if('erro' in data){
                     alert(data.erro);
                 }else{
+
                     $('#tabela-historico-pecas').html(data.html);
                 }
             }
         });
         return false;
     });
+    $('.btn-atualizar-peca').click(function () {
 
+        var id          =   $(this).attr("peca")
+        var historico_id =   $(this).attr("historico");
+        var descricao   =   $("#descricao-"+id.toString()).val();
+        var autorizado  =   $("#autorizado-"+id.toString()).val();
+        var valor       =   $("#valor-"+id.toString()).val();
+        var qnt       =   $("#qnt-"+id.toString()).val();
+        var valor_fornecedor  =   $("#valor_fornecedor-"+id.toString()).val();
+        var rota          =   "{{route("peca.atualizar")}}";
+        console.info(id);
+
+        $.ajax({
+
+            url: rota,
+            header:{
+                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+
+                'peca_id'               :   id,
+                'historico_id'          :   historico_id,
+                'descricao'             :   descricao,
+                'autorizado'            :   autorizado,
+                'valor'                 :   valor,
+                'valor_fornecedor'      :   valor_fornecedor,
+                'qnt'                   :   qnt
+            },
+            type: "post",
+            success: function( data )
+            {
+                if('erro' in data){
+                     alert(data.erro);
+                 }else{
+
+                     $('#tabela-historico-pecas').html(data.html);
+                 }
+            },
+            error:function (data) {
+
+            }
+        });
+    });
 
 </script>

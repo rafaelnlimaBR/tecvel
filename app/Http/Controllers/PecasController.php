@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Historico;
 use App\Models\Peca;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class PecasController extends Controller
@@ -40,18 +41,24 @@ class PecasController extends Controller
         }
     }
 
-    public function atualizar()
+    public function atualizar(Request $r)
     {
-        return response()->json(['deu']);
-        try{
-            $historico          =   Historico::find(\request()->get('historico'));
-            $peca           =   Peca::find(\request()->get('id'));
-            if($peca == null){
-                return response()->json(["erro"=>"Peca null"]);
-            }
-            $peca->atualizar(\request());
 
-            return response()->json(['html'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->render()]);
+
+        try{
+            if($r->ajax() == true){
+
+                $historico          =   Historico::find(\request()->get('historico_id'));
+                $peca           =   Peca::find(\request()->get('peca_id'));
+
+                if($peca == null){
+                    return response()->json(["erro"=>"Peca null"]);
+                }
+                $peca->atualizar(\request());
+
+                return response()->json(['html'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->render()]);
+            }
+
         }catch (\Exception $e){
             return response()->json(['erro'=>$e->getMessage()]);
         }
