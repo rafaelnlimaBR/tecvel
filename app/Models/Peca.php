@@ -16,6 +16,7 @@ class Peca extends Model
         $peca               =   new Peca();
         $peca->descricao    =   $r->get('descricao');
         $peca->valor        =   $r->get('valor');
+        $peca->valor_fornecedor        =   $r->get('valor_fornecedor');
         $peca->qnt          =   $r->get('qnt');
         $peca->autorizado   =   $r->get('autorizado');
         $peca->historico_id =   $r->get('historico_id');
@@ -30,5 +31,21 @@ class Peca extends Model
         if($this->delete() == false){
             throw new \Exception('Não foi possível realizar a exclusão',200);
         }
+    }
+
+    public function atualizar(Request $r)
+    {
+        $peca               =   $this;
+        $peca->descricao    =   $r->get('descricao');
+        $peca->valor        =   $r->get('valor');
+        $peca->valor_fornecedor        =   $r->get('valor_fornecedor');
+        $peca->qnt          =   $r->get('qnt');
+        $peca->autorizado   =   $r->get('autorizado');
+        $peca->historico_id =   $r->get('historico');
+
+        if($peca->save() == false){
+            throw new \Exception('Não foi possível realizar o registro',200);
+        }
+        return $peca;
     }
 }

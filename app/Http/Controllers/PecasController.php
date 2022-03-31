@@ -39,4 +39,21 @@ class PecasController extends Controller
             return response()->json(['erro'=>$e->getMessage()]);
         }
     }
+
+    public function atualizar()
+    {
+        return response()->json(['deu']);
+        try{
+            $historico          =   Historico::find(\request()->get('historico'));
+            $peca           =   Peca::find(\request()->get('id'));
+            if($peca == null){
+                return response()->json(["erro"=>"Peca null"]);
+            }
+            $peca->atualizar(\request());
+
+            return response()->json(['html'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->render()]);
+        }catch (\Exception $e){
+            return response()->json(['erro'=>$e->getMessage()]);
+        }
+    }
 }

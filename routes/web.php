@@ -55,6 +55,7 @@ Route::group(['prefix'=>'admin'],function(){
 
     Route::post('/peca/cadastrar', [App\Http\Controllers\PecasController::class, 'cadastrar'])->name('peca.cadastrar');
     Route::get('/peca/excluir', [App\Http\Controllers\PecasController::class, 'excluir'])->name('peca.excluir');
+    Route::post('/peca/atualizar', [App\Http\Controllers\PecasController::class, 'atualizar'])->name('peca.atualizar');
 
     Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente.index');
     Route::get('/cliente/novo', [App\Http\Controllers\ClienteController::class, 'novo'])->name('cliente.novo');

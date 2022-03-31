@@ -157,7 +157,7 @@
 
 
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
 
                                     <div class="form-group">
                                         <label>Descrição </label>
@@ -165,6 +165,12 @@
                                         {{csrf_field()}}
                                         <input type="hidden" name="historico_id" value="{{$historico->id}}">
                                         <input type="hidden" name="contrato_id" value="{{$contrato->id}}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group" style="">
+                                        <label>Valor Fornecedor</label>
+                                        <input class="form-control dinheiro" type="text" name="valor_fornecedor" id="" placeholder="Valor Fornecedor">
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
@@ -179,7 +185,7 @@
                                         <input class="form-control" type="number" name="qnt" placeholder="Qnt">
                                     </div>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-1">
                                     <div class="form-group">
                                         <label>Autori</label>
                                         <select class="form-control "  name="autorizado"  >

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->decimal('valor',8,2);
+            $table->decimal('valor_fornecedor',8,2)->nullable();
             $table->string('descricao');
             $table->integer('qnt')->default(1);
             $table->integer('pedido_id')->unsigned()->nullable();

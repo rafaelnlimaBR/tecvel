@@ -112,9 +112,10 @@
 
 
             $.ajax({
-                type: "POST",
+                type: "post",
                 url: rota,
                 data: dados,
+
                 success: function( data )
                 {
 
