@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contrato;
 use App\Models\Historico;
 use App\Models\Peca;
 use http\Env\Response;
@@ -13,13 +14,14 @@ class PecasController extends Controller
     {
         try{
             $historico      =   Historico::find(\request()->get('historico_id'));
+            $contrato       =   Contrato::find(\request()->get('contrato_id'));
             if($historico == null){
                 return response()->json(['erro'=>"historico null"]);
             }
 
             $peca   =   Peca::cadastrar(\request());
 
-            return response()->json(['html'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->render()]);
+            return response()->json(['html'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render()]);
         }catch (\Exception $e){
             return response()->json(['erro'=>$e->getMessage()]);
         }
@@ -30,12 +32,13 @@ class PecasController extends Controller
         try{
             $historico          =   Historico::find(\request()->get('historico'));
             $peca           =   Peca::find(\request()->get('peca'));
+            $contrato       =   Contrato::find(\request()->get('contrato'));
             if($peca == null){
                 return response()->json(["erro"=>"Historico null"]);
             }
             $peca->excluir(\request()->get('peca'));
 
-            return response()->json(['html'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->render()]);
+            return response()->json(['html'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render()]);
         }catch (\Exception $e){
             return response()->json(['erro'=>$e->getMessage()]);
         }
@@ -50,13 +53,14 @@ class PecasController extends Controller
 
                 $historico          =   Historico::find(\request()->get('historico_id'));
                 $peca           =   Peca::find(\request()->get('peca_id'));
+                $contrato       =   Contrato::find(\request()->get('contrato_id'));
 
                 if($peca == null){
                     return response()->json(["erro"=>"Peca null"]);
                 }
                 $peca->atualizar(\request());
 
-                return response()->json(['html'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->render()]);
+                return response()->json(['html'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render()]);
             }
 
         }catch (\Exception $e){

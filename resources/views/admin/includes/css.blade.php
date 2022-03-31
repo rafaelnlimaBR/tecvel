@@ -8,5 +8,8 @@
     .error{
         font-size: 10px; color: red;
     }
-
+    .letra-pequena{
+        font-size: 12px;
+        font-weight: bolder;
+    }
 </style>
