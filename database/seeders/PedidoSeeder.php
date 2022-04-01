@@ -21,6 +21,8 @@ class PedidoSeeder extends Seeder
            [
                'numero_pedido'      =>      "50332321",
                'fornecedor_id'      =>      1,
+               'historico_id'      =>      1,
+               'desconto'           =>      10.00,
                'data'               =>      Carbon::now()
            ]
         ]);

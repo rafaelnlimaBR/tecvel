@@ -35,6 +35,25 @@ class Historico extends Model
         return $this->hasMany(Peca::class,'historico_id');
     }
 
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class,'historico_id');
+    }
+
+    public function historico_pedido()
+    {
+        return $this->belongsToMany(Pedido::class, 'pecas','historico_id','pedido_id')
+            ->withPivot('id','valor','valor_fornecedor','descricao','qnt');
+    }
+
+    public function scopePedidosSR ()
+    {
+        // I assume resources is the relation name, instead of singular resource
+        return $this::whereHas('pecas', function ($q) {
+            $q->distinct('pedido_id');
+        });
+    }
+
     public function cadastrarServico(Request $r)
     {
         $this->servicos()->attach($r->get('servico_id'),[

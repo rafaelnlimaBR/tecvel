@@ -11,6 +11,11 @@ class Peca extends Model
     use HasFactory;
     protected $table    =   "pecas";
 
+    public function pedido()
+    {
+        return $this->belongsTo(Pedido::class,'pedido_id');
+    }
+
     public static function cadastrar(Request $r)
     {
         $peca               =   new Peca();

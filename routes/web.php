@@ -26,12 +26,8 @@ Auth::routes();
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('/teste', function (){
-        dd(\App\Models\Historico::find(2)->pecas);
-        foreach (\App\Models\Historico::find(2)->pecas as $h){
-            echo  $h->obs;
-
-        }
-
+       $pedidos =  \App\Models\Historico::find(1)->pedidos;
+       return $pedidos;
     });
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');

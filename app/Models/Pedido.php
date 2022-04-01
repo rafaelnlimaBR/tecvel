@@ -12,7 +12,12 @@ class Pedido extends Model
 
     public function fornecedor()
     {
-        return $this->belongsTo(Fornecedor::class,'fornecedor_id','id');
+        return $this->belongsTo(Fornecedor::class,'fornecedor_id');
+    }
+
+    public function pecas()
+    {
+        return $this->hasMany(Peca::class,'pedido_id');
     }
 
     public function historicos()

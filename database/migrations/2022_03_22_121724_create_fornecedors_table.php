@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('endereco')->nullable();
             $table->string('telefone01')->nullable();
             $table->string('telefone02')->nullable();
+            $table->decimal('desconto',5,2)->nullable()->default(0.00);
 
         });
     }

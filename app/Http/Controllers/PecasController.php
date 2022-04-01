@@ -21,7 +21,10 @@ class PecasController extends Controller
 
             $peca   =   Peca::cadastrar(\request());
 
-            return response()->json(['html'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render()]);
+            return response()->json([
+                'pecas'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render(),
+                'pedidos'=>view('admin.contratos.includes.tabelaPedidos')->with('historico',$historico)->with('contrato',$contrato)->render(),
+                                    ]);
         }catch (\Exception $e){
             return response()->json(['erro'=>$e->getMessage()]);
         }
@@ -38,7 +41,10 @@ class PecasController extends Controller
             }
             $peca->excluir(\request()->get('peca'));
 
-            return response()->json(['html'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render()]);
+            return response()->json([
+                'pecas'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render(),
+                'pedidos'=>view('admin.contratos.includes.tabelaPedidos')->with('historico',$historico)->with('contrato',$contrato)->render(),
+            ]);
         }catch (\Exception $e){
             return response()->json(['erro'=>$e->getMessage()]);
         }
@@ -60,7 +66,10 @@ class PecasController extends Controller
                 }
                 $peca->atualizar(\request());
 
-                return response()->json(['html'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render()]);
+                return response()->json([
+                    'pecas'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render(),
+                    'pedidos'=>view('admin.contratos.includes.tabelaPedidos')->with('historico',$historico)->with('contrato',$contrato)->render(),
+                ]);
             }
 
         }catch (\Exception $e){

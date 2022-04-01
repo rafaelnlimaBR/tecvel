@@ -24,9 +24,11 @@ class DatabaseSeeder extends Seeder
             StatusSeeder::class,
             FornecedorSeeder::class,
             ContratoSeeder::class,
-            PedidoSeeder::class,
             TipoSeeder::class,
             HistoricoSeeder::class,
+            PedidoSeeder::class,
+
+
             TerceirizadosSeeder::class,
             PecasSeeder::class,
             TrabalhoSeeder::class,

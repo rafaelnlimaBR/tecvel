@@ -61,7 +61,8 @@
                     alert(data.erro);
                 }else{
 
-                    $('#tabela-historico-pecas').html(data.html);
+                    $('#tabela-historico-pecas').html(data.pecas);
+                    $('#tabela-historico-pedidos').html(data.pedidos);
                 }
             }
         });
@@ -107,7 +108,8 @@
                      alert(data.erro);
                  }else{
 
-                     $('#tabela-historico-pecas').html(data.html);
+                     $('#tabela-historico-pecas').html(data.pecas);
+                     $('#tabela-historico-pedidos').html(data.pedidos);
                  }
             },
             error:function (data) {

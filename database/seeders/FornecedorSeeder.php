@@ -23,6 +23,7 @@ class FornecedorSeeder extends Seeder
                'endereco' =>  'Rua J. da Penha, 4423',
                'telefone01' =>  '8532256135',
                'telefone02' =>  '85988554223',
+               'desconto'   =>  0.00,
                'created_at' =>  Carbon::now(),
                'updated_at' =>  Carbon::now()
            ],[
@@ -30,6 +31,7 @@ class FornecedorSeeder extends Seeder
                'endereco' =>  'Av. dos Expedicionários, 221',
                'telefone01' =>  '8532256135',
                'telefone02' =>  '85988554223',
+                'desconto'   =>  10.00,
                 'created_at' =>  Carbon::now(),
                 'updated_at' =>  Carbon::now()
            ],

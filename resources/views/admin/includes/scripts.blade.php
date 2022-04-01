@@ -21,7 +21,7 @@
                         alert(data.erro);
                     }else{
 
-                        $('#tabela-historico-pecas').html(data.html);
+                        $('#tabela-historico-pecas').html(data.pecas);
                     }
                 },
                 error:function (data,e) {

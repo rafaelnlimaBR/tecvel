@@ -2,11 +2,7 @@
 
 @section("conteudo")
 
-@if(Session::has('active'))
-    @php
-    $active = Session::get('active');
-    @endphp
-@endif
+
 
 
     <div class="col-12 col-sm-12">
@@ -15,19 +11,22 @@
                 <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
                     <li class="pt-2 px-3"><h3 class="card-title">{{isset($contrato)?$historico->status->nome:$titulo_formulario}}</h3></li>
                     <li class="nav-item">
-                        <a class="nav-link {{isset($active)?'':"active"}}" id="dados-tab" data-toggle="pill" href="#dados" role="tab" aria-controls="custom-tabs-two-home" aria-selected="true">Dados</a>
+                        <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "dados"?"active":"":"active"}}" id="dados-tab" data-toggle="pill" href="#dados" role="tab" aria-controls="custom-tabs-two-home" aria-selected="true">Dados</a>
                     </li>
                     @if(isset($contrato))
 
 
                     <li class="nav-item">
-                        <a class="nav-link {{isset($active)?$active == "historicos"?"active":"":""}}" id="historicos-tab" data-toggle="pill" href="#historicos" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">Historicos</a>
+                        <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "historicos"?"active":"":""}}" id="historicos-tab" data-toggle="pill" href="#historicos" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">Historicos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{isset($active)?$active == "servicos"?"active":"":""}}" id="custom-tabs-two-messages-tab" data-toggle="pill" href="#servicos" role="tab" aria-controls="custom-tabs-two-messages" aria-selected="false">Serviços</a>
+                        <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "servicos"?"active":"":""}}" id="custom-tabs-two-messages-tab" data-toggle="pill" href="#servicos" role="tab" aria-controls="custom-tabs-two-messages" aria-selected="false">Serviços</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="custom-tabs-two-pecas-tab" data-toggle="pill" href="#custom-tabs-two-pecas" role="tab" aria-controls="custom-tabs-two-pecas" aria-selected="false">Peças</a>
+                        <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "pecas"?"active":"":""}}" id="custom-tabs-two-pecas-tab" data-toggle="pill" href="#custom-tabs-two-pecas" role="tab" aria-controls="custom-tabs-two-pecas" aria-selected="false">Peças</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "pedidos"?"active":"":""}}" id="custom-tabs-two-pedidos-tab" data-toggle="pill" href="#custom-tabs-two-pedidos" role="tab" aria-controls="custom-tabs-two-pedidos" aria-selected="false">Pedidos</a>
                     </li>
 
                     @endif
@@ -36,8 +35,8 @@
             </div>
             <div class="card-body">
                 <div class="tab-content" id="custom-tabs-two-tabContent">
-{{--                    <div class="tab-pane fade {{isset($active)?'':"show active"}}" id="dados" role="tabpanel" aria-labelledby="dados-tab">--}}
-                    <div class="tab-pane fade" id="dados" role="tabpanel" aria-labelledby="dados-tab">
+{{--                    <div class="tab-pane fade {{isset($tela)?'':"show tela"}}" id="dados" role="tabpanel" aria-labelledby="dados-tab">--}}
+                    <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "dados"?"show active":"":"show active"}}" id="dados" role="tabpanel" aria-labelledby="dados-tab">
                         <form action="{{isset($contrato)?route('contrato.atualizar'):route("contrato.cadastrar")}}" method="post">
                         <div class="row">
                             <div class="col-sm-6">
@@ -101,10 +100,10 @@
                         </form>
                     </div>
                     @if(isset($contrato))
-                    <div class="tab-pane fade {{isset($active)?$active == "historicos"?"show active":"":""}}" id="historicos" role="tabpanel" aria-labelledby="historicos-tab">
+                    <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "historicos"?"show active":"":""}}" id="historicos" role="tabpanel" aria-labelledby="historicos-tab">
                         @include('admin.contratos.includes.tabelaHistoricos')
                     </div>
-                    <div class="tab-pane fade {{isset($active)?$active == "servicos"?"show active":"":""}}" id="servicos" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
+                    <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "servicos"?"show active":"":""}}" id="servicos" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
                         <form action="{{route('historico.cadastrar.servico')}}" method="post" name="form-adicionar-servico">
 
 
@@ -152,7 +151,7 @@
 
                         @include('admin.contratos.includes.tabelaServicos')
                     </div>
-                    <div class="tab-pane fade show active" id="custom-tabs-two-pecas" role="tabpanel" aria-labelledby="custom-tabs-two-pecas-tab">
+                    <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "pecas"?"show active":"":""}}" id="custom-tabs-two-pecas" role="tabpanel" aria-labelledby="custom-tabs-two-pecas-tab">
                         <form action="{{route('peca.cadastrar')}}" method="post" name="form-adicionar-peca">
 
 
@@ -205,6 +204,16 @@
                             </div>
                         </form>
                         @include('admin.contratos.includes.tabelaPecas')
+                    </div>
+                    <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "pedidos"?"show active":"":""}}" id="custom-tabs-two-pedidos" role="tabpanel" aria-labelledby="custom-tabs-two-pedidos-tab">
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Novo </label>
+                                <a class="btn btn-primary form-control">Novo</a>
+                            </div>
+                        </div>
+
+                        @include('admin.contratos.includes.tabelaPedidos')
                     </div>
                     @endif
                 </div>

@@ -18,9 +18,12 @@ return new class extends Migration
             $table->timestamps();
             $table->string('numero_pedido')->nullable();
             $table->integer('fornecedor_id')->unsigned();
+            $table->bigInteger('historico_id')->unsigned();
+            $table->decimal("desconto",4,2)->default(0.00);
             $table->dateTime('data');
 
             $table->foreign('fornecedor_id')->references('id')->on('fornecedores')->onDelete('cascade');
+            $table->foreign('historico_id')->references('id')->on('historicos')->onDelete('cascade');
         });
     }
 
