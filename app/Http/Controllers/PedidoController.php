@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fornecedor;
+use App\Models\Historico;
+use App\Models\Peca;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
 
@@ -29,7 +32,10 @@ class PedidoController extends Controller
 
         $dados      =  [
             "titulo"    => "Pedido",
-            "titulo_formulario" =>'Novo'
+            "titulo_formulario" =>'Novo',
+            'fornecedores'      =>  Fornecedor::all(),
+            'historico_id'      =>  \request('historico_id'),
+            'contrato_id'       =>  Historico::find( \request('historico_id'))->contrato->id
         ];
         return view('admin.pedidos.formulario',$dados);
 
@@ -38,23 +44,32 @@ class PedidoController extends Controller
     public function cadastrar()
     {
         try{
-            $id = Pedido::gravar(\request());
-            return redirect()->route('pedido.index')->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
+            $pedido = Pedido::gravar(\request());
+            $historico  =   Historico::find(\request()->get('historico_id'));
+            return redirect()->route('contrato.editar',['id'=>$historico->contrato->id,'historico_id'=>\request()->get('historico_id'),'tela'=>'pedidos'])->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
             return redirect()->route('pedido.novo')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
 
     }
 
-    public function editar($id)
+    public function editar($id,$historico_id,$pedido_id)
     {
+        $historico  =   Historico::find( \request('historico_id'));
 
         $dados      =  [
             "titulo"    => "Pedido",
-            "titulo_formulario" =>'Editar'
+            "titulo_formulario" =>'Editar',
+            'fornecedores'      =>  Fornecedor::all(),
+            'historico_id'      =>  $historico->id,
+            'contrato_id'       =>  $historico->contrato->id,
+            'pecas'             =>  $historico->pecas
         ];
-        $pedido    =   Pedido::find($id);
 
+        $pedido    =   Pedido::find($pedido_id);
+        if($pedido == null){
+            return redirect()->route('contrato.editar',['id'=>$id,'historico_id'=>$historico_id,'tela'=>'pedidos'])->with('alerta',['tipo'=>'warning','msg'=>"Nenhum registro encontrato",'icon'=>'check','titulo'=>"Erro"]);
+        }
 
         return view('admin.pedidos.formulario',$dados)->with('pedido',$pedido);
     }
@@ -62,22 +77,25 @@ class PedidoController extends Controller
     public function atualizar()
     {
         try{
-//            return request();
-            $id = Pedido::atualizar(\request());
-            return redirect()->route('pedido.index')->with('alerta',['tipo'=>'success','msg'=>"Editado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
+
+            $pedido = Pedido::atualizar(\request());
+            return redirect()->route('contrato.editar',['id'=>$pedido->historico->contrato->id,'historico_id'=>$pedido->historico->id,'tela'=>'pedidos'])->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
-            return redirect()->route('pedido.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+
+
+            return redirect()->route('contrato.editar',['id'=>\request('contrato_id'),'historico_id'=>\request('historico_id'),'tela'=>'pedidos'])->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
     }
 
     public function excluir()
     {
         try{
-            $id = Pedido::excluir(\request()->get('id'));
-            return redirect()->route('pedido.index')->with('alerta',['tipo'=>'success','msg'=>"Excluido com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);;
+            $id = Pedido::excluir(\request()->get('pedido_id'));
+            return redirect()->route('contrato.editar',['id'=>\request('contrato_id'),'historico_id'=>\request('historico_id'),'tela'=>'pedidos'])->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
-            return redirect()->route('pedido.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+            return redirect()->route('contrato.editar',['id'=>\request('contrato_id'),'historico_id'=>\request('historico_id'),'tela'=>'pedidos'])->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
     }
+
 
 }

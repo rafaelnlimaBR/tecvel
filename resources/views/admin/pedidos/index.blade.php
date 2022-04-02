@@ -10,7 +10,7 @@
 
 
                 <div class="card-tools">
-                    <a href="{{route('pedido.novo')}}" type="button" class="btn btn-block btn-primary btn-sm left"><i class="fa fa-solid fa-plus"></i> Novo</a>
+
                 </div>
             </div>
 

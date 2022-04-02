@@ -22,7 +22,7 @@
             <td>{{date('d/m/Y H:m', strtotime($s->data))}}</td>
             <td>R$ {{$s->pecas->sum('valor_fornecedor')}}</td>
             <td>R$ {{$s->pecas->sum('valor_fornecedor')*(100-$s->desconto)/100}}</td>
-            <td></td>
+            <td><a href="{{route('pedido.editar',['id'=>$contrato->id,'historico_id'=>$historico->id,'pedido_id'=>$s->id])}}">e</a></td>
         </tr>
     @endforeach
 

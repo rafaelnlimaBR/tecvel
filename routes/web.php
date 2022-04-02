@@ -26,7 +26,7 @@ Auth::routes();
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('/teste', function (){
-       $pedidos =  \App\Models\Historico::find(1)->pedidos;
+       $pedidos =  \App\Models\Pedido::find(2)->historico->contrato;
        return $pedidos;
     });
 
@@ -46,12 +46,15 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('/contrato/editar/{id}/historico/{historico_id}/servicos', [App\Http\Controllers\TrabalhoController::class, 'index'])->name('trabalho.index');
     Route::get('/contrato/editar/{id}/historico/{historico_id}/servico/editar/{$trabalho_id}', [App\Http\Controllers\TrabalhoController::class, 'editar'])->name('trabalho.editar');
 
+
+
     Route::post('/historico/atualizar/servico', [App\Http\Controllers\TrabalhoController::class, 'cadastrar'])->name('historico.cadastrar.servico');
     Route::get('/historico/excluir/servico', [App\Http\Controllers\TrabalhoController::class, 'excluir'])->name('historico.excluir.servico');
 
     Route::post('/peca/cadastrar', [App\Http\Controllers\PecasController::class, 'cadastrar'])->name('peca.cadastrar');
     Route::get('/peca/excluir', [App\Http\Controllers\PecasController::class, 'excluir'])->name('peca.excluir');
     Route::post('/peca/atualizar', [App\Http\Controllers\PecasController::class, 'atualizar'])->name('peca.atualizar');
+    Route::get('/pedido/adicionar/peca', [App\Http\Controllers\PecasController::class, 'adicionarPedido'])->name('pedido.adicionar.peca');
 
     Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente.index');
     Route::get('/cliente/novo', [App\Http\Controllers\ClienteController::class, 'novo'])->name('cliente.novo');
@@ -94,9 +97,10 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/fornecedor/excluir', [App\Http\Controllers\FornecedorController::class, 'excluir'])->name('fornecedor.excluir');
 
     Route::get('/pedidos', [App\Http\Controllers\PedidoController::class, 'index'])->name('pedido.index');
-    Route::get('/pedido/novo', [App\Http\Controllers\PedidoController::class, 'novo'])->name('pedido.novo');
-    Route::get('/pedido/editar/{id}', [App\Http\Controllers\PedidoController::class, 'editar'])->name('pedido.editar');
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/pedido/novo', [App\Http\Controllers\PedidoController::class, 'novo'])->name('pedido.novo');
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/pedido/editar/{pedido_id}', [App\Http\Controllers\PedidoController::class, 'editar'])->name('pedido.editar');
     Route::post('/pedido/cadastrar', [App\Http\Controllers\PedidoController::class, 'cadastrar'])->name('pedido.cadastrar');
     Route::post('/pedido/atualizar', [App\Http\Controllers\PedidoController::class, 'atualizar'])->name('pedido.atualizar');
     Route::post('/pedido/excluir', [App\Http\Controllers\PedidoController::class, 'excluir'])->name('pedido.excluir');
+
 });

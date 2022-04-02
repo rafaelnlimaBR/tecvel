@@ -76,4 +76,26 @@ class PecasController extends Controller
             return response()->json(['erro'=>$e->getMessage()]);
         }
     }
+
+    public function adicionarPedido(Request $r)
+    {
+        try {
+//            if ($r->ajax() == true) {
+
+                $peca = Peca::find(\request()->get('peca_id'));
+
+
+                if ($peca == null) {
+                    return response()->json(["erro" => "Peca null"]);
+                }
+                $peca->adicionarPedido(\request());
+
+
+//            }
+
+        } catch (\Exception $e) {
+            return response()->json(['erro' => $e->getMessage()]);
+
+        }
+    }
 }

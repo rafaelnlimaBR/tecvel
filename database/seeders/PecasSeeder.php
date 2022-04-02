@@ -20,7 +20,7 @@ class PecasSeeder extends Seeder
                 'valor'             =>  13.40,
                 'descricao'         =>  'Lampada do painel',
                 'qnt'               =>  5,
-                'pedido_id'         =>  1,
+                'pedido_id'         =>  null,
                 'historico_id'      =>  1,
                 'autorizado'        =>  true
             ],[

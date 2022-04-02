@@ -12,6 +12,11 @@ class Historico extends Model
     use HasFactory;
     protected $table    =   "historicos";
 
+    public function contrato()
+    {
+        return $this->belongsTo(Contrato::class,'contrato_id');
+    }
+
     public function tipo()
     {
         return $this->belongsTo(TipoContrato::class,'tipo_id');

@@ -209,7 +209,7 @@
                         <div class="row">
                             <div class="form-group">
                                 <label>Novo </label>
-                                <a class="btn btn-primary form-control">Novo</a>
+                                <a href="{{route('pedido.novo',['id'=>$contrato->id,'historico_id'=>$historico->id])}}" class="btn btn-primary form-control">Novo</a>
                             </div>
                         </div>
 
