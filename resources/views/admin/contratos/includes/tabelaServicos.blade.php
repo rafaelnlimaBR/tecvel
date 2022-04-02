@@ -20,7 +20,7 @@
 
             <td>{{($s->pivot->autorizado?"Sim":"Não")}}
             </td>
-            <td><a href="" class="excluir_trabalho" trabalho="{{$s->pivot->id}}" historico="{{$historico->id}}">e</a></td>
+            <td><a href="" class="excluir_trabalho btn btn-danger" trabalho="{{$s->pivot->id}}" historico="{{$historico->id}}">e</a></td>
         </tr>
     @endforeach
 
@@ -30,22 +30,25 @@
 <script type="text/javascript">
     $(".excluir_trabalho").click(function () {
 
-        var trabalho    =   $(this).attr('trabalho');
-        var historico   =   $(this).attr('historico');
+        if (confirm('Desejar excluir esse registro?')){
+            var trabalho    =   $(this).attr('trabalho');
+            var historico   =   $(this).attr('historico');
 
-        $.ajax({
-            type: "get",
-            url: '{{route('historico.excluir.servico')}}',
-            data: {'trabalho':trabalho,'historico':historico},
-            success: function( data )
-            {
-                if('erro' in data){
-                    alert(data.erro);
-                }else{
-                    $('#tabela-historico-servicos').html(data.html);
+            $.ajax({
+                type: "get",
+                url: '{{route('historico.excluir.servico')}}',
+                data: {'trabalho':trabalho,'historico':historico},
+                success: function( data )
+                {
+                    if('erro' in data){
+                        alert(data.erro);
+                    }else{
+                        $('#tabela-historico-servicos').html(data.html);
+                    }
                 }
-            }
-        });
+            });
+            return false;
+        }
         return false;
     });
 </script>

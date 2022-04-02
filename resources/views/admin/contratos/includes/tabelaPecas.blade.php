@@ -82,7 +82,7 @@
         var qnt       =   $("#qnt-"+id.toString()).val();
         var valor_fornecedor  =   $("#valor_fornecedor-"+id.toString()).val();
         var rota          =   "{{route("peca.atualizar")}}";
-        console.info(id);
+
 
         $.ajax({
 
@@ -104,6 +104,7 @@
             type: "post",
             success: function( data )
             {
+
                 if('erro' in data){
                      alert(data.erro);
                  }else{

@@ -43,12 +43,14 @@ class PedidoController extends Controller
 
     public function cadastrar()
     {
+
+        $historico  =   Historico::find(\request()->get('historico_id'));
         try{
             $pedido = Pedido::gravar(\request());
             $historico  =   Historico::find(\request()->get('historico_id'));
-            return redirect()->route('contrato.editar',['id'=>$historico->contrato->id,'historico_id'=>\request()->get('historico_id'),'tela'=>'pedidos'])->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
+            return redirect()->route('pedido.editar',['id'=>$historico->contrato->id,'historico_id'=>\request()->get('historico_id'),'pedido_id'=>$pedido->id,'tela'=>'pedidos'])->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
-            return redirect()->route('pedido.novo')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+            return redirect()->route('pedido.novo',['id'=>$historico->contrato->id,'historico_id'=>\request()->get('historico_id')])->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
 
     }

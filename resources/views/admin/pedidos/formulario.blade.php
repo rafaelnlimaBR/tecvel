@@ -20,7 +20,7 @@
                                 <div class="form-group">
                                     {{csrf_field()}}
                                     <label for="fornecedor">Fornecedor</label>
-                                    {{Form::select('fornecedor', $fornecedores->pluck('nome','id'), (isset($pedido)?$pedido->fornecedor->id:0),['class'=>'form-control'])}}
+                                    {{Form::select('fornecedor', $fornecedores->pluck('nome','id'), (isset($pedido)?$pedido->fornecedor->id:0),['class'=>'form-control  select-fornecedor'])}}
                                     <input type="hidden" value="{{$historico_id}}" name="historico_id">
                                     <input type="hidden" value="{{$contrato_id}}" name="contrato_id">
 
@@ -37,7 +37,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="desconto">Desconto</label>
-                                    <input type="text" class="form-control" id="desconto" name="desconto" placeholder="Desconto" value="{{isset($pedido)?$pedido->desconto:''}}">
+                                    <input type="text"  class="form-control numero" id="desconto" name="desconto" placeholder="Desconto" value="{{isset($pedido)?$pedido->desconto:''}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -82,41 +82,11 @@
                         <h3 class="card-title">Lista de peças</h3>
                     </div>
 
-                    <table class="table table-bordered tabela-pecas">
-                        <thead>
-                        <tr>
-                            <th style="width: 5%">#</th>
-                            <th style="width:40%">Descrição</th>
-                            <th style="width:20%">V.F.</th>
-                            <th style="width: 10%">QNT</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        @foreach($pecas as $p)
-                            <tr>
-                                <td><input class="checkbox-pecas" type="checkbox" peca_id="{{$p->id}}" pedido_id="{{$pedido->id}}" {{$p->pedido_id == $pedido->id?'checked':""}}></td>
-                                <td>{{$p->descricao}}</td>
-                                <td>{{$p->valor_fornecedor}}</td>
-                                <td>{{$p->qnt}}</td>
-                            </tr>
-
-
-                        @endforeach
-                        </tbody>
-                    </table>
+                    @include('admin.pedidos.includes.tabelaPecas')
 
                 </div>
             </div>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    /*$('.tabela-pecas').dataTable(
 
-                    );*/
-                });
-
-
-            </script>
 
 
 
@@ -157,6 +127,21 @@
         @endif
 
     </div>
+<script type="text/javascript">
+    $('.select-fornecedor').change(function () {
+        var id =    $(this).val();
 
+        $.ajax({
+            type: "get",
+            url: '{{route('fornecedor.descontoAjax')}}',
+            data: {'fornecedor_id':id},
+            success: function( data )
+            {
+                $('#desconto').val(data.desconto);
+            }
+        });
+    })
+
+</script>
 
 @stop

@@ -95,6 +95,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/fornecedor/cadastrar', [App\Http\Controllers\FornecedorController::class, 'cadastrar'])->name('fornecedor.cadastrar');
     Route::post('/fornecedor/atualizar', [App\Http\Controllers\FornecedorController::class, 'atualizar'])->name('fornecedor.atualizar');
     Route::post('/fornecedor/excluir', [App\Http\Controllers\FornecedorController::class, 'excluir'])->name('fornecedor.excluir');
+    Route::get('/fornecedor/desconto', [App\Http\Controllers\FornecedorController::class, 'descontoAjax'])->name('fornecedor.descontoAjax');
 
     Route::get('/pedidos', [App\Http\Controllers\PedidoController::class, 'index'])->name('pedido.index');
     Route::get('/contrato/editar/{id}/historico/{historico_id}/pedido/novo', [App\Http\Controllers\PedidoController::class, 'novo'])->name('pedido.novo');

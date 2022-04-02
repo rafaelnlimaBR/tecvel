@@ -8,31 +8,7 @@
             }
         });
 
-        $('.checkbox-pecas').change(function () {
-            var peca_id     =   $(this).attr('peca_id');
-            var pedido_id   =   $(this).attr('pedido_id');
 
-            var selecionado = $(this).is(':checked');
-
-            var rota    =   "{{route('pedido.adicionar.peca')}}"
-
-            $.ajax({
-                type: "get",
-                url: rota,
-                data:{'peca_id':peca_id,'pedido_id':pedido_id,'selecionado':selecionado} ,
-                success: function( data )
-                {
-
-
-                },
-                error:function (data,e) {
-                    console.info(data);
-                    alert(data);
-                }
-            });
-            return false;
-
-        });
         $("form[name='form-adicionar-peca']").submit(function () {
             var dados   = $(this).serialize();
             var rota    =   this.action;
@@ -168,6 +144,7 @@
         });
 
         var URL     =   $('#url').val();
+        $('.numero').mask("#.##0.00" , { reverse:true})
         $('.dinheiro').mask("#.##0.00" , { reverse:true})
         $('#selectServicos').select2({
             //placeholder: 'Search for a category',

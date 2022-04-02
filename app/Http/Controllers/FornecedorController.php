@@ -82,4 +82,14 @@ class FornecedorController extends Controller
         }
     }
 
+    public function descontoAjax()
+    {
+        if(\request()->ajax()){
+            $desconto       =   Fornecedor::find(\request()->get('fornecedor_id'))->desconto;
+            return response()->json(['desconto'=>$desconto]);
+        }else{
+            return "acesso negado";
+        }
+    }
+
 }

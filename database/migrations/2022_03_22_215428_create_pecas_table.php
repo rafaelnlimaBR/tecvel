@@ -20,11 +20,11 @@ return new class extends Migration
             $table->decimal('valor_fornecedor',8,2)->nullable();
             $table->string('descricao');
             $table->integer('qnt')->default(1);
-            $table->integer('pedido_id')->nullable()->default(null)->unsigned();
+            $table->integer('pedido_id')->nullable()->index()->unsigned();
             $table->bigInteger('historico_id')->unsigned();
             $table->boolean('autorizado')->default(true);
 
-            $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('cascade');
+            $table->foreign('pedido_id')->nullable()->references('id')->on('pedidos')->onDelete('cascade');
             $table->foreign('historico_id')->references('id')->on('historicos')->onDelete('cascade');
         });
     }
