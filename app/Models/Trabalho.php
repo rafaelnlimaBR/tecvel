@@ -25,6 +25,7 @@ class Trabalho extends Model
     }
 
 
+
     public function cadastrar(Request $r)
     {
         $this->servicos()->attach($r->get('servico_id'),[

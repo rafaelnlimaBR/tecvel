@@ -8,6 +8,40 @@
             }
         });
 
+        $('.tipo_pagamento').change(function () {
+            var id      =   $(this).val();
+            console.log(id);
+            $.ajax({
+                type: "post",
+                url: "{{route('tipospagamentos.listar.taxas')}}",
+                data: {'id'     :   id},
+                success: function( data )
+                {
+                    if('erro' in data){
+                        alert(data.erro);
+                    }else{
+                        var dropdown = $('#taxas-select');
+                        dropdown.empty();
+
+
+                        dropdown.prop('selectedIndex', 0);
+
+                        $.each(data, function (key, entry)
+                        {
+                            dropdown.append($('<option></option>')
+                                .attr('value', entry.id)
+                                .text(entry.nome));
+                        })
+
+                    }
+                },
+                error:function (data,e) {
+                    alert(data);
+                }
+            });
+
+        });
+
 
         $("form[name='form-adicionar-peca']").submit(function () {
             var dados   = $(this).serialize();

@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
+use \Illuminate\Support\Facades\View;
 use App\Http\Controllers\ClienteController;
 
 /*
@@ -26,8 +27,7 @@ Auth::routes();
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('/teste', function (){
-       $pedidos =  \App\Models\Pedido::find(2)->historico->contrato;
-       return $pedidos;
+       return \App\Models\Historico::find(1)->valorTotalPecasAutorizado();
     });
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');
@@ -42,6 +42,9 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/contrato/atualizar', [App\Http\Controllers\ContratoController::class, 'atualizar'])->name('contrato.atualizar');
     Route::post('/contrato/excluir', [App\Http\Controllers\ContratoController::class, 'excluir'])->name('contrato.excluir');
     Route::post('/contrato/atualizar/status', [App\Http\Controllers\ContratoController::class, 'atualizarStatus'])->name('contrato.atualizar.status');
+
+    Route::post('/contrato/pagar', [App\Http\Controllers\HistoricoController::class, 'pagar'])->name('historico.pagar');
+    Route::get('/contrato/historico/{historico_id}/faturar/', [App\Http\Controllers\HistoricoController::class, 'faturar'])->name('historico.faturar');
 
     Route::get('/contrato/editar/{id}/historico/{historico_id}/servicos', [App\Http\Controllers\TrabalhoController::class, 'index'])->name('trabalho.index');
     Route::get('/contrato/editar/{id}/historico/{historico_id}/servico/editar/{$trabalho_id}', [App\Http\Controllers\TrabalhoController::class, 'editar'])->name('trabalho.editar');
@@ -104,4 +107,11 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/pedido/atualizar', [App\Http\Controllers\PedidoController::class, 'atualizar'])->name('pedido.atualizar');
     Route::post('/pedido/excluir', [App\Http\Controllers\PedidoController::class, 'excluir'])->name('pedido.excluir');
 
+    Route::post('/tipo/pagamentos/taxas', [App\Http\Controllers\TipoPagamentosController::class, 'listarTaxas'])->name('tipospagamentos.listar.taxas');
+
+
+
+    View::composer(['admin.entradas.includes.form'],function($view){
+        $view->with(['tipos'=>\App\Models\TipoPagamentos::all()]);
+    });
 });

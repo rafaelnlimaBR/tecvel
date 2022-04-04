@@ -28,6 +28,9 @@
                     <li class="nav-item">
                         <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "pedidos"?"active":"":""}}" id="custom-tabs-two-pedidos-tab" data-toggle="pill" href="#custom-tabs-two-pedidos" role="tab" aria-controls="custom-tabs-two-pedidos" aria-selected="false">Pedidos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "fatura"?"active":"":""}}" id="custom-tabs-two-fatura-tab" data-toggle="pill" href="#custom-tabs-two-fatura" role="tab" aria-controls="custom-tabs-two-fatura" aria-selected="false">Pagamentos</a>
+                    </li>
 
                     @endif
                 </ul>
@@ -215,6 +218,17 @@
 
                         @include('admin.contratos.includes.tabelaPedidos')
                     </div>
+                    <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "fatura"?"show active":"":""}}" id="custom-tabs-two-fatura" role="tabpanel" aria-labelledby="custom-tabs-two-fatura-tab">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label>Novo </label>
+                                    <a href="{{route('historico.faturar',['historico_id'=>$historico->id])}}" class="form-control btn btn-primary" >
+                                        Faturar
+                                    </a>
+                                </div>
+                            </div>
+                            @include('admin.contratos.includes.tabelaPagamentos')
+                        </div>
                     @endif
                 </div>
             </div>

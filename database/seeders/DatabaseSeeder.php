@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Pedido;
+use App\Models\Taxa;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -32,6 +33,9 @@ class DatabaseSeeder extends Seeder
             TerceirizadosSeeder::class,
             PecasSeeder::class,
             TrabalhoSeeder::class,
+            TipoPagamentosSeeder::class,
+            TaxaSeeder::class,
+
         ]);
     }
 }

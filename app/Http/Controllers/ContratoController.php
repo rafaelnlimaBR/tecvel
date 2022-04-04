@@ -131,5 +131,9 @@ class ContratoController extends Controller
         }
     }
 
+    public function faturar()
+    {
+
+    }
 
 }

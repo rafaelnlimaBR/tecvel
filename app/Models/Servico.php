@@ -29,6 +29,8 @@ class Servico extends Model
         return $query->where('descricao','like','%'.$nome.'%');
     }
 
+
+
     public static function gravar(Request $r)
     {
         $servico                =   new Servico();
