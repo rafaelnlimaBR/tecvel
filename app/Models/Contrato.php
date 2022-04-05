@@ -39,19 +39,6 @@ class Contrato extends Model
         return $this->belongsTo(Veiculo::class,'veiculo_id');
     }
 
-    public function scopePesquisarPorCliente($query, $nome)
-    {
-        return $query->whereHas('cliente', function ($query) use ($nome) {
-            $query->where('nome', 'like', '%' . $nome . '%');
-        });
-    }
-
-    public function scopePesquisarPorVeiculo($query, $placa)
-    {
-        return $query->whereHas('veiculo', function ($query) use ($placa) {
-            $query->where('placa', 'like', '%' . $placa . '%');
-        });
-    }
 
     public static function gravar(Request $r)
     {
@@ -119,16 +106,30 @@ class Contrato extends Model
     {
         $tipo_id        =   null;
         $conf           =   Configuracao::find(1);
+        $historico      =   Historico::find($r->get('historico_id'));
+        $pecas        =   [];
 
         switch ($r->get('status_id')){
             case  $conf->autorizado:
+                $pecas    =   $historico->pecas->pluck('id');
                 $tipo_id    =   $conf->ordem_servico;
                 break;
             case $conf->nao_autorizado:
+
                 $tipo_id    =   $conf->orcamento;
                 break;
-            default:
+            case $conf->aberto:
+
                 $tipo_id    =   $r->get('tipo_id');
+                break;
+            case $conf->concluido:
+
+                $tipo_id    =   $r->get('tipo_id');
+                break;
+            case $conf->retorno:
+
+                $tipo_id    =   $r->get('tipo_id');
+                break;
         };
 
         $this->status()->attach($r->get('status_id'),[
@@ -136,7 +137,14 @@ class Contrato extends Model
             'obs'           =>  $r->get('obs'),
             'tipo_id'       =>  $tipo_id
             ]);
+        if($r->get('status_id') == $conf->autorizado){
+            $historico  =   Historico::find($this->status->last()->pivot->id);
+            foreach ($pecas as $p){
+
+            }
+        }
     }
+
 
 
 }

@@ -57,9 +57,9 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/historico/atualizar/servico', [App\Http\Controllers\TrabalhoController::class, 'cadastrar'])->name('historico.cadastrar.servico');
     Route::get('/historico/excluir/servico', [App\Http\Controllers\TrabalhoController::class, 'excluir'])->name('historico.excluir.servico');
 
-    Route::post('/peca/cadastrar', [App\Http\Controllers\PecasController::class, 'cadastrar'])->name('peca.cadastrar');
-    Route::get('/peca/excluir', [App\Http\Controllers\PecasController::class, 'excluir'])->name('peca.excluir');
-    Route::post('/peca/atualizar', [App\Http\Controllers\PecasController::class, 'atualizar'])->name('peca.atualizar');
+    Route::post('/historico/peca/adicionar', [App\Http\Controllers\HistoricoController::class, 'adicionarPeca'])->name('peca.cadastrar');
+    Route::get('/historico/peca/excluir', [App\Http\Controllers\HistoricoController::class, 'desvincularPeca'])->name('peca.excluir');
+    Route::post('/historico/peca/atualizar', [App\Http\Controllers\HistoricoController::class, 'atualizarPeca'])->name('peca.atualizar');
     Route::get('/pedido/adicionar/peca', [App\Http\Controllers\PecasController::class, 'adicionarPedido'])->name('pedido.adicionar.peca');
 
     Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente.index');

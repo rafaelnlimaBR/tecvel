@@ -132,8 +132,9 @@
                                     <div class="form-group">
                                         <label>Autorizado</label>
                                         <select class="form-control "  name="autorizado"  >
-                                            <option value="1">Sim</option>
-                                            <option value="0">Não</option>
+
+                                            <option value="1" {{$historico->tipo->autorizado == 1?"selected":""}}>Sim</option>
+                                            <option value="0" {{$historico->tipo->autorizado == 0?"selected":""}}>Não</option>
                                         </select>
                                     </div>
                                 </div>
@@ -192,8 +193,11 @@
                                     <div class="form-group">
                                         <label>Autori</label>
                                         <select class="form-control "  name="autorizado"  >
-                                            <option value="1" selected>Sim</option>
-                                            <option value="0">Não</option>
+
+                                            <option value="0" {{$historico->tipo->autorizado == 0?"selected":""}}>Não</option>
+
+                                            <option value="1" {{$historico->tipo->autorizado == 1?"selected":""}}>Sim</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -236,12 +240,12 @@
                 <a href="{{route('contrato.index')}}" class="btn btn-default" style="border-color: rgba(105,105,106,0.85); color: rgba(72,72,73,0.85); font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">Voltar</a>
                 @if(isset($contrato))
 
-                    @if($contrato->historicos->last()->tipo->id == \App\Models\Configuracao::find(1)->orcamento and $contrato->status->last()->id != \App\Models\Configuracao::find(1)->nao_autorizado)
+                    @if($contrato->historicos->last()->tipo->id == $conf->orcamento and $contrato->status->last()->id != $conf->nao_autorizado)
 
-                        <button status_id="{{\App\Models\Configuracao::find(1)->autorizado}}" type="button" class="btn btn-primary modalAtualizarStatus" data-toggle="modal" data-target="#modalStatus" style="background-color: {{\App\Models\Status::find(\App\Models\Configuracao::find(1)->autorizado)->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">
+                        <button status_id="{{$conf->autorizado}}" type="button" class="btn btn-primary modalAtualizarStatus" data-toggle="modal" data-target="#modalStatus" style="background-color: {{\App\Models\Status::find($conf->autorizado)->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">
                            Autorizadar
                         </button>
-                        <button status_id="{{\App\Models\Configuracao::find(1)->nao_autorizado}}" type="button" class="btn btn-primary modalAtualizarStatus" data-toggle="modal" data-target="#modalStatus" style="background-color: {{\App\Models\Status::find(\App\Models\Configuracao::find(1)->nao_autorizado)->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">
+                        <button status_id="{{$conf->nao_autorizado}}" type="button" class="btn btn-primary modalAtualizarStatus" data-toggle="modal" data-target="#modalStatus" style="background-color: {{\App\Models\Status::find($conf->nao_autorizado)->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">
                             Não Autorizadar
                         </button>
 

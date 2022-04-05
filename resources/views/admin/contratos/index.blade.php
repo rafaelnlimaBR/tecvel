@@ -21,7 +21,7 @@
             </div>
             <div class="card-body">
                 <div class="" style="padding-bottom: 10px" >
-                    <form class="form-inline" action="{{route('contrato.index')}}" method="get">
+                    {{--<form class="form-inline" action="{{route('contrato.index')}}" method="get">
 
                         {{csrf_field()}}
                         <div class="input-group input-group-sm" style="width: 350px;">
@@ -38,9 +38,9 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form>--}}
                 </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered " id="tabela-contratos">
                     <thead>
                     <tr>
                         <th style="width: 5%">ID</th>
@@ -75,7 +75,7 @@
                     </tbody>
                 </table>
                 <div class="card-footer clearfix">
-                    {{ $contratos->links('pagination::bootstrap-4') }}
+                    {{--{{ $contratos->links('pagination::bootstrap-4') }}--}}
                 </div>
             </div>
 

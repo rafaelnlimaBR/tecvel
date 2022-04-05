@@ -33,6 +33,7 @@
                                 <textarea  class="form-control" id="obs" name="obs"  value=""></textarea>
                                 <input type="text" value="{{isset($status_id)?$status_id:""}}" name="status_id" id="status_id">
                                 <input type="hidden" value="{{isset($contrato_id)?$contrato_id:""}}" name="contrato_id">
+                                <input type="hidden" value="{{isset($historico)?$historico->id:""}}" name="historico_id">
                                 <input type="text" value="{{isset($historico)?$historico->tipo->id:""}}" name="tipo_id">
                             </div>
                         </div>

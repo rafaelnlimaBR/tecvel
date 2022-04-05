@@ -42,7 +42,9 @@ class Historico extends Model
 
     public function pecas()
     {
-        return $this->hasMany(Peca::class,'historico_id');
+        return $this->belongsToMany(Peca::class,'historico_peca','historico_id','peca_id')
+            ->withPivot('valor_fornecedor','qnt','pedido_id')
+            ->withTimestamps();
     }
 
     public function pedidos()
@@ -59,6 +61,7 @@ class Historico extends Model
     {
         return $this->ValorTotalServicosAutorizadoComDesconto()+$this->ValorTotalPecasAutorizadoComDesconto();
     }
+
 
     public function ValorTotalServicosAutorizadoComDesconto()
     {

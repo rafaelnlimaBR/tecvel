@@ -100,7 +100,7 @@
 
 
             $.ajax({
-                type: "GET",
+                type: "post",
                 url: rota,
                 data: dados,
                 success: function( data )
@@ -354,5 +354,10 @@
 
     });
 
-
+    $('#tabela-contratos').dataTable({
+        "language":{
+            "url":"//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
+        },
+        responsive: true
+    });
 </script>

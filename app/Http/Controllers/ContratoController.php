@@ -16,8 +16,7 @@ class ContratoController extends Controller
     public function index()
     {
 
-        $contratos = Contrato::pesquisarPorCliente(\request()->get('cliente'))->
-            pesquisarPorVeiculo(\request()->get('veiculo'))->orderby('id','desc')->paginate(30);;
+        $contratos = Contrato::orderby('id','desc')->paginate(30);;
         $dados      =  [
             "titulo"    => "Contratos",
             "titulo_tabela" => "Lista de Contratos"
@@ -71,6 +70,7 @@ class ContratoController extends Controller
             "titulo"    => "Contrato",
             "titulo_formulario" =>'Editar',
             "servicos"          =>  Servico::orderby('id','desc'),
+            'conf'              => Configuracao::find(1)
         ];
         $contrato    =      Contrato::find($id);
 
@@ -129,11 +129,6 @@ class ContratoController extends Controller
         }catch (\Exception $e){
             return redirect()->route('contrato.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
-    }
-
-    public function faturar()
-    {
-
     }
 
 }

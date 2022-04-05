@@ -19,32 +19,47 @@ class PecasSeeder extends Seeder
             [
                 'valor'             =>  13.40,
                 'descricao'         =>  'Lampada do painel',
-                'qnt'               =>  5,
-                'pedido_id'         =>  null,
-                'historico_id'      =>  1,
-                'autorizado'        =>  true
+
             ],[
                 'valor'             =>  7.90,
                 'descricao'         =>  'Fita isolante',
-                'qnt'               =>  5,
-                'pedido_id'         =>  1,
-                'historico_id'      =>  1,
-                'autorizado'        =>  true
+
             ],[
                 'valor'             =>  90.00,
                 'descricao'         =>  'Bobina de velocidade do painel Branca',
-                'qnt'               =>  5,
-                'pedido_id'         =>  1,
-                'historico_id'      =>  1,
-                'autorizado'        =>  true
+
             ],[
                 'valor'             =>  150.00,
                 'descricao'         =>  'Bobina de velocidade do painel Metal',
-                'qnt'               =>  5,
-                'pedido_id'         =>  1,
-                'historico_id'      =>  1,
-                'autorizado'        =>  true
+
             ]
+        ]);
+
+        DB::table('historico_peca')->insert([
+            [
+                'historico_id'=>1,
+                'peca_id'       =>1,
+                'autorizado'    =>1,
+                'valor_fornecedor'=>12.00,
+                'valor'=>12.00,
+                'qnt'           =>3
+                ],
+            [
+                'historico_id'=>1,
+                'peca_id'       =>3,
+                'autorizado'    =>  1,
+                'valor_fornecedor'=>12.00,
+                'valor'=>12.00,
+                'qnt'           =>2
+            ],
+            [
+                'historico_id'=>1,
+                'peca_id'       =>3,
+                'autorizado'    =>1,
+                'valor_fornecedor'=>12.00,
+                'valor'=>12.00,
+                'qnt'           =>4
+            ],
         ]);
     }
 }

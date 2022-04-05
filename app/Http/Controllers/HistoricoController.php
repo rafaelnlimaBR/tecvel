@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contrato;
 use App\Models\Entrada;
 use App\Models\Historico;
+use App\Models\Peca;
 use App\Models\TipoPagamentos;
 use Illuminate\Http\Request;
 
@@ -122,5 +124,86 @@ class HistoricoController extends Controller
                 ->with('alerta',['tipo'=>'danger','msg'=>"Não foi possível excluir o registro",'titulo'=>'Erro!','icon'=>'check']);
         }
     }
+
+    public function desvincularPeca()
+    {
+        try{
+            $historico          =   Historico::find(\request()->get('historico'));
+            $peca           =   Peca::find(\request()->get('peca'));
+            $contrato       =   Contrato::find(\request()->get('contrato'));
+            if($peca == null){
+                return response()->json(["erro"=>"Historico null"]);
+            }
+            $historico->pecas()->detach($peca->id);
+
+            return response()->json([
+                'pecas'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render(),
+                'pedidos'=>view('admin.contratos.includes.tabelaPedidos')->with('historico',$historico)->with('contrato',$contrato)->render(),
+            ]);
+        }catch (\Exception $e){
+            return response()->json(['erro'=>$e->getMessage()]);
+        }
+    }
+
+    public function atualizarPeca(Request $r)
+    {
+        try{
+            if($r->ajax() == true){
+
+                $historico          =   Historico::find(\request()->get('historico_id'));
+                $peca           =   Peca::find(\request()->get('peca_id'));
+                $contrato       =   Contrato::find(\request()->get('contrato_id'));
+
+                if($peca == null){
+                    return response()->json(["erro"=>"Peca null"]);
+                }
+
+                $peca->atualizar($r->get('descricao'));
+
+                $historico->pecas()->sync([34,[
+                    'valor'         =>  $r->get('valor'),
+                    'valor_fornecedor'=>    $r->get('valor_fornecedor'),
+                    'qnt'               =>  $r->get('qnt'),
+                    'autorizado'        =>  $r->get('autorizado')
+                ]]);
+
+                return response()->json([
+                    'pecas'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render(),
+                    'pedidos'=>view('admin.contratos.includes.tabelaPedidos')->with('historico',$historico)->with('contrato',$contrato)->render(),
+                ]);
+            }
+
+        }catch (\Exception $e){
+            return response()->json(['erro'=>$e->getMessage()]);
+        }
+    }
+
+    public function adicionarPeca()
+    {
+        try{
+            $historico      =   Historico::find(\request()->get('historico_id'));
+            $contrato       =   Contrato::find(\request()->get('contrato_id'));
+            if($historico == null){
+                return response()->json(['erro'=>"historico null"]);
+            }
+
+            $peca   =   Peca::cadastrar(\request()->get('descricao'),\request()->get('valor'));
+
+            $historico->pecas()->attach($peca->id,[
+                'valor_fornecedor'          =>      \request()->get('valor_fornecedor'),
+                'valor'                     =>      \request()->get('valor'),
+                'qnt'                       =>      \request()->get('qnt'),
+                'autorizado'                =>      \request()->get('autorizado')
+            ]);
+
+            return response()->json([
+                'pecas'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render(),
+                'pedidos'=>view('admin.contratos.includes.tabelaPedidos')->with('historico',$historico)->with('contrato',$contrato)->render(),
+            ]);
+        }catch (\Exception $e){
+            return response()->json(['erro'=>$e->getMessage()]);
+        }
+    }
+
 
 }
