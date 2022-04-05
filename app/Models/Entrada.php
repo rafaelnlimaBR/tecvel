@@ -22,7 +22,7 @@ class Entrada extends Model
         $taxa_pagamento             =   Taxa::find($r->get('taxa'));
         $entrada                    =   new Entrada();
         $entrada->valor             =   $r->get('valor');
-        $entrada->valor_total       =   $r->get('valor');
+        $entrada->valor_total       =   $r->get('valor')-($r->get('valor')*($taxa_pagamento->taxa/100));
         $entrada->descricao         =   $r->get('descricao');
         $entrada->taxa_id           =   $taxa_pagamento->id;
         $entrada->data              =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'));
@@ -31,5 +31,30 @@ class Entrada extends Model
             throw new \Exception('Não foi possível realizar o registro',200);
         }
         return $entrada;
+    }
+
+    public function atualizar(Request $r)
+    {
+        $taxa_pagamento             =   Taxa::find($r->get('taxa'));
+        $entrada                    =   $this;
+        $entrada->valor             =   $r->get('valor');
+        $entrada->valor_total       =   $r->get('valor')-($r->get('valor')*($taxa_pagamento->taxa/100));
+        $entrada->descricao         =   $r->get('descricao');
+        $entrada->taxa_id           =   $taxa_pagamento->id;
+        $entrada->data              =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'));
+
+        if($entrada->save() == false){
+            throw new \Exception('Não foi possível realizar o registro',200);
+        }
+        return $entrada;
+    }
+
+    public function excluir()
+    {
+        $entrada        =   $this;
+
+        if($entrada->delete() == false){
+            throw new \Exception('Não foi possível realizar o registro',200);
+        }
     }
 }

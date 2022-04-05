@@ -25,7 +25,7 @@
                 {{csrf_field()}}
 
                 <td><input id="descricao-{{$s->id}}" name="descricao-{{$s->id}}" value="{{$s->descricao}}" class="form-control letra-pequena"></td>
-                <td><input id="valor-{{$s->id}}" name="valor-{{$s->id}}" value="{{$s->valor}}" class="form-control letra-pequena"></td>
+                <td><input id="valor-{{$s->id}}" name="valor-{{$s->id}}" value="{{$s->valor}}" class="form-control letra-pequena dinheiro"></td>
                 <td><input id="valor_fornecedor-{{$s->id}}" name="valor_fornecedor-{{$s->id}}" value="{{$s->valor_fornecedor}}" class="letra-pequena form-control"></td>
                 <td><input  id="qnt-{{$s->id}}" name="qnt-{{$s->id}}" value="{{$s->qnt}}" class="letra-pequena form-control"></td>
                 <td><input disabled name="total-{{$s->id}}" value="{{$s->qnt*$s->valor}}" class=" letra-pequena form-control"></td>

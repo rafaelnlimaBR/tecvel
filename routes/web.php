@@ -45,6 +45,9 @@ Route::group(['prefix'=>'admin'],function(){
 
     Route::post('/contrato/pagar', [App\Http\Controllers\HistoricoController::class, 'pagar'])->name('historico.pagar');
     Route::get('/contrato/historico/{historico_id}/faturar/', [App\Http\Controllers\HistoricoController::class, 'faturar'])->name('historico.faturar');
+    Route::get('/contrato/historico/{historico_id}/faturar/editar/{fatura_id}', [App\Http\Controllers\HistoricoController::class, 'editarPagamento'])->name('historico.faturar.editar');
+    Route::post('/contrato/historico/faturar/atualizar', [App\Http\Controllers\HistoricoController::class, 'atualizarPagamento'])->name('historico.faturar.atualizar');
+    Route::post('/contrato/historico/faturar/excluir', [App\Http\Controllers\HistoricoController::class, 'excluirPagamento'])->name('historico.fatura.excluir');
 
     Route::get('/contrato/editar/{id}/historico/{historico_id}/servicos', [App\Http\Controllers\TrabalhoController::class, 'index'])->name('trabalho.index');
     Route::get('/contrato/editar/{id}/historico/{historico_id}/servico/editar/{$trabalho_id}', [App\Http\Controllers\TrabalhoController::class, 'editar'])->name('trabalho.editar');

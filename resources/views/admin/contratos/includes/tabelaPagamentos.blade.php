@@ -9,7 +9,7 @@
         <th style="width: 20%">Recebido</th>
         <th style="width: 30%">Forma de Pagamento</th>
         <th style="width: 30%">Data</th>
-
+        <th style="width: 5%">Editar</th>
 
     </tr>
     </thead>
@@ -21,6 +21,7 @@
             <td>{{$s->valor_total}}</td>
             <td>{{$s->taxa->formaPagamento->nome." / ".$s->taxa->nome}}</td>
             <td>{{date('d/m/Y H:i',strtotime($s->data))}}</td>
+            <td><a href="{{route('historico.faturar.editar',['historico_id'=>$historico->id,'fatura_id'=>$s->id])}}">e</a></td>
         </tr>
     @endforeach
 
