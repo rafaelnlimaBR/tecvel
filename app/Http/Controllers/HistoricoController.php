@@ -9,14 +9,6 @@ use Illuminate\Http\Request;
 class HistoricoController extends Controller
 {
 
-    public function totalValorAutorizadoAjax()
-    {
-        if(\request()->ajax()){
-
-        }
-        return "nao autorizado";
-
-    }
 
     public function faturar($historico_id)
     {
@@ -32,15 +24,16 @@ class HistoricoController extends Controller
         $valor_peca     =   $historico->valorTotalPecasAutorizado();
         $total          =  $valor_peca + $valor_servico;
         $dados      =  [
-            "titulo"    => "Cliente",
-            "titulo_formulario" =>'Novo',
+            "titulo"    => "Faturar Contrato ".$historico->contrato->id,
+            "titulo_formulario" =>'Nova Fatura',
             'modal'             => 0,
             'fk_id'             =>  $historico->id,
-            'route'        =>  route('contrato.editar',['id'=>$historico->contrato->id,'historico_id'=>$historico->id,'tela'=>'faturar']),
+            'route'             =>  route('contrato.editar',['id'=>$historico->contrato->id,'historico_id'=>$historico->id,'tela'=>'fatura']),
             "valor_total"       =>  $total,
-            'descricao'         =>  "pagamento do contrato: ".$historico->contrato->id
+            'descricao'         =>  "pagamento do contrato: ".$historico->contrato->id,
+            'action'            =>  route('historico.pagar'),
         ];
-
+//        return $dados;
         return view('admin.entradas.includes.form',$dados);
 
     }
@@ -48,18 +41,19 @@ class HistoricoController extends Controller
     public function pagar()
     {
         try{
-//            if(\request()->ajax()){
+
                 $pagamento  =   Entrada::gravar(\request());
 
                 $historico  =   Historico::find(\request()->get('fk_id'));
 
                 $historico->pagamentos()->attach($pagamento->id);
-                return response()->json(['pagamentos'=>view('admin.contratos.includes.tabelaPagamentos')->with('historico',$historico)->render()]);
-//            }
+                return redirect()->route('contrato.editar',['id'=>$historico->contrato->id,'historico_id'=>$historico->id,'tela'=>'fatura'])
+                    ->with('alerta',['tipo'=>'success','msg'=>"Registro realizado com sucesso",'titulo'=>'Sucesso!','icon'=>'check']);
+
         }catch (\Exception $e){
-            return response()->json(['error'=>$e->getMessage()]);
+            return redirect()->route('contrato.editar',['id'=>$historico->contrato->id,'historico_id'=>$historico->id,'tela'=>'fatura'])
+                ->with('alerta',['tipo'=>'danger','msg'=>"Não foi possível faturar",'titulo'=>'Sucesso!','icon'=>'check']);
         }
-//        return \request()->all();
 
     }
 

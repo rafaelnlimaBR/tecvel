@@ -178,8 +178,8 @@
         });
 
         var URL     =   $('#url').val();
-        $('.numero').mask("#.##0.00" , { reverse:true})
-        $('.dinheiro').mask("#.##0.00" , { reverse:true})
+        $('.numero').mask("#0.00" , { reverse:true})
+        $('.dinheiro').mask("00000000.00" , { reverse:true})
         $('#selectServicos').select2({
             //placeholder: 'Search for a category',
             ajax: {
