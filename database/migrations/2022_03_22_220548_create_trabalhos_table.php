@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('trabalhos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->dateTime('data');
             $table->decimal('valor',8,2);
             $table->boolean('autorizado')->default(true);
             $table->bigInteger('historico_id')->unsigned();

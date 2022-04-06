@@ -1,6 +1,5 @@
 
 
-{{--
 
 <table class="table table-bordered " id="tabela-historico-pedidos">
     <thead>
@@ -27,4 +26,4 @@
     @endforeach
 
     </tbody>
-</table>--}}
+</table>

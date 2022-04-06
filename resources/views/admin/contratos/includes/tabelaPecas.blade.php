@@ -25,13 +25,13 @@
                 {{csrf_field()}}
 
                 <td><input id="descricao-{{$s->id}}" name="descricao-{{$s->id}}" value="{{$s->descricao}}" class="form-control letra-pequena"></td>
-                <td><input id="valor-{{$s->id}}" name="valor-{{$s->id}}" value="{{$s->valor}}" class="form-control letra-pequena dinheiro"></td>
+                <td><input id="valor-{{$s->id}}" name="valor-{{$s->id}}" value="{{$s->pivot->valor}}" class="form-control letra-pequena dinheiro"></td>
                 <td><input id="valor_fornecedor-{{$s->id}}" name="valor_fornecedor-{{$s->id}}" value="{{$s->pivot->valor_fornecedor}}" class="letra-pequena form-control"></td>
                 <td><input  id="qnt-{{$s->id}}" name="qnt-{{$s->id}}" value="{{$s->pivot->qnt}}" class="letra-pequena form-control"></td>
-                <td><input disabled name="total-{{$s->id}}" value="{{$s->pivot->qnt*$s->valor}}" class=" letra-pequena form-control"></td>
+                <td><input disabled name="total-{{$s->id}}" value="{{$s->pivot->qnt*$s->pivot->valor}}" class=" letra-pequena form-control"></td>
 
-                <td>{{Form::select('autorizado', [0=>"Não",1=>"Sim"], $s->autorizado,['class'=>' letra-pequena form-control','id'=>'autorizado-'.$s->id])}}</td>
-                <td><a class="btn-atualizar-peca btn btn-warning" contrato="{{$contrato->id}}"  peca="{{$s->id}}" historico="{{$historico->id}}" >{{$s->id}}</a></td>
+                <td>{{Form::select('autorizado', [0=>"Não",1=>"Sim"], $s->pivot->autorizado,['class'=>' letra-pequena form-control','id'=>'autorizado-'.$s->id])}}</td>
+                <td><a class="btn-atualizar-peca btn btn-warning" contrato="{{$contrato->id}}"  peca="{{$s->id}}" historico_peca="{{$s->pivot->id}}" historico="{{$historico->id}}" >{{$s->id}}</a></td>
                 <td><a href="" class="excluir_peca btn btn-danger" contrato="{{$contrato->id}}"  peca="{{$s->id}}" historico="{{$historico->id}}">e</a></td>
 
             </tr>
@@ -75,12 +75,14 @@
         var id          =   $(this).attr("peca")
         var historico_id =   $(this).attr("historico");
         var contrato_id =   $(this).attr("contrato");
+        var historico_peca= $(this).attr('historico_peca');
         var descricao   =   $("#descricao-"+id.toString()).val();
         var autorizado  =   $("#autorizado-"+id.toString()).val();
         var valor       =   $("#valor-"+id.toString()).val();
         var qnt       =   $("#qnt-"+id.toString()).val();
         var valor_fornecedor  =   $("#valor_fornecedor-"+id.toString()).val();
         var rota          =   "{{route("peca.atualizar")}}";
+
 
 
         $.ajax({
@@ -98,8 +100,9 @@
                 'valor'                 :   valor,
                 'valor_fornecedor'      :   valor_fornecedor,
                 'qnt'                   :   qnt,
-                'contrato_id'           :   contrato_id
-            },
+                'contrato_id'           :   contrato_id,
+                'historico_peca'        :   historico_peca
+                },
             type: "post",
             success: function( data )
             {

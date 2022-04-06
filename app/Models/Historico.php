@@ -36,14 +36,14 @@ class Historico extends Model
     {
         return $this->belongsToMany(Servico::class,'trabalhos','historico_id','servico_id')
             ->withPivot([
-                'valor','autorizado','data','id'
+                'valor','autorizado','id'
             ]);
     }
 
     public function pecas()
     {
         return $this->belongsToMany(Peca::class,'historico_peca','historico_id','peca_id')
-            ->withPivot('valor_fornecedor','qnt','pedido_id')
+            ->withPivot('valor_fornecedor','qnt','pedido_id','id','autorizado','valor')
             ->withTimestamps();
     }
 
@@ -95,8 +95,8 @@ class Historico extends Model
         $valorPecaTotalAutorizado    =  0;
 
         foreach ($historico->pecas as $s){
-            if($s->autorizado == 1){
-                $valorPecaTotalAutorizado += $s->valor*$s->qnt;
+            if($s->pivot->autorizado == 1){
+                $valorPecaTotalAutorizado += $s->pivot->valor*$s->pivot->qnt;
             }
         }
         return $valorPecaTotalAutorizado;
@@ -121,7 +121,6 @@ class Historico extends Model
         $this->servicos()->attach($r->get('servico_id'),[
             'valor'         =>  $r->get('valor'),
             'autorizado'    =>  $r->get('autorizado'),
-            'data'          =>  Carbon::now()
         ]);
     }
     public function excluirServico($trabalho_id)

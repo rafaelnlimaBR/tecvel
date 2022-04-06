@@ -18,13 +18,11 @@ class TrabalhoSeeder extends Seeder
     {
         DB::table('trabalhos')->insert([
            [
-               'data'           =>  Carbon::now(),
                'valor'          =>  150.00,
                'autorizado'     =>  true,
                'historico_id'   =>  1,
                'servico_id'     =>  1
            ],[
-                'data'           =>  Carbon::now(),
                 'valor'          =>  95.00,
                 'autorizado'     =>  true,
                 'historico_id'   =>  1,

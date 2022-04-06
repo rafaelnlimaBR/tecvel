@@ -11,10 +11,10 @@
 
     @foreach($pecas as $p)
         <tr>
-            <td><input class="checkbox-pecas" type="checkbox" peca_id="{{$p->id}}" pedido_id="{{$pedido->id}}" historico_id="{{$historico_id}}" {{$p->pedido_id == $pedido->id?'checked':""}}></td>
+            <td><input class="checkbox-pecas" type="checkbox" historico_peca="{{$p->pivot->id}}"  pedido_id="{{$pedido->id}}"  {{$p->pivot->pedido_id == $pedido->id?'checked':""}}></td>
             <td>{{$p->descricao}}</td>
-            <td>{{$p->valor_fornecedor}}</td>
-            <td>{{$p->qnt}}</td>
+            <td>{{$p->pivot->valor_fornecedor}}</td>
+            <td>{{$p->pivot->qnt}}</td>
         </tr>
 
 
@@ -22,16 +22,11 @@
     </tbody>
 </table>
 <script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+
 
     $('.checkbox-pecas').change(function () {
-        var peca_id     =   $(this).attr('peca_id');
         var pedido_id   =   $(this).attr('pedido_id');
-        var historico_id=   $(this).attr('historico_id');
+        var historico_peca   =   $(this).attr('historico_peca');
 
         var selecionado = $(this).is(':checked');
 
@@ -40,7 +35,7 @@
         $.ajax({
             type: "get",
             url: rota,
-            data:{'peca_id':peca_id,'pedido_id':pedido_id,'historico_id':historico_id,'selecionado':selecionado} ,
+            data:{'pedido_id':pedido_id,'selecionado':selecionado,'historico_peca':historico_peca} ,
             success: function( data )
             {
 

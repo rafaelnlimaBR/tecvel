@@ -50,7 +50,7 @@ class Contrato extends Model
         $contrato->cliente_id   =   $r->get('cliente');
         $contrato->veiculo_id   =   $r->get('veiculo');
         $contrato->garantia     =   $r->get('garantia');
-
+        $contrato->data_fim_garantia    =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'))->addDays( $r->get('garantia'));
 
 
         if($contrato->save() == false){
@@ -88,6 +88,7 @@ class Contrato extends Model
         $contrato->garantia     =   $r->get('garantia');
 
 
+
         if($contrato->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
@@ -104,14 +105,19 @@ class Contrato extends Model
 
     public function atualizarStatus(Request $r)
     {
+
         $tipo_id        =   null;
         $conf           =   Configuracao::find(1);
         $historico      =   Historico::find($r->get('historico_id'));
-        $pecas        =   [];
+        $contrato       =   Contrato::find($r->get('contrato_id'));
+        $pecas          =   [];
+        $servicos       =   [];
+
 
         switch ($r->get('status_id')){
             case  $conf->autorizado:
-                $pecas    =   $historico->pecas->pluck('id');
+                $pecas      =   $historico->pecas;
+                $servicos   =   $historico->servicos;
                 $tipo_id    =   $conf->ordem_servico;
                 break;
             case $conf->nao_autorizado:
@@ -127,7 +133,10 @@ class Contrato extends Model
                 $tipo_id    =   $r->get('tipo_id');
                 break;
             case $conf->retorno:
-
+                $contrato->data_fim_garantia    =    Carbon::createFromFormat('d/m/Y H:i',$r->get('data'))->addDays($contrato->garantia);
+                if($contrato->save() == false){
+                    throw new \Exception('Não foi possível realizar o registro',200);
+                }
                 $tipo_id    =   $r->get('tipo_id');
                 break;
         };
@@ -140,7 +149,18 @@ class Contrato extends Model
         if($r->get('status_id') == $conf->autorizado){
             $historico  =   Historico::find($this->status->last()->pivot->id);
             foreach ($pecas as $p){
-
+                $historico->pecas()->attach($p->id,[
+                    'valor'             =>      $p->pivot->valor,
+                    'valor_fornecedor'  =>      $p->pivot->valor_fornecedor,
+                    'qnt'               =>      $p->pivot->qnt,
+                    'autorizado'        =>      true,
+                ]);
+            }
+            foreach ($servicos as $s){
+                $historico->servicos()->attach($s->id,[
+                    'valor'             =>      $s->pivot->valor,
+                    'autorizado'        =>      true,
+                ]);
             }
         }
     }

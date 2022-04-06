@@ -27,7 +27,7 @@ Auth::routes();
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('/teste', function (){
-       return \App\Models\Historico::find(1)->valorTotalPecasAutorizado();
+       return Carbon::now()->addDays(90);
     });
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');

@@ -26,7 +26,7 @@ return new class extends Migration
 
             $table->foreign('historico_id')->references('id')->on('historicos')->onDelete('cascade');
             $table->foreign('peca_id')->references('id')->on('pecas')->onDelete('cascade');
-            $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('cascade');
+            $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('set null');
         });
     }
 

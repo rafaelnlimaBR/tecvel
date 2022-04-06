@@ -36,6 +36,10 @@ class Status extends Model
         $Status->nome  =   $r->get('nome');
         $Status->cor    =   $r->get('cor');
         $Status->habilitado    =   $r->get('habilitado');
+        $Status->editar_servicos=   $r->get('editar_servicos');
+        $Status->editar_pecas=   $r->get('editar_pecas');
+        $Status->editar_pagamentos=   $r->get('editar_pagamentos');
+        $Status->editar_pedidos=   $r->get('editar_pedidos');
 
         if($Status->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
@@ -49,6 +53,11 @@ class Status extends Model
         $Status->nome  =   $r->get('nome');
         $Status->cor    =   $r->get('cor');
         $Status->habilitado    =   $r->get('habilitado');
+        $Status->editar_servicos=   $r->get('editar_servicos');
+        $Status->editar_pecas=   $r->get('editar_pecas');
+        $Status->editar_pagamentos=   $r->get('editar_pagamentos');
+        $Status->editar_pedidos=   $r->get('editar_pedidos');
+
         if($Status->save() == false){
             throw new \Exception('Não foi possível realizar a atualização',200);
         }

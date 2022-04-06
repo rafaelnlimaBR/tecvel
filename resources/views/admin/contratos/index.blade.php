@@ -49,7 +49,7 @@
                         <th style="width: 20%">Data</th>
                         <th style="width: 20%">Tipo</th>
                         <th style="width: 10%">Status</th>
-                        <th style="width: 5%">Editar</th>
+                        <th style="width: 5%">Entrar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -62,11 +62,11 @@
                             <td>{{$c->veiculo->placa}}</td>
                             <td>{{date('d/m/Y H:m', strtotime($c->data))}}</td>
                             <td>{{$c->historicos->last()->tipo->descricao}}</td>
-                            <td>{{$c->status->last()->nome}}</td>
+                            <td><span class="badge" style="background: {{$c->status->last()->cor}}; color: white" >{{$c->status->last()->nome}}</span></td>
                             <td>
-                                <a href="{{route('contrato.editar',['id'=>$c->id,'historico_id'=>$c->historicos->last()->id,'tela'=>"dados"])}}" class="btn btn-block btn-warning btn-xs">
+                                <a href="{{route('contrato.editar',['id'=>$c->id,'historico_id'=>$c->historicos->last()->id,'tela'=>"dados"])}}" class="btn btn-block btn-primary btn-xs">
 
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fa fa-solid fa-arrow-right"></i>
                                 </a>
                             </td>
                         </tr>

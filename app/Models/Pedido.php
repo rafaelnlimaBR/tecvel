@@ -19,12 +19,18 @@ class Pedido extends Model
 
     public function pecas()
     {
-        return $this->hasMany(Peca::class,'pedido_id');
+        return $this->hasMany(HistoricoPeca::class,'pedido_id');
     }
 
     public function historico()
     {
         return $this->belongsTo(Historico::class,'historico_id');
+    }
+
+    public function pagamentos()
+    {
+        return $this->belongsToMany(Saida::class,'saida_pedido','pedido_id','saida_id')
+            ->withPivot('pedido_id','saida_id')->withTimestamps();
     }
 
     public static function gravar(Request $r)

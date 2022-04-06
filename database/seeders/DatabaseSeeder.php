@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             TrabalhoSeeder::class,
             TipoPagamentosSeeder::class,
             TaxaSeeder::class,
+            SaidaSeeder::class,
 
         ]);
     }

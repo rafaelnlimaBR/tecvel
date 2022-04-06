@@ -42,17 +42,6 @@ class Peca extends Model
         return $peca;
     }
 
-    public function adicionarPedido(Request $r)
-    {
-        $peca               =   $this;
-        $peca->pedido_id    =   ($r->get('selecionado') =="true"?$r->get('pedido_id'):null);
-        if($peca->save() == false){
-            throw new \Exception('Não foi possível realizar o registro',200);
-        }
-    }
 
-    public function adicionarPeca()
-    {
 
-    }
 }

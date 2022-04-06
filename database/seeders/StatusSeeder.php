@@ -20,23 +20,43 @@ class StatusSeeder extends Seeder
             [
                 'nome'      =>  'Aberto',
                 'cor'       =>  '#3CB371',
-                'habilitado' =>     true
+                'habilitado' =>     true,
+                'editar_servicos'       =>  true,
+                'editar_pecas'          =>  true,
+                'editar_pagamentos'     =>  true,
+                'editar_pedidos'        =>  true
             ],[
                 'nome'      =>  'Concluido',
                 'cor'       =>  '#008B8B',
-                'habilitado' =>     true
+                'habilitado' =>     true,
+                'editar_servicos'       =>  false,
+                'editar_pecas'          =>  false,
+                'editar_pagamentos'     =>  false,
+                'editar_pedidos'        =>  false
             ],[
                 'nome'      =>  'Não autorizado',
                 'cor'       =>  '#FFA500',
-                'habilitado' =>     true
+                'habilitado' =>     true,
+                'editar_servicos'       =>  false,
+                'editar_pecas'          =>  false,
+                'editar_pagamentos'     =>  false,
+                'editar_pedidos'        =>  false
             ],[
                 'nome'      =>  'Retorno',
                 'cor'       =>  '#4F4F4F',
-                'habilitado' =>     true
+                'habilitado' =>     true,
+                'editar_servicos'       =>  true,
+                'editar_pecas'          =>  true,
+                'editar_pagamentos'     =>  true,
+                'editar_pedidos'        =>  true
             ],[
                 'nome'      =>  'Autorizado',
                 'cor'       =>  '#4F4F4F',
-                'habilitado' =>     true
+                'habilitado' =>     true,
+                'editar_servicos'       =>  true,
+                'editar_pecas'          =>  true,
+                'editar_pagamentos'     =>  true,
+                'editar_pedidos'        =>  true
             ]
 
 

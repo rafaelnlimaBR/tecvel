@@ -19,18 +19,27 @@
                     <li class="nav-item">
                         <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "historicos"?"active":"":""}}" id="historicos-tab" data-toggle="pill" href="#historicos" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">Historicos</a>
                     </li>
+
+                    @if($historico->status->editar_servicos)
                     <li class="nav-item">
                         <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "servicos"?"active":"":""}}" id="custom-tabs-two-messages-tab" data-toggle="pill" href="#servicos" role="tab" aria-controls="custom-tabs-two-messages" aria-selected="false">Serviços</a>
                     </li>
+                    @endif
+                    @if($historico->status->editar_pecas)
                     <li class="nav-item">
                         <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "pecas"?"active":"":""}}" id="custom-tabs-two-pecas-tab" data-toggle="pill" href="#custom-tabs-two-pecas" role="tab" aria-controls="custom-tabs-two-pecas" aria-selected="false">Peças</a>
                     </li>
+                    @endif
+                    @if($historico->status->editar_pedidos)
                     <li class="nav-item">
                         <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "pedidos"?"active":"":""}}" id="custom-tabs-two-pedidos-tab" data-toggle="pill" href="#custom-tabs-two-pedidos" role="tab" aria-controls="custom-tabs-two-pedidos" aria-selected="false">Pedidos</a>
                     </li>
+                    @endif
+                    @if($historico->status->editar_pagamentos)
                     <li class="nav-item">
                         <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "fatura"?"active":"":""}}" id="custom-tabs-two-fatura-tab" data-toggle="pill" href="#custom-tabs-two-fatura" role="tab" aria-controls="custom-tabs-two-fatura" aria-selected="false">Pagamentos</a>
                     </li>
+                    @endif
 
                     @endif
                 </ul>
@@ -50,6 +59,7 @@
                                     {{ Form::select('cliente', (isset($contrato)?[$contrato->cliente->id=>$contrato->cliente->nome]:[null=>"Selecione um Cliente"]), null ,['class'=>'form-control clientes_select2','required']) }}
                                     <input type="hidden" name="tipo_contrato" value="{{isset($tipo_contrato)?$tipo_contrato:''}}">
                                     <input type="hidden" name="contrato_id" value="{{isset($contrato)?$contrato->id:''}}">
+                                    <input type="hidden" name="historico_id" value="{{isset($contrato)?$historico->id:''}}">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -74,7 +84,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Data</label>
                                     <div class="input-group date dataTempo" id="dataTempo" data-target-input="nearest">
@@ -86,11 +96,18 @@
 
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>Garantia</label>
 
                                     {{Form::select('garantia', [0=>"Sem Garantia",30=>'30 Dias',90=>'90 Dias',180=>'180 Dias'], (isset($contrato)?$contrato->garantia:90),['class'=>'form-control'])}}
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Fim da Garantia</label>
+                                    <input type="text" class="form-control " name="fimGarantia"  value="{{isset($contrato)?date('d/m/Y',strtotime($contrato->data_fim_garantia)):""}}"/>
 
                                 </div>
                             </div>

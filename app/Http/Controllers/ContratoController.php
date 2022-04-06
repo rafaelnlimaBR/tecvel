@@ -99,10 +99,17 @@ class ContratoController extends Controller
 
     public function atualizar()
     {
+
         try{
 
             $id = Contrato::atualizar(\request());
-            return redirect()->route('contrato.index')
+            return redirect()->route('contrato.editar',
+                [
+                    'id'                =>  \request('contrato_id'),
+                    'historico_id'      =>  \request('historico_id'),
+                    'tela'              =>  'dados'
+
+                ])
                 ->with('alerta',['tipo'=>'success','msg'=>"Editado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
             return redirect()->route('contrato.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);

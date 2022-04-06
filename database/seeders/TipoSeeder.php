@@ -20,7 +20,7 @@ class TipoSeeder extends Seeder
                'descricao'=>'Orcamento',
                'autorizado'=>   false
            ],[
-                'descricao'=>'Ordem de Serviço',
+                'descricao'=>'O.S.',
                 'autorizado'=>   true
             ]
         ]);

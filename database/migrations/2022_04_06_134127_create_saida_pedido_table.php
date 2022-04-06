@@ -13,18 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('status', function (Blueprint $table) {
+        Schema::create('saida_pedido', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->timestamps();
-            $table->string('nome');
-            $table->string('cor');
-            $table->boolean('habilitado')->default(true);
-            $table->boolean('editar_servicos')->default(false);
-            $table->boolean('editar_pagamentos')->default(false);
-            $table->boolean('editar_pecas')->default(false);
-            $table->boolean('editar_pedidos')->default(false);
+            $table->integer('pedido_id')->unsigned();
+            $table->integer('saida_id')->unsigned();
 
-
+            $table->foreign('pedido_id')->references('id')->on('pedidos')->onDelete('cascade');
+            $table->foreign('saida_id')->references('id')->on('saidas')->onDelete('cascade');
         });
     }
 
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status');
+        Schema::dropIfExists('saida_pedido');
     }
 };

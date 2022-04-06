@@ -38,7 +38,44 @@
 
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-3">
 
+                                <div class="form-group">
+                                    <label>Serviço</label>
+                                    {{Form::select('editar_servicos', [0=>'Não',1=>'Sim'], (isset($status)?$status->editar_servicos:1),['class'=>'form-control'])}}
+
+                                    {{--<input  type="text" class="form-control" id="descricao" name="descricao" placeholder="Descricao" value="{{isset($status)?$status->descricao:''}}">--}}
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label>Peça</label>
+                                    {{Form::select('editar_pecas', [0=>'Não',1=>'Sim'], (isset($status)?$status->editar_pecas:1),['class'=>'form-control'])}}
+
+                                    {{--<input  type="text" class="form-control" id="descricao" name="descricao" placeholder="Descricao" value="{{isset($status)?$status->descricao:''}}">--}}
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label>Pedido</label>
+                                    {{Form::select('editar_pedidos', [0=>'Não',1=>'Sim'], (isset($status)?$status->editar_pedidos:1),['class'=>'form-control'])}}
+
+                                    {{--<input  type="text" class="form-control" id="descricao" name="descricao" placeholder="Descricao" value="{{isset($status)?$status->descricao:''}}">--}}
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label>Pagamentos</label>
+                                    {{Form::select('editar_pagamentos', [0=>'Não',1=>'Sim'], (isset($status)?$status->editar_pagamentos:1),['class'=>'form-control'])}}
+
+                                    {{--<input  type="text" class="form-control" id="descricao" name="descricao" placeholder="Descricao" value="{{isset($status)?$status->descricao:''}}">--}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         @if(isset($status))

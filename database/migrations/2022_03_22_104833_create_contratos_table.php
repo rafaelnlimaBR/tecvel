@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('obs')->nullable();
             $table->text('defeito')->nullable();
             $table->dateTime('data');
+            $table->dateTime('data_fim_garantia')->nullable();
             $table->string('garantia')->nullable();
             $table->integer('cliente_id')->unsigned();
             $table->integer('veiculo_id')->unsigned();

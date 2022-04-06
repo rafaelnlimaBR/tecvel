@@ -8,6 +8,7 @@ use App\Models\Historico;
 use App\Models\Peca;
 use App\Models\TipoPagamentos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HistoricoController extends Controller
 {
@@ -160,12 +161,16 @@ class HistoricoController extends Controller
 
                 $peca->atualizar($r->get('descricao'));
 
-                $historico->pecas()->sync([34,[
-                    'valor'         =>  $r->get('valor'),
-                    'valor_fornecedor'=>    $r->get('valor_fornecedor'),
-                    'qnt'               =>  $r->get('qnt'),
-                    'autorizado'        =>  $r->get('autorizado')
-                ]]);
+                DB::table('historico_peca')
+                    ->where('id',$r->get('historico_peca'))
+                    ->update([
+                        'valor'             =>  $r->get('valor'),
+                        'valor_fornecedor'  =>    $r->get('valor_fornecedor'),
+                        'qnt'               =>  $r->get('qnt'),
+                        'autorizado'        =>  $r->get('autorizado'),
+
+                    ]);
+
 
                 return response()->json([
                     'pecas'=>view('admin.contratos.includes.tabelaPecas')->with('historico',$historico)->with('contrato',$contrato)->render(),

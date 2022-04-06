@@ -7,6 +7,34 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        $('.mod_ano').mask("00/00",{placeholder: "  /  "});
+        $('.telefone').mask("(99)999999999");
+
+        $('.placa').mask('AAA0U00', {
+            translation: {
+                'A': {
+                    pattern: /[A-Za-z]/
+                },
+                'U': {
+                    pattern: /[A-Za-z0-9]/
+                },
+            },
+            onKeyPress: function (value, e, field, options) {
+                // Convert to uppercase
+                e.currentTarget.value = value.toUpperCase();
+
+                // Get only valid characters
+                let val = value.replace(/[^\w]/g, '');
+
+                // Detect plate format
+                let isNumeric = !isNaN(parseFloat(val[4])) && isFinite(val[4]);
+                let mask = 'AAA0U00';
+                if(val.length > 4 && isNumeric) {
+                    mask = 'AAA0000';
+                }
+                $(field).mask(mask, options);
+            }
+        });
 
         $('.tipo_pagamento').change(function () {
             var id      =   $(this).val();
@@ -323,41 +351,18 @@
             locale :"pt-br",
             format: 'DD/MM/YYYY HH:mm',
         });
-
-        $('.placa').mask('AAA0U00', {
-            translation: {
-                'A': {
-                    pattern: /[A-Za-z]/
-                },
-                'U': {
-                    pattern: /[A-Za-z0-9]/
-                },
-            },
-            onKeyPress: function (value, e, field, options) {
-                // Convert to uppercase
-                e.currentTarget.value = value.toUpperCase();
-
-                // Get only valid characters
-                let val = value.replace(/[^\w]/g, '');
-
-                // Detect plate format
-                let isNumeric = !isNaN(parseFloat(val[4])) && isFinite(val[4]);
-                let mask = 'AAA0U00';
-                if(val.length > 4 && isNumeric) {
-                    mask = 'AAA0000';
-                }
-                $(field).mask(mask, options);
-            }
+        $('. dataTempoSemHora').datetimepicker({
+            locale :"pt-br",
+            format: 'DD/MM/YYYY',
         });
-        $('.mod_ano').mask("00/00",{placeholder: "  /  "});
-        $('.telefone').mask("(99)999999999");
+
 
     });
-
     $('#tabela-contratos').dataTable({
         "language":{
             "url":"//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
         },
         responsive: true
     });
+
 </script>
