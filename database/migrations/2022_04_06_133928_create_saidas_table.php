@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('descricao');
             $table->decimal('valor',8,2);
+            $table->dateTime('data');
         });
     }
 

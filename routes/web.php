@@ -109,8 +109,12 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/pedido/cadastrar', [App\Http\Controllers\PedidoController::class, 'cadastrar'])->name('pedido.cadastrar');
     Route::post('/pedido/atualizar', [App\Http\Controllers\PedidoController::class, 'atualizar'])->name('pedido.atualizar');
     Route::post('/pedido/excluir', [App\Http\Controllers\PedidoController::class, 'excluir'])->name('pedido.excluir');
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/pedido/editar/{pedido_id}/pagar', [App\Http\Controllers\PedidoController::class, 'novoPagamento'])->name('pedido.novo.pagamento');
+    Route::post('/pedido/pagar', [App\Http\Controllers\PedidoController::class, 'pagar'])->name('pedido.pagar');
 
     Route::post('/tipo/pagamentos/taxas', [App\Http\Controllers\TipoPagamentosController::class, 'listarTaxas'])->name('tipospagamentos.listar.taxas');
+
+    Route::get('/saidas', [App\Http\Controllers\SaidaController::class, 'index'])->name('saida.index');
 
 
 

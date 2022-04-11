@@ -6,6 +6,7 @@ use App\Models\Fornecedor;
 use App\Models\Historico;
 use App\Models\Peca;
 use App\Models\Pedido;
+use App\Models\Saida;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -58,6 +59,7 @@ class PedidoController extends Controller
     public function editar($id,$historico_id,$pedido_id)
     {
         $historico  =   Historico::find( \request('historico_id'));
+        $pedido    =   Pedido::find($pedido_id);
 
         $dados      =  [
             "titulo"    => "Pedido",
@@ -65,10 +67,11 @@ class PedidoController extends Controller
             'fornecedores'      =>  Fornecedor::all(),
             'historico_id'      =>  $historico->id,
             'contrato_id'       =>  $historico->contrato->id,
-            'pecas'             =>  $historico->pecas
+            'pecas'             =>  $historico->pecas,
+            'saidas'            =>  $pedido->pagamentos
         ];
 
-        $pedido    =   Pedido::find($pedido_id);
+
         if($pedido == null){
             return redirect()->route('contrato.editar',['id'=>$id,'historico_id'=>$historico_id,'tela'=>'pedidos'])->with('alerta',['tipo'=>'warning','msg'=>"Nenhum registro encontrato",'icon'=>'check','titulo'=>"Erro"]);
         }
@@ -100,4 +103,52 @@ class PedidoController extends Controller
     }
 
 
+
+    public function novoPagamento($id,$historico_id,$pedido_id)
+    {
+        $historico      =   Historico::find($historico_id);
+        if($historico == null){
+            return redirect()->route('contrato.index')
+                ->with('alerta',['tipo'=>'warning','msg'=>"Histórico não encontrado",'icon'=>'check','titulo'=>"Não permitido"]);
+        }
+
+
+
+
+        $total          =   $historico->valorTotalComDesconto()-$historico->valorTotalPago();
+        $dados      =  [
+            "titulo"    => "Faturar Pedido :".$pedido_id,
+            "titulo_formulario" =>'Novo Pagamento ',
+            'modal'             => 0,
+            'fk_id'             =>  $historico->id,
+            'route'             =>  route('pedido.editar',['id'=>$historico->contrato->id,'historico_id'=>$historico->id,'pedido_id'=>$pedido_id,'tela'=>'pagamentos']),
+            "valor"             =>  $total,
+            'descricao'         =>  "Pagamento do pedido : ".$pedido_id,
+            'action'            =>  route('pedido.pagar'),
+        ];
+//        return $dados;
+        return view('admin.saidas.includes.form',$dados);
+
+    }
+
+    public function pagar()
+    {
+        $saida  =   Saida::gravar(\request());
+
+        $pedido  =   Pedido::find(\request()->get('fk_id'));
+        try{
+
+
+
+
+            $pedido->pagamentos()->attach($saida->id);
+            return redirect()->route('pedido.editar',['id'=>$pedido->historico->contrato->id,'historico_id'=>$pedido->historico->id,'pedido_id'=>$pedido->id,'tela'=>'pagamentos'])
+                ->with('alerta',['tipo'=>'success','msg'=>"Registro realizado com sucesso",'titulo'=>'Sucesso!','icon'=>'check']);
+
+        }catch (\Exception $e){
+            return redirect()->route('contrato.editar',['id'=>$pedido->historico->contrato->id,'historico_id'=>$pedido->historico->id,'tela'=>'fatura'])
+                ->with('alerta',['tipo'=>'danger','msg'=>"Não foi possível faturar",'titulo'=>'Sucesso!','icon'=>'check']);
+        }
+
+    }
 }
