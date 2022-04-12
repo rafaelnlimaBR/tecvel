@@ -8,7 +8,7 @@
         <th style="width: 50%">Serviço</th>
         <th style="width: 20%">Valor</th>
         <th style="width: 10%">Autorizado</th>
-        <th style="width: 10%">Editar</th>
+        <th style="width: 6%">Editar</th>
     </tr>
     </thead>
     <tbody>
@@ -20,7 +20,7 @@
 
             <td>{{($s->pivot->autorizado?"Sim":"Não")}}
             </td>
-            <td><a href="" class="excluir_trabalho btn btn-danger" trabalho="{{$s->pivot->id}}" historico="{{$historico->id}}">e</a></td>
+            <td><a href="" class="excluir_trabalho btn btn-warning btn-sm" trabalho="{{$s->pivot->id}}" historico="{{$historico->id}}"><i class="fa fa-edit"></i></a></td>
         </tr>
     @endforeach
 

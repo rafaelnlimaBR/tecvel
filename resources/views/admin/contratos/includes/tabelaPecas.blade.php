@@ -11,8 +11,8 @@
         <th style="width: 8%">Qnt</th>
         <th style="width: 10%">Total</th>
         <th style="width: 10%">Autorizado</th>
-        <th style="width: 5%">Editar</th>
-        <th style="width: 5%">Excluir</th>
+        <th style="width: 4%">Editar</th>
+        <th style="width: 4%">Excluir</th>
     </tr>
     </thead>
     <tbody>
@@ -31,8 +31,8 @@
                 <td><input disabled name="total-{{$s->id}}" value="{{$s->pivot->qnt*$s->pivot->valor}}" class=" letra-pequena form-control"></td>
 
                 <td>{{Form::select('autorizado', [0=>"Não",1=>"Sim"], $s->pivot->autorizado,['class'=>' letra-pequena form-control','id'=>'autorizado-'.$s->id])}}</td>
-                <td><a class="btn-atualizar-peca btn btn-warning" contrato="{{$contrato->id}}"  peca="{{$s->id}}" historico_peca="{{$s->pivot->id}}" historico="{{$historico->id}}" >{{$s->id}}</a></td>
-                <td><a href="" class="excluir_peca btn btn-danger" contrato="{{$contrato->id}}"  peca="{{$s->id}}" historico="{{$historico->id}}">e</a></td>
+                <td><a class="btn-atualizar-peca btn btn-warning btn-sm" contrato="{{$contrato->id}}"  peca="{{$s->id}}" historico_peca="{{$s->pivot->id}}" historico="{{$historico->id}}" ><i class="fa fa-edit"></i></a></td>
+                <td><a href="" class="excluir_peca btn btn-danger btn-sm" contrato="{{$contrato->id}}"  peca="{{$s->id}}" historico="{{$historico->id}}"><i class="fa fa-trash"></i></a></td>
 
             </tr>
 

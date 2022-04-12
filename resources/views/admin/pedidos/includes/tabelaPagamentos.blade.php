@@ -14,7 +14,7 @@
             <td>{{$p->id}}</td>
             <td>{{$p->valor}}</td>
             <td>{{date('d/m/Y H:i', strtotime($p->data))}}</td>
-            <td></td>
+            <td><a class="btn btn-warning btn-sm" href="{{route('pedido.editar.pagamento',['id'=>$contrato_id,'historico_id'=>$historico_id,'pedido_id'=>$pedido->id,'saida_id'=>$p->id])}}"><i class="fa fa-edit"></i></a></td>
         </tr>
 
 

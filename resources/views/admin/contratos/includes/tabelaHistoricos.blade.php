@@ -5,7 +5,7 @@
         <th>Status</th>
         <th>Tipo</th>
 
-        <th>.</th>
+        <th style="width: 4%">Entrar</th>
     </tr>
     </thead>
     <tbody>
@@ -15,7 +15,7 @@
             <td>{{$s->nome}}</td>
             <td>{{\App\Models\TipoContrato::find($s->pivot->tipo_id)->descricao}}</td>
 
-            <td><a href="{{route('contrato.editar',['id'=>$contrato->id,'historico_id'=>$s->pivot->id,'tela'=>'historicos'])}}">Ir</a></td>
+            <td><a class="btn btn-primary btn-sm" href="{{route('contrato.editar',['id'=>$contrato->id,'historico_id'=>$s->pivot->id,'tela'=>'historicos'])}}"><i class="fa fa-solid fa-arrow-right fa-sm"></i></a></td>
         </tr>
         <tr class="expandable-body d-none">
             <td colspan="5">

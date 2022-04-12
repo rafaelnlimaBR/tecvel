@@ -11,7 +11,7 @@
 
     @foreach($pecas as $p)
         <tr>
-            <td><input class="checkbox-pecas" type="checkbox" historico_peca="{{$p->pivot->id}}"  pedido_id="{{$pedido->id}}"  {{$p->pivot->pedido_id == $pedido->id?'checked':""}}></td>
+            <td><input {{$p->pivot->pedido_id == null?"":($p->pivot->pedido_id == $pedido->id?"":"disabled") }}  class="checkbox-pecas" type="checkbox" historico_peca="{{$p->pivot->id}}"  pedido_id="{{$pedido->id}}"  {{$p->pivot->pedido_id == $pedido->id?'checked':""}}></td>
             <td>{{$p->descricao}}</td>
             <td>{{$p->pivot->valor_fornecedor}}</td>
             <td>{{$p->pivot->qnt}}</td>

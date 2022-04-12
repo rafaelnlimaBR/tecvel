@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('servico');
             $table->decimal('valor',8,2);
             $table->dateTime('data');
-            $table->string('nota_fiscal')->nullable();
-            $table->boolean('autorizado');
+            $table->string('codigo')->nullable();
             $table->integer('fornecedor_id')->unsigned();
             $table->bigInteger('historico_id')->unsigned();
 

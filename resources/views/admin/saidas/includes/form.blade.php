@@ -35,7 +35,7 @@
                                 <div class="form-group">
                                     <label>Data</label>
                                     <div class="input-group date dataTempo" id="dataTempo" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" name="data" data-target=".dataTempo"  value="{{isset($contrato)?date('dd/mm/YYYY H:i',strtotime($contrato->data)):\Carbon\Carbon::now()->format('dd/mm/YYYY H:i')}}"/>
+                                        <input type="text" class="form-control datetimepicker-input" name="data" data-target=".dataTempo"  value="{{isset($pagamento)?date('dd/mm/YYYY H:i',strtotime($pagamento->data)):\Carbon\Carbon::now()->format('dd/mm/YYYY H:i')}}"/>
                                         <div class="input-group-append" data-target=".dataTempo" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>

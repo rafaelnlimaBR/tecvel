@@ -21,8 +21,7 @@ class TerceirizadosSeeder extends Seeder
                 'servico'           =>  'Reparo no modulo',
                 'valor'             =>  340.00,
                 'data'              =>  Carbon::now(),
-                'nota_fiscal'       =>  '2324343434',
-                'autorizado'        =>  true,
+                'codigo'       =>  '2324343434',
                 'fornecedor_id'     =>  1,
                 'historico_id'      =>  1
             ]

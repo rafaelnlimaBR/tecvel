@@ -15,7 +15,7 @@ class Saida extends Model
 
     public static function gravar(Request $r)
     {
-  
+
         $saida                    =   new Saida();
         $saida->valor             =   $r->get('valor');
         $saida->descricao         =   $r->get('descricao');
@@ -25,5 +25,27 @@ class Saida extends Model
             throw new \Exception('Não foi possível realizar o registro',200);
         }
         return $saida;
+    }
+
+    public static function editar(Request $r)
+    {
+        $saida                    =   Saida::find($r->get('pagamento_id'));
+        $saida->valor             =   $r->get('valor');
+        $saida->descricao         =   $r->get('descricao');
+        $saida->data              =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'));
+
+        if($saida->save() == false){
+            throw new \Exception('Não foi possível realizar o registro',200);
+        }
+        return $saida;
+    }
+
+    public function excluir()
+    {
+        $saida        =   $this;
+
+        if($saida->delete() == false){
+            throw new \Exception('Não foi possível realizar o registro',200);
+        }
     }
 }
