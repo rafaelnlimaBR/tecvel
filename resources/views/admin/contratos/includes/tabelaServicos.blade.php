@@ -20,7 +20,7 @@
 
             <td>{{($s->pivot->autorizado?"Sim":"Não")}}
             </td>
-            <td><a href="" class="excluir_trabalho btn btn-warning btn-sm" trabalho="{{$s->pivot->id}}" historico="{{$historico->id}}"><i class="fa fa-edit"></i></a></td>
+            <td><a href="" class="excluir_trabalho btn btn-danger btn-sm" trabalho="{{$s->pivot->id}}" historico="{{$historico->id}}"><i class="fa fa-trash"></i></a></td>
         </tr>
     @endforeach
 
