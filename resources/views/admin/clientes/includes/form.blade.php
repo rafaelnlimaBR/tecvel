@@ -9,21 +9,20 @@
 
 
             <label for="nome">Nome</label>
-            <input type="text" class="form-control " id="nome" name="nome" placeholder="Nome" value="{{isset($cliente)?$cliente->nome:""}}">
-            <p class="error">{{ $errors->first('nome', ":message") }}</p>
+            <input type="text" class="form-control @error('nome') is-invalid @enderror" id="nome" name="nome" placeholder="Nome" value="{{isset($cliente)?$cliente->nome:""}}">
+
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" class="form-control " id="emai" name="email" placeholder="Email" value="{{isset($cliente)?$cliente->email:''}}">
-            <p class="error">{{ $errors->first('email', ":message") }}</p>
+            <input type="text" class="form-control @error('email') is-invalid @enderror" id="emai" name="email" placeholder="Email" value="{{isset($cliente)?$cliente->email:''}}">
+
         </div>
         <div class="row">
             <div class="col-sm-6">
 
                 <div class="form-group">
                     <label>Whatsapp</label>
-                    <input type="text" class="form-control telefone " name="telefone01" placeholder="Numero" value="{{isset($cliente)?$cliente->telefone01:''}}">
-                    <p class="error">{{ $errors->first('telefone01', ":message") }}</p>
+                    <input type="text" class="form-control telefone @error('telefone01') is-invalid @enderror" name="telefone01" placeholder="Numero" value="{{isset($cliente)?$cliente->telefone01:''}}">
                 </div>
             </div>
             <div class="col-sm-6">

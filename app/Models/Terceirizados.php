@@ -12,6 +12,23 @@ class Terceirizados extends Model
     use HasFactory;
     protected $table    =   "terceirizados";
 
+    private static $restricao = [
+        'valor'       =>     'required',
+        'servico'       =>  'required',
+        'data'          =>  'required',
+    ];
+    private static $mensagem = [
+        'required'    => 'O campo :attribute é obrigado.',
+        'unique'    =>  'Já possui registro com esse :attribute ',
+    ];
+    public static function validacao($dados)
+    {
+        if(array_key_exists('id',$dados)){
+
+        }
+        return \Validator::make($dados,static::$restricao,static::$mensagem);
+    }
+
     public function fornecedor()
     {
         return $this->belongsTo(Fornecedor::class,'fornecedor_id');

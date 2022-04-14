@@ -28,6 +28,13 @@ class TerceirizadosController extends Controller
 
         $historico  =   Historico::find(\request()->get('historico_id'));
         try{
+            $validacao  =   Terceirizados::validacao(request()->all());
+
+            if($validacao->fails()){
+                return redirect()->route('terceirizado.novo',['id'=>$historico->contrato->id,'historico_id'=>\request()->get('historico_id')])->withErrors($validacao)->withInput();
+
+            }
+
             $terceirizado = Terceirizados::gravar(\request());
 
             return redirect()->route('terceirizado.editar',['id'=>$historico->contrato->id,'historico_id'=>\request()->get('historico_id'),'terceirizado_id'=>$terceirizado->id,'tela'=>'dados'])->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);

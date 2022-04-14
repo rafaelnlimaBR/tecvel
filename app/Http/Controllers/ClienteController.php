@@ -51,7 +51,6 @@ class ClienteController extends Controller
 
         try{
             $modal = request()->get("modal");
-            $validacao  =   Cliente::validacao(request()->all());
 
 
             $validacao  =   Cliente::validacao(request()->all());

@@ -40,6 +40,11 @@
                             <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "terceirizados"?"show active":"":""}}" id="custom-tabs-two-terceirizados-tab" data-toggle="pill" href="#custom-tabs-two-terceirizados" role="tab" aria-controls="custom-tabs-two-terceirizados" aria-selected="false">Terceirizados</a>
                         </li>
                     @endif
+                    @if($historico->status->editar_comissoes)
+                        <li class="nav-item">
+                            <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "comissoes"?"show active":"":""}}" id="custom-tabs-two-comissoes-tab" data-toggle="pill" href="#custom-tabs-two-comissoes" role="tab" aria-controls="custom-tabs-two-comissoes" aria-selected="false">Comissões</a>
+                        </li>
+                    @endif
                     @if($historico->status->editar_pagamentos)
                     <li class="nav-item">
                         <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "fatura"?"active":"":""}}" id="custom-tabs-two-fatura-tab" data-toggle="pill" href="#custom-tabs-two-fatura" role="tab" aria-controls="custom-tabs-two-fatura" aria-selected="false">Pagamentos</a>
@@ -254,6 +259,16 @@
 
                             @include('admin.contratos.includes.tabelaTerceirizados')
                         </div>
+                    <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "comissoes"?"show active":"":""}}" id="custom-tabs-two-comissoes" role="tabpanel" aria-labelledby="custom-tabs-two-comissoes-tab">
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Novo </label>
+                                <a href="{{route('comissao.novo',['id'=>$contrato->id,'historico_id'=>$historico->id])}}" class="btn btn-primary form-control">Novo</a>
+                            </div>
+                        </div>
+
+                        @include('admin.contratos.includes.tabelaComissoes')
+                    </div>
                     <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "fatura"?"show active":"":""}}" id="custom-tabs-two-fatura" role="tabpanel" aria-labelledby="custom-tabs-two-fatura-tab">
                             <div class="row">
                                 <div class="form-group">

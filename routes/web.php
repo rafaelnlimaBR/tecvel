@@ -127,6 +127,17 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/terceirizado/atualizar/pagamento', [App\Http\Controllers\TerceirizadosController::class, 'atualizarPagamento'])->name('terceirizado.atualizar.pagamento');
 
 
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/comissao/novo', [App\Http\Controllers\ComissaoController::class, 'novo'])->name('comissao.novo');
+    Route::post('/comissao/cadastrar', [App\Http\Controllers\ComissaoController::class, 'cadastrar'])->name('comissao.cadastrar');
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/comissao/editar/{comissao_id}', [App\Http\Controllers\ComissaoController::class, 'editar'])->name('comissao.editar');
+    Route::post('/comissao/atualizar', [App\Http\Controllers\ComissaoController::class, 'atualizar'])->name('comissao.atualizar');
+    Route::post('/comissao/excluir', [App\Http\Controllers\ComissaoController::class, 'excluir'])->name('comissao.excluir');
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/comissao/editar/{comissao_id}/pagar', [App\Http\Controllers\ComissaoController::class, 'novoPagamento'])->name('comissao.novo.pagamento');
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/comissao/editar/{comissao_id}/editar/pagamento/{saida_id}', [App\Http\Controllers\ComissaoController::class, 'editarPagamento'])->name('comissao.editar.pagamento');
+    Route::post('/comissao/pagar', [App\Http\Controllers\ComissaoController::class, 'pagar'])->name('comissao.pagar');
+    Route::post('/comissao/excluir/pagamento', [App\Http\Controllers\ComissaoController::class, 'excluirPagamento'])->name('comissao.excluir.pagamento');
+    Route::post('/comissao/atualizar/pagamento', [App\Http\Controllers\ComissaoController::class, 'atualizarPagamento'])->name('comissao.atualizar.pagamento');
+    
     Route::post('/tipo/pagamentos/taxas', [App\Http\Controllers\TipoPagamentosController::class, 'listarTaxas'])->name('tipospagamentos.listar.taxas');
 
     Route::get('/saidas', [App\Http\Controllers\SaidaController::class, 'index'])->name('saida.index');

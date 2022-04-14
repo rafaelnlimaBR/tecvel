@@ -32,6 +32,11 @@ class Historico extends Model
         return $this->belongsTo(TipoContrato::class,'tipo_id');
     }
 
+    public function comissoes()
+    {
+        return $this->hasMany(Comissao::class,'historico_id');
+    }
+
     public function status()
     {
         return $this->belongsTo(Status::class,'status_id');

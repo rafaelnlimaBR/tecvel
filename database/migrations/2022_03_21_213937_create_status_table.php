@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('editar_pecas')->default(false);
             $table->boolean('editar_pedidos')->default(false);
             $table->boolean('editar_terceirizados')->default(false);
+            $table->boolean('editar_comissoes')->default(false);
 
 
         });

@@ -17,7 +17,7 @@
                             <li class="nav-item">
                                 <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "dados"?"active":"":"active"}}" id="custom-tabs-one-dados-tab" data-toggle="pill" href="#custom-tabs-one-dados" role="tab" aria-controls="custom-tabs-one-dados" aria-selected="true">Dados</a>
                             </li>
-                            @if(isset($terceirizado))
+                            @if(isset($comissao))
                             <li class="nav-item">
                                 <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "pagamentos"?"active":"":""}}" id="custom-tabs-one-pagamentos-tab" data-toggle="pill" href="#custom-tabs-one-pagamentos" role="tab" aria-controls="custom-tabs-one-pagamentos" aria-selected="false">Pagamentos</a>
                             </li>
@@ -28,14 +28,14 @@
                     <div class="card-body">
                         <div class="tab-content" id="custom-tabs-one-tabContent">
                             <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "dados"?"show active":"":"show active"}}" id="custom-tabs-one-dados" role="tabpanel" aria-labelledby="custom-tabs-one-dados-tab">
-                                <form class="" action="{{isset($terceirizado)?route('terceirizado.atualizar'):route('terceirizado.cadastrar')}}" method="post">
+                                <form class="" action="{{isset($comissao)?route('comissao.atualizar'):route('comissao.cadastrar')}}" method="post">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-7">
                                                 <div class="form-group">
                                                     {{csrf_field()}}
                                                     <label for="fornecedor">Fornecedor</label>
-                                                    {{Form::select('fornecedor', $fornecedores->pluck('nome','id'), (isset($terceirizado)?$terceirizado->fornecedor->id:0),['class'=>'form-control  select-fornecedor'])}}
+                                                    {{Form::select('fornecedor', $fornecedores->pluck('nome','id'), (isset($comissao)?$comissao->fornecedor->id:0),['class'=>'form-control  select-fornecedor'])}}
                                                     <input type="hidden" value="{{$historico_id}}" name="historico_id">
                                                     <input type="hidden" value="{{$contrato_id}}" name="contrato_id">
 
@@ -43,23 +43,19 @@
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="form-group">
-                                                    <label for="codigo">Código</label>
-                                                    <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Codigo" value="{{isset($terceirizado)?$terceirizado->codigo:''}}">
+                                                    <label for="valor">Valor</label>
+                                                    <input type="text"  class="form-control dinheiro @error('valor') is-invalid @enderror" id="valor" name="valor" placeholder="Valor" value="{{isset($comissao)?$comissao->valor:''}}">
+
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="valor">Valor</label>
-                                                    <input type="text"  class="form-control dinheiro @error('valor') is-invalid @enderror" id="valor" name="valor" placeholder="Valor" value="{{isset($terceirizado)?$terceirizado->valor:''}}">
-                                                </div>
-                                            </div>
+
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="data">Data</label>
-                                                    <div class="input-group date dataTempo @error('data') is-invalid @enderror" id="dataTempo" data-target-input="nearest">
-                                                        <input type="text" class="form-control datetimepicker-input" name="data" data-target=".dataTempo"  value="{{isset($terceirizado)?date('dd/mm/YYYY H:i',strtotime($terceirizado->data)):\Carbon\Carbon::now()->format('dd/mm/YYYY H:i')}}"/>
+                                                    <div class="input-group date dataTempo" id="dataTempo" data-target-input="nearest">
+                                                        <input type="text" class="form-control datetimepicker-input @error('data') is-invalid @enderror" name="data" data-target=".dataTempo"  value="{{isset($comissao)?date('dd/mm/YYYY H:i',strtotime($comissao->data)):\Carbon\Carbon::now()->format('dd/mm/YYYY H:i')}}"/>
                                                         <div class="input-group-append" data-target=".dataTempo" data-toggle="datetimepicker">
                                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                         </div>
@@ -71,8 +67,8 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="valor">Serviço</label>
-                                                    <textarea class="form-control @error('servico') is-invalid @enderror" name="servico" >{{isset($terceirizado)?$terceirizado->servico:''}}</textarea>
+                                                    <label for="descricao">Descrição</label>
+                                                    <textarea class="form-control" name="descricao" >{{isset($comissao)?$comissao->descricao:''}}</textarea>
 
                                                 </div>
                                             </div>
@@ -81,7 +77,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="obs">Observações</label>
-                                                    <textarea class="form-control" name="obs" >{{isset($terceirizado)?$terceirizado->obs:''}}</textarea>
+                                                    <textarea class="form-control" name="obs" >{{isset($comissao)?$comissao->obs:''}}</textarea>
 
                                                 </div>
                                             </div>
@@ -89,27 +85,27 @@
 
                                     </div>
                                     <div class="card-footer">
-                                        @if(isset($terceirizado))
+                                        @if(isset($comissao))
                                             <button type="submit" class="btn btn-warning">Editar</button>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir">
                                                 Deletar
                                             </button>
-                                            <input type="hidden" class="form-control" id="id" name="terceirizado_id" value="{{$terceirizado->id}}">
+                                            <input type="hidden" class="form-control" id="id" name="comissao_id" value="{{$comissao->id}}">
                                         @else
                                             <button type="submit" class="btn btn-primary">Salva</button>
                                         @endif
 
-                                        <a href="{{route('contrato.editar',['id'=>$contrato_id,'historico_id'=>$historico_id,'tela'=>'terceirizados'])}}" class="btn btn-default" style="float: right">Voltar </a>
+                                        <a href="{{route('contrato.editar',['id'=>$contrato_id,'historico_id'=>$historico_id,'tela'=>'comissoes'])}}" class="btn btn-default" style="float: right">Voltar </a>
                                     </div>
                                 </form>
                             </div>
-                            @if(isset($terceirizado))
+                            @if(isset($comissao))
                             <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "pagamentos"?"show active":"":""}}" id="custom-tabs-one-pagamentos" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
 
                                 <div class="card-header">
-                                    <a href="{{route('terceirizado.novo.pagamento',['id'=>$contrato_id,'historico_id'=>$historico_id,'terceirizado_id'=>$terceirizado->id])}}" class="btn btn-primary">Pagar</a>
+                                    <a href="{{route('comissao.novo.pagamento',['id'=>$contrato_id,'historico_id'=>$historico_id,'comissao_id'=>$comissao->id])}}" class="btn btn-primary">Pagar</a>
                                 </div>
-                                @include('admin.terceirizados.includes.tabelaPagamentos')
+                                @include('admin.comissao.includes.tabelaPagamentos')
                             </div>
                             @endif
                         </div>
@@ -120,7 +116,7 @@
 
 
 
-        @if(isset($terceirizado))
+        @if(isset($comissao))
 
 
 
@@ -132,8 +128,8 @@
 
 
 
-            <form class="" action="{{route('terceirizado.excluir')}}" method="post">
-                <input name="terceirizado_id" value="{{$terceirizado->id}}" type="hidden">
+            <form class="" action="{{route('comissao.excluir')}}" method="post">
+                <input name="comissao_id" value="{{$comissao->id}}" type="hidden">
                 <input type="hidden" value="{{$historico_id}}" name="historico_id">
                 <input type="hidden" value="{{$contrato_id}}" name="contrato_id">
 

@@ -26,6 +26,7 @@ class StatusSeeder extends Seeder
                 'editar_pagamentos'     =>  true,
                 'editar_pedidos'        =>  true,
                 'editar_terceirizados'  =>  true,
+                'editar_comissoes'      =>  true,
             ],[
                 'nome'      =>  'Concluido',
                 'cor'       =>  '#008B8B',
@@ -35,6 +36,7 @@ class StatusSeeder extends Seeder
                 'editar_pagamentos'     =>  false,
                 'editar_pedidos'        =>  false,
                 'editar_terceirizados'  =>  false,
+                'editar_comissoes'      =>  false,
             ],[
                 'nome'      =>  'Não autorizado',
                 'cor'       =>  '#FFA500',
@@ -43,7 +45,8 @@ class StatusSeeder extends Seeder
                 'editar_pecas'          =>  false,
                 'editar_pagamentos'     =>  false,
                 'editar_pedidos'        =>  false,
-                'editar_terceirizados'  =>  false
+                'editar_terceirizados'  =>  false,
+                'editar_comissoes'      =>  false,
             ],[
                 'nome'      =>  'Retorno',
                 'cor'       =>  '#4F4F4F',
@@ -53,6 +56,7 @@ class StatusSeeder extends Seeder
                 'editar_pagamentos'     =>  true,
                 'editar_pedidos'        =>  true,
                 'editar_terceirizados'  =>  true,
+                'editar_comissoes'      =>  true,
             ],[
                 'nome'      =>  'Autorizado',
                 'cor'       =>  '#4F4F4F',
@@ -62,6 +66,7 @@ class StatusSeeder extends Seeder
                 'editar_pagamentos'     =>  true,
                 'editar_pedidos'        =>  true,
                 'editar_terceirizados'  =>  true,
+                'editar_comissoes'      =>  true,
             ]
 
 
