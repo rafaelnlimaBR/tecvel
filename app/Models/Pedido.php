@@ -33,6 +33,28 @@ class Pedido extends Model
             ->withPivot('pedido_id','saida_id')->withTimestamps();
     }
 
+    public function valorTotal()
+    {
+        $valorTotal =   0;
+
+        foreach ($this->pecas as $p){
+            $valorTotal     +=   $p->valor_fornecedor*$p->qnt;
+        }
+        return $valorTotal;
+
+    }
+
+    public function valorTotalDesconto()
+    {
+        $valorTotal =   0;
+        $desconto   =   $this->desconto;
+        foreach ($this->pecas as $p){
+            $valorTotal     +=   $p->valor_fornecedor*$p->qnt;
+        }
+        return $valorTotal*(100-$desconto)/100;
+
+    }
+
     public static function gravar(Request $r)
     {
         $pedido                =   new Pedido();

@@ -27,7 +27,7 @@ Auth::routes();
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('/teste', function (){
-       return \App\Models\Terceirizados::find(1)->fornecedor;
+       return \App\Models\Pedido::find(2)->valorTotal();
     });
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');
