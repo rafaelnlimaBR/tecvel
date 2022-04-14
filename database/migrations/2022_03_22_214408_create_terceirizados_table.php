@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('terceirizados', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->timestamps();
-            $table->string('servico');
+            $table->text('servico');
+            $table->text('obs')->nullable();
             $table->decimal('valor',8,2);
             $table->dateTime('data');
             $table->string('codigo')->nullable();

@@ -24,7 +24,8 @@ class StatusSeeder extends Seeder
                 'editar_servicos'       =>  true,
                 'editar_pecas'          =>  true,
                 'editar_pagamentos'     =>  true,
-                'editar_pedidos'        =>  true
+                'editar_pedidos'        =>  true,
+                'editar_terceirizados'  =>  true,
             ],[
                 'nome'      =>  'Concluido',
                 'cor'       =>  '#008B8B',
@@ -32,7 +33,8 @@ class StatusSeeder extends Seeder
                 'editar_servicos'       =>  false,
                 'editar_pecas'          =>  false,
                 'editar_pagamentos'     =>  false,
-                'editar_pedidos'        =>  false
+                'editar_pedidos'        =>  false,
+                'editar_terceirizados'  =>  false,
             ],[
                 'nome'      =>  'Não autorizado',
                 'cor'       =>  '#FFA500',
@@ -40,7 +42,8 @@ class StatusSeeder extends Seeder
                 'editar_servicos'       =>  false,
                 'editar_pecas'          =>  false,
                 'editar_pagamentos'     =>  false,
-                'editar_pedidos'        =>  false
+                'editar_pedidos'        =>  false,
+                'editar_terceirizados'  =>  false
             ],[
                 'nome'      =>  'Retorno',
                 'cor'       =>  '#4F4F4F',
@@ -48,7 +51,8 @@ class StatusSeeder extends Seeder
                 'editar_servicos'       =>  true,
                 'editar_pecas'          =>  true,
                 'editar_pagamentos'     =>  true,
-                'editar_pedidos'        =>  true
+                'editar_pedidos'        =>  true,
+                'editar_terceirizados'  =>  true,
             ],[
                 'nome'      =>  'Autorizado',
                 'cor'       =>  '#4F4F4F',
@@ -56,7 +60,8 @@ class StatusSeeder extends Seeder
                 'editar_servicos'       =>  true,
                 'editar_pecas'          =>  true,
                 'editar_pagamentos'     =>  true,
-                'editar_pedidos'        =>  true
+                'editar_pedidos'        =>  true,
+                'editar_terceirizados'  =>  true,
             ]
 
 

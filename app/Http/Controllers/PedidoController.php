@@ -48,7 +48,6 @@ class PedidoController extends Controller
         $historico  =   Historico::find(\request()->get('historico_id'));
         try{
             $pedido = Pedido::gravar(\request());
-            $historico  =   Historico::find(\request()->get('historico_id'));
             return redirect()->route('pedido.editar',['id'=>$historico->contrato->id,'historico_id'=>\request()->get('historico_id'),'pedido_id'=>$pedido->id,'tela'=>'dados'])->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
             return redirect()->route('pedido.novo',['id'=>$historico->contrato->id,'historico_id'=>\request()->get('historico_id')])->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);

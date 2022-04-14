@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('editar_pagamentos')->default(false);
             $table->boolean('editar_pecas')->default(false);
             $table->boolean('editar_pedidos')->default(false);
+            $table->boolean('editar_terceirizados')->default(false);
 
 
         });

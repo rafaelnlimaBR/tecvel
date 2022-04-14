@@ -17,6 +17,11 @@ class Historico extends Model
         return $this->belongsTo(Contrato::class,'contrato_id');
     }
 
+    public function terceirizados()
+    {
+        return $this->hasMany(Terceirizados::class,'historico_id');
+    }
+
     public function pagamentos()
     {
         return $this->belongsToMany(Entrada::class,'entrada_historicos','historico_id','entrada_id','')->withTimestamps();

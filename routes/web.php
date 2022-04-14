@@ -27,7 +27,7 @@ Auth::routes();
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('/teste', function (){
-       return Carbon::now()->addDays(90);
+       return \App\Models\Terceirizados::find(1)->fornecedor;
     });
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');
@@ -114,6 +114,18 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/pedido/pagar', [App\Http\Controllers\PedidoController::class, 'pagar'])->name('pedido.pagar');
     Route::post('/pedido/excluir/pagamento', [App\Http\Controllers\PedidoController::class, 'excluirPagamento'])->name('pedido.excluir.pagamento');
     Route::post('/pedido/atualizar/pagamento', [App\Http\Controllers\PedidoController::class, 'atualizarPagamento'])->name('pedido.atualizar.pagamento');
+
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/terceirizado/novo', [App\Http\Controllers\TerceirizadosController::class, 'novo'])->name('terceirizado.novo');
+    Route::post('/terceirizado/cadastrar', [App\Http\Controllers\TerceirizadosController::class, 'cadastrar'])->name('terceirizado.cadastrar');
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/terceirizado/editar/{terceirizado_id}', [App\Http\Controllers\TerceirizadosController::class, 'editar'])->name('terceirizado.editar');
+    Route::post('/terceirizado/atualizar', [App\Http\Controllers\TerceirizadosController::class, 'atualizar'])->name('terceirizado.atualizar');
+    Route::post('/terceirizado/excluir', [App\Http\Controllers\TerceirizadosController::class, 'excluir'])->name('terceirizado.excluir');
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/terceirizado/editar/{terceirizado_id}/pagar', [App\Http\Controllers\TerceirizadosController::class, 'novoPagamento'])->name('terceirizado.novo.pagamento');
+    Route::get('/contrato/editar/{id}/historico/{historico_id}/terceirizado/editar/{terceirizado_id}/editar/pagamento/{saida_id}', [App\Http\Controllers\TerceirizadosController::class, 'editarPagamento'])->name('terceirizado.editar.pagamento');
+    Route::post('/terceirizado/pagar', [App\Http\Controllers\TerceirizadosController::class, 'pagar'])->name('terceirizado.pagar');
+    Route::post('/terceirizado/excluir/pagamento', [App\Http\Controllers\TerceirizadosController::class, 'excluirPagamento'])->name('terceirizado.excluir.pagamento');
+    Route::post('/terceirizado/atualizar/pagamento', [App\Http\Controllers\TerceirizadosController::class, 'atualizarPagamento'])->name('terceirizado.atualizar.pagamento');
+
 
     Route::post('/tipo/pagamentos/taxas', [App\Http\Controllers\TipoPagamentosController::class, 'listarTaxas'])->name('tipospagamentos.listar.taxas');
 
