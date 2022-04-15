@@ -76,6 +76,26 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label>Terceirizações</label>
+                                    {{Form::select('editar_terceirizados', [0=>'Não',1=>'Sim'], (isset($status)?$status->editar_terceirizados:1),['class'=>'form-control'])}}
+
+                                    {{--<input  type="text" class="form-control" id="descricao" name="descricao" placeholder="Descricao" value="{{isset($status)?$status->descricao:''}}">--}}
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label>Comissões</label>
+                                    {{Form::select('editar_comissoes', [0=>'Não',1=>'Sim'], (isset($status)?$status->editar_comissoes:1),['class'=>'form-control'])}}
+
+                                    {{--<input  type="text" class="form-control" id="descricao" name="descricao" placeholder="Descricao" value="{{isset($status)?$status->descricao:''}}">--}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         @if(isset($status))

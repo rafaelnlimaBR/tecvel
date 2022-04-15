@@ -98,6 +98,13 @@ class Contrato extends Model
     public static function excluir($id)
     {
         $contrato        =   Contrato::find($id);
+        foreach ($contrato->historicos as $h){
+            $h->excluirPagamentoEntrada();
+            $h->excluirPagamentosComissao();
+            $h->excluirPagamentosTerceirizado();
+            $h->excluirPagamentosPedido();
+        }
+
         if($contrato->delete() == false){
             throw new \Exception('Não foi possível realizar a exclusão',200);
         }

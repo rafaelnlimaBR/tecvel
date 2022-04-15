@@ -32,14 +32,16 @@ class Status extends Model
 
     public static function gravar(Request $r)
     {
-        $Status        =   new Status();
-        $Status->nome  =   $r->get('nome');
-        $Status->cor    =   $r->get('cor');
-        $Status->habilitado    =   $r->get('habilitado');
-        $Status->editar_servicos=   $r->get('editar_servicos');
-        $Status->editar_pecas=   $r->get('editar_pecas');
-        $Status->editar_pagamentos=   $r->get('editar_pagamentos');
-        $Status->editar_pedidos=   $r->get('editar_pedidos');
+        $Status                         =   new Status();
+        $Status->nome                   =   $r->get('nome');
+        $Status->cor                    =   $r->get('cor');
+        $Status->habilitado             =   $r->get('habilitado');
+        $Status->editar_servicos        =   $r->get('editar_servicos');
+        $Status->editar_pecas           =   $r->get('editar_pecas');
+        $Status->editar_pagamentos      =   $r->get('editar_pagamentos');
+        $Status->editar_pedidos         =   $r->get('editar_pedidos');
+        $Status->editar_comissoes       =   $r->get('editar_comissoes');
+        $Status->editar_terceirizados   =   $r->get('editar_terceirizados');
 
         if($Status->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
@@ -50,13 +52,15 @@ class Status extends Model
     public static function atualizar(Request $r)
     {
         $Status        =   Status::find($r->get('id'));
-        $Status->nome  =   $r->get('nome');
-        $Status->cor    =   $r->get('cor');
-        $Status->habilitado    =   $r->get('habilitado');
-        $Status->editar_servicos=   $r->get('editar_servicos');
-        $Status->editar_pecas=   $r->get('editar_pecas');
-        $Status->editar_pagamentos=   $r->get('editar_pagamentos');
-        $Status->editar_pedidos=   $r->get('editar_pedidos');
+        $Status->nome                   =   $r->get('nome');
+        $Status->cor                    =   $r->get('cor');
+        $Status->habilitado             =   $r->get('habilitado');
+        $Status->editar_servicos        =   $r->get('editar_servicos');
+        $Status->editar_pecas           =   $r->get('editar_pecas');
+        $Status->editar_pagamentos      =   $r->get('editar_pagamentos');
+        $Status->editar_pedidos         =   $r->get('editar_pedidos');
+        $Status->editar_comissoes       =   $r->get('editar_comissoes');
+        $Status->editar_terceirizados   =   $r->get('editar_terceirizados');
 
         if($Status->save() == false){
             throw new \Exception('Não foi possível realizar a atualização',200);

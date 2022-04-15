@@ -62,6 +62,44 @@ class Historico extends Model
         return $this->hasMany(Pedido::class,'historico_id');
     }
 
+    public function excluirPagamentoEntrada()
+    {
+        foreach ($this->pagamentos as $p){
+            $entrada     =   Entrada::find($p->pivot->entrada_id);
+            $entrada->excluir();
+        }
+    }
+
+    public function excluirPagamentosComissao()
+    {
+        foreach ($this->comissoes as $c){
+           foreach ($c->pagamentos as $p){
+               $saida      =   Saida::find($p->pivot->saida_id);
+               $saida->excluir();
+           }
+        }
+    }
+
+    public function excluirPagamentosTerceirizado()
+    {
+        foreach ($this->terceirizados as $c){
+            foreach ($c->pagamentos as $p){
+                $saida      =   Saida::find($p->pivot->saida_id);
+                $saida->excluir();
+            }
+        }
+    }
+
+    public function excluirPagamentosPedido()
+    {
+        foreach ($this->pedidos as $c){
+            foreach ($c->pagamentos as $p){
+                $saida      =   Saida::find($p->pivot->saida_id);
+                $saida->excluir();
+            }
+        }
+    }
+
     public function valorTotalPago()
     {
         return $this->pagamentos->sum('valor');

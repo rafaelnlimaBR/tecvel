@@ -124,6 +124,9 @@
                         </div>
                             @if(isset($contrato))
                                 <button type="submit" class="btn btn-warning">Atualizar</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#excluir-contrato" style="float: right;">
+                                    Excluir
+                                </button>
                             @else
                                 <button type="submit" class="btn btn-primary">Cadastrar</button>
                             @endif
@@ -321,7 +324,36 @@
         </div>
     </div>
 
+@if(isset($contrato))
+    <div class="modal fade" id="excluir-contrato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{route('contrato.excluir')}}" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        {{csrf_field()}}
+                        <input type="hidden" name="id" value="{{$contrato->id}}">
 
+
+
+                    Deseja excluir esse registro?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-danger">Excluir</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+@endif
 
 
 

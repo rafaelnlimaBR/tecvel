@@ -95,9 +95,10 @@ class TerceirizadosController extends Controller
     public function novoPagamento($id,$historico_id,$terceirizado_id)
     {
         $historico      =   Historico::find($historico_id);
-        if($historico == null){
+        $terceirizado   =   Terceirizados::find($terceirizado_id);
+        if($historico == null or $terceirizado == null){
             return redirect()->route('contrato.index')
-                ->with('alerta',['tipo'=>'warning','msg'=>"Histórico não encontrado",'icon'=>'check','titulo'=>"Não permitido"]);
+                ->with('alerta',['tipo'=>'warning','msg'=>"Registro não encontrado",'icon'=>'check','titulo'=>"Não permitido"]);
         }
 
 
@@ -110,7 +111,7 @@ class TerceirizadosController extends Controller
             'modal'             => 0,
             'fk_id'             =>  $terceirizado_id,
             'route'             =>  route('terceirizado.editar',['id'=>$historico->contrato->id,'historico_id'=>$historico->id,'terceirizado_id'=>$terceirizado_id,'tela'=>'pagamentos']),
-            "valor"             =>  0,
+            "valor"             =>  $terceirizado->valor - $terceirizado->pagamentos()->sum('valor'),
             'descricao'         =>  "Pagamento do terceirizado : ".$terceirizado_id,
             'action'            =>  route('terceirizado.pagar'),
         ];

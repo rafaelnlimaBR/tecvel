@@ -106,13 +106,11 @@ class PedidoController extends Controller
     public function novoPagamento($id,$historico_id,$pedido_id)
     {
         $historico      =   Historico::find($historico_id);
-        if($historico == null){
+        $pedido         =   Pedido::find($pedido_id);
+        if($historico == null or $pedido == null){
             return redirect()->route('contrato.index')
-                ->with('alerta',['tipo'=>'warning','msg'=>"Histórico não encontrado",'icon'=>'check','titulo'=>"Não permitido"]);
+                ->with('alerta',['tipo'=>'warning','msg'=>"Registro não encontrado",'icon'=>'check','titulo'=>"Não permitido"]);
         }
-
-
-
 
 
         $dados      =  [
@@ -121,7 +119,7 @@ class PedidoController extends Controller
             'modal'             => 0,
             'fk_id'             =>  $pedido_id,
             'route'             =>  route('pedido.editar',['id'=>$historico->contrato->id,'historico_id'=>$historico->id,'pedido_id'=>$pedido_id,'tela'=>'pagamentos']),
-            "valor"             =>  0,
+            "valor"             =>  $pedido->valorTotalDesconto() - $pedido->pagamentos()->sum('valor'),
             'descricao'         =>  "Pagamento do pedido : ".$pedido_id,
             'action'            =>  route('pedido.pagar'),
         ];

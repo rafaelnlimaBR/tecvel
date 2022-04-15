@@ -100,7 +100,8 @@ class ComissaoController extends Controller
     public function novoPagamento($id,$historico_id,$comissao_id)
     {
         $historico      =   Historico::find($historico_id);
-        if($historico == null){
+        $comissao       =   Comissao::find($comissao_id);
+        if($historico == null or $comissao == null){
             return redirect()->route('contrato.index')
                 ->with('alerta',['tipo'=>'warning','msg'=>"Histórico não encontrado",'icon'=>'check','titulo'=>"Não permitido"]);
         }
@@ -115,7 +116,7 @@ class ComissaoController extends Controller
             'modal'             => 0,
             'fk_id'             =>  $comissao_id,
             'route'             =>  route('comissao.editar',['id'=>$historico->contrato->id,'historico_id'=>$historico->id,'comissao_id'=>$comissao_id,'tela'=>'pagamentos']),
-            "valor"             =>  0,
+            "valor"             =>  $comissao->valor - $comissao->pagamentos()->sum('valor'),
             'descricao'         =>  "Pagamento do comissao : ".$comissao_id,
             'action'            =>  route('comissao.pagar'),
         ];
