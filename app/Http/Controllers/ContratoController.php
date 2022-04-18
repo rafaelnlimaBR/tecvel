@@ -15,11 +15,10 @@ class ContratoController extends Controller
 {
     public function index()
     {
-
         $contratos = Contrato::orderby('id','desc')->paginate(30);;
         $dados      =  [
-            "titulo"    => "Contratos",
-            "titulo_tabela" => "Lista de Contratos"
+            "titulo"            =>  "Contratos",
+            "titulo_tabela"     =>  "Lista de Contratos",
         ];
 
         return view('admin.contratos.index',$dados)->with('contratos',$contratos);
@@ -54,11 +53,18 @@ class ContratoController extends Controller
 
     public function cadastrar()
     {
+//        return request()->all();
         try{
+            $validacao  =   Contrato::validacao(request()->all());
+
+            if($validacao->fails()){
+                return redirect()->route('cliente.novo',['tipo'=>\request()->get('tipo_contrato')])->withErrors($validacao)->withInput();
+            }
+
             $contrato = Contrato::gravar(\request());
             return redirect()->route('contrato.editar',['id'=>$contrato->id,'historico_id'=>$contrato->historicos->last()->id,'tela'=>'dados'])->with('alerta',['tipo'=>'success','msg'=>"Cadastrado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
-            return redirect()->route('contrato.novo',['status'=>\request()->get('tipo_contrato')])->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+            return redirect()->route('contrato.novo',['tipo'=>\request()->get('tipo_contrato')])->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
         }
 
     }
@@ -70,7 +76,8 @@ class ContratoController extends Controller
             "titulo"    => "Contrato",
             "titulo_formulario" =>'Editar',
             "servicos"          =>  Servico::orderby('id','desc'),
-            'conf'              => Configuracao::find(1)
+            'conf'              => Configuracao::find(1),
+
         ];
         $contrato    =      Contrato::find($id);
 

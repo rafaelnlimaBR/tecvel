@@ -5,6 +5,7 @@
         <th>Status</th>
         <th>Tipo</th>
 
+
         <th style="width: 4%">Entrar</th>
     </tr>
     </thead>
@@ -14,6 +15,7 @@
             <td>{{date('d/m/Y H:m', strtotime($s->pivot->data))}}</td>
             <td>{{$s->nome}}</td>
             <td>{{\App\Models\TipoContrato::find($s->pivot->tipo_id)->descricao}}</td>
+
 
             <td><a class="btn btn-primary btn-sm" href="{{route('contrato.editar',['id'=>$contrato->id,'historico_id'=>$s->pivot->id,'tela'=>'historicos'])}}"><i class="fa fa-solid fa-arrow-right fa-sm"></i></a></td>
         </tr>

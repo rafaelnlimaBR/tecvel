@@ -10,14 +10,32 @@ use Illuminate\Http\Request;
 class Contrato extends Model
 {
     use HasFactory;
+    protected $table    =   'contratos';
+
+    private static $restricao = [
+        'cliente'       =>     'required',
+        'veiculo'       =>     'required',
+        'desconto_peca'    =>     'required',
+        'desconto_servico'    =>     'required',
+        'data'          =>     'required',
+    ];
+    private static $mensagem = [
+        'required'    => 'O campo :attribute é obrigado.',
+        'unique'    =>  'Já possui registro com esse :attribute ',
+    ];
+    public static function validacao($dados)
+    {
+        if(array_key_exists('id',$dados)){
+
+        }
+        return \Validator::make($dados,static::$restricao,static::$mensagem);
+    }
 
     public function status()
     {
         return $this->belongsToMany(Status::class,'historicos','contrato_id','status_id')
             ->withPivot('data')
             ->withPivot('obs')
-            ->withPivot('desconto_peca')
-            ->withPivot('desconto_servico')
             ->withPivot('tipo_id')
             ->withPivot('id')
             ->withTimestamps();
@@ -50,6 +68,8 @@ class Contrato extends Model
         $contrato->cliente_id   =   $r->get('cliente');
         $contrato->veiculo_id   =   $r->get('veiculo');
         $contrato->garantia     =   $r->get('garantia');
+        $contrato->desconto_peca=   $r->get('desconto_peca');
+        $contrato->desconto_servico     =   $r->get('desconto_servico');
         $contrato->data_fim_garantia    =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'))->addDays( $r->get('garantia'));
 
 
@@ -68,8 +88,6 @@ class Contrato extends Model
                 'obs'           =>   'Criado em '.\request()->get('data'),
                 'data'          =>  Carbon::createFromFormat('d/m/Y H:i',$r->get('data')),
                 'tipo_id'       => \request()->get('tipo_contrato'),
-                'desconto_peca' =>  0,
-                'desconto_servico'=>    0,
             ]);
 
         return $contrato;
@@ -86,6 +104,8 @@ class Contrato extends Model
         $contrato->cliente_id   =   $r->get('cliente');
         $contrato->veiculo_id   =   $r->get('veiculo');
         $contrato->garantia     =   $r->get('garantia');
+        $contrato->desconto_peca=   $r->get('desconto_peca');
+        $contrato->desconto_servico     =   $r->get('desconto_servico');
 
 
 

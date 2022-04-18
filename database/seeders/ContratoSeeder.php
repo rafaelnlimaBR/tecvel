@@ -26,6 +26,8 @@ class ContratoSeeder extends Seeder
                'garantia'       =>  90,
                'created_at'     =>  Carbon::now(),
                'updated_at'     =>  Carbon::now(),
+               'desconto_peca'  =>  10,
+               'desconto_servico'=> 10
            ],[
                 'cliente_id'     =>  2,
                 'veiculo_id'     =>  1,
@@ -35,6 +37,8 @@ class ContratoSeeder extends Seeder
                 'data'           =>  Carbon::now(),
                 'created_at'     =>  Carbon::now(),
                 'updated_at'     =>  Carbon::now(),
+                'desconto_peca'  =>  10,
+                'desconto_servico'=> 10
             ],
         ]);
     }

@@ -114,14 +114,14 @@ class Historico extends Model
     public function ValorTotalServicosAutorizadoComDesconto()
     {
         $valor_total_servicos_autorizado       =   $this->valorTotalServicoAutorizado();
-        $desconto                           =   $this->desconto_servico;
+        $desconto                           =   $this->contrato->desconto_servico;
         return $valor_total_servicos_autorizado-($valor_total_servicos_autorizado *(($desconto/100)));
     }
 
     public function ValorTotalPecasAutorizadoComDesconto()
     {
         $valor_total_pecas_autorizado       =   $this->valorTotalPecasAutorizado();
-        $desconto                           =   $this->desconto_peca;
+        $desconto                           =   $this->contrato->desconto_peca;
         return $valor_total_pecas_autorizado-($valor_total_pecas_autorizado *(($desconto/100)));
     }
 

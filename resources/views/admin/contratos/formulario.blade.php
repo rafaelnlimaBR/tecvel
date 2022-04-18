@@ -66,7 +66,7 @@
 
                                 <div class="form-group">
                                     <label>Cliente <a class="" data-toggle="modal" data-target="#modalCliente"> Novo</a></label>
-                                    {{ Form::select('cliente', (isset($contrato)?[$contrato->cliente->id=>$contrato->cliente->nome]:[null=>"Selecione um Cliente"]), null ,['class'=>'form-control clientes_select2','required']) }}
+                                    {{ Form::select('cliente', (isset($contrato)?[$contrato->cliente->id=>$contrato->cliente->nome]:[null=>"Selecione um Cliente"]), null ,['class'=>'form-control clientes_select2 ','required']) }}
                                     <input type="hidden" name="tipo_contrato" value="{{isset($tipo_contrato)?$tipo_contrato:''}}">
                                     <input type="hidden" name="contrato_id" value="{{isset($contrato)?$contrato->id:''}}">
                                     <input type="hidden" name="historico_id" value="{{isset($contrato)?$historico->id:''}}">
@@ -106,7 +106,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <div class="form-group">
                                     <label>Garantia</label>
 
@@ -114,11 +114,23 @@
 
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <div class="form-group">
                                     <label>Fim da Garantia</label>
                                     <input type="text" class="form-control " name="fimGarantia"  value="{{isset($contrato)?date('d/m/Y',strtotime($contrato->data_fim_garantia)):""}}"/>
 
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Desconto Peça</label>
+                                    <input type="text" class="form-control " name="desconto_peca"  value="{{isset($contrato)?$contrato->desconto_peca:0}}"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Desconto Serviço</label>
+                                    <input type="text" class="form-control " name="desconto_servico"  value="{{isset($contrato)?$contrato->desconto_servico:0}}"/>
                                 </div>
                             </div>
                         </div>

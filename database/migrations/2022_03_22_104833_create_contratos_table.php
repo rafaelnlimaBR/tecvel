@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('garantia')->nullable();
             $table->integer('cliente_id')->unsigned();
             $table->integer('veiculo_id')->unsigned();
+            $table->integer('desconto_peca')->nullable();
+            $table->integer('desconto_servico')->nullable();
 
             $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
             $table->foreign('veiculo_id')->references('id')->on('veiculos')->onDelete('cascade');
