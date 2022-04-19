@@ -46,8 +46,8 @@
                         <th style="width: 5%">ID</th>
                         <th style="width: 40%">Cliente</th>
                         <th style="width: 20%">Veículo</th>
-                        <th style="width: 20%">Data</th>
-                        <th style="width: 20%">Tipo</th>
+                        <th style="width: 25%">Data</th>
+                        <th style="width: 15%">Tipo</th>
                         <th style="width: 10%">Status</th>
                         <th style="width: 10%">Pagamento</th>
                         <th style="width: 5%">Entrar</th>
@@ -61,7 +61,7 @@
                             <td>{{$c->id}}</td>
                             <td>{{$c->cliente->nome}}</td>
                             <td>{{$c->veiculo->placa}}</td>
-                            <td>{{date('d/m/Y H:m', strtotime($c->data))}}</td>
+                            <td><span style="font-size: 14px">{{date('d/m/Y H:m', strtotime($c->data))}}</span></td>
                             <td>{{$c->historicos->last()->tipo->descricao}}</td>
                             <td><span class="badge" style="background: {{$c->status->last()->cor}}; color: white" >{{$c->status->last()->nome}}</span></td>
                             <td>
