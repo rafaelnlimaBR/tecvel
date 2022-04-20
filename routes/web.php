@@ -19,6 +19,7 @@ use App\Http\Controllers\ClienteController;
 Route::get('/teste', function () {
 
 });
+Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('home');
 
 Auth::routes();
 

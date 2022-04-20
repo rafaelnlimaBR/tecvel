@@ -16,29 +16,16 @@
 
 
             <div class="card-body">
-                <div class="" style="padding-bottom: 10px" >
-                    <form class="form-inline" action="{{route('pedido.index')}}" method="get">
 
-                        {{csrf_field()}}
-                        <div class="input-group input-group-sm" style="width: 350px;">
-
-                            <input type="text" name="descricao" class="form-control float-right col-md-5" style="" placeholder="Descrição">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="tabela">
                     <thead>
                     <tr>
                         <th style="width: 10px">#</th>
                         <th style="width: 20%">Numero do pedido</th>
-                        <th>Fornecedor</th>
-                        <th style="width: 15%">Data do pedido</th>
-                        <th style="width: 40px">Editar</th>
+                        <th style="width: 25%">Fornecedor</th>
+                        <th style="width: 25%">Data do pedido</th>
+                        <th>Pagamento</th>
+                        <th style="width: 5px">Editar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,9 +37,18 @@
                             <td>{{$c->numero_pedido}}</td>
                             <td>{{$c->fornecedor->nome}}</td>
                             <td>{{date('d/m/Y H:m', strtotime($c->data))}}</td>
-
                             <td>
-                                <a href="{{route('pedido.editar',$c->id)}}" class="btn btn-block btn-warning btn-xs">
+
+                                @if($c->pagamentos()->sum('valor') == $c->valorTotalDesconto())
+                                    <span class="badge" style="background: #148f14 ; color: white" >PAGO</span>
+                                @elseif($c->pagamentos()->sum('valor') > $c->valorTotalDesconto())
+                                    <span class="badge" style="background: #3878ab ; color: white" >SUPER</span>
+                                @else
+                                    <span class="badge" style="background: #bb291a ; color: white" >PENDENTE</span>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{route('pedido.editar',['id'=>$c->historico->contrato->id,'historico_id'=>$c->historico->id,'pedido_id'=>$c->id])}}" class="btn btn-block btn-warning btn-xs">
 
                                     <i class="fas fa-edit"></i>
                                 </a>
