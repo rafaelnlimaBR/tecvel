@@ -285,6 +285,12 @@ return [
             'label_color' => 'success',
         ],
         [
+            'text'        => 'Posts',
+            'url'         => "admin/posts",
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
+        [
             'text'        => 'Contratos',
             'url'         => "admin/contratos",
             'icon'        => 'far fa-fw fa-file',
@@ -393,6 +399,22 @@ return [
     */
 
     'plugins' => [
+        'Summernote' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js',
+                ]
+                ,
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css',
+                ],
+            ],
+        ],
         'Moment' => [
             'active' => true,
             'files' => [

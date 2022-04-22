@@ -20,6 +20,7 @@ Route::get('/teste', function () {
 
 });
 Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('home');
+Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('posts');
 
 Auth::routes();
 
@@ -103,6 +104,13 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/fornecedor/atualizar', [App\Http\Controllers\FornecedorController::class, 'atualizar'])->name('fornecedor.atualizar');
     Route::post('/fornecedor/excluir', [App\Http\Controllers\FornecedorController::class, 'excluir'])->name('fornecedor.excluir');
     Route::get('/fornecedor/desconto', [App\Http\Controllers\FornecedorController::class, 'descontoAjax'])->name('fornecedor.descontoAjax');
+
+    Route::get('/posts', [App\Http\Controllers\PostController::class, 'index'])->name('post.index');
+    Route::get('/post/novo', [App\Http\Controllers\PostController::class, 'novo'])->name('post.novo');
+    Route::get('/post/editar/{id}', [App\Http\Controllers\PostController::class, 'editar'])->name('post.editar');
+    Route::post('/post/cadastrar', [App\Http\Controllers\PostController::class, 'cadastrar'])->name('post.cadastrar');
+    Route::post('/post/atualizar', [App\Http\Controllers\PostController::class, 'atualizar'])->name('post.atualizar');
+    Route::post('/post/excluir', [App\Http\Controllers\PostController::class, 'excluir'])->name('post.excluir');
 
     Route::get('/pedidos', [App\Http\Controllers\PedidoController::class, 'index'])->name('pedido.index');
     Route::get('/contrato/editar/{id}/historico/{historico_id}/pedido/novo', [App\Http\Controllers\PedidoController::class, 'novo'])->name('pedido.novo');

@@ -7,6 +7,9 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        $('.editor-texto').summernote({
+            height: 300,
+        });
         $('.mod_ano').mask("00/00",{placeholder: "  /  "});
         $('.telefone').mask("(99)999999999");
 
