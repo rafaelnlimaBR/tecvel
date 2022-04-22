@@ -10,16 +10,21 @@
                 <div class="card-header p-0 pt-1">
                     <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-post" role="tab" aria-controls="custom-tabs-one-post" aria-selected="true">Conteudo</a>
+                            <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "dados"?"active":"":"active"}}" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-post" role="tab" aria-controls="custom-tabs-one-post" aria-selected="true">Conteudo</a>
+                        </li>
+                        @if(isset($post))
+                        <li class="nav-item">
+                            <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "imagens"?"active":"":""}}" id="custom-tabs-one-imagens-tab" data-toggle="pill" href="#custom-tabs-one-imagens" role="tab" aria-controls="custom-tabs-one-imagens" aria-selected="false">Imagens</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-imagens" role="tab" aria-controls="custom-tabs-one-imagens" aria-selected="false">Imagens</a>
+                            <a class="nav-link {{request()->exists('tela')?request()->get('tela') == "comentarios"?"active":"":""}}" id="custom-tabs-one-comentarios-tab" data-toggle="pill" href="#custom-tabs-one-comentarios" role="tab" aria-controls="custom-tabs-one-comentarios" aria-selected="false">Comentarios</a>
                         </li>
+                        @endif
                     </ul>
                 </div>
                 <div class="card-body">
                     <div class="tab-content" id="custom-tabs-one-tabContent">
-                        <div class="tab-pane fade show active" id="custom-tabs-one-post" role="tabpanel" aria-labelledby="custom-tabs-one-post-tab">
+                        <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "dados"?"show active":"":"show active"}}" id="custom-tabs-one-post" role="tabpanel" aria-labelledby="custom-tabs-one-post-tab">
                             <form class="" action="{{isset($post)?route('post.atualizar'):route('post.cadastrar')}}" method="post">
                                     <div class="card-body">
                                         <div class="row">
@@ -75,58 +80,82 @@
                                     </div>
                                 </form>
                         </div>
-                        <div class="tab-pane fade" id="custom-tabs-one-imagens" role="tabpanel" aria-labelledby="custom-tabs-one-imagens-tab">
-
+                        @if(isset($post))
+                        <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "imagens"?"show active":"":""}}" id="custom-tabs-one-imagens" role="tabpanel" aria-labelledby="custom-tabs-one-imagens-tab">
+                          <div class="row">
+                              <a href="{{route('post.imagem.novo',['id'=>$post->id])}}" class="btn btn-primary">Nova Imagem</a>
+                          </div>
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th style="width: 10px">#</th>
+                                    <th style="width: 10px">Seq</th>
                                     <th>Imagen</th>
-                                    <th>Data</th>
-                                    <th style="width: 40px">Excluir</th>
+                                    <th>Título</th>
+                                    <th style="width: 40px">Editar</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Update software</td>
-                                    <td>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-danger">55%</span></td>
-                                </tr>
+                                @foreach($post->imagens as $i)
+                                    <tr>
+                                        <td>{{$i->sequencia}}</td>
+                                        <td><img src="{{url('/imagens/posts/'.$i->img)}}" style="height: 50px" alt="{{$i->alt}}"></td>
+                                        <td>
+                                            {{$i->titulo}}
+                                        </td>
+                                        <td>
+                                            <a href="{{route('post.imagem.editar',['id'=>$post->id,'imagem_id'=>$i->id])}}" class="btn btn-block btn-warning btn-xs">
+
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                @endforeach
+
 
                                 </tbody>
                             </table>
 
                         </div>
+                        <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "comentarios"?"show active":"":""}}" id="custom-tabs-one-comentarios" role="tabpanel" aria-labelledby="custom-tabs-one-comentarios-tab">
+                                <div class="row">
+                                    <a href="{{route('post.imagem.novo',['id'=>$post->id])}}" class="btn btn-primary">Nova Imagem</a>
+                                </div>
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Nome</th>
+                                        <th>Data</th>
+                                        <th style="width: 40px">Editar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($post->comentarios as $i)
+                                        <tr>
+                                            <td>{{$i->id}}</td>
+                                            <td>{{$i->autor->nome}}</td>
+                                            <td>{{$i->data}}</td>
+                                            <td>
+                                                <a href="{{route('post.imagem.editar',['id'=>$post->id,'imagem_id'=>$i->id])}}" class="btn btn-block btn-warning btn-xs">
+
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+
+                                    @endforeach
+
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        @endif
                     </div>
                 </div>
 
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

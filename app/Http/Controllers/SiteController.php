@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -21,6 +22,10 @@ class SiteController extends Controller
 
     public function posts()
     {
-        return view('site.posts.posts');
+        $dados  =   [
+            "titulo"        =>  "",
+            "posts"         =>  Post::all()
+        ];
+        return view('site.posts.posts',$dados);
     }
 }

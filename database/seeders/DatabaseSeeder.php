@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comentario;
 use App\Models\Pedido;
 use App\Models\Taxa;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,7 +19,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            UsuarioSeeder::class,
             ConfiguracaoSeeder::class,
+            ComentarioSeeder::class,
             ClienteSeeder::class,
             VeiculoSeeder::class,
             ServicoSeeder::class,
@@ -36,6 +39,8 @@ class DatabaseSeeder extends Seeder
             TipoPagamentosSeeder::class,
             TaxaSeeder::class,
             SaidaSeeder::class,
+
+            PostSeeder::class,
 
         ]);
     }
