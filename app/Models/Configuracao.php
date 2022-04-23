@@ -32,6 +32,8 @@ class Configuracao extends Model
         $configuracao->nao_autorizado    =   $r->get('nao_autorizado');
         $configuracao->retorno           =   $r->get('retorno');
         $configuracao->autorizado        =   $r->get('autorizado');
+        $configuracao->instagran        =   $r->get('instagran');
+        $configuracao->facebook        =   $r->get('facebook');
 
         if(\request()->hasFile('logo_empresa')){
             if(File::exists(public_path().'/imagens/'.$configuracao->logo)){

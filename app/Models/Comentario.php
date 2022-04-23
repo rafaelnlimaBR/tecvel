@@ -19,4 +19,9 @@ class Comentario extends Model
     {
         return $this->belongsTo(Cliente::class,'cliente_id');
     }
+
+    public function respostas()
+    {
+        return $this->hasMany(RespostasComentarios::class,'comentario_id');
+    }
 }

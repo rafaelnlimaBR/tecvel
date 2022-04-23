@@ -19,11 +19,14 @@ use App\Http\Controllers\ClienteController;
 Route::get('/teste', function () {
     return \App\Models\Post::habilitados(1);
 });
-Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('home');
-Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('posts');
+
+
 
 Auth::routes();
 
+Route::get('/{id}/{titulo}', [App\Http\Controllers\SiteController::class, 'post'])->name('post');
+Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('home');
+Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('posts');
 
 //Route::group(['prefix'=>'admin','middleware'=>'auth:web'],function(){
 Route::group(['prefix'=>'admin'],function(){

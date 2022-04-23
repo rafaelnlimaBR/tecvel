@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('telefone_movel');
             $table->string('email');
             $table->string('logo');
+            $table->string('instagran');
+            $table->string('facebook');
             $table->integer('orcamento')->nullable();
             $table->integer('ordem_servico')->nullable();
             $table->integer('aberto')->nullable();
