@@ -28,7 +28,26 @@ class Post extends Model
         }
         return \Validator::make($dados,static::$restricao,static::$mensagem);
     }
-    
+
+    public function imagens()
+    {
+        return $this->hasMany(Imagens::class,'post_id');
+    }
+
+    public function autor()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class,'post_id');
+    }
+
+    /*public function scopeHabilitados($query,$habilitado)
+    {
+        return $query->where('habilitado','=',$habilitado);
+    }*/
 
     public function gravar(Request $r)
     {

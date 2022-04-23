@@ -41,10 +41,6 @@ class PostController extends Controller
     public function cadastrar()
     {
         try {
-
-            $validacao  =   Post::validacao(request()->all());
-
-
             $validacao  =   Post::validacao(request()->all());
 
             if($validacao->fails()){
@@ -69,7 +65,8 @@ class PostController extends Controller
 
         $dados      =  [
             "titulo"    => "Post",
-            "titulo_formulario" =>'Editar'
+            "titulo_formulario" =>'Editar',
+            'usuarios'          => User::all()
         ];
         $Post    =   Post::find($id);
 
@@ -80,8 +77,9 @@ class PostController extends Controller
     public function atualizar()
     {
         try{
-//            return request();
-            $id = Post::atualizar(\request());
+            $post   =   Post::find(\request('id'));
+            $post->atualizar(\request());
+
             return redirect()->route('post.index')->with('alerta',['tipo'=>'success','msg'=>"Editado com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);
         }catch (\Exception $e){
             return redirect()->route('post.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);

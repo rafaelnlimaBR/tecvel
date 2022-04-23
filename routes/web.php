@@ -17,7 +17,7 @@ use App\Http\Controllers\ClienteController;
 */
 
 Route::get('/teste', function () {
-
+    return \App\Models\Post::habilitados(1);
 });
 Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('home');
 Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('posts');
@@ -111,6 +111,11 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/post/cadastrar', [App\Http\Controllers\PostController::class, 'cadastrar'])->name('post.cadastrar');
     Route::post('/post/atualizar', [App\Http\Controllers\PostController::class, 'atualizar'])->name('post.atualizar');
     Route::post('/post/excluir', [App\Http\Controllers\PostController::class, 'excluir'])->name('post.excluir');
+    Route::get('/post/editar/{id}/imagen/nova', [App\Http\Controllers\ImagemPostController::class, 'novo'])->name('post.imagem.novo');
+    Route::get('/post/editar/{id}/imagen/editar/{imagem_id}', [App\Http\Controllers\ImagemPostController::class, 'editar'])->name('post.imagem.editar');
+    Route::post('/post/editar/cadastrar', [App\Http\Controllers\ImagemPostController::class, 'cadastrar'])->name('post.imagem.cadastrar');
+    Route::post('/post/editar/atualizar', [App\Http\Controllers\ImagemPostController::class, 'atualizar'])->name('post.imagem.atualizar');
+    Route::post('/post/editar/excluir', [App\Http\Controllers\ImagemPostController::class, 'excluir'])->name('post.imagem.excluir');
 
     Route::get('/pedidos', [App\Http\Controllers\PedidoController::class, 'index'])->name('pedido.index');
     Route::get('/contrato/editar/{id}/historico/{historico_id}/pedido/novo', [App\Http\Controllers\PedidoController::class, 'novo'])->name('pedido.novo');
