@@ -21,19 +21,14 @@ Route::get('/teste', function () {
 });
 
 
-
 Auth::routes();
 
-Route::get('/{id}/{titulo}', [App\Http\Controllers\SiteController::class, 'post'])->name('post');
-Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('home');
-Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('posts');
+
+
 
 //Route::group(['prefix'=>'admin','middleware'=>'auth:web'],function(){
 Route::group(['prefix'=>'admin'],function(){
 
-    Route::get('/teste', function (){
-       return \App\Models\Contrato::find(1)->historicos->pagamentos;
-    });
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');
 
@@ -165,3 +160,8 @@ Route::group(['prefix'=>'admin'],function(){
         $view->with(['tipos'=>\App\Models\TipoPagamentos::all()]);
     });
 });
+
+Route::get('/{id}/{titulo}', [App\Http\Controllers\SiteController::class, 'post'])->name('site.postagem');
+Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('site.home');
+Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('site.postagens');
+Route::post('/comentar/postagem', [App\Http\Controllers\SiteController::class, 'comentar'])->name('site.postagem.comentar');

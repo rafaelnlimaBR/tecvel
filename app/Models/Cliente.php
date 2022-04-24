@@ -10,6 +10,7 @@ class Cliente extends Model
 {
     use HasFactory;
     protected $table = "clientes";
+    protected $fillable =   ['email','nome','telefone01'];
     private static $restricao = [
         'email'      =>     'required|unique:clientes',
         'nome'       =>     'required',

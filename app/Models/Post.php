@@ -54,7 +54,7 @@ class Post extends Model
         $post                   =   new Post();
         $post->titulo    =   $r->get('titulo');
         $post->conteudo           =   $r->get('conteudo');
-        $post->user_id      =   $r->get('user_id');
+        $post->user_id      =   $r->get('usuario');
         $post->habilitado            =   $r->get('habilitado');
         $post->data             =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'));
         if($post->save() == false){
@@ -68,7 +68,7 @@ class Post extends Model
         $post                         =   $this;
         $post->titulo    =   $r->get('titulo');
         $post->conteudo           =   $r->get('conteudo');
-        $post->user_id      =   $r->get('user_id');
+        $post->user_id      =   $r->get('usuario');
         $post->habilitado            =   $r->get('habilitado');
         $post->data             =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'));
         if($post->save() == false){

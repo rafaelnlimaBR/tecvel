@@ -116,11 +116,11 @@
                         </div><!-- header end -->
 
                         <div class="entry-content">
-                            <p>{{$p->conteudo}}</p>
+                            <p>1{{$p->conteudo}}</p>
                         </div>
 
                         <div class="post-footer">
-                            <a href="{{route('post',['id'=>$p->id,'titulo'=>str_replace(' ','-',$p->titulo)])}}" class="btn btn-primary">Continuar Lendo</a>
+                            <a href="{{route('site.postagem',['id'=>$p->id,'titulo'=>str_replace(' ','-',$p->titulo)])}}" class="btn btn-primary">Continuar Lendo</a>
                         </div>
 
                     </div><!-- post-body end -->

@@ -12,6 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Construction Html5 Template">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon
   ================================================== -->
@@ -30,10 +31,11 @@
     <link rel="stylesheet" href="{{ asset('vendor/site/plugins/colorbox/colorbox.css') }}">
     <!-- Template styles-->
     <link rel="stylesheet" href="{{ asset('vendor/site/css/style.css') }}">
+    <script src="{{ asset('vendor/jquery/jquery.js') }}"></script>
 </head>
 <body>
 <div class="body-inner">
-
+    @include('site.includes.scripts')
     <div id="top-bar" class="top-bar">
         <div class="container">
             <div class="row">
@@ -317,7 +319,7 @@
 
     <!-- Javascript Files
     ================================================== -->
-    <script src="{{ asset('vendor/site/plugins/jQuery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery/jquery.js') }}"></script>
     <!-- Bootstrap jQuery -->
     <script src="{{ asset('vendor/site/plugins/bootstrap/bootstrap.min.js') }}" defer></script>
     <!-- Slick Carousel -->
@@ -336,6 +338,7 @@
 
     <!-- Template custom -->
     <script src="{{ asset('vendor/site/js/script.js') }}"></script>
+
 </div><!-- Body inner end -->
 </body>
 

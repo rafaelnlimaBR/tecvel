@@ -17,50 +17,28 @@
                             <div class="entry-header">
                                 <div class="post-meta">
                 <span class="post-author">
-                  <i class="far fa-user"></i><a href="#"> Admin</a>
+                  <i class="far fa-user"></i><a href="#"> {{$post->autor->name}}</a>
                 </span>
                                     <span class="post-cat">
                   <i class="far fa-folder-open"></i><a href="#"> News</a>
                 </span>
-                                    <span class="post-meta-date"><i class="far fa-calendar"></i> June 14, 2016</span>
-                                    <span class="post-comment"><i class="far fa-comment"></i> 03<a href="#" class="comments-link">Comments</a></span>
+                                    <span class="post-meta-date"><i class="far fa-calendar"></i>{{date('d/m/Y H:m', strtotime($post->data))}}</span>
+                                    <span class="post-comment"><i class="far fa-comment"></i> {{$post->comentarios->count()}}<a href="#" class="comments-link">Comentários</a></span>
                                 </div>
                                 <h2 class="entry-title">
-                                    We Just Completes $17.6 million Medical Clinic in Mid-Missouri
+                                    {{$post->titulo}}
                                 </h2>
                             </div><!-- header end -->
 
                             <div class="entry-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                    fugiat nulla pariatur.</p>
-
-                                <p>Kucididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit, sed do</p>
-
-                                <p>Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut
-                                    perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. </p>
-
-                                <blockquote>
-                                    <p>Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.<cite>-
-                                            Anger Mathe</cite></p>
-
-                                </blockquote>
-
-                                <p>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
-                                    sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                                    consequuntur magni dolores eos quira tione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-                                    dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
-                                    incidunt ue magnam aliquam quaerat voluptatem.</p>
+                                {{html_entity_decode($post->conteudo)}}
                             </div>
+                            {{--<blockquote>--}}
+                                {{--<p>Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud--}}
+                                    {{--exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.<cite>---}}
+                                        {{--Anger Mathe</cite></p>--}}
 
+                            {{--</blockquote>--}}
                             <div class="tags-area d-flex align-items-center justify-content-between">
                                 <div class="post-tags">
                                     <a href="#">Construction</a>
@@ -95,108 +73,7 @@
                     </div> <!-- Author box end -->--}}
 
                     <!-- Post comment start -->
-                    <div id="comments" class="comments-area">
-                        <h3 class="comments-heading">{{$post->comentarios->count()}} Comentários</h3>
-
-                        <ul class="comments-list">
-                            <li>
-                                @foreach($post->comentarios as $c)
-                                    <div class="comment d-flex">
-                                        {{--<img loading="lazy" class="comment-avatar" alt="author" src="images/news/avator1.png">--}}
-                                        <div class="comment-body">
-                                            <div class="meta-data">
-                                                <span class="comment-author mr-3">{{$c->autor->nome}}</span>
-                                                <span class="comment-date float-right">{{date('d/m/Y H:m', strtotime($c->data))}}</span>
-                                            </div>
-                                            <div class="comment-content">
-                                                <p>{{$c->texto}}</p>
-                                            </div>
-                                            <div class="text-left">
-                                                <a class="comment-reply font-weight-bold" href="#">Reply</a>
-                                            </div>
-                                        </div>
-                                    </div><!-- Comments end -->
-
-                                    @foreach($c->respostas as $r)
-
-                                        <ul class="comments-reply">
-                                            <li>
-                                                <div class="comment d-flex">
-                                                    {{--<img loading="lazy" class="comment-avatar" alt="author" src="images/news/avator2.png">--}}
-                                                    <div class="comment-body">
-                                                        <div class="meta-data">
-                                                            <span class="comment-author mr-3">{{$r->autor->name}}</span>
-                                                            <span class="comment-date float-right">{{date('d/m/Y H:m', strtotime($c->data))}}</span>
-                                                        </div>
-                                                        <div class="comment-content">
-                                                            <p>{{$r->texto}}</p>
-                                                        </div>
-
-                                                    </div>
-                                                </div><!-- Comments end -->
-                                            </li>
-                                        </ul><!-- comments-reply end -->
-                                    @endforeach
-
-                                @endforeach
-
-
-                                <div class="comment d-flex last">
-                                    <img loading="lazy" class="comment-avatar" alt="author" src="images/news/avator3.png">
-                                    <div class="comment-body">
-                                        <div class="meta-data">
-                                            <span class="comment-author mr-3">Genelia Dusteen</span>
-                                            <span class="comment-date float-right">January 17, 2016 at 1:38 pm</span>
-                                        </div>
-                                        <div class="comment-content">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen.</p>
-                                        </div>
-                                        <div class="text-left">
-                                            <a class="comment-reply font-weight-bold" href="#">Reply</a>
-                                        </div>
-                                    </div>
-                                </div><!-- Comments end -->
-                            </li><!-- Comments-list li end -->
-                        </ul><!-- Comments-list ul end -->
-                    </div><!-- Post comment end -->
-
-                    <div class="comments-form border-box">
-                        <h3 class="title-normal">Add a comment</h3>
-
-                        <form role="form">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="message" class="w-100"><textarea class="form-control required-field" id="message" placeholder="Your Comment" rows="10" required=""></textarea></label>
-                                    </div>
-                                </div><!-- Col 12 end -->
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="name" class="w-100"><input class="form-control" name="name" id="name" placeholder="Your Name" type="text" required=""></label>
-                                    </div>
-                                </div><!-- Col 4 end -->
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="email" class="w-100"><input class="form-control" name="email" id="email" placeholder="Your Email" type="email" required=""></label>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="website" class="w-100"><input class="form-control" id="website" placeholder="Your Website" type="text" required=""></label>
-                                    </div>
-                                </div>
-
-                            </div><!-- Form row end -->
-                            <div class="clearfix">
-                                <button class="btn btn-primary" type="submit" aria-label="post-comment">Post Comment</button>
-                            </div>
-                        </form><!-- Form end -->
-                    </div><!-- Comments form end -->
+                    @include('site.posts.comentarios')
                 </div><!-- Content Col end -->
 
                 <div class="col-lg-4">
@@ -287,5 +164,7 @@
 
         </div><!-- Conatiner end -->
     </section>
+
+
 
 @endsection
