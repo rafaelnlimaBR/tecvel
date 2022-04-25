@@ -30,7 +30,7 @@ class Comentario extends Model
 
     public static function gravar(Request $r)
     {
-        $cliente                    =   Cliente::firstOrCreate(['email'=>$r->get('email')],['nome'=>$r->get('nome'),'telefone01'=>$r->get('whatsapp')]);
+        $cliente                    =   Cliente::firstOrCreate(['email'=>strtolower($r->get('email'))],['nome'=>strtoupper($r->get('nome')),'telefone01'=>$r->get('whatsapp')]);
         $comentario                 =   new Comentario();
         $comentario->texto          =   $r->get('comentario');
         $comentario->data           =   Carbon::now();
