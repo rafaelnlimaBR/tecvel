@@ -89,7 +89,8 @@ class PostController extends Controller
     public function excluir()
     {
         try{
-            $id = Post::excluir(\request()->get('id'));
+            $post = Post::find(\request()->get('id'));
+            $post->excluir();
             return redirect()->route('post.index')->with('alerta',['tipo'=>'success','msg'=>"Excluido com sucesso",'icon'=>'check','titulo'=>"Sucesso"]);;
         }catch (\Exception $e){
             return redirect()->route('post.index')->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);

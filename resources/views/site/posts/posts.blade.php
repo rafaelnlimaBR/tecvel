@@ -92,10 +92,11 @@
         <div class="col-lg-8 mb-5 mb-lg-0 order-0 order-lg-1">
             @foreach($posts as $p)
                 <div class="post">
+                    @if($p->imagens->count() != 0)
                     <div class="post-media post-image">
                         <img loading="lazy" src="{{url('imagens/posts/'.$p->imagens->first()->img)}}" class="img-fluid" alt="{{$p->imagens->first()->img}}">
                     </div>
-
+                    @endif
                     <div class="post-body">
                         <div class="entry-header">
                             <div class="post-meta">
@@ -115,11 +116,11 @@
                         </div><!-- header end -->
 
                         <div class="entry-content">
-                            <p>{{$p->conteudo}}</p>
+                            {!! substr($p->conteudo,0,600) !!}...<a style=" color: #0c84ff; text-decoration: underline" href="{{route('site.postagem',['id'=>$p->id,'titulo'=>str_replace(' ','-',$p->titulo)])}}}}">Continuar lendo</a>
                         </div>
 
                         <div class="post-footer">
-                            <a href="news-single.html" class="btn btn-primary">Continuar Lendo</a>
+                            <a   href="{{route('site.postagem',['id'=>$p->id,'titulo'=>str_replace(' ','-',$p->titulo)])}}" class="btn btn-primary">Continuar Lendo</a>
                         </div>
 
                     </div><!-- post-body end -->

@@ -17,7 +17,7 @@
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <label>Título</label>
-                                    <input  type="text" class="form-control @error('titulo') is-invalid @enderror" id="titulo" name="titulo" placeholder="Título" value="{{isset($imagem)?$imagem->titulo:'awd'}}" >
+                                    <input  type="text" class="form-control @error('titulo') is-invalid @enderror" id="titulo" name="titulo" placeholder="Título" value="{{isset($imagem)?$imagem->titulo:''}}" >
                                     <input type="hidden" value="{{$post}}" name="post_id">
                                 </div>
                             </div>
@@ -25,14 +25,14 @@
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <label>Alt</label>
-                                    <input  type="text" class="form-control @error('alt') is-invalid @enderror"  name="alt" placeholder="Alt" value="{{isset($imagem)?$imagem->alt:'awd'}}">
+                                    <input  type="text" class="form-control @error('alt') is-invalid @enderror"  name="alt" placeholder="Alt" value="{{isset($imagem)?$imagem->alt:''}}">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <label>Descrição</label>
-                                <textarea type="number" name="descricao" class="form-control " placeholder="Descrição" value="{{isset($imagem)?$imagem->descricao:'adw'}}"></textarea>
+                                <textarea type="number" name="descricao" class="form-control " placeholder="Descrição" value="">{{isset($imagem)?$imagem->descricao:''}}</textarea>
                             </div>
                         </div>
                         <div class="row">

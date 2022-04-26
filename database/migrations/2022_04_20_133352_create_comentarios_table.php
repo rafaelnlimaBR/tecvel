@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('comentarios', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->timestamps();
-            $table->string('texto');
+            $table->text('texto');
             $table->dateTime('data');
             $table->boolean('habilitado')->default(0);
             $table->integer('cliente_id')->unsigned();

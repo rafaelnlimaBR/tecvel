@@ -74,6 +74,24 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Instagran</label>
+                                            <input type="text" class="form-control" name="instagran" value="{{$conf->instagran}}" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Facebook</label>
+                                            <input type="text" class="form-control" name="facebook"  value="{{$conf->facebook}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <div class="form-group">

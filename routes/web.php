@@ -19,18 +19,16 @@ use App\Http\Controllers\ClienteController;
 Route::get('/teste', function () {
     return \App\Models\Post::habilitados(1);
 });
-Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('home');
-Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('posts');
+
 
 Auth::routes();
+
+
 
 
 //Route::group(['prefix'=>'admin','middleware'=>'auth:web'],function(){
 Route::group(['prefix'=>'admin'],function(){
 
-    Route::get('/teste', function (){
-       return \App\Models\Contrato::find(1)->historicos->pagamentos;
-    });
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');
 
@@ -117,6 +115,14 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/post/editar/atualizar', [App\Http\Controllers\ImagemPostController::class, 'atualizar'])->name('post.imagem.atualizar');
     Route::post('/post/editar/excluir', [App\Http\Controllers\ImagemPostController::class, 'excluir'])->name('post.imagem.excluir');
 
+    Route::get('/comentario/editar/{id}', [App\Http\Controllers\ComentarioController::class, 'editar'])->name('comentario.editar');
+    Route::post('/comentario/atualizar', [App\Http\Controllers\ComentarioController::class, 'atualizar'])->name('comentario.atualizar');
+    Route::post('/responder/comentario', [App\Http\Controllers\RespostaController::class, 'gravar'])->name('comentario.resposta.gravar');
+    Route::post('/atualizar/resposta/comentario', [App\Http\Controllers\RespostaController::class, 'atualizar'])->name('comentario.resposta.atualizar');
+    Route::post('/excluir/resposta/comentario', [App\Http\Controllers\RespostaController::class, 'excluir'])->name('comentario.resposta.excluir');
+    Route::get('/comentario/editar/{id}/responder', [App\Http\Controllers\RespostaController::class, 'novo'])->name('comentario.editar.responder');
+    Route::get('/comentario/editar/{id}/editar/resposta/{resposta_id}', [App\Http\Controllers\RespostaController::class, 'editar'])->name('comentario.responder.editar');
+
     Route::get('/pedidos', [App\Http\Controllers\PedidoController::class, 'index'])->name('pedido.index');
     Route::get('/contrato/editar/{id}/historico/{historico_id}/pedido/novo', [App\Http\Controllers\PedidoController::class, 'novo'])->name('pedido.novo');
     Route::get('/contrato/editar/{id}/historico/{historico_id}/pedido/editar/{pedido_id}', [App\Http\Controllers\PedidoController::class, 'editar'])->name('pedido.editar');
@@ -162,3 +168,8 @@ Route::group(['prefix'=>'admin'],function(){
         $view->with(['tipos'=>\App\Models\TipoPagamentos::all()]);
     });
 });
+
+Route::get('/{id}/{titulo}', [App\Http\Controllers\SiteController::class, 'post'])->name('site.postagem');
+Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('site.home');
+Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('site.postagens');
+Route::post('/comentar/postagem', [App\Http\Controllers\SiteController::class, 'comentar'])->name('site.postagem.comentar');
