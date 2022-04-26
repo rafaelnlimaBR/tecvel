@@ -59,7 +59,7 @@ class SiteController extends Controller
             $postagem       =   Post::find(\request('post_id'));
 
             $id = Comentario::gravar(\request());
-            return response()->json(['comentarios'=>view('site.posts.comentarios')->with('post',$postagem)->with('alerta',['Comentário adicionado com sucesso'])->render()]);
+            return response()->json(['comentarios'=>view('site.posts.comentarios')->with('dados', Configuracao::find(1))->with('post',$postagem)->with('alerta',['Comentário adicionado com sucesso'])->render()]);
         }catch (\Exception $e){
             return response()->json(['erro'=>'Error: '.$e->getMessage()]);
         }
