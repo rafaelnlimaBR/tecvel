@@ -28,6 +28,11 @@ class Comentario extends Model
         return $this->hasMany(RespostasComentarios::class,'comentario_id');
     }
 
+    public function scopeHabilitados($query,$habilitado)
+    {
+        return $query->where('habilitado',1);
+    }
+
     public static function gravar(Request $r)
     {
         $cliente                    =   Cliente::firstOrCreate(['email'=>strtolower($r->get('email'))],['nome'=>strtoupper($r->get('nome')),'telefone01'=>$r->get('whatsapp')]);
@@ -37,6 +42,20 @@ class Comentario extends Model
         $comentario->habilitado     =   1;
         $comentario->post_id        =   $r->get('post_id');
         $comentario->cliente_id     =   $cliente->id;
+
+        if($comentario->save() == false){
+            throw new \Exception('Não foi possível realizar o registro',200);
+        }
+        return $comentario->id;
+    }
+
+    public function atualizar(Request $r)
+    {
+        $comentario                 =   $this;
+        $comentario->texto          =   $r->get('texto');
+        $comentario->data           =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'));
+        $comentario->habilitado     =   $r->get('habilitado');
+        $comentario->cliente_id     =   $r->get('cliente_id');
 
         if($comentario->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);

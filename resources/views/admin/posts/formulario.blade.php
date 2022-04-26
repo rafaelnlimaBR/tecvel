@@ -122,9 +122,10 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th style="width: 10px">#</th>
+                                        <th style="width: 5%">#</th>
                                         <th>Nome</th>
                                         <th>Data</th>
+                                        <th style="width: 10%">Habilitado</th>
                                         <th style="width: 40px">Editar</th>
                                     </tr>
                                     </thead>
@@ -135,7 +136,14 @@
                                             <td>{{$i->autor->nome}}</td>
                                             <td>{{$i->data}}</td>
                                             <td>
-                                                <a href="{{route('post.imagem.editar',['id'=>$post->id,'imagem_id'=>$i->id])}}" class="btn btn-block btn-warning btn-xs">
+                                            @if($i->habilitado == 1)
+                                                <span class='badge' style='background: green ; color: white' >Sim</span>
+                                            @else
+                                                <span class='badge' style='background: red ; color: white' >Não</span>
+                                            @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{route('comentario.editar',['id'=>$i->id])}}" class="btn btn-block btn-warning btn-xs">
 
                                                     <i class="fas fa-edit"></i>
                                                 </a>
