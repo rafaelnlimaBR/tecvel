@@ -9,11 +9,18 @@
                 <div class="col-lg-8 mb-5 mb-lg-0">
 
                     <div class="post-content post-single">
+<<<<<<< HEAD
                         @if($post->imagens->count() != 0)
                         <div class="post-media post-image">
                             <img loading="lazy" src="{{url('imagens/posts/'.$post->imagens->first()->img)}}" class="img-fluid" alt="post-image">
                         </div>
                         @endif
+=======
+                        <div class="post-media post-image">
+                            <img loading="lazy" src="{{url('imagens/posts/'.$post->imagens->first()->img)}}" class="img-fluid" alt="post-image">
+                        </div>
+
+>>>>>>> 08d4005608bc4d4a319875884628f64f64af0f11
                         <div class="post-body">
                             <div class="entry-header">
                                 <div class="post-meta">
@@ -32,7 +39,11 @@
                             </div><!-- header end -->
 
                             <div class="entry-content">
+<<<<<<< HEAD
                                 {!!$post->conteudo!!}
+=======
+                                {{html_entity_decode($post->conteudo)}}
+>>>>>>> 08d4005608bc4d4a319875884628f64f64af0f11
                             </div>
                             {{--<blockquote>--}}
                                 {{--<p>Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud--}}

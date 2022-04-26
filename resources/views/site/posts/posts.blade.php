@@ -116,11 +116,19 @@
                         </div><!-- header end -->
 
                         <div class="entry-content">
+<<<<<<< HEAD
                             {!! substr($p->conteudo,0,600) !!}...<a style=" color: #0c84ff; text-decoration: underline" href="{{route('site.postagem',['id'=>$p->id,'titulo'=>str_replace(' ','-',$p->titulo)])}}}}">Continuar lendo</a>
                         </div>
 
                         <div class="post-footer">
                             <a   href="{{route('site.postagem',['id'=>$p->id,'titulo'=>str_replace(' ','-',$p->titulo)])}}" class="btn btn-primary">Continuar Lendo</a>
+=======
+                            <p>1{{$p->conteudo}}</p>
+                        </div>
+
+                        <div class="post-footer">
+                            <a href="{{route('site.postagem',['id'=>$p->id,'titulo'=>str_replace(' ','-',$p->titulo)])}}" class="btn btn-primary">Continuar Lendo</a>
+>>>>>>> 08d4005608bc4d4a319875884628f64f64af0f11
                         </div>
 
                     </div><!-- post-body end -->
