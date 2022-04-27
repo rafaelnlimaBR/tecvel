@@ -10,24 +10,25 @@
                 <input type="hidden" name="post_id" value="{{$post->id}}">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="message" class="w-100"><textarea class="form-control required-field" id="message" placeholder="Seu Comentario" rows="10" name="comentario"></textarea></label>
+                        <label for="message" class="w-100">
+                            <textarea class="form-control required-field @error('comentario') is-invalid @enderror" id="message" placeholder="Seu Comentario" rows="10" name="comentario"></textarea></label>
                     </div>
                 </div><!-- Col 12 end -->
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="name"  class="w-100"><input class="form-control" name="nome" id="name" placeholder="Nome Completo" type="text"  required></label>
+                        <label for="name"  class="w-100"><input class="form-control @error('nome') is-invalid @enderror" name="nome" id="name" placeholder="Nome Completo" type="text"  ></label>
                     </div>
                 </div><!-- Col 4 end -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="name"  class="w-100"><input class="form-control" name="whatsapp" placeholder="Whatsapp" type="text"  required ></label>
+                        <label for="name"  class="w-100"><input class="form-control @error('whatsapp') is-invalid @enderror" name="whatsapp" placeholder="Whatsapp" type="text"   ></label>
                     </div>
                 </div><!-- Col 4 end -->
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="email" class="w-100"><input class="form-control" name="email" id="email" placeholder="Seu Email" type="text" requiredp></label>
+                        <label for="email" class="w-100"><input class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Seu Email" type="text"></label>
                     </div>
                 </div>
 

@@ -13,6 +13,22 @@ class Comentario extends Model
     use HasFactory;
     protected $table    =   'comentarios';
 
+    private static $restricao = [
+        'email'      =>     'required',
+        'nome'       =>     'required',
+        'whatsapp' =>     'required',
+        'comentario' =>     'required',
+    ];
+    private static $mensagem = [
+        'required'    => 'O campo :attribute é obrigado.',
+        'unique'    =>  'Já possui registro com esse :attribute ',
+    ];
+    public static function validacao($dados)
+    {
+        return \Validator::make($dados,static::$restricao,static::$mensagem);
+    }
+
+
     public function post()
     {
         return $this->belongsTo(Post::class,'post_id');

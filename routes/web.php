@@ -175,8 +175,9 @@ Route::group(['prefix'=>'admin'],function(){
     });
 });
 
-Route::get('/{id}/{titulo}', [App\Http\Controllers\SiteController::class, 'post'])->name('site.postagem');
+Route::get('/{titulo}/{id}', [App\Http\Controllers\SiteController::class, 'post'])->name('site.postagem');
 Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('site.home');
 Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('site.postagens');
+Route::get('/categoria/{nome}/{id}', [App\Http\Controllers\SiteController::class, 'categoria'])->name('site.categoria');
 Route::post('/comentar/postagem', [App\Http\Controllers\SiteController::class, 'comentar'])->name('site.postagem.comentar');
 

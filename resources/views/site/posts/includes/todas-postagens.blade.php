@@ -29,13 +29,13 @@
 
                 <div class="entry-content">
 
-                    {!! substr($p->conteudo,0,500) !!}...<a style=" color: #0c84ff; text-decoration: underline" href="{{route('site.postagem',['id'=>$p->id,'titulo'=>str_replace(' ','-',$p->titulo)])}}">Continuar lendo</a>
+                    {!! substr($p->conteudo,0,500) !!}...<a style=" color: #0c84ff; text-decoration: underline" href="{{route('site.postagem',['titulo'=>strtolower(str_replace(' ','-',$p->titulo)),'id'=>$p->id])}}">Continuar lendo</a>
                 </div>
 
 
 
                 <div class="post-footer">
-                    <a href="{{route('site.postagem',['id'=>$p->id,'titulo'=>str_replace(' ','-',$p->titulo)])}}" class="btn btn-primary">Continuar Lendo</a>
+                    <a href="{{route('site.postagem',['titulo'=>strtolower(str_replace(' ','-',$p->titulo)),'id'=>$p->id])}}" class="btn btn-primary">Continuar Lendo</a>
 
                 </div>
 

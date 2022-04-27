@@ -7,15 +7,6 @@
         <div class="col-lg-8 mb-5 mb-lg-0">
             @yield('postagem')
 
-            <nav class="paging" aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-left"></i></a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-right"></i></a></li>
-                </ul>
-            </nav>
 
         </div><!-- Content Col end -->
 
@@ -27,9 +18,11 @@
                     <ul class="list-unstyled">
                         @foreach($postagem_recentes as  $p)
                             <li class="d-flex align-items-center">
+                                @if($p->imagens->count() != 0)
                                 <div class="posts-thumb">
-                                    <a href="#"><img loading="lazy" alt="img" src="images/news/news1.jpg"></a>
+                                    <a href="{{route('site.postagem',['titulo'=>strtolower(str_replace(' ','-',$p->titulo)),'id'=>$p->id])}}"><img loading="lazy" alt="img" src="{{url('imagens/posts/'.$p->imagens->first()->img)}}"></a>
                                 </div>
+                                @endif
                                 <div class="post-info">
                                     <h4 class="entry-title">
                                         <a href="#">{{$p->titulo}}</a>
@@ -46,7 +39,7 @@
                     <h3 class="widget-title">Categorias</h3>
                     <ul class="arrow nav nav-tabs">
                         @foreach($categorias as $c)
-                            <li><a href="#">{{$c->nome}}</a></li>
+                            <li><a href="{{route('site.categoria',['nome'=>strtolower(str_replace(" ","-",$c->nome)),'id'=>$c->id])}}">{{$c->nome}}</a></li>
                         @endforeach
                     </ul>
                 </div><!-- Categories end -->

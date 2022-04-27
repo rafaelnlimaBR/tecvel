@@ -44,15 +44,6 @@
                 <a href="#">Safety</a>
                 <a href="#">Planning</a>
             </div>
-            <div class="share-items">
-                <ul class="post-social-icons list-unstyled">
-                    <li class="social-icons-head">Share:</li>
-                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
-                    <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                </ul>
-            </div>
         </div>
 
     </div><!-- post-body end -->

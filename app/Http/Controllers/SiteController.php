@@ -39,18 +39,18 @@ class SiteController extends Controller
         return view('site.posts.includes.todas-postagens',$dados);
     }
 
-    public function post($id,$titulo)
+    public function post($titulo,$id)
     {
         $post   =   Post::find($id);
         if($post == null){
-            return redirect()->route('site.posts');
+            return redirect()->route('site.postagens');
         }else{
             $post->adicionarVisita();
         }
 
 
         $dados  =   [
-            "titulo"        =>  "Tecvel - Postagens",
+            "titulo"        =>  "Tecvel - ".$post->titulo,
             "post"          =>  $post,
             "posts"         =>  Post::orderBy('data', 'desc'),
             'dados'         =>  Configuracao::find(1),
@@ -62,14 +62,37 @@ class SiteController extends Controller
 
     public function comentar()
     {
-        $postagem   =   0;
+        $validacao  =   Comentario::validacao(request()->all());
+
+        $postagem       =   Post::find(\request('post_id'));
+
+        if($validacao->fails()){
+            return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('dados',Configuracao::find(1))->with('post',$postagem)->withErrors($validacao)->render()]);
+        }
         try{
-            $postagem       =   Post::find(\request('post_id'));
 
             $id = Comentario::gravar(\request());
             return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('dados', Configuracao::find(1))->with('post',$postagem)->with('alerta',['Comentário adicionado com sucesso'])->render()]);
         }catch (\Exception $e){
             return response()->json(['erro'=>'Error: '.$e->getMessage()]);
         }
+    }
+
+    public function categoria($nome,$id)
+    {
+        $categoria   =   Categoria::find($id);
+
+        if($categoria == null){
+            return redirect()->route('site.postagens');
+        }
+        $dados  =   [
+            "titulo"        =>  "Tecvel - ".$categoria->nome,
+            "posts"         =>  $categoria->posts(),
+            'dados'         =>  Configuracao::find(1),
+            'categorias'    =>  Categoria::all(),
+            'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get()
+        ];
+        return view('site.posts.includes.todas-postagens',$dados);
+
     }
 }
