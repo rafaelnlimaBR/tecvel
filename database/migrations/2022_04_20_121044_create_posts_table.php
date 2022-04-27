@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('conteudo');
             $table->dateTime('data');
             $table->boolean('habilitado')->default(0);
+            $table->bigInteger('visitas')->default(0)->nullable();
             $table->integer('user_id')->nullable()->unsigned();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');

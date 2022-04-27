@@ -2,73 +2,55 @@
 
 @section('conteudo')
 
-
     <div class="row">
 
-        <div class="col-lg-4 order-1 order-lg-0">
+        <div class="col-lg-8 mb-5 mb-lg-0">
+            @yield('postagem')
 
-            <div class="sidebar sidebar-left">
+            <nav class="paging" aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-left"></i></a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-right"></i></a></li>
+                </ul>
+            </nav>
+
+        </div><!-- Content Col end -->
+
+        <div class="col-lg-4">
+
+            <div class="sidebar sidebar-right">
                 <div class="widget recent-posts">
-                    <h3 class="widget-title">Recent Posts</h3>
+                    <h3 class="widget-title">Postagens Recentes</h3>
                     <ul class="list-unstyled">
-                        <li class="d-flex align-items-center">
-                            <div class="posts-thumb">
-                                <a href="#"><img loading="lazy" alt="img" src="images/news/news1.jpg"></a>
-                            </div>
-                            <div class="post-info">
-                                <h4 class="entry-title">
-                                    <a href="#">We Just Completes $17.6 Million Medical Clinic In Mid-missouri</a>
-                                </h4>
-                            </div>
-                        </li><!-- 1st post end-->
-
-                        <li class="d-flex align-items-center">
-                            <div class="posts-thumb">
-                                <a href="#"><img loading="lazy" alt="img" src="images/news/news2.jpg"></a>
-                            </div>
-                            <div class="post-info">
-                                <h4 class="entry-title">
-                                    <a href="#">Thandler Airport Water Reclamation Facility Expansion Project Named</a>
-                                </h4>
-                            </div>
-                        </li><!-- 2nd post end-->
-
-                        <li class="d-flex align-items-center">
-                            <div class="posts-thumb">
-                                <a href="#"><img loading="lazy" alt="img" src="images/news/news3.jpg"></a>
-                            </div>
-                            <div class="post-info">
-                                <h4 class="entry-title">
-                                    <a href="#">Silicon Bench And Cornike Begin Construction Solar Facilities</a>
-                                </h4>
-                            </div>
-                        </li><!-- 3rd post end-->
+                        @foreach($postagem_recentes as  $p)
+                            <li class="d-flex align-items-center">
+                                <div class="posts-thumb">
+                                    <a href="#"><img loading="lazy" alt="img" src="images/news/news1.jpg"></a>
+                                </div>
+                                <div class="post-info">
+                                    <h4 class="entry-title">
+                                        <a href="#">{{$p->titulo}}</a>
+                                    </h4>
+                                </div>
+                            </li><!-- 1st post end-->
+                        @endforeach
 
                     </ul>
 
                 </div><!-- Recent post end -->
 
                 <div class="widget">
-                    <h3 class="widget-title">Categories</h3>
+                    <h3 class="widget-title">Categorias</h3>
                     <ul class="arrow nav nav-tabs">
-                        <li><a href="#">Construction</a></li>
-                        <li><a href="#">Commercial</a></li>
-                        <li><a href="#">Building</a></li>
-                        <li><a href="#">Safety</a></li>
-                        <li><a href="#">Structure</a></li>
+                        @foreach($categorias as $c)
+                            <li><a href="#">{{$c->nome}}</a></li>
+                        @endforeach
                     </ul>
                 </div><!-- Categories end -->
 
-                <div class="widget">
-                    <h3 class="widget-title">Archives </h3>
-                    <ul class="arrow nav nav-tabs">
-                        <li><a href="#">Feburay 2016</a></li>
-                        <li><a href="#">January 2016</a></li>
-                        <li><a href="#">December 2015</a></li>
-                        <li><a href="#">November 2015</a></li>
-                        <li><a href="#">October 2015</a></li>
-                    </ul>
-                </div><!-- Archives end -->
 
                 <div class="widget widget-tags">
                     <h3 class="widget-title">Tags </h3>
@@ -89,65 +71,8 @@
             </div><!-- Sidebar end -->
         </div><!-- Sidebar Col end -->
 
-        <div class="col-lg-8 mb-5 mb-lg-0 order-0 order-lg-1">
-            @foreach($posts as $p)
-                <div class="post">
-                    @if($p->imagens->count() != 0)
-                    <div class="post-media post-image">
-                        <img loading="lazy" src="{{url('imagens/posts/'.$p->imagens->first()->img)}}" class="img-fluid" alt="{{$p->imagens->first()->img}}">
-                    </div>
-                    @endif
-                    <div class="post-body">
-                        <div class="entry-header">
-                            <div class="post-meta">
-                <span class="post-author">
-                  <i class="far fa-user"></i><a href="#"> {{$p->autor->name}}</a>
-                </span>
-                                <span class="post-cat">
-                  <i class="far fa-folder-open"></i><a href="#"> News</a>
-                </span>
-                                <span class="post-meta-date"><i class="far fa-calendar"></i> {{date('d/m/Y H:m', strtotime($p->data))}}</span>
-                                <span class="post-comment"><i class="far fa-comment"></i> {{$p->comentarios->count()}}<a href="#"
-                                                                                               class="comments-link">Comentarios</a></span>
-                            </div>
-                            <h2 class="entry-title">
-                                <a href="news-single.html">{{$p->titulo}}</a>
-                            </h2>
-                        </div><!-- header end -->
+    </div>
 
-                        <div class="entry-content">
-<<<<<<< HEAD
-                            {!! substr($p->conteudo,0,600) !!}...<a style=" color: #0c84ff; text-decoration: underline" href="{{route('site.postagem',['id'=>$p->id,'titulo'=>str_replace(' ','-',$p->titulo)])}}}}">Continuar lendo</a>
-                        </div>
-
-                        <div class="post-footer">
-                            <a   href="{{route('site.postagem',['id'=>$p->id,'titulo'=>str_replace(' ','-',$p->titulo)])}}" class="btn btn-primary">Continuar Lendo</a>
-=======
-                            <p>1{{$p->conteudo}}</p>
-                        </div>
-
-                        <div class="post-footer">
-                            <a href="{{route('site.postagem',['id'=>$p->id,'titulo'=>str_replace(' ','-',$p->titulo)])}}" class="btn btn-primary">Continuar Lendo</a>
->>>>>>> 08d4005608bc4d4a319875884628f64f64af0f11
-                        </div>
-
-                    </div><!-- post-body end -->
-                </div>
-            @endforeach
-
-            <nav class="paging" aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-left"></i></a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-right"></i></a></li>
-                </ul>
-            </nav>
-
-        </div><!-- Content Col end -->
-
-    </div><!-- Main row end -->
 
 
 @endsection

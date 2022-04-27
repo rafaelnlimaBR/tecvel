@@ -34,6 +34,13 @@ class Post extends Model
         return $this->hasMany(Imagens::class,'post_id');
     }
 
+    public function categorias()
+    {
+        return $this->belongsToMany(Categoria::class,'post_categoria','post_id','categoria_id')
+            ->withPivot('categoria_id')
+            ->withPivot('post_id');
+    }
+
     public function autor()
     {
         return $this->belongsTo(User::class,'user_id');
@@ -49,6 +56,15 @@ class Post extends Model
         return $query->where('habilitado','=',$habilitado);
     }*/
 
+    public function adicionarVisita()
+    {
+        $post       =   $this;
+        $post->visitas  += 1;
+        if($post->save() == false){
+            throw new \Exception('Não foi possível adicionar visita',200);
+        }
+    }
+
     public function gravar(Request $r)
     {
         $post                   =   new Post();
@@ -60,6 +76,7 @@ class Post extends Model
         if($post->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
+        $post->categorias()->attach(1);
         return $post;
     }
 
@@ -74,6 +91,7 @@ class Post extends Model
         if($post->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
+        $post->categorias()->sync(\request('categorias'));
         return $post;
     }
 

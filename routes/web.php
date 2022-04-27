@@ -146,7 +146,13 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/terceirizado/excluir/pagamento', [App\Http\Controllers\TerceirizadosController::class, 'excluirPagamento'])->name('terceirizado.excluir.pagamento');
     Route::post('/terceirizado/atualizar/pagamento', [App\Http\Controllers\TerceirizadosController::class, 'atualizarPagamento'])->name('terceirizado.atualizar.pagamento');
 
-
+    Route::get('/categorias', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categoria.index');
+    Route::get('/categoria/novo', [App\Http\Controllers\CategoriaController::class, 'novo'])->name('categoria.novo');
+    Route::get('/categoria/editar/{id}', [App\Http\Controllers\CategoriaController::class, 'editar'])->name('categoria.editar');
+    Route::post('/categoria/cadastrar', [App\Http\Controllers\CategoriaController::class, 'cadastrar'])->name('categoria.cadastrar');
+    Route::post('/categoria/atualizar', [App\Http\Controllers\CategoriaController::class, 'atualizar'])->name('categoria.atualizar');
+    Route::post('/categoria/excluir', [App\Http\Controllers\CategoriaController::class, 'excluir'])->name('categoria.excluir');
+    
     Route::get('/contrato/editar/{id}/historico/{historico_id}/comissao/novo', [App\Http\Controllers\ComissaoController::class, 'novo'])->name('comissao.novo');
     Route::post('/comissao/cadastrar', [App\Http\Controllers\ComissaoController::class, 'cadastrar'])->name('comissao.cadastrar');
     Route::get('/contrato/editar/{id}/historico/{historico_id}/comissao/editar/{comissao_id}', [App\Http\Controllers\ComissaoController::class, 'editar'])->name('comissao.editar');
@@ -173,3 +179,4 @@ Route::get('/{id}/{titulo}', [App\Http\Controllers\SiteController::class, 'post'
 Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('site.home');
 Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('site.postagens');
 Route::post('/comentar/postagem', [App\Http\Controllers\SiteController::class, 'comentar'])->name('site.postagem.comentar');
+

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -31,7 +32,8 @@ class PostController extends Controller
         $dados      =  [
             "titulo"    => "Postagens",
             "titulo_formulario" =>'Novo',
-            "usuarios"          =>User::all()
+            "usuarios"          =>  User::all(),
+            "categorias"        =>  Categoria::all()
         ];
 
         return view('admin.posts.formulario',$dados);
@@ -66,7 +68,9 @@ class PostController extends Controller
         $dados      =  [
             "titulo"    => "Post",
             "titulo_formulario" =>'Editar',
-            'usuarios'          => User::all()
+            'usuarios'          => User::all(),
+            "categorias"        =>  Categoria::all(),
+
         ];
         $Post    =   Post::find($id);
 
@@ -76,6 +80,7 @@ class PostController extends Controller
 
     public function atualizar()
     {
+
         try{
             $post   =   Post::find(\request('id'));
             $post->atualizar(\request());

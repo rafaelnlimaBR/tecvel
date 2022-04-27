@@ -78,11 +78,11 @@
 
                         @endif
 
-<<<<<<< HEAD
+
                             <a href="{{route('comentario.editar',['id'=>$comentario->id])}}" class="btn btn-default" style="float: right">Voltar </a>
-=======
-                            <a href="{{route('comentario.editar',['id'=>$comentario->post->id,'tela'=>'comentarios'])}}" class="btn btn-default" style="float: right">Voltar </a>
->>>>>>> 08d4005608bc4d4a319875884628f64f64af0f11
+
+
+
                     </div>
                 </form>
             </div>

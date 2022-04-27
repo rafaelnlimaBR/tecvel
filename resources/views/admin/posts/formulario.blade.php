@@ -28,13 +28,16 @@
                             <form class="" action="{{isset($post)?route('post.atualizar'):route('post.cadastrar')}}" method="post">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-12">
                                                 {{csrf_field()}}
                                                 <div class="form-group">
                                                     <label>Título</label>
                                                     <input  type="text" class="form-control @error('titulo') is-invalid @enderror" id="titulo" name="titulo" placeholder="Título" value="{{isset($post)?$post->titulo:''}}">
                                                 </div>
                                             </div>
+
+                                        </div>
+                                        <div class="row">
                                             <div class="col-sm-2">
                                                 <label>Data</label>
                                                 <div class="input-group date dataTempo @error('data') is-invalid @enderror" id="dataTempo" data-target-input="nearest">
@@ -52,6 +55,10 @@
                                             <div class="col-sm-2">
                                                 <label>Autor</label>
                                                 {{ Form::select('usuario', $usuarios->pluck('name','id'), (isset($post)?$post->user_id:1) ,['class'=>'form-control','required']) }}
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label>Categorias</label>
+                                                {{ Form::select('categorias[]', $categorias->pluck('nome','id'), (isset($post)?$post->categorias()->pluck('categoria_id'):0) ,['class'=>'form-control select-multiple','multiple']) }}
                                             </div>
                                         </div>
                                         <div class="row">

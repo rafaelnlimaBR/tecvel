@@ -16,28 +16,15 @@
 
 
             <div class="card-body">
-                <div class="" style="padding-bottom: 10px" >
-                    <form class="form-inline" action="{{route('post.index')}}" method="get">
 
-                        {{csrf_field()}}
-                        <div class="input-group input-group-sm" style="width: 350px;">
-
-                            <input type="text" name="nome" class="form-control float-right col-md-5" style="" placeholder="Nome">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="tabela">
                     <thead>
                     <tr>
                         <th style="width: 5%">#</th>
                         <th style="width: 50%">Título</th>
                         <th style="width: 20%">Data</th>
                         <th style="width: 20%">Habilitado</th>
+                        <th style="width: 10%">Visitas</th>
                         <th style="width: 10px">Editar</th>
                     </tr>
                     </thead>
@@ -46,8 +33,9 @@
                         <tr>
                             <td>{{$c->id}}</td>
                             <td>{{$c->titulo}}</td>
-                            <td>{{$c->data}}</td>
+                            <td>{{date('d/m/Y H:m', strtotime($c->data))}}</td>
                             <td>{{$c->habilitado?"Sim":"Não"}}</td>
+                            <td>{{$c->visitas}}</td>
                             <td>
                                 <a href="{{route('post.editar',$c->id)}}" class="btn btn-block btn-warning btn-xs">
 

@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             SaidaSeeder::class,
 
             PostSeeder::class,
-
+            CategoriaSeeder::class
         ]);
     }
 }

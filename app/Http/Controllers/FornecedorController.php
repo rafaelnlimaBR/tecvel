@@ -29,7 +29,7 @@ class FornecedorController extends Controller
     {
 
         $dados      =  [
-            "titulo"    => "Veículo",
+            "titulo"    => "Fornecedor",
             "titulo_formulario" =>'Novo'
         ];
 
