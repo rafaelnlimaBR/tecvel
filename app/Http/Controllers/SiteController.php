@@ -34,7 +34,8 @@ class SiteController extends Controller
             "posts"         =>  Post::orderBy('data', 'desc'),
             'dados'         =>  Configuracao::find(1),
             'categorias'    =>  Categoria::all(),
-            'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get()
+            'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get(),
+            'postagems_mais'    =>  Post::orderBy('visitas','desc')->take(5)->get()
         ];
         return view('site.posts.includes.todas-postagens',$dados);
     }
@@ -55,7 +56,8 @@ class SiteController extends Controller
             "posts"         =>  Post::orderBy('data', 'desc'),
             'dados'         =>  Configuracao::find(1),
             'categorias'    =>  Categoria::all(),
-            'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get()
+            'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get(),
+            'postagems_mais'    =>  Post::orderBy('visitas','desc')->take(5)->get()
             ];
         return view('site.posts.includes.postagem',$dados);
     }
@@ -90,7 +92,8 @@ class SiteController extends Controller
             "posts"         =>  $categoria->posts(),
             'dados'         =>  Configuracao::find(1),
             'categorias'    =>  Categoria::all(),
-            'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get()
+            'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get(),
+            'postagems_mais'    =>  Post::orderBy('visitas','desc')->take(5)->get()
         ];
         return view('site.posts.includes.todas-postagens',$dados);
 

@@ -14,6 +14,27 @@
 
             <div class="sidebar sidebar-right">
                 <div class="widget recent-posts">
+                    <h3 class="widget-title">Postagens Mais Visitadas</h3>
+                    <ul class="list-unstyled">
+                        @foreach($postagems_mais as  $p)
+                            <li class="d-flex align-items-center">
+                                @if($p->imagens->count() != 0)
+                                    <div class="posts-thumb">
+                                        <a href="{{route('site.postagem',['titulo'=>strtolower(str_replace(' ','-',$p->titulo)),'id'=>$p->id])}}"><img loading="lazy" alt="img" src="{{url('imagens/posts/'.$p->imagens->first()->img)}}"></a>
+                                    </div>
+                                @endif
+                                <div class="post-info">
+                                    <h4 class="entry-title">
+                                        <a href="#">{{$p->titulo}}</a>
+                                    </h4>
+                                </div>
+                            </li><!-- 1st post end-->
+                        @endforeach
+
+                    </ul>
+
+                </div><!-- more vist post end -->
+                <div class="widget recent-posts">
                     <h3 class="widget-title">Postagens Recentes</h3>
                     <ul class="list-unstyled">
                         @foreach($postagem_recentes as  $p)
