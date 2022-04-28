@@ -49,15 +49,27 @@ class Comentario extends Model
         return $query->where('habilitado',1);
     }
 
+    public function visualizar()
+    {
+        $comentario =   $this;
+        $comentario->visualizado =   1;
+        if($comentario->save() == false){
+            throw new \Exception('Não foi possível atualizar o comentário',200);
+        }
+    }
+
     public static function gravar(Request $r)
     {
         $cliente                    =   Cliente::firstOrCreate(['email'=>strtolower($r->get('email'))],['nome'=>strtoupper($r->get('nome')),'telefone01'=>$r->get('whatsapp')]);
+
+
         $comentario                 =   new Comentario();
         $comentario->texto          =   $r->get('comentario');
         $comentario->data           =   Carbon::now();
         $comentario->habilitado     =   1;
         $comentario->post_id        =   $r->get('post_id');
         $comentario->cliente_id     =   $cliente->id;
+        $comentario->visualizado    =   0;
 
         if($comentario->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);

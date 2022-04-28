@@ -12,7 +12,7 @@ class ComentarioController extends Controller
 
     public function editar($id)
     {
-
+        try{
         $comentario     =   Comentario::find($id);
         if($comentario  == null){
             return redirect()->route('post.index');
@@ -23,7 +23,11 @@ class ComentarioController extends Controller
             "titulo_formulario_segundario"  =>  "Respostas"
 
         ];
+        $comentario->visualizar();
         return view('admin.comentarios.formulario',$dados)->with('comentario',$comentario);
+        }catch (\Exception $e){
+            return redirect()->route('post.editar',['id'=>$comentario->post->id,'tela'=>'comentarios'])->with('alerta',['tipo'=>'danger','msg'=>'Erro:'.$e->getMessage(),'icon'=>'ban','titulo'=>"Erro"]);
+        }
 
     }
 

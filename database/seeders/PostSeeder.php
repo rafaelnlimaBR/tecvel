@@ -34,42 +34,48 @@ Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven
                 'cliente_id'    =>   1,
                 'post_id'       =>  1,
                 'data'          =>  Carbon::now(),
-                'habilitado'    =>  1
+                'habilitado'    =>  1,
+                'visualizado'   =>  0
             ],
             [
                 'texto'         =>   "gostei do seruv awd ada klna knad la doaw adn admnadjn nfidghil nvsn safmn ndf jsnnnnkv n vns sj snf sf",
                 'cliente_id'    =>   1,
                 'post_id'       =>  1,
                 'data'          =>  Carbon::now(),
-                'habilitado'    =>  1
+                'habilitado'    =>  1,
+                'visualizado'   =>  0
             ],
             [
                 'texto'         =>   "gostei do seruv awd ada klna knad la doaw adn admnadjn nfidghil nvsn safmn ndf jsnnnnkv n vns sj snf sf",
                 'cliente_id'    =>   2,
                 'post_id'       =>  1,
                 'data'          =>  Carbon::now(),
-                'habilitado'    =>  1
+                'habilitado'    =>  1,
+                'visualizado'   =>  1
             ],
             [
                 'texto'         =>   "gostei do seruv awd ada klna knad la doaw adn admnadjn nfidghil nvsn safmn ndf jsnnnnkv n vns sj snf sf",
                 'cliente_id'    =>   8,
                 'post_id'       =>  1,
                 'data'          =>  Carbon::now(),
-                'habilitado'    =>  1
+                'habilitado'    =>  1,
+                'visualizado'   =>  1
             ],
             [
                 'texto'         =>   "gostei do seruv awd ada klna knad la doaw adn admnadjn nfidghil nvsn safmn ndf jsnnnnkv n vns sj snf sf",
                 'cliente_id'    =>   2,
                 'post_id'       =>  1,
                 'data'          =>  Carbon::now(),
-                'habilitado'    =>  1
+                'habilitado'    =>  1,
+                'visualizado'   =>  1
             ],
             [
                 'texto'         =>   "gostei do seruv awd ada klna knad la doaw adn admnadjn nfidghil nvsn safmn ndf jsnnnnkv n vns sj snf sf",
                 'cliente_id'    =>   5,
                 'post_id'       =>  1,
                 'data'          =>  Carbon::now(),
-                'habilitado'    =>  1
+                'habilitado'    =>  1,
+                'visualizado'   =>  0
             ],
         ]);
 

@@ -150,6 +150,7 @@
                                         <th style="width: 5%">#</th>
                                         <th>Nome</th>
                                         <th>Data</th>
+                                        <th style="width: 10%">Visualizado</th>
                                         <th style="width: 10%">Habilitado</th>
                                         <th style="width: 40px">Editar</th>
                                     </tr>
@@ -160,6 +161,13 @@
                                             <td>{{$i->id}}</td>
                                             <td>{{$i->autor->nome}}</td>
                                             <td>{{$i->data}}</td>
+                                            <td>
+                                                @if($i->visualizado == 1)
+                                                    <span class='badge' style='background: green ; color: white' >Visualizado</span>
+                                                @else
+                                                    <span class='badge' style='background: red ; color: white' >Não Visualizado</span>
+                                                @endif
+                                            </td>
                                             <td>
                                             @if($i->habilitado == 1)
                                                 <span class='badge' style='background: green ; color: white' >Sim</span>

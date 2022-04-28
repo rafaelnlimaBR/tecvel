@@ -69,14 +69,15 @@ class SiteController extends Controller
 
     public function comentar()
     {
-        $validacao  =   Comentario::validacao(request()->all());
 
-        $postagem       =   Post::find(\request('post_id'));
-
-        if($validacao->fails()){
-            return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('dados',Configuracao::find(1))->with('post',$postagem)->withErrors($validacao)->render()]);
-        }
         try{
+            $validacao  =   Comentario::validacao(request()->all());
+
+            $postagem       =   Post::find(\request('post_id'));
+
+            if($validacao->fails()){
+                return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('dados',Configuracao::find(1))->with('post',$postagem)->withErrors($validacao)->render()]);
+            }
 
             $id = Comentario::gravar(\request());
             return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('dados', Configuracao::find(1))->with('post',$postagem)->with('alerta',['Comentário adicionado com sucesso'])->render()]);

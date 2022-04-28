@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('habilitado')->default(0);
             $table->integer('cliente_id')->unsigned();
             $table->integer('post_id')->unsigned();
+            $table->boolean('visualizado')->default(0);
 
             $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
