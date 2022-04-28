@@ -38,13 +38,15 @@
         {{--Anger Mathe</cite></p>--}}
 
         {{--</blockquote>--}}
+        @if($post->tags->count() != 0)
         <div class="tags-area d-flex align-items-center justify-content-between">
             <div class="post-tags">
-                <a href="#">Construction</a>
-                <a href="#">Safety</a>
-                <a href="#">Planning</a>
+                @foreach($post->tags as $tag)
+                <a href="#">{{$tag->nome}}</a>
+                @endforeach
             </div>
         </div>
+        @endif
 
     </div><!-- post-body end -->
 </div><!-- post content end -->

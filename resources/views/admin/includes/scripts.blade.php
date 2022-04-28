@@ -212,6 +212,9 @@
         $('.numero').mask("#0.00" , { reverse:true})
         $('.dinheiro').mask("00000000.00" , { reverse:true})
         $('.select-multiple').select2();
+        $('.select-multiple-tags').select2({
+            tags: true
+        });
         $('#selectServicos').select2({
             //placeholder: 'Search for a category',
             ajax: {

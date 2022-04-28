@@ -13,7 +13,7 @@
                 <div class="entry-header">
                     <div class="post-meta">
                 <span class="post-author">
-                  <i class="far fa-user"></i><a href="#"> {{$p->autor->name}}</a>
+                  <i class="far fa-user"></i><a href=""> {{$p->autor->name}}</a>
                 </span>
                         <span class="post-cat">
                   <i class="far fa-folder-open"></i><a href="#"> News</a>
@@ -23,7 +23,7 @@
                                                                                                                  class="comments-link">Comentarios</a></span>
                     </div>
                     <h2 class="entry-title">
-                        <a href="news-single.html">{{$p->titulo}}</a>
+                        <a href="{{route('site.postagem',['titulo'=>strtolower(str_replace(' ','-',$p->titulo)),'id'=>$p->id])}}">{{$p->titulo}}</a>
                     </h2>
                 </div><!-- header end -->
 

@@ -1,6 +1,6 @@
 @extends('site.home')
 
-@section('conteudo')
+@section('conteudo_site')
 
     <div class="row">
 
@@ -65,22 +65,18 @@
                     </ul>
                 </div><!-- Categories end -->
 
-
+                @if(isset($post))
                 <div class="widget widget-tags">
                     <h3 class="widget-title">Tags </h3>
 
                     <ul class="list-unstyled">
-                        <li><a href="#">Construction</a></li>
-                        <li><a href="#">Design</a></li>
-                        <li><a href="#">Project</a></li>
-                        <li><a href="#">Building</a></li>
-                        <li><a href="#">Finance</a></li>
-                        <li><a href="#">Safety</a></li>
-                        <li><a href="#">Contracting</a></li>
-                        <li><a href="#">Planning</a></li>
+                        @foreach($post->tags as $t)
+                        <li><a href="#">{{$t->nome}}</a></li>
+                        @endforeach
+
                     </ul>
                 </div><!-- Tags end -->
-
+                @endif
 
             </div><!-- Sidebar end -->
         </div><!-- Sidebar Col end -->

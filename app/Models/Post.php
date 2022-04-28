@@ -14,7 +14,7 @@ class Post extends Model
 
     private static $restricao = [
         'titulo'       =>     'required',
-        'conteudo'       =>  'required',
+        'descricao'     =>  'required',
         'data'          =>  'required',
     ];
     private static $mensagem = [
@@ -46,6 +46,26 @@ class Post extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tags::class,'post_tag','post_id','tag_id')
+            ->withPivot('post_id')
+            ->withPivot('tag_id');
+    }
+
+    public function tagsSeparadoPorVirtula()
+    {
+        $post       =   $this;
+        $tags       =   [];
+
+        foreach ($post->tags as $i=>$tag){
+            $tags[$i]   =   $tag->nome;
+        }
+
+        $tags   =   implode(', ',$tags);
+        return $tags;
+    }
+
     public function comentarios()
     {
         return $this->hasMany(Comentario::class,'post_id');
@@ -70,13 +90,30 @@ class Post extends Model
         $post                   =   new Post();
         $post->titulo    =   $r->get('titulo');
         $post->conteudo           =   $r->get('conteudo');
+        $post->descricao          =   $r->get('descricao');
         $post->user_id      =   $r->get('usuario');
         $post->habilitado            =   $r->get('habilitado');
         $post->data             =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'));
         if($post->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
-        $post->categorias()->attach(1);
+
+        $tags   =   [];
+        $tag    =   "";
+        foreach ($r->get('tags') as $i => $t){
+//            dd($i);
+            if(is_numeric($t)){
+                $tag        =   Tags::firstOrCreate(['id'=>$t],['nome'=>$t]);
+            }else{
+                $tag    =   Tags::firstOrCreate(['nome'=>$t],['nome'=>$t]);
+            }
+
+            $tags[$i]   =   $tag->id;
+
+        }
+//        dd($tags);
+        $post->tags()->sync($tags);
+        $post->categorias()->sync($r->get('categorias'));
         return $post;
     }
 
@@ -85,13 +122,31 @@ class Post extends Model
         $post                         =   $this;
         $post->titulo    =   $r->get('titulo');
         $post->conteudo           =   $r->get('conteudo');
+        $post->descricao          =   $r->get('descricao');
         $post->user_id      =   $r->get('usuario');
         $post->habilitado            =   $r->get('habilitado');
         $post->data             =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'));
         if($post->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
-        $post->categorias()->sync(\request('categorias'));
+//        dd($r->get('tags'));
+        $tags   =   [];
+        $tag    =   "";
+        foreach ($r->get('tags') as $i => $t){
+//            dd($i);
+
+            if(is_numeric($t)){
+                $tag        =   Tags::firstOrCreate(['id'=>$t],['nome'=>$t]);
+            }else{
+                $tag    =   Tags::firstOrCreate(['nome'=>$t],['nome'=>$t]);
+            }
+
+            $tags[$i]   =   $tag->id;
+
+        }
+//        dd($tags);
+        $post->tags()->sync($tags);
+        $post->categorias()->sync($r->get('categorias'));
         return $post;
     }
 

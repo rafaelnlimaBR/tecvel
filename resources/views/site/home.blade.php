@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 
     <!-- Basic Page Needs
@@ -10,7 +10,8 @@
     <!-- Mobile Specific Metas
   ================================================== -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Construction Html5 Template">
+    <meta name="description" content="{{isset($meta_description)?$meta_description:""}}">
+    <meta name="keywords" content="{{isset($meta_tags)?$meta_tags:''}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -121,24 +122,10 @@
 
                             <div id="navbar-collapse" class="collapse navbar-collapse">
                                 <ul class="nav navbar-nav mr-auto">
-                                    <li class="nav-item dropdown active">
-                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Home <i class="fa fa-angle-down"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li class="active"><a href="index.html">Home One</a></li>
-                                            <li><a href="index-2.html">Home Two</a></li>
-                                        </ul>
-                                    </li>
+                                    <li class="nav-item {{isset($active)?$active == "inicio"?"active":"":""}}"><a class="nav-link" href="{{route('site.inicio')}}">Início</a></li>
 
-                                    <li class="nav-item dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Company <i class="fa fa-angle-down"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="team.html">Our People</a></li>
-                                            <li><a href="testimonials.html">Testimonials</a></li>
-                                            <li><a href="faq.html">Faq</a></li>
-                                            <li><a href="pricing.html">Pricing</a></li>
-                                        </ul>
-                                    </li>
+                                    <li class="nav-item {{isset($active)?$active == "post"?"active":"":""}}"><a class="nav-link" href="{{route('site.postagens')}}">Postagens</a></li>
+
 
                                     <li class="nav-item dropdown">
                                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Projects <i class="fa fa-angle-down"></i></a>
@@ -207,30 +194,11 @@
         <!--/ Navigation end -->
     </header>
     <!--/ Header end -->
-    {{--<div id="banner-area" class="banner-area" style="background-image:url(images/banner/banner1.jpg)">--}}
-        {{--<div class="banner-text">--}}
-            {{--<div class="container">--}}
-                {{--<div class="row">--}}
-                    {{--<div class="col-lg-12">--}}
-                        {{--<div class="banner-heading">--}}
-                            {{--<h1 class="banner-title">News</h1>--}}
-                            {{--<nav aria-label="breadcrumb">--}}
-                                {{--<ol class="breadcrumb justify-content-center">--}}
-                                    {{--<li class="breadcrumb-item"><a href="#">Home</a></li>--}}
-                                    {{--<li class="breadcrumb-item"><a href="#">News</a></li>--}}
-                                    {{--<li class="breadcrumb-item active" aria-current="page">News left sidebar</li>--}}
-                                {{--</ol>--}}
-                            {{--</nav>--}}
-                        {{--</div>--}}
-                    {{--</div><!-- Col end -->--}}
-                {{--</div><!-- Row end -->--}}
-            {{--</div><!-- Container end -->--}}
-        {{--</div><!-- Banner text end -->--}}
-    {{--</div><!-- Banner area end -->--}}
+
 
     <section id="main-container" class="main-container">
         <div class="container">
-            @yield('conteudo')
+            @yield('conteudo_site')
 
         </div><!-- Container end -->
     </section><!-- Main container end -->

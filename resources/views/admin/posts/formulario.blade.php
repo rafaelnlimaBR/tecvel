@@ -56,9 +56,27 @@
                                                 <label>Autor</label>
                                                 {{ Form::select('usuario', $usuarios->pluck('name','id'), (isset($post)?$post->user_id:1) ,['class'=>'form-control','required']) }}
                                             </div>
-                                            <div class="col-sm-6">
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
                                                 <label>Categorias</label>
                                                 {{ Form::select('categorias[]', $categorias->pluck('nome','id'), (isset($post)?$post->categorias()->pluck('categoria_id'):0) ,['class'=>'form-control select-multiple','multiple']) }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label>Tags</label>
+                                                {{ Form::select('tags[]', $tags->pluck('nome','id'), (isset($post)?$post->tags()->pluck('tag_id'):0) ,['class'=>'form-control select-multiple-tags','multiple']) }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+
+                                                <div class="form-group">
+                                                    <label>Descrição</label>
+                                                    <textarea type="text" class="form-control @error('descricao') is-invalid @enderror" id="editor-texto"  name="descricao" placeholder="">{{isset($post)?$post->descricao:''}}</textarea>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">

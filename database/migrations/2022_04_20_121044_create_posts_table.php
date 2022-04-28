@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('titulo');
             $table->text('conteudo');
+            $table->text('descricao');
             $table->dateTime('data');
             $table->boolean('habilitado')->default(0);
             $table->bigInteger('visitas')->default(0)->nullable();

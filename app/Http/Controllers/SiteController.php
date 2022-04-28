@@ -22,9 +22,10 @@ class SiteController extends Controller
         $dados  =   [
             "titulo"        =>  "Tecvel - Eletrônica Automotiva",
             "posts"         =>  Post::all(),
-            'dados'         =>  Configuracao::find(1)
+            'dados'         =>  Configuracao::find(1),
+            'active'        =>  'inicio'
         ];
-        return view('site.home',$dados);
+        return view('site.inicio.inicio',$dados);
     }
 
     public function posts()
@@ -35,7 +36,8 @@ class SiteController extends Controller
             'dados'         =>  Configuracao::find(1),
             'categorias'    =>  Categoria::all(),
             'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get(),
-            'postagems_mais'    =>  Post::orderBy('visitas','desc')->take(5)->get()
+            'postagems_mais'    =>  Post::orderBy('visitas','desc')->take(5)->get(),
+            'active'            =>  'post'
         ];
         return view('site.posts.includes.todas-postagens',$dados);
     }
@@ -57,7 +59,10 @@ class SiteController extends Controller
             'dados'         =>  Configuracao::find(1),
             'categorias'    =>  Categoria::all(),
             'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get(),
-            'postagems_mais'    =>  Post::orderBy('visitas','desc')->take(5)->get()
+            'postagems_mais'    =>  Post::orderBy('visitas','desc')->take(5)->get(),
+            'meta_tags'         =>  $post->tagsSeparadoPorVirtula(),
+            'meta_description'  =>  $post->descricao,
+            'active'            =>  'post'
             ];
         return view('site.posts.includes.postagem',$dados);
     }

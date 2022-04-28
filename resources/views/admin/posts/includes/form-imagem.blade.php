@@ -1,6 +1,7 @@
 @extends('admin.home')
 
 @section("conteudo")
+
     <div class="row">
 
         <div class="col-md-12">
@@ -96,4 +97,4 @@
         </form>
     @endif
 
-@endsection
+@stop

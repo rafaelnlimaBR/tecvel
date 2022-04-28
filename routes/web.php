@@ -17,7 +17,9 @@ use App\Http\Controllers\ClienteController;
 */
 
 Route::get('/teste', function () {
-    return \App\Models\Post::habilitados(1);
+    $post           =   \App\Models\Post::find(2);
+
+    return $post->tagsSeparadoPorVirtula();
 });
 
 
@@ -176,7 +178,7 @@ Route::group(['prefix'=>'admin'],function(){
 });
 
 Route::get('/{titulo}/{id}', [App\Http\Controllers\SiteController::class, 'post'])->name('site.postagem');
-Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('site.home');
+Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('site.inicio');
 Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('site.postagens');
 Route::get('/categoria/{nome}/{id}', [App\Http\Controllers\SiteController::class, 'categoria'])->name('site.categoria');
 Route::post('/comentar/postagem', [App\Http\Controllers\SiteController::class, 'comentar'])->name('site.postagem.comentar');

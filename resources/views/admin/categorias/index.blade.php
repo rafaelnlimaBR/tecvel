@@ -1,7 +1,6 @@
 @extends('admin.home')
 
 @section('conteudo')
-
     <div class="col-md-12">
 
         <div class="card">
@@ -49,6 +48,7 @@
 
 
         </div>
+
 
 
 
