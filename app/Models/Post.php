@@ -66,6 +66,11 @@ class Post extends Model
         return $tags;
     }
 
+    public function scopeHabilitados($query, $h)
+    {
+        return $query->where('habilitado',$h);
+    }
+
     public function comentarios()
     {
         return $this->hasMany(Comentario::class,'post_id');

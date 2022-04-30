@@ -50,7 +50,7 @@
                                             </div>
                                             <div class="col-sm-2">
                                                 <label>Habilitado</label>
-                                                {{ Form::select('habilitado', [0=>"Não",1=>"Sim"], (isset($post)?$post->halitado:0) ,['class'=>'form-control ','required']) }}
+                                                {{ Form::select('habilitado', [0=>"Não",1=>"Sim"], (isset($post)?$post->habilitado:0) ,['class'=>'form-control ','required']) }}
                                             </div>
                                             <div class="col-sm-2">
                                                 <label>Autor</label>
@@ -74,7 +74,7 @@
                                             <div class="col-sm-12">
 
                                                 <div class="form-group">
-                                                    <label>Descrição</label>
+                                                    <label>Meta Descrição</label>
                                                     <textarea type="text" class="form-control @error('descricao') is-invalid @enderror" id="editor-texto"  name="descricao" placeholder="">{{isset($post)?$post->descricao:''}}</textarea>
                                                 </div>
                                             </div>

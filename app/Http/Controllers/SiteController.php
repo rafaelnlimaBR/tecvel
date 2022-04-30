@@ -32,7 +32,7 @@ class SiteController extends Controller
     {
         $dados  =   [
             "titulo"        =>  "Tecvel - Postagens",
-            "posts"         =>  Post::orderBy('data', 'desc'),
+            "posts"         =>  Post::habilitados(1)->orderBy('data', 'desc'),
             'dados'         =>  Configuracao::find(1),
             'categorias'    =>  Categoria::all(),
             'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get(),

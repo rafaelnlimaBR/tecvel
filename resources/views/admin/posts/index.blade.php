@@ -34,7 +34,13 @@
                             <td>{{$c->id}}</td>
                             <td>{{$c->titulo}}</td>
                             <td>{{date('d/m/Y H:m', strtotime($c->data))}}</td>
-                            <td>{{$c->habilitado?"Sim":"Não"}}</td>
+                            <td>
+                                @if($c->habilitado == 1)
+                                    <span class='badge' style='background: green ; color: white' >Habilitado</span>
+                                @else
+                                    <span class='badge' style='background: red ; color: white' >Não Habilitado</span>
+                                @endif
+                            </td>
                             <td>{{$c->visitas}}</td>
                             <td>
                                 <a href="{{route('post.editar',$c->id)}}" class="btn btn-block btn-warning btn-xs">
