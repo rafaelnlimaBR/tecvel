@@ -22,7 +22,7 @@
                 </div><!-- Col 4 end -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="name"  class="w-100"><input class="form-control @error('whatsapp') is-invalid @enderror" name="whatsapp" placeholder="Whatsapp" type="text"   ></label>
+                        <label for="name"  class="w-100 telefone"><input class="form-control @error('whatsapp') is-invalid @enderror" name="whatsapp" placeholder="Whatsapp" type="text"   ></label>
                     </div>
                 </div><!-- Col 4 end -->
 
@@ -94,6 +94,8 @@
 
 </div>
 <script type="text/javascript">
+
+    // $('.telefone').mask("(99)999999999");
 
     $("form[name='postar-comentario']").submit(function () {
         var dados   = $(this).serialize();

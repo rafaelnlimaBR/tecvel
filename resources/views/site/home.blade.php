@@ -289,6 +289,7 @@
     ================================================== -->
     <script src="{{ asset('vendor/jquery/jquery.js') }}"></script>
     <!-- Bootstrap jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="{{ asset('vendor/site/plugins/bootstrap/bootstrap.min.js') }}" defer></script>
     <!-- Slick Carousel -->
     <script src="{{ asset('vendor/site/plugins/slick/slick.min.js') }}"></script>

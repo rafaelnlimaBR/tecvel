@@ -78,6 +78,7 @@ jQuery(function ($) {
 
 	$(document).ready(function () {
 
+
 		// navSearch show/hide
 		function navSearch() {
 			$('.nav-search').on('click', function () {
