@@ -32,7 +32,7 @@
                     @foreach($posts as $c)
                         <tr>
                             <td>{{$c->id}}</td>
-                            <td>{{$c->titulo}}</td>
+                            <td><a href="{{route('site.postagem',['titulo'=>strtolower(str_replace(' ','-',$c->titulo)),'id'=>$c->id])}}" target="_new">{{$c->titulo}}</a></td>
                             <td>{{date('d/m/Y H:m', strtotime($c->data))}}</td>
                             <td>
                                 @if($c->habilitado == 1)
