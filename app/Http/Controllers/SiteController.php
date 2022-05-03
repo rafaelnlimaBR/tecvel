@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Avaliacao;
 use App\Models\Banner;
 use App\Models\Categoria;
 use App\Models\Comentario;
@@ -25,7 +26,8 @@ class SiteController extends Controller
             "posts"         =>  Post::all(),
             'dados'         =>  Configuracao::find(1),
             'active'        =>  'inicio',
-            'banners'        =>  Banner::habilitados(1)->Sequenciadas('asc')->get()
+            'banners'        =>  Banner::habilitados(1)->Sequenciadas('asc')->get(),
+            'avaliacoes'    =>  Avaliacao::habilitados(1)->Sequenciadas('asc')->get()
         ];
         return view('site.inicio.inicio',$dados);
     }

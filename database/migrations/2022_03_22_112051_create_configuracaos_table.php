@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('logo');
             $table->string('instagran');
             $table->string('facebook');
+            $table->string('link_avaliacao')->nullable();
             $table->integer('orcamento')->nullable();
             $table->integer('ordem_servico')->nullable();
             $table->integer('aberto')->nullable();

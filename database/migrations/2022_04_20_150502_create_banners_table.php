@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->timestamps();
-            $table->string('titulo');
-            $table->text('texto');
+            $table->string('titulo')->nullable();
+            $table->text('texto')->nullable();
             $table->string('url')->nullable();
             $table->boolean('habilitado');
             $table->string('sequencia');

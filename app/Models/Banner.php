@@ -12,7 +12,6 @@ class Banner extends Model
     protected $table = 'banners';
     private static $restricao = [
         'img'      =>     'image|mimes:jpeg,png,jpg',
-        'titulo'      =>     'required',
         'sequencia'      =>     'required',
     ];
     private static $mensagem = [

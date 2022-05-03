@@ -33,6 +33,7 @@
     <!-- Template styles-->
     <link rel="stylesheet" href="{{ asset('vendor/site/css/style.css') }}">
     <script src="{{ asset('vendor/jquery/jquery.js') }}"></script>
+
 </head>
 <body>
 <div class="body-inner">

@@ -17,9 +17,14 @@ use App\Http\Controllers\ClienteController;
 */
 
 Route::get('/teste', function () {
-    $post           =   \App\Models\Post::find(2);
+    try{
+        $comentario =   \App\Models\Comentario::find(1);
+//    dd(env('MAIL_USERNAME'));
+        \Illuminate\Support\Facades\Mail::send(new \App\Mail\NotificacaoComentario($comentario,"rafael@tecvelautomotiva.com.br"));
+    }catch (Exception $e){
+        return$e->getFile();
+    }
 
-    return $post->tagsSeparadoPorVirtula();
 });
 
 
@@ -94,6 +99,13 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/banner/cadastrar', [App\Http\Controllers\BannerController::class, 'cadastrar'])->name('banner.cadastrar');
     Route::post('/banner/atualizar', [App\Http\Controllers\BannerController::class, 'atualizar'])->name('banner.atualizar');
     Route::post('/banner/excluir', [App\Http\Controllers\BannerController::class, 'excluir'])->name('banner.excluir');
+
+    Route::get('/avaliacoes', [App\Http\Controllers\AvaliacaoController::class, 'index'])->name('avaliacao.index');
+    Route::get('/avaliacao/novo', [App\Http\Controllers\AvaliacaoController::class, 'novo'])->name('avaliacao.novo');
+    Route::get('/avaliacao/editar/{id}', [App\Http\Controllers\AvaliacaoController::class, 'editar'])->name('avaliacao.editar');
+    Route::post('/avaliacao/cadastrar', [App\Http\Controllers\AvaliacaoController::class, 'cadastrar'])->name('avaliacao.cadastrar');
+    Route::post('/avaliacao/atualizar', [App\Http\Controllers\AvaliacaoController::class, 'atualizar'])->name('avaliacao.atualizar');
+    Route::post('/avaliacao/excluir', [App\Http\Controllers\AvaliacaoController::class, 'excluir'])->name('avaliacao.excluir');
     
     Route::get('/status', [App\Http\Controllers\StatusController::class, 'index'])->name('status.index');
     Route::get('/status/novo', [App\Http\Controllers\StatusController::class, 'novo'])->name('status.novo');

@@ -79,6 +79,8 @@ jQuery(function ($) {
 	$(document).ready(function () {
 
 
+		$('.your-class').slick();
+
 		// navSearch show/hide
 		function navSearch() {
 			$('.nav-search').on('click', function () {
@@ -201,7 +203,7 @@ jQuery(function ($) {
 				slidesToScroll: 1,
 				dots: true,
 				speed: 600,
-				arrows: false
+				arrows: true
 			});
 		}
 		testimonialCarousel();

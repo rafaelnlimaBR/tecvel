@@ -90,6 +90,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Link de Avaliação do google</label>
+                                            <input type="text" class="form-control" name="avaliacao"  value="{{$conf->link_avaliacao}}">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">

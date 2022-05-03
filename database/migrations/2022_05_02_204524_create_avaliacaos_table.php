@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('avaliacaos', function (Blueprint $table) {
+        Schema::create('avaliacoes', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->timestamps();
             $table->string('cliente');
-            $table->string('texto');
+            $table->text('texto');
+            $table->boolean('habilitado');
+            $table->integer('sequencia');
 
         });
     }
