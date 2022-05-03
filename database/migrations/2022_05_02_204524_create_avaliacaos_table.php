@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('banners', function (Blueprint $table) {
+        Schema::create('avaliacaos', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->timestamps();
-            $table->string('titulo');
-            $table->text('texto');
-            $table->string('url')->nullable();
-            $table->boolean('habilitado');
-            $table->string('sequencia');
-            $table->string('img');
+            $table->string('cliente');
+            $table->string('texto');
 
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('banners');
+        Schema::dropIfExists('avaliacaos');
     }
 };

@@ -291,6 +291,12 @@ return [
             'label_color' => 'success',
         ],
         [
+            'text'        => 'Banners',
+            'url'         => "admin/banner",
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
+        [
             'text'        => 'Categorias',
             'url'         => "admin/categorias",
             'icon'        => 'far fa-fw fa-file',

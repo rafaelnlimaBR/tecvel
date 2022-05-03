@@ -88,6 +88,13 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/servico/excluir', [App\Http\Controllers\ServicoController::class, 'excluir'])->name('servico.excluir');
     Route::post('/servico/carregarSelect2', [App\Http\Controllers\ServicoController::class, 'carregarSelect2'])->name('servico.carregarSelect2');
 
+    Route::get('/banner', [App\Http\Controllers\BannerController::class, 'index'])->name('banner.index');
+    Route::get('/banner/novo', [App\Http\Controllers\BannerController::class, 'novo'])->name('banner.novo');
+    Route::get('/banner/editar/{id}', [App\Http\Controllers\BannerController::class, 'editar'])->name('banner.editar');
+    Route::post('/banner/cadastrar', [App\Http\Controllers\BannerController::class, 'cadastrar'])->name('banner.cadastrar');
+    Route::post('/banner/atualizar', [App\Http\Controllers\BannerController::class, 'atualizar'])->name('banner.atualizar');
+    Route::post('/banner/excluir', [App\Http\Controllers\BannerController::class, 'excluir'])->name('banner.excluir');
+    
     Route::get('/status', [App\Http\Controllers\StatusController::class, 'index'])->name('status.index');
     Route::get('/status/novo', [App\Http\Controllers\StatusController::class, 'novo'])->name('status.novo');
     Route::get('/status/editar/{id}', [App\Http\Controllers\StatusController::class, 'editar'])->name('status.editar');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Categoria;
 use App\Models\Comentario;
 use App\Models\Configuracao;
@@ -23,7 +24,8 @@ class SiteController extends Controller
             "titulo"        =>  "Tecvel - Eletrônica Automotiva",
             "posts"         =>  Post::all(),
             'dados'         =>  Configuracao::find(1),
-            'active'        =>  'inicio'
+            'active'        =>  'inicio',
+            'banners'        =>  Banner::habilitados(1)->Sequenciadas('asc')->get()
         ];
         return view('site.inicio.inicio',$dados);
     }

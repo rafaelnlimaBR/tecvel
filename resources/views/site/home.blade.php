@@ -195,13 +195,8 @@
     </header>
     <!--/ Header end -->
 
+    @yield('conteudo_site')
 
-    <section id="main-container" class="main-container">
-        <div class="container">
-            @yield('conteudo_site')
-
-        </div><!-- Container end -->
-    </section><!-- Main container end -->
 
     <footer id="footer" class="footer bg-overlay">
         <div class="footer-main">
