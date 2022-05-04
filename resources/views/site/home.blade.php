@@ -19,7 +19,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
-    <meta property="og:url" content="{{ base_path()}}" />
+    <meta property="og:url" content="{{ url()->to('')}}" />
     <meta property="og:title" content="{{isset($post)?$post->titulo:$dados->nome_empresa}}" />
     <meta property="og:image" content="{{isset($post)?url('imagens/'.$post->img):url('imagens/'.$dados->logo)}}" />
     <meta property="og:description" content="DESCRIÇÃO" />
