@@ -22,7 +22,7 @@
     </head>
     <body class="antialiased">
         <h2 style="text-align: center">Site em desenvolvimento</h2>
-        <h5 style="text-align: center">em breve novo sitem estará no ar.</h5>
+        <h5 style="text-align: center">em breve novo site estará no ar.</h5>
 
     <h1 style="text-align: center">Tecvel Eletrônica Automotiva</h1>
     <h3 style="text-align: center"><a style="color: blue; text-decoration: underline" href="https://wa.me/5585981067785">Nosso Whatsapp</a></h3>
