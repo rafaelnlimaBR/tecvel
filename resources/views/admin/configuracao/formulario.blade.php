@@ -74,6 +74,26 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Descrição</label>
+                                            <textarea class="form-control @error('descrica') is-invalid @enderror" name="descricao" >{{$conf->descricao}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Tags</label>
+                                            <textarea class="form-control @error('tags') is-invalid @enderror" name="tags" >{{$conf->tags}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <div class="form-group">

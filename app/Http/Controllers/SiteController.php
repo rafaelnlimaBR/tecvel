@@ -22,6 +22,7 @@ class SiteController extends Controller
 
     public function home()
     {
+
         return view('welcome');
         $dados  =   [
             "titulo"        =>  "Tecvel - Eletrônica Automotiva",
@@ -36,14 +37,16 @@ class SiteController extends Controller
 
     public function posts()
     {
+        $conf   =   Configuracao::find(1);
         $dados  =   [
             "titulo"        =>  "Tecvel - Postagens",
             "posts"         =>  Post::habilitados(1)->orderBy('data', 'desc'),
-            'dados'         =>  Configuracao::find(1),
+            'dados'         =>  $conf,
             'categorias'    =>  Categoria::all(),
             'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get(),
             'postagems_mais'    =>  Post::orderBy('visitas','desc')->take(5)->get(),
-            'active'            =>  'post'
+            'active'            =>  'post',
+
         ];
         return view('site.posts.includes.todas-postagens',$dados);
     }

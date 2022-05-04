@@ -10,10 +10,42 @@
     <!-- Mobile Specific Metas
   ================================================== -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="{{isset($meta_description)?$meta_description:""}}">
-    <meta name="keywords" content="{{isset($meta_tags)?$meta_tags:''}}">
+    <meta name="description" content="{{isset($post)?$meta_description:$dados->descricao}}">
+    <meta name="keywords" content="{{isset($post)?$meta_tags:$dados->tags}}">
+    <meta name="author" content="{{$dados->nome_empresa}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <link rel="alternate" href="" hreflang="pt-br" />
+    <meta name="robots" content="index, follow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
+    <meta property="og:url" content="{{ base_path()}}" />
+    <meta property="og:title" content="{{isset($post)?$post->titulo:$dados->nome_empresa}}" />
+    <meta property="og:image" content="{{isset($post)?url('imagens/'.$post->img):url('imagens/'.$dados->logo)}}" />
+    <meta property="og:description" content="DESCRIÇÃO" />
+    <meta name="theme-color" content="#fe2813">
+
+    <meta property="business:contact_data:country_name" content="Brasil" />
+    <meta property="business:contact_data:website" content="URL" />
+    <meta property="business:contact_data:region" content="CE" />
+    <meta property="business:contact_data:email" content="{{$dados->email}}" />
+    <meta property="business:contact_data:phone_number" content="{{$dados->telefone_movel}}" />
+
+
+    <meta name="twitter:card" content="{{isset($post)?$post->titulo:$dados->nome_empresa}}" />
+    <meta name="twitter:description" content="{{isset($post)?$meta_description:$dados->descricao}}"/>
+    <meta name="twitter:title" content="{{isset($post)?$post->titulo:$dados->nome_empresa}}" />
+    <meta name="twitter:image" content="{{isset($post)?url('imagens/'.$post->img):url('imagens/'.$dados->logo)}}}}" />
+
+
+    <meta name="geo.placename" content="Fortaleza" />
+    <meta name="geo.region" content="BR" />
+    <meta name="description" content="{{isset($post)?$meta_description:$dados->descricao}}" />
+    <link rel="canonical" href="{{ base_path()}}" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="format-detection" content="telephone=no">
 
     <!-- Favicon
   ================================================== -->

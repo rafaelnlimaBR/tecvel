@@ -35,6 +35,8 @@ class Configuracao extends Model
         $configuracao->instagran        =   $r->get('instagran');
         $configuracao->facebook        =   $r->get('facebook');
         $configuracao->link_avaliacao        =   $r->get('avaliacao');
+        $configuracao->descricao            =   $r->get('descricao');
+        $configuracao->tags                 =   $r->get('tags');
 
         if(\request()->hasFile('logo_empresa')){
             if(File::exists(public_path().'/imagens/'.$configuracao->logo)){

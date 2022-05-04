@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('endereco');
             $table->string('telefone_fixo');
             $table->string('telefone_movel');
+            $table->text('descricao')->nullable();
+            $table->text('tags')->nullable();
             $table->string('email');
             $table->string('logo');
             $table->string('instagran');
