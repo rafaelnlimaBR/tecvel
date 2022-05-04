@@ -22,7 +22,7 @@ Route::get('/teste', function () {
 //    dd(env('MAIL_USERNAME'));
         \Illuminate\Support\Facades\Mail::send(new \App\Mail\NotificacaoComentario($comentario,"rafael@tecvelautomotiva.com.br"));
     }catch (Exception $e){
-        return$e->getFile();
+        return$e->getMessage();
     }
 
 });
