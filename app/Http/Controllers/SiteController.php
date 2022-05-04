@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotificacaoComentario;
 use App\Models\Avaliacao;
 use App\Models\Banner;
 use App\Models\Categoria;
@@ -9,6 +10,7 @@ use App\Models\Comentario;
 use App\Models\Configuracao;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class SiteController extends Controller
 {
@@ -20,7 +22,7 @@ class SiteController extends Controller
 
     public function home()
     {
-
+        return view('welcome');
         $dados  =   [
             "titulo"        =>  "Tecvel - Eletrônica Automotiva",
             "posts"         =>  Post::all(),
@@ -73,20 +75,25 @@ class SiteController extends Controller
 
     public function comentar()
     {
-
+        $conf   =   Configuracao::find(1);
         try{
             $validacao  =   Comentario::validacao(request()->all());
 
             $postagem       =   Post::find(\request('post_id'));
 
             if($validacao->fails()){
-                return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('dados',Configuracao::find(1))->with('post',$postagem)->withErrors($validacao)->render()]);
+                return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('alerta',['tipo'=>'erro','mensagem'=>'Preencha os camos obrigatórios'])->with('dados',$conf)->with('post',$postagem)->withErrors($validacao)->render()]);
             }
 
-            $id = Comentario::gravar(\request());
-            return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('dados', Configuracao::find(1))->with('post',$postagem)->with('alerta',['Comentário adicionado com sucesso'])->render()]);
+            $comentario = Comentario::gravar(\request());
+            Mail::send(new NotificacaoComentario($comentario,$conf->email));
+            return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('dados', $conf)->with('post',$postagem)->with('alerta',['Comentário adicionado com sucesso'])->render()]);
         }catch (\Exception $e){
-            return response()->json(['erro'=>'Error: '.$e->getMessage()]);
+            return response()->json(
+                [
+                    'comentarios'=>view('site.posts.includes.comentarios')->with('dados', $conf)->with('post',$postagem)->with('alerta',['tipo'=>'erro','mensagem'=>'Houve algum erro ao comentar esse post, favor informar nesse numero : '.$conf->telefone_movel])->render(),
+                    'erro'      =>  $e->getMessage()
+                ]);
         }
     }
 

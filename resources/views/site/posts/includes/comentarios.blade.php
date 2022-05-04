@@ -2,7 +2,7 @@
     <div class="comments-form border-box">
         <h3 class="title-normal">Adicionar Comentário</h3>
         @if (isset($alerta))
-            <p style="color: green">Adicionado com sucesso</p>
+            <p style="color: {{$alerta['tipo']=='erro'?'red':'green'}}" id="msg-comentario">{{$alerta['mensagem']}}</p>
         @endif
         <form role="form" name="postar-comentario" method="post" action="{{route('site.postagem.comentar')}}">
             <div class="row">
@@ -108,9 +108,9 @@
             success: function( data )
             {
                 if('erro' in data){
-                    console.log(data);
+                    console.log(data.erro);
+                    $('#comentarios').html(data.comentarios);
                 }else{
-                    console.log(data);
                     $('#comentarios').html(data.comentarios);
                 }
             },

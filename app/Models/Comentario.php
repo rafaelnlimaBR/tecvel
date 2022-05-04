@@ -74,7 +74,7 @@ class Comentario extends Model
         if($comentario->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
-        return $comentario->id;
+        return $comentario;
     }
 
     public function atualizar(Request $r)
