@@ -86,7 +86,7 @@ class SiteController extends Controller
 
             $comentario = Comentario::gravar(\request());
             Mail::send(new NotificacaoComentario($comentario,$conf->email));
-            return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('dados', $conf)->with('post',$postagem)->with('alerta',['Comentário adicionado com sucesso'])->render()]);
+            return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('dados', $conf)->with('post',$postagem)->with('alerta',['tipo'=>'sucessro','mensagem'=>'Comentado com sucesso'])->render()]);
         }catch (\Exception $e){
             return response()->json(
                 [
