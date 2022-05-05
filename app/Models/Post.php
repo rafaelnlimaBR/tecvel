@@ -128,7 +128,7 @@ class Post extends Model
         if($r->hasFile('img') ){
 
             if($r->file('img')->move(public_path().'/imagens/posts/',$nomeImg) == false) {
-                throw new \Exception('Registro atualizado mas não foi possível fazer o upload da imagem',200);
+                throw new \Exception('Registro atualizado mas não foi possível fazer o upload da imagem.',200);
             }else{
 
             }
