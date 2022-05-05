@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class Post extends Model
 {
@@ -153,7 +154,10 @@ class Post extends Model
             if($r->file('img')->move(public_path().'/imagens/posts/',$nomeImg) == false) {
                 throw new \Exception('Registro atualizado mas não foi possível fazer o upload da imagem',200);
             }else{
-                unlink(public_path().'/imagens/posts/'.$post->img);
+                if(file_exists(public_path().'/imagens/posts/'.$post->img) == true){
+                    unlink(public_path().'/imagens/posts/'.$post->img);
+                }
+
                 $post->img       =   $nomeImg;
 
             }

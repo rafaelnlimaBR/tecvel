@@ -54,12 +54,8 @@ class SiteController extends Controller
     public function post($titulo,$id)
     {
         $post   =   Post::find($id);
-        if($post == null){
-            return redirect()->route('site.postagens');
-        }else{
-            $post->adicionarVisita();
-        }
 
+        $post->adicionarVisita();
 
         $dados  =   [
             "titulo"        =>  "Tecvel - ".$post->titulo,

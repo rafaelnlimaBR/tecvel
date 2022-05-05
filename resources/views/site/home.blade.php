@@ -21,7 +21,7 @@
 
     <meta property="og:url" content="{{ url()->to('')}}" />
     <meta property="og:title" content="{{isset($post)?$post->titulo:$dados->nome_empresa}}" />
-    <meta property="og:image" content="{{isset($post)?url('imagens/'.$post->img):url('imagens/'.$dados->logo)}}" />
+    <meta property="og:image" content="{{isset($post)?url('imagens/posts/'.$post->img):url('imagens/'.$dados->logo)}}" />
     <meta property="og:description" content="DESCRIÇÃO" />
     <meta name="theme-color" content="#fe2813">
 
@@ -35,7 +35,7 @@
     <meta name="twitter:card" content="{{isset($post)?$post->titulo:$dados->nome_empresa}}" />
     <meta name="twitter:description" content="{{isset($post)?$meta_description:$dados->descricao}}"/>
     <meta name="twitter:title" content="{{isset($post)?$post->titulo:$dados->nome_empresa}}" />
-    <meta name="twitter:image" content="{{isset($post)?url('imagens/'.$post->img):url('imagens/'.$dados->logo)}}}}" />
+    <meta name="twitter:image" content="{{isset($post)?url('imagens/posts/'.$post->img):url('imagens/'.$dados->logo)}}}}" />
 
 
     <meta name="geo.placename" content="Fortaleza" />

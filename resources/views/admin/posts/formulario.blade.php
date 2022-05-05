@@ -93,12 +93,17 @@
                                             <div class="col-sm-6">
 
                                                 <div class="form-group">
-                                                    <label>Meta Imagem</label>
+                                                    <label>Meta Imagem (200px/200px)</label>
                                                     <input  type="file" class="form-control @error('img') is-invalid @enderror"   name="img" >
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
+                                                @if(isset($post))
+                                                <div class="form-group">
 
+                                                    <img src="{{url('/imagens/posts/'.$post->img)}}" style="height: 70px">
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
