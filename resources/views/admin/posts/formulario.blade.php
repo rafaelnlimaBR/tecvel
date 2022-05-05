@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <div class="tab-content" id="custom-tabs-one-tabContent">
                         <div class="tab-pane fade {{request()->exists('tela')?request()->get('tela') == "dados"?"show active":"":"show active"}}" id="custom-tabs-one-post" role="tabpanel" aria-labelledby="custom-tabs-one-post-tab">
-                            <form class="" action="{{isset($post)?route('post.atualizar'):route('post.cadastrar')}}" method="post">
+                            <form class="" action="{{isset($post)?route('post.atualizar'):route('post.cadastrar')}}"  method="post" files="true" enctype="multipart/form-data">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -88,6 +88,18 @@
                                                 </div>
                                             </div>
 
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+
+                                                <div class="form-group">
+                                                    <label>Meta Imagem</label>
+                                                    <input  type="file" class="form-control @error('img') is-invalid @enderror"   name="img" >
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-footer">

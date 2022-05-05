@@ -92,6 +92,9 @@ class Post extends Model
 
     public function gravar(Request $r)
     {
+        $extensao   =   $r->file('img')->extension();
+        $nomeImg    =   time().'.'.$extensao;
+
         $post                   =   new Post();
         $post->titulo    =   $r->get('titulo');
         $post->conteudo           =   $r->get('conteudo');
@@ -99,6 +102,8 @@ class Post extends Model
         $post->user_id      =   $r->get('usuario');
         $post->habilitado            =   $r->get('habilitado');
         $post->data             =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'));
+        $post->img              =   $nomeImg;
+
         if($post->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
@@ -119,6 +124,15 @@ class Post extends Model
 //        dd($tags);
         $post->tags()->sync($tags);
         $post->categorias()->sync($r->get('categorias'));
+        if($r->hasFile('img') ){
+
+            if($r->file('img')->move(public_path().'/imagens/posts/',$nomeImg) == false) {
+                throw new \Exception('Registro atualizado mas não foi possível fazer o upload da imagem',200);
+            }else{
+
+            }
+        }
+
         return $post;
     }
 
@@ -131,6 +145,20 @@ class Post extends Model
         $post->user_id      =   $r->get('usuario');
         $post->habilitado            =   $r->get('habilitado');
         $post->data             =   Carbon::createFromFormat('d/m/Y H:i',$r->get('data'));
+
+        if($r->hasFile('img') ){
+            $extensao   =   $r->file('img')->extension();
+            $nomeImg    =   time().'.'.$extensao;
+
+            if($r->file('img')->move(public_path().'/imagens/posts/',$nomeImg) == false) {
+                throw new \Exception('Registro atualizado mas não foi possível fazer o upload da imagem',200);
+            }else{
+                unlink(public_path().'/imagens/posts/'.$post->img);
+                $post->img       =   $nomeImg;
+
+            }
+        }
+
         if($post->save() == false){
             throw new \Exception('Não foi possível realizar o registro',200);
         }
@@ -152,6 +180,8 @@ class Post extends Model
 //        dd($tags);
         $post->tags()->sync($tags);
         $post->categorias()->sync($r->get('categorias'));
+
+
         return $post;
     }
 
