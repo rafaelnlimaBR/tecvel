@@ -198,6 +198,8 @@ Route::group(['prefix'=>'admin'],function(){
 
 Route::get('/{titulo}/{id}', [App\Http\Controllers\SiteController::class, 'post'])->name('site.postagem');
 Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('site.inicio');
+Route::get('/contato', [App\Http\Controllers\SiteController::class, 'contato'])->name('site.contato');
+Route::post('/contato/enviar', [App\Http\Controllers\SiteController::class, 'cadastrarContato'])->name('site.contato.cadastrar');
 Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('site.postagens');
 Route::get('/categoria/{nome}/{id}', [App\Http\Controllers\SiteController::class, 'categoria'])->name('site.categoria');
 Route::post('/comentar/postagem', [App\Http\Controllers\SiteController::class, 'comentar'])->name('site.postagem.comentar');

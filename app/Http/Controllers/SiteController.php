@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NotificacaoComentario;
+use App\Mail\NotificacaoContato;
 use App\Models\Avaliacao;
 use App\Models\Banner;
 use App\Models\Categoria;
 use App\Models\Comentario;
 use App\Models\Configuracao;
+use App\Models\Contato;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use function Symfony\Component\Mime\Header\all;
 
 class SiteController extends Controller
 {
@@ -81,6 +84,7 @@ class SiteController extends Controller
             $postagem       =   Post::find(\request('post_id'));
 
             if($validacao->fails()){
+
                 return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('alerta',['tipo'=>'erro','mensagem'=>'Preencha os camos obrigatórios'])->with('dados',$conf)->with('post',$postagem)->withErrors($validacao)->render()]);
             }
 
@@ -113,5 +117,40 @@ class SiteController extends Controller
         ];
         return view('site.posts.includes.todas-postagens',$dados);
 
+    }
+
+    public function contato()
+    {
+        $dados  =   [
+            "titulo"        =>  "Tecvel - Contato",
+            'dados'         =>  Configuracao::find(1),
+            'active'        =>  'contato',
+        ];
+        return view('site.contato.contato',$dados);
+    }
+
+    public function cadastrarContato()
+    {
+
+        try{
+            $conf   =   Configuracao::find(1);
+            $validacao  =   Contato::validacao(request()->all());
+
+
+            if($validacao->fails()){
+                return response()->json(['form'=>view('site.contato.includes.contato-form')->with('alerta',['tipo'=>'erro','mensagem'=>'Preencha os camos obrigatórios'])->with('dados',$conf)->withInput(\request()->all())->withErrors($validacao)->render()]);
+            }
+
+            $contato    =   new Contato();
+            $contato    =   $contato->gravar(\request());
+            Mail::send(new NotificacaoContato($contato,$conf->email,"Novo Contato"));
+            return response()->json(['form'=>view('site.contato.includes.contato-form')->with('dados', $conf)->with('alerta',['tipo'=>'sucessro','mensagem'=>'Obrigado pelo contato, logo entraremos com uma resposta'])->render()]);
+        }catch (\Exception $e){
+            return response()->json(
+                [
+                    'comentarios'=>view('site.contato.includes.contato-form')->with('dados', $conf)->with('alerta',['tipo'=>'erro','mensagem'=>'Houve algum erro ao comentar esse post, favor informar nesse numero : '.$conf->telefone_movel])->render(),
+                    'erro'      =>  $e->getMessage()
+                ]);
+        }
     }
 }

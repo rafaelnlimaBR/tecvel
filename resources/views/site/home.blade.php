@@ -19,7 +19,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
-    <meta property="og:url" content="{{ url()->to('')}}" />
+    <meta property="og:url" content="{{ url()->current()}}" />
     <meta property="og:title" content="{{isset($post)?$post->titulo:$dados->nome_empresa}}" />
     <meta property="og:image" content="{{isset($post)?url('imagens/posts/'.$post->img):url('imagens/'.$dados->logo)}}" />
     <meta property="og:description" content="{{isset($post)?$post->descricao:$dados->descricao}}" />
@@ -204,7 +204,7 @@
                                         </ul>
                                     </li>
 
-                                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                                    <li class="nav-item {{isset($active)?$active == "contato"?"active":"":""}}"><a class="nav-link" href="{{route('site.contato')}}">Nosso Contato</a></li>
                                 </ul>
                             </div>
                         </nav>

@@ -1,7 +1,5 @@
-<div id="comentarios">
-    <div hidden class="carregando-comentario">
-        <h3>Carregando Comentário</h3>
-    </div>
+
+
     <div class="comments-form border-box">
         <h3 class="title-normal">Adicionar Comentário</h3>
         @if (isset($alerta))
@@ -95,8 +93,7 @@
 </div><!-- Post comment end -->
 
 
-</div>
-<script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.js') }}" defer></script>
+
 
 <script type="text/javascript">
 
@@ -105,8 +102,7 @@
     $("form[name='postar-comentario']").submit(function () {
 
         $('.comments-form').fadeOut();
-        $('.carregando-comentario').show();
-        $('.carregando-comentario').fadeIn();
+
 
         var dados   = $(this).serialize();
         var rota    =   this.action;
@@ -117,8 +113,8 @@
             data: dados,
             success: function( data )
             {
-                $('.comments-form').delay(800).fadeIn(55555);
-                $('.carregando-comentario').fadeOut();
+                $('.comments-form').delay(800).fadeIn(200);
+
                 if('erro' in data){
                     console.log(data.erro);
                     $('#comentarios').html(data.comentarios);

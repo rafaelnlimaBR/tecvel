@@ -97,7 +97,7 @@ class Post extends Model
         $extensao   =   $r->file('img')->extension();
         $nomeImg    =   time().'.'.$extensao;
 
-        $post                   =   new Post();
+        $post                   =   $this;
         $post->titulo    =   $r->get('titulo');
         $post->conteudo           =   $r->get('conteudo');
         $post->descricao          =   $r->get('descricao');
