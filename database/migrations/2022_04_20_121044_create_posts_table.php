@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integerIncrements('id');
             $table->timestamps();
             $table->string('titulo');
-            $table->text('conteudo');
+            $table->text('conteudo')->nullable();
             $table->text('descricao');
             $table->string('img')->default("logo");
             $table->dateTime('data');

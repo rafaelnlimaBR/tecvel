@@ -17,6 +17,7 @@ class Post extends Model
         'titulo'       =>     'required',
         'descricao'     =>  'required',
         'data'          =>  'required',
+        'img'           =>   'required'
     ];
     private static $mensagem = [
         'required'    => 'O campo :attribute é obrigado.',

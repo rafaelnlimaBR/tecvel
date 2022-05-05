@@ -64,6 +64,9 @@
     <link rel="stylesheet" href="{{ asset('vendor/site/plugins/colorbox/colorbox.css') }}">
     <!-- Template styles-->
     <link rel="stylesheet" href="{{ asset('vendor/site/css/style.css') }}">
+
+
+
     <script src="{{ asset('vendor/jquery/jquery.js') }}"></script>
 
 </head>
@@ -332,6 +335,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" defer></script>
     <!-- Google Map Plugin-->
     <script src="{{ asset('vendor/site/plugins/google-map/map.js') }}" defer></script>
+
+
 
     <!-- Template custom -->
     <script src="{{ asset('vendor/site/js/script.js') }}"></script>
