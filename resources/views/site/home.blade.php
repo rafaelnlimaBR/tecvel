@@ -22,7 +22,7 @@
     <meta property="og:url" content="{{ url()->to('')}}" />
     <meta property="og:title" content="{{isset($post)?$post->titulo:$dados->nome_empresa}}" />
     <meta property="og:image" content="{{isset($post)?url('imagens/posts/'.$post->img):url('imagens/'.$dados->logo)}}" />
-    <meta property="og:description" content="DESCRIÇÃO" />
+    <meta property="og:description" content="{{isset($post)?$post->descricao:$dados->descricao}}" />
     <meta name="theme-color" content="#fe2813">
 
     <meta property="business:contact_data:country_name" content="Brasil" />
@@ -237,7 +237,7 @@
                 <div class="row justify-content-between">
                     <div class="col-lg-4 col-md-6 footer-widget footer-about">
                         <h3 class="widget-title">About Us</h3>
-                        <img loading="lazy" width="200px" class="footer-logo" src="images/footer-logo.png" alt="Constra">
+                        {{--<img loading="lazy" width="200px" class="footer-logo" src="images/footer-logo.png" alt="Constra">--}}
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done idunt ut
                             labore et dolore magna aliqua.</p>
                         <div class="footer-social">
