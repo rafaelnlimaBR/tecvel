@@ -26,6 +26,11 @@ class Contato extends Model
         return \Validator::make($dados,static::$restricao,static::$mensagem);
     }
 
+    public function scopeVisualizados($query,$v)
+    {
+        return $query->where('visualizado',$v);
+    }
+
     public function cliente()
     {
         return $this->belongsTo(Cliente::class,'cliente_id');

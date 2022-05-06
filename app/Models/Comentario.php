@@ -49,6 +49,11 @@ class Comentario extends Model
         return $query->where('habilitado',1);
     }
 
+    public function scopeVisualizados($query,$v)
+    {
+        return  $query->where('visualizado',$v);
+    }
+
     public function visualizar()
     {
         $comentario =   $this;

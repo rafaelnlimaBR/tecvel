@@ -2,12 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
+use App\Models\Comentario;
+use App\Models\Contato;
+use App\Models\Contrato;
+use App\Models\Entrada;
+use App\Models\Saida;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function home()
     {
-        return view('admin.home')->with('titulo','Dashboard');
+
+        $dados      =  [
+            "titulo"            =>  "Dashboardd",
+            "contatos"  =>      Contato::visualizados(0)->orderBy('created_at','desc')->take(5)->get(),
+            "comentarios"   =>  Comentario::visualizados(0)->orderBy('created_at','desc')->take(5)->get(),
+            "contratos"     =>  Contrato::all(),
+            "clientes"      =>  Cliente::all(),
+            "entradas"      =>  Entrada::orderBy('data','desc')->take(5)->get(),
+            "saidas"        =>  Saida::orderBy('data','desc')->take(5)->get(),
+            "entradas_hj"   =>  Entrada::whereDate('data',Carbon::now())->sum('valor_total'),
+            "saidas_hj"     =>  Saida::whereDate('data',Carbon::now())->sum('valor'),
+        ];
+        return view('admin.dashboard.index',$dados);
     }
 }

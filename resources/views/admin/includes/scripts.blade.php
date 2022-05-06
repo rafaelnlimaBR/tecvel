@@ -358,13 +358,17 @@
             locale :"pt-br",
             format: 'DD/MM/YYYY HH:mm',
         });
-        $('. dataTempoSemHora').datetimepicker({
+        $('.dataTempoSemHora').datetimepicker({
             locale :"pt-br",
             format: 'DD/MM/YYYY',
         });
-
-
     });
+
+    $('.input-garantia').change(function () {
+        var diasGarantia   =   $(this).val();
+        $('.input-fim-garantia').val(diasGarantia);
+    });
+
     $('#tabela-contratos').dataTable({
         "language":{
             "url":"//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
