@@ -42,7 +42,7 @@
                                 <input type="number" name="sequencia" class="form-control" placeholder="Sequência" value="{{isset($imagem)?$imagem->sequencia:'1'}}">
                             </div>
                             <div class="col-ms-10">
-                                <label>Imagem</label>
+                                <label>Imagem (750x450)</label>
                                 <input type="file" name="img" class="form-control @error('img') is-invalid @enderror"  value="{{isset($imagem)?$imagem->img:''}}">
                             </div>
 

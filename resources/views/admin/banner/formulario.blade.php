@@ -63,7 +63,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Imagem</label>
+                                    <label>Imagem (1600x800)</label>
                                     <input  type="file" class="form-control"  name="img" >
                                 </div>
                             </div>

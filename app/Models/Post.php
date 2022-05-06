@@ -31,6 +31,11 @@ class Post extends Model
         return \Validator::make($dados,static::$restricao,static::$mensagem);
     }
 
+    public function scopePesuisarPorTitulo($query,$titulo)
+    {
+        return $query->where('titulo','like','%'.$titulo.'%');
+    }
+
     public function imagens()
     {
         return $this->hasMany(Imagens::class,'post_id');

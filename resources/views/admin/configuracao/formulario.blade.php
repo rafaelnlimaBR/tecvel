@@ -14,7 +14,7 @@
                             <a  class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#confi" role="tab" aria-controls="confi" aria-selected="false">Configuração</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#teste01" role="tab" aria-controls="teste02" aria-selected="false">Teste01</a>
+                            <a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#horarios" role="tab" aria-controls="teste02" aria-selected="false">horarios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#teste02" role="tab" aria-controls="teste02" aria-selected="false">Teste02</a>
@@ -189,8 +189,25 @@
                             </div>
 
                         </div>
-                        <div class="tab-pane fade" id="teste01" role="tabpanel" aria-labelledby="teste01">
-                            teste
+                        <div class="tab-pane fade" id="horarios" role="tabpanel" aria-labelledby="horarios">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Horários de funcionamento</label>
+                                            <textarea type="text" class="form-control editor-texto @error('horarios') is-invalid @enderror" id="editor-texto"  name="horarios" placeholder="">{{isset($conf)?$conf->horario_funcionamento:''}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Sobre Nós</label>
+                                            <textarea type="text" class="form-control editor-texto @error('sobre_nos') is-invalid @enderror" id="editor-texto"  name="sobre_nos" placeholder="">{{isset($conf)?$conf->sobre_nos:''}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="teste02" role="tabpanel" aria-labelledby="teste02">
                             teste

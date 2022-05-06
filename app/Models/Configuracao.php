@@ -37,6 +37,8 @@ class Configuracao extends Model
         $configuracao->link_avaliacao        =   $r->get('avaliacao');
         $configuracao->descricao            =   $r->get('descricao');
         $configuracao->tags                 =   $r->get('tags');
+        $configuracao->horario_funcionamento=   $r->get('horarios');
+        $configuracao->sobre_nos            =   $r->get('sobre_nos');
 
         if(\request()->hasFile('logo_empresa')){
             if(File::exists(public_path().'/imagens/'.$configuracao->logo)){

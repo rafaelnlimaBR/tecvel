@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('telefone_fixo');
             $table->string('telefone_movel');
             $table->text('descricao')->nullable();
+            $table->text('horario_funcionamento')->nullable();
             $table->text('tags')->nullable();
             $table->string('email');
             $table->string('logo');
@@ -35,6 +36,7 @@ return new class extends Migration
             $table->integer('retorno')->nullable();
             $table->integer('nao_autorizado')->nullable();
             $table->integer('autorizado')->nullable();
+            $table->text('sobre_nos')->nullable();
         });
     }
 

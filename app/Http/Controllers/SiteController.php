@@ -26,13 +26,14 @@ class SiteController extends Controller
     public function home()
     {
 
-        return view('welcome');
+//        return view('welcome');
         $dados  =   [
             "titulo"        =>  "Tecvel - Eletrônica Automotiva",
-            "posts"         =>  Post::all(),
+            "post_mais_visto"   =>  Post::orderBy('visitas','desc')->take(1)->first(),
+            "posts"         =>  Post::habilitados(1)->orderBy('data', 'desc')->get(),
             'dados'         =>  Configuracao::find(1),
             'active'        =>  'inicio',
-            'banners'        =>  Banner::habilitados(1)->Sequenciadas('asc')->get(),
+            'banners'       =>  Banner::habilitados(1)->Sequenciadas('asc')->get(),
             'avaliacoes'    =>  Avaliacao::habilitados(1)->Sequenciadas('asc')->get()
         ];
         return view('site.inicio.inicio',$dados);
@@ -43,7 +44,7 @@ class SiteController extends Controller
         $conf   =   Configuracao::find(1);
         $dados  =   [
             "titulo"        =>  "Tecvel - Postagens",
-            "posts"         =>  Post::habilitados(1)->orderBy('data', 'desc'),
+            "posts"         =>  Post::PesuisarPorTitulo(\request('titulo'))->habilitados(1)->orderBy('data', 'desc')->paginate(1),
             'dados'         =>  $conf,
             'categorias'    =>  Categoria::all(),
             'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get(),

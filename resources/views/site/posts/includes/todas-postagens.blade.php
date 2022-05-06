@@ -2,7 +2,7 @@
 
 @section('postagem')
 
-    @foreach($posts->get() as $p)
+    @foreach($posts as $p)
         <div class="post">
             @if($p->imagens->count() != 0)
                 <div class="post-media post-image">
@@ -42,16 +42,10 @@
             </div><!-- post-body end -->
         </div>
     @endforeach
+    <div class="d-flex justify-content-center">
+        {!!$posts->links('pagination::bootstrap-4') !!}
+    </div>
 
-    <nav class="paging" aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-left"></i></a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#"><i class="fas fa-angle-double-right"></i></a></li>
-        </ul>
-    </nav>
 
 
 

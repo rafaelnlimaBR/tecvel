@@ -27,7 +27,7 @@ class ContatoController extends Controller
             "titulo_formulario" => "Visualização do Contato",
             "whatsapp"          =>  str_replace(')','',str_replace('(','',$contato->cliente->telefone01)),
             "msg_whatsapp"      =>
-                "Olá, você entrou em contato através do nosso site.\nData e Hora: ".date('d/m/Y H:m', strtotime($contato->created_at))."\nMensagem: ".$contato->mensagem
+                "Olá, você entrou em contato através do nosso site.\n\nData e Hora: ".date('d/m/Y H:m', strtotime($contato->created_at))."\nMensagem: ".$contato->mensagem
         ];
 
 
