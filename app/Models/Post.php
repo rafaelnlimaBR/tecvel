@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class Post extends Model
 {
@@ -16,6 +17,7 @@ class Post extends Model
         'titulo'       =>     'required',
         'descricao'     =>  'required',
         'data'          =>  'required',
+        'img'           =>   'required'
     ];
     private static $mensagem = [
         'required'    => 'O campo :attribute é obrigado.',
@@ -95,7 +97,7 @@ class Post extends Model
         $extensao   =   $r->file('img')->extension();
         $nomeImg    =   time().'.'.$extensao;
 
-        $post                   =   new Post();
+        $post                   =   $this;
         $post->titulo    =   $r->get('titulo');
         $post->conteudo           =   $r->get('conteudo');
         $post->descricao          =   $r->get('descricao');
@@ -127,7 +129,7 @@ class Post extends Model
         if($r->hasFile('img') ){
 
             if($r->file('img')->move(public_path().'/imagens/posts/',$nomeImg) == false) {
-                throw new \Exception('Registro atualizado mas não foi possível fazer o upload da imagem',200);
+                throw new \Exception('Registro atualizado mas não foi possível fazer o upload da imagem.',200);
             }else{
 
             }
@@ -153,7 +155,11 @@ class Post extends Model
             if($r->file('img')->move(public_path().'/imagens/posts/',$nomeImg) == false) {
                 throw new \Exception('Registro atualizado mas não foi possível fazer o upload da imagem',200);
             }else{
-                unlink(public_path().'/imagens/posts/'.$post->img);
+                if(File::exists(public_path().'/imagens/posts/'.$post->img) == true){
+//                    unlink(public_path().'/imagens/posts/'.$post->img);
+                    File::delete(public_path().'/imagens/posts/'.$post->img);
+                }
+
                 $post->img       =   $nomeImg;
 
             }

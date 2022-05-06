@@ -1,4 +1,5 @@
-<div id="comentarios">
+
+
     <div class="comments-form border-box">
         <h3 class="title-normal">Adicionar Comentário</h3>
         @if (isset($alerta))
@@ -92,12 +93,17 @@
 </div><!-- Post comment end -->
 
 
-</div>
+
+
 <script type="text/javascript">
 
     // $('.telefone').mask("(99)999999999");
 
     $("form[name='postar-comentario']").submit(function () {
+
+        $('.comments-form').fadeOut();
+
+
         var dados   = $(this).serialize();
         var rota    =   this.action;
 
@@ -107,10 +113,13 @@
             data: dados,
             success: function( data )
             {
+                $('.comments-form').delay(800).fadeIn(200);
+
                 if('erro' in data){
                     console.log(data.erro);
                     $('#comentarios').html(data.comentarios);
                 }else{
+
                     $('#comentarios').html(data.comentarios);
                 }
             },

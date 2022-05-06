@@ -65,6 +65,8 @@
 </div> <!-- Author box end -->--}}
 
 <!-- Post comment start -->
+<div id="comentarios">
 @include('site.posts.includes.comentarios')
+</div>
 
 @stop

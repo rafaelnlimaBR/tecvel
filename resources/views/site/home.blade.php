@@ -19,10 +19,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
-    <meta property="og:url" content="{{ url()->to('')}}" />
+    <meta property="og:url" content="{{ url()->current()}}" />
     <meta property="og:title" content="{{isset($post)?$post->titulo:$dados->nome_empresa}}" />
-    <meta property="og:image" content="{{isset($post)?url('imagens/'.$post->img):url('imagens/'.$dados->logo)}}" />
-    <meta property="og:description" content="DESCRIÇÃO" />
+    <meta property="og:image" content="{{isset($post)?url('imagens/posts/'.$post->img):url('imagens/'.$dados->logo)}}" />
+    <meta property="og:description" content="{{isset($post)?$post->descricao:$dados->descricao}}" />
     <meta name="theme-color" content="#fe2813">
 
     <meta property="business:contact_data:country_name" content="Brasil" />
@@ -35,7 +35,7 @@
     <meta name="twitter:card" content="{{isset($post)?$post->titulo:$dados->nome_empresa}}" />
     <meta name="twitter:description" content="{{isset($post)?$meta_description:$dados->descricao}}"/>
     <meta name="twitter:title" content="{{isset($post)?$post->titulo:$dados->nome_empresa}}" />
-    <meta name="twitter:image" content="{{isset($post)?url('imagens/'.$post->img):url('imagens/'.$dados->logo)}}}}" />
+    <meta name="twitter:image" content="{{isset($post)?url('imagens/posts/'.$post->img):url('imagens/'.$dados->logo)}}" />
 
 
     <meta name="geo.placename" content="Fortaleza" />
@@ -64,6 +64,9 @@
     <link rel="stylesheet" href="{{ asset('vendor/site/plugins/colorbox/colorbox.css') }}">
     <!-- Template styles-->
     <link rel="stylesheet" href="{{ asset('vendor/site/css/style.css') }}">
+
+
+
     <script src="{{ asset('vendor/jquery/jquery.js') }}"></script>
 
 </head>
@@ -201,7 +204,7 @@
                                         </ul>
                                     </li>
 
-                                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                                    <li class="nav-item {{isset($active)?$active == "contato"?"active":"":""}}"><a class="nav-link" href="{{route('site.contato')}}">Nosso Contato</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -237,7 +240,7 @@
                 <div class="row justify-content-between">
                     <div class="col-lg-4 col-md-6 footer-widget footer-about">
                         <h3 class="widget-title">About Us</h3>
-                        <img loading="lazy" width="200px" class="footer-logo" src="images/footer-logo.png" alt="Constra">
+                        {{--<img loading="lazy" width="200px" class="footer-logo" src="images/footer-logo.png" alt="Constra">--}}
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done idunt ut
                             labore et dolore magna aliqua.</p>
                         <div class="footer-social">
@@ -332,6 +335,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" defer></script>
     <!-- Google Map Plugin-->
     <script src="{{ asset('vendor/site/plugins/google-map/map.js') }}" defer></script>
+
+
 
     <!-- Template custom -->
     <script src="{{ asset('vendor/site/js/script.js') }}"></script>
