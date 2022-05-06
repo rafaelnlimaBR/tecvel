@@ -184,7 +184,11 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/comissao/pagar', [App\Http\Controllers\ComissaoController::class, 'pagar'])->name('comissao.pagar');
     Route::post('/comissao/excluir/pagamento', [App\Http\Controllers\ComissaoController::class, 'excluirPagamento'])->name('comissao.excluir.pagamento');
     Route::post('/comissao/atualizar/pagamento', [App\Http\Controllers\ComissaoController::class, 'atualizarPagamento'])->name('comissao.atualizar.pagamento');
-    
+
+    Route::get('/contatos', [App\Http\Controllers\ContatoController::class, 'index'])->name('contato.index');
+    Route::get('/contato/visualizar/{id}', [App\Http\Controllers\ContatoController::class, 'visualizar'])->name('contato.visualizar');
+    Route::post('/contato/excluir', [App\Http\Controllers\ContatoController::class, 'excluir'])->name('contato.excluir');
+
     Route::post('/tipo/pagamentos/taxas', [App\Http\Controllers\TipoPagamentosController::class, 'listarTaxas'])->name('tipospagamentos.listar.taxas');
 
     Route::get('/saidas', [App\Http\Controllers\SaidaController::class, 'index'])->name('saida.index');

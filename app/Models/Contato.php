@@ -68,4 +68,12 @@ class Contato extends Model
         }
         return $contato;
     }
+
+    public function excluir()
+    {
+        $contato        =   $this;
+        if($contato->delete() == false){
+            throw new \Exception('Não foi possível realizar a exclusão',200);
+        }
+    }
 }

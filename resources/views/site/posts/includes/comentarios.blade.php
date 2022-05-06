@@ -37,7 +37,7 @@
 
             </div><!-- Form row end -->
             <div class="clearfix">
-                <button class="btn btn-primary" id="postar" type="submit" aria-label="post-comment">Postar Comentário</button>
+                <button class="btn btn-primary" name="postar-comentario" id="postar" type="submit" aria-label="post-comment">Postar Comentário</button>
             </div>
         </form><!-- Form end -->
     </div><!-- Comments form end -->
@@ -101,7 +101,8 @@
 
     $("form[name='postar-comentario']").submit(function () {
 
-        $('.comments-form').fadeOut();
+        $("button[name=postar-comentario]").attr("disabled", "true");
+        $("button[name=postar-comentario]").html('Enviando');
 
 
         var dados   = $(this).serialize();
@@ -113,7 +114,7 @@
             data: dados,
             success: function( data )
             {
-                $('.comments-form').delay(800).fadeIn(200);
+
 
                 if('erro' in data){
                     console.log(data.erro);
@@ -122,6 +123,8 @@
 
                     $('#comentarios').html(data.comentarios);
                 }
+                $("button[name=postar-comentario]").prop( "disabled", false );
+                $("button[name=postar-comentario]").html('Enviar Mensagem');
             },
             error:function (data,e) {
                 console.log(data);

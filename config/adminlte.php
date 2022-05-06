@@ -313,6 +313,12 @@ return [
             'url'         => "admin/contratos",
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Contatos',
+            'url'         => "admin/contatos",
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
         ]
         ,
         ['header' => 'account_settings'],
