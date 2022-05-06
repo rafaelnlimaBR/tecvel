@@ -14,7 +14,7 @@
                             <a  class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#confi" role="tab" aria-controls="confi" aria-selected="false">Configuração</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#horarios" role="tab" aria-controls="teste02" aria-selected="false">horarios</a>
+                            <a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#horarios" role="tab" aria-controls="teste02" aria-selected="false">Informações</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#teste02" role="tab" aria-controls="teste02" aria-selected="false">Teste02</a>
