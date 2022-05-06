@@ -53,7 +53,7 @@
  ================================================== -->
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('vendor/site/plugins/bootstrap/bootstrap.min.css') }}">
-    <!-- FontAwesome -->
+    <!-- FontAwesome -->X
     <link rel="stylesheet" href="{{ asset('vendor/site/plugins/fontawesome/css/all.min.css') }}">
     <!-- Animation -->
     <link rel="stylesheet" href="{{ asset('vendor/site/plugins/animate-css/animate.css') }}">
