@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <a href="https://wa.me/55{{$contato->cliente->telefone01}}/?text={{urlencode($msg_whatsapp)}}" target="_new" class="btn" style="background-color: green; color: white">Responder no Whatsapp</a>
+                                    <a href="https://wa.me/55{{$whatsapp}}/?text={{urlencode($msg_whatsapp)}}" target="_new" class="btn" style="background-color: green; color: white">Responder no Whatsapp</a>
                                     {{--<a href="whatsapp://send?text=0a‎Hello%0aWorld`;" target="_new" class="form-control">Responder no Whatsapp</a>--}}
                                 </div>
                             </div>

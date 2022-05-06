@@ -25,6 +25,7 @@ class ContatoController extends Controller
         $dados      =  [
             "titulo"    => "Contatos de Visitantes do Site",
             "titulo_formulario" => "Visualização do Contato",
+            "whatsapp"          =>  str_replace(')','',str_replace('(','',$contato->cliente->telefone01)),
             "msg_whatsapp"      =>
                 "Olá, você entrou em contato através do nosso site.\nData e Hora: ".date('d/m/Y H:m', strtotime($contato->created_at))."\nMensagem: ".$contato->mensagem
         ];
