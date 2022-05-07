@@ -19,6 +19,8 @@ class ContratoController extends Controller
         $dados      =  [
             "titulo"            =>  "Contratos",
             "titulo_tabela"     =>  "Lista de Contratos",
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "contratos"
         ];
 
         return view('admin.contratos.index',$dados)->with('contratos',$contratos);
@@ -45,7 +47,9 @@ class ContratoController extends Controller
         $dados      =  [
             "titulo"    => "Contrato",
             "titulo_formulario" =>$tipo->descricao,
-            'tipo_contrato'     =>  $tipo->id
+            'tipo_contrato'     =>  $tipo->id,
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "contratos"
         ];
         return view('admin.contratos.formulario',$dados);
 
@@ -77,6 +81,8 @@ class ContratoController extends Controller
             "titulo_formulario" =>'Editar',
             "servicos"          =>  Servico::orderby('id','desc'),
             'conf'              => Configuracao::find(1),
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "contratos"
 
         ];
         $contrato    =      Contrato::find($id);

@@ -12,7 +12,8 @@ class CategoriaController extends Controller
         $categorias = Categoria::all();
         $dados      =  [
             "titulo"    => "Categorias",
-            "titulo_tabela" => "Lista de Categorias"
+            "titulo_tabela" => "Lista de Categorias",
+            "menu_open"     =>  "categorias"
         ];
 
         return view('admin.categorias.index',$dados)->with('categorias',$categorias);
@@ -30,6 +31,7 @@ class CategoriaController extends Controller
         $dados      =  [
             "titulo"    => "Categoria",
             "titulo_formulario" =>'Novo',
+            "menu_open"     =>  "categorias"
 
         ];
 
@@ -59,7 +61,8 @@ class CategoriaController extends Controller
 
         $dados      =  [
             "titulo"    => "Categoria",
-            "titulo_formulario" =>'Editar'
+            "titulo_formulario" =>'Editar',
+            "menu_open"     =>  "categorias"
         ];
         $categoria    =   Categoria::find($id);
         if($categoria   == null){

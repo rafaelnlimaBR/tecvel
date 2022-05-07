@@ -12,7 +12,9 @@ class AvaliacaoController extends Controller
         $avaliacao = Avaliacao::all();
         $dados      =  [
             "titulo"    => "Avaliacao",
-            "titulo_tabela" => "Lista de Avaliacões"
+            "titulo_tabela" => "Lista de Avaliacões",
+            "menu_open"     =>  "site",
+            "menu_active"   =>  "avaliacoes"
         ];
 
         return view('admin.avaliacao.index',$dados)->with('avaliacao',$avaliacao);
@@ -28,7 +30,9 @@ class AvaliacaoController extends Controller
 
         $dados      =  [
             "titulo"    => "Avaliação",
-            "titulo_formulario" =>'Novo'
+            "titulo_formulario" =>'Novo',
+            "menu_open"     =>  "site",
+            "menu_active"   =>  "avaliacoes"
         ];
 
         return view('admin.avaliacao.formulario',$dados);
@@ -58,7 +62,9 @@ class AvaliacaoController extends Controller
 
         $dados      =  [
             "titulo"    => "Avaliacao",
-            "titulo_formulario" =>'Editar'
+            "titulo_formulario" =>'Editar',
+            "menu_open"     =>  "site",
+            "menu_active"   =>  "avaliacoes"
         ];
 
         $avaliacao    =   Avaliacao::find($id);

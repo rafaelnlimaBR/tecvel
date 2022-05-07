@@ -14,7 +14,8 @@ class FornecedorController extends Controller
             ->orderby('id','desc')->paginate(30);;
         $dados      =  [
             "titulo"    => "Fornecedores",
-            "titulo_tabela" => "Lista de Fornecedores"
+            "titulo_tabela" => "Lista de Fornecedores",
+            "menu_open"     =>  "fornecedores"
         ];
 
         return view('admin.fornecedor.index',$dados)->with('fornecedores',$fornecedores);
@@ -30,7 +31,8 @@ class FornecedorController extends Controller
 
         $dados      =  [
             "titulo"    => "Fornecedor",
-            "titulo_formulario" =>'Novo'
+            "titulo_formulario" =>'Novo',
+            "menu_open"     =>  "fornecedores"
         ];
 
         return view('admin.fornecedor.formulario',$dados);
@@ -53,7 +55,8 @@ class FornecedorController extends Controller
 
         $dados      =  [
             "titulo"    => "Fornecedor",
-            "titulo_formulario" =>'Editar'
+            "titulo_formulario" =>'Editar',
+            "menu_open"     =>  "fornecedores"
         ];
         $Fornecedor    =   Fornecedor::find($id);
 

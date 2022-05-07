@@ -20,7 +20,8 @@ class ComentarioController extends Controller
         $dados      =  [
             "titulo"    => "Comentário",
             "titulo_formulario" =>'Responder Comentário',
-            "titulo_formulario_segundario"  =>  "Respostas"
+            "titulo_formulario_segundario"  =>  "Respostas",
+            "menu_open"     =>  "site"
 
         ];
         $comentario->visualizar();

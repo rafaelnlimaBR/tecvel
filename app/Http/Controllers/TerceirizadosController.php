@@ -18,7 +18,8 @@ class TerceirizadosController extends Controller
             "titulo_formulario" =>'Novo',
             'fornecedores'      =>  Fornecedor::all(),
             'historico_id'      =>  $historico_id,
-            'contrato_id'       =>  $id
+            'contrato_id'       =>  $id,
+            "menu_open"     =>  "contratos"
         ];
         return view('admin.terceirizados.formulario',$dados);
     }
@@ -55,7 +56,8 @@ class TerceirizadosController extends Controller
             'fornecedores'      =>  Fornecedor::all(),
             'historico_id'      =>  $historico->id,
             'contrato_id'       =>  $historico->contrato->id,
-            'saidas'            =>  $terceirizado->pagamentos
+            'saidas'            =>  $terceirizado->pagamentos,
+            "menu_open"     =>  "contratos"
 
         ];
 
@@ -114,6 +116,7 @@ class TerceirizadosController extends Controller
             "valor"             =>  $terceirizado->valor - $terceirizado->pagamentos()->sum('valor'),
             'descricao'         =>  "Pagamento do terceirizado : ".$terceirizado_id,
             'action'            =>  route('terceirizado.pagar'),
+            "menu_open"     =>  "contratos"
         ];
 //        return $dados;
         return view('admin.saidas.includes.form',$dados);
@@ -142,7 +145,8 @@ class TerceirizadosController extends Controller
             'descricao'         =>  "Pagamento do terceirizado : ".$terceirizado_id,
             'action'            =>  route('terceirizado.atualizar.pagamento'),
             'pagamento'         =>  $saida,
-            'action_excluir'    => route('terceirizado.excluir.pagamento')
+            'action_excluir'    => route('terceirizado.excluir.pagamento'),
+            "menu_open"     =>  "contratos"
         ];
 //        return $dados;
         return view('admin.saidas.includes.form',$dados);

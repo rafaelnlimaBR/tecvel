@@ -208,7 +208,7 @@
             return false;
         });
 
-        var URL     =   $('#url').val();
+
         $('.numero').mask("#0.00" , { reverse:true})
         $('.dinheiro').mask("00000000.00" , { reverse:true})
         $('.select-multiple').select2();
@@ -219,7 +219,7 @@
             //placeholder: 'Search for a category',
             ajax: {
                 type: 'POST',
-                url: URL+"/admin/servico/carregarSelect2",
+                url: "{{route('servico.carregarSelect2')}}",
                 dataType: 'json',
                 beforeSend: function (xhr) {
                     var token = $("input[name='_token']" ).val();
@@ -273,7 +273,7 @@
             //placeholder: 'Search for a category',
             ajax: {
                 type: 'POST',
-                url: URL+"/admin/cliente/carregarSelect2",
+                url: "{{route('cliente.carregarSelect2')}}",
                 dataType: 'json',
                 beforeSend: function (xhr) {
                     var token = $("input[name='_token']" ).val();
@@ -315,7 +315,7 @@
             //placeholder: 'Search for a category',
             ajax: {
                 type: 'POST',
-                url: URL+"/admin/veiculo/carregarSelect2",
+                url: "{{route('veiculo.carregarSelect2')}}",
                 dataType: 'json',
                 beforeSend: function (xhr) {
                     var token = $("input[name='_token']" ).val();

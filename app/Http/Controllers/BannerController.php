@@ -12,7 +12,9 @@ class BannerController extends Controller
         $banner = Banner::sequenciadas('asc')->get();
         $dados      =  [
             "titulo"    => "Banner",
-            "titulo_tabela" => "Lista de Banner"
+            "titulo_tabela" => "Lista de Banner",
+            "menu_open"     =>  "site",
+            "menu_active"   =>  "banner"
         ];
 
         return view('admin.banner.index',$dados)->with('banner',$banner);
@@ -28,7 +30,9 @@ class BannerController extends Controller
 
         $dados      =  [
             "titulo"    => "Banner",
-            "titulo_formulario" =>'Novo'
+            "titulo_formulario" =>'Novo',
+            "menu_open"     =>  "site",
+            "menu_active"   =>  "banner"
         ];
 
         return view('admin.banner.formulario',$dados);
@@ -59,7 +63,9 @@ class BannerController extends Controller
 
         $dados      =  [
             "titulo"    => "Banner",
-            "titulo_formulario" =>'Editar'
+            "titulo_formulario" =>'Editar',
+            "menu_open"     =>  "site",
+            "menu_active"   =>  "banner"
         ];
 
 

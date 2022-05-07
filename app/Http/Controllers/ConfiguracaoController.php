@@ -20,7 +20,8 @@ class ConfiguracaoController extends Controller
             "titulo"    => "Configuração",
             'titulo_formulario' => 'Alterar configuração',
             'status'            => Status::PesquisarPorHabilitados(),
-            'tipos'             =>  TipoContrato::all()
+            'tipos'             =>  TipoContrato::all(),
+            "menu_open"     =>  "configuracoes"
         ];
 
         return view('admin.configuracao.formulario',$dados)->with('conf',$configuracao);

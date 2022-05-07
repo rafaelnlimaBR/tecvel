@@ -17,7 +17,8 @@ class PedidoController extends Controller
             orderby('id','desc')->paginate(30);;
         $dados      =  [
             "titulo"    => "Pedidos",
-            "titulo_tabela" => "Lista de Pedidos"
+            "titulo_tabela" => "Lista de Pedidos",
+            "menu_open"     =>  "pedidos"
         ];
 
         return view('admin.pedidos.index',$dados)->with('pedidos',$pedidos);
@@ -36,7 +37,8 @@ class PedidoController extends Controller
             "titulo_formulario" =>'Novo',
             'fornecedores'      =>  Fornecedor::all(),
             'historico_id'      =>  \request('historico_id'),
-            'contrato_id'       =>  Historico::find( \request('historico_id'))->contrato->id
+            'contrato_id'       =>  Historico::find( \request('historico_id'))->contrato->id,
+            "menu_open"     =>  "contratos"
         ];
         return view('admin.pedidos.formulario',$dados);
 
@@ -67,7 +69,9 @@ class PedidoController extends Controller
             'historico_id'      =>  $historico->id,
             'contrato_id'       =>  $historico->contrato->id,
             'pecas'             =>  $historico->pecas,
-            'saidas'            =>  $pedido->pagamentos
+            'saidas'            =>  $pedido->pagamentos,
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "pedidos"
         ];
 
 
@@ -122,6 +126,8 @@ class PedidoController extends Controller
             "valor"             =>  $pedido->valorTotalDesconto() - $pedido->pagamentos()->sum('valor'),
             'descricao'         =>  "Pagamento do pedido : ".$pedido_id,
             'action'            =>  route('pedido.pagar'),
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "pedidos"
         ];
 //        return $dados;
         return view('admin.saidas.includes.form',$dados);
@@ -150,7 +156,9 @@ class PedidoController extends Controller
             'descricao'         =>  "Pagamento do pedido : ".$pedido_id,
             'action'            =>  route('pedido.atualizar.pagamento'),
             'pagamento'         =>  $saida,
-            'action_excluir'    => route('pedido.excluir.pagamento')
+            'action_excluir'    => route('pedido.excluir.pagamento'),
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "pedidos"
         ];
 //        return $dados;
         return view('admin.saidas.includes.form',$dados);

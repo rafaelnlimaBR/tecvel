@@ -35,6 +35,7 @@ class HistoricoController extends Controller
             "valor"             =>  $total,
             'descricao'         =>  "pagamento do contrato: ".$historico->contrato->id,
             'action'            =>  route('historico.pagar'),
+            "menu_open"     =>  "contratos"
         ];
 //        return $dados;
         return view('admin.entradas.includes.form',$dados);
@@ -84,7 +85,8 @@ class HistoricoController extends Controller
             'action'            =>  route('historico.faturar.atualizar'),
             'action_excluir'    =>  route('historico.fatura.excluir'),
             'pagamento'         =>  $pagamento,
-            'taxas'             =>  TipoPagamentos::find($pagamento->taxa->formaPagamento->id)->taxas
+            'taxas'             =>  TipoPagamentos::find($pagamento->taxa->formaPagamento->id)->taxas,
+            "menu_open"     =>  "contratos"
         ];
 
         return view('admin.entradas.includes.form',$dados);

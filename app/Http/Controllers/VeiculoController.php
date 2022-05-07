@@ -14,7 +14,8 @@ class VeiculoController extends Controller
         $dados      =  [
             "titulo"    => "Veiculos",
             "titulo_tabela" => "Lista de Veiculos",
-            'modal'         =>  0
+            'modal'         =>  0,
+            "menu_open"     =>  "veiculos"
         ];
 
         return view('admin.veiculos.index',$dados)->with('veiculos',$veiculos);
@@ -30,7 +31,8 @@ class VeiculoController extends Controller
 
         $dados      =  [
             "titulo"    => "Veículo",
-            "titulo_formulario" =>'Novo'
+            "titulo_formulario" =>'Novo',
+            "menu_open"     =>  "veiculos"
         ];
 
         return view('admin.veiculos.formulario',$dados);
@@ -76,7 +78,8 @@ class VeiculoController extends Controller
 
         $dados      =  [
             "titulo"    => "Veiculo",
-            "titulo_formulario" =>'Editar'
+            "titulo_formulario" =>'Editar',
+            "menu_open"     =>  "veiculos"
         ];
         $Veiculo    =   Veiculo::find($id);
 

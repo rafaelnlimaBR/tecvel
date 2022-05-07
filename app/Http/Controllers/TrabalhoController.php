@@ -19,6 +19,7 @@ class TrabalhoController extends Controller
             "titulo_tabela" => "Lista de servicos",
             "contrato_id"   =>  $id,
             "historico_id"  =>  $historico_id,
+            "menu_open"     =>  "contratos"
         ];
 
         return view('admin.trabalhos.index',$dados)->with('contrato',$contrato);

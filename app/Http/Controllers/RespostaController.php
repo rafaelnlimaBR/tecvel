@@ -18,7 +18,8 @@ class RespostaController extends Controller
         $dados      =  [
             "titulo"    => "Respota",
             "titulo_formulario" =>'Nova Resposta',
-            "usuarios"          =>  User::all()
+            "usuarios"          =>  User::all(),
+            "menu_open"     =>  "site"
 
         ];
         return view('admin.comentarios.includes.form-responder',$dados)->with('comentario',$comentario);
@@ -73,7 +74,8 @@ class RespostaController extends Controller
             "titulo"    => "Respota",
             "titulo_formulario" =>'Editar Resposta',
             "usuarios"          =>  User::all(),
-            'comentario'        =>  $comentario
+            'comentario'        =>  $comentario,
+            "menu_open"     =>  "site"
 
         ];
         return view('admin.comentarios.includes.form-responder',$dados)->with('resposta',$resposta);

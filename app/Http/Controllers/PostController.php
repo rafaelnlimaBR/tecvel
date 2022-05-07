@@ -16,7 +16,9 @@ class PostController extends Controller
         $dados      =  [
             "titulo"    => "Posts",
             "titulo_tabela" => "Lista de Postagens",
-            'modal'         =>  0
+            'modal'         =>  0,
+            "menu_open"     =>  "site",
+            "menu_active"   =>  "posts"
         ];
 
         return view('admin.posts.index',$dados)->with('posts',$posts);
@@ -35,7 +37,9 @@ class PostController extends Controller
             "titulo_formulario" =>'Novo',
             "usuarios"          =>  User::all(),
             "categorias"        =>  Categoria::all(),
-            "tags"              =>  Tags::all()
+            "tags"              =>  Tags::all(),
+            "menu_open"     =>  "site",
+            "menu_active"   =>  "posts"
         ];
 
         return view('admin.posts.formulario',$dados);
@@ -72,7 +76,9 @@ class PostController extends Controller
             "titulo_formulario" =>'Editar',
             'usuarios'          => User::all(),
             "categorias"        =>  Categoria::all(),
-            "tags"              =>  Tags::all()
+            "tags"              =>  Tags::all(),
+            "menu_open"     =>  "site",
+            "menu_active"   =>  "posts"
 
         ];
         $Post    =   Post::find($id);

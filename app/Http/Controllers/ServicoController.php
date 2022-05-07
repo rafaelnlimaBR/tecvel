@@ -13,7 +13,9 @@ class ServicoController extends Controller
             ->orderby('id','desc')->paginate(30);;
         $dados      =  [
             "titulo"    => "Servicos",
-            "titulo_tabela" => "Lista de Servicos"
+            "titulo_tabela" => "Lista de Servicos",
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "servicos"
         ];
 
         return view('admin.servicos.index',$dados)->with('servicos',$servicos);
@@ -29,7 +31,9 @@ class ServicoController extends Controller
 
         $dados      =  [
             "titulo"    => "Servico",
-            "titulo_formulario" =>'Novo'
+            "titulo_formulario" =>'Novo',
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "servicos"
         ];
         return view('admin.servicos.formulario',$dados);
 
@@ -83,7 +87,9 @@ class ServicoController extends Controller
 
         $dados      =  [
             "titulo"    => "Servico",
-            "titulo_formulario" =>'Editar'
+            "titulo_formulario" =>'Editar',
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "servicos"
         ];
         $servico    =   Servico::find($id);
 

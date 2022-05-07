@@ -13,7 +13,8 @@ class ImagemPostController extends Controller
         $dados      =  [
             "titulo"    => "Nova Imagem",
             "titulo_formulario" =>'Imagem ',
-            'post'              => $id
+            'post'              => $id,
+            "menu_open"     =>  "posts"
         ];
 
         return view('admin.posts.includes.form-imagem',$dados);
@@ -27,7 +28,8 @@ class ImagemPostController extends Controller
             "titulo"    => "Editar Imagem",
             "titulo_formulario" =>'Imagem ',
             'post'              => $id,
-            'imagem'            =>  Imagens::find($imagem_id)
+            'imagem'            =>  Imagens::find($imagem_id),
+            "menu_open"     =>  "posts"
         ];
 
         return view('admin.posts.includes.form-imagem',$dados);

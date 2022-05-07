@@ -14,7 +14,8 @@ class SaidaController extends Controller
 
         $dados      =  [
             "titulo"    => "Caixa de Saidas",
-            "titulo_tabela" => "Lista de saidas do caixa"
+            "titulo_tabela" => "Lista de saidas do caixa",
+            "menu_open"     =>  "saidas"
         ];
 
         return view('admin.saidas.index',$dados)->with('saidas',$saidas);

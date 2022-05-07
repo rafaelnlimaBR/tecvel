@@ -23,7 +23,8 @@ class ClienteController extends Controller
             ->orderby('id','desc')->paginate(30);;
         $dados      =  [
             "titulo"    => "Clientes",
-            "titulo_tabela" => "Lista de Clientes"
+            "titulo_tabela" => "Lista de Clientes",
+            "menu_open"     =>  "clientes"
         ];
 
         return view('admin.clientes.index',$dados)->with('clientes',$clientes);
@@ -40,7 +41,8 @@ class ClienteController extends Controller
         $dados      =  [
             "titulo"    => "Cliente",
             "titulo_formulario" =>'Novo',
-            'modal'             => 0
+            'modal'             => 0,
+            "menu_open"     =>  "clientes"
         ];
         return view('admin.clientes.formulario',$dados);
 
@@ -85,7 +87,8 @@ class ClienteController extends Controller
         $dados      =  [
             "titulo"    => "Cliente",
             "titulo_formulario" =>'Editar',
-            'modal'             =>  false
+            'modal'             =>  false,
+            "menu_open"     =>  "clientes"
         ];
         $cliente    =   Cliente::find($id);
 

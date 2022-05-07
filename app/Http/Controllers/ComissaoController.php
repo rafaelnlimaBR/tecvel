@@ -17,7 +17,8 @@ class ComissaoController extends Controller
             "titulo_formulario" =>'Novo',
             'fornecedores'      =>  Fornecedor::all(),
             'historico_id'      =>  $historico_id,
-            'contrato_id'       =>  $id
+            'contrato_id'       =>  $id,
+            "menu_open"     =>  "contratos"
         ];
         return view('admin.comissao.formulario',$dados);
     }
@@ -53,7 +54,8 @@ class ComissaoController extends Controller
             'fornecedores'      =>  Fornecedor::all(),
             'historico_id'      =>  $historico->id,
             'contrato_id'       =>  $historico->contrato->id,
-            'saidas'            =>  $comissao->pagamentos
+            'saidas'            =>  $comissao->pagamentos,
+            "menu_open"     =>  "contratos"
 
         ];
 
@@ -119,6 +121,7 @@ class ComissaoController extends Controller
             "valor"             =>  $comissao->valor - $comissao->pagamentos()->sum('valor'),
             'descricao'         =>  "Pagamento do comissao : ".$comissao_id,
             'action'            =>  route('comissao.pagar'),
+            "menu_open"     =>  "contratos"
         ];
 //        return $dados;
         return view('admin.saidas.includes.form',$dados);
@@ -147,7 +150,8 @@ class ComissaoController extends Controller
             'descricao'         =>  "Pagamento do comissao : ".$comissao_id,
             'action'            =>  route('comissao.atualizar.pagamento'),
             'pagamento'         =>  $saida,
-            'action_excluir'    => route('comissao.excluir.pagamento')
+            'action_excluir'    => route('comissao.excluir.pagamento'),
+            "menu_open"     =>  "contratos"
         ];
 //        return $dados;
         return view('admin.saidas.includes.form',$dados);

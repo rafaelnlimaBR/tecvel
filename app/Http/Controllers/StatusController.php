@@ -13,7 +13,9 @@ class StatusController extends Controller
             ->orderby('id','desc')->paginate(30);;
         $dados      =  [
             "titulo"    => "Status",
-            "titulo_tabela" => "Lista de Status"
+            "titulo_tabela" => "Lista de Status",
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "status"
         ];
 
         return view('admin.status.index',$dados)->with('status',$status);
@@ -29,7 +31,9 @@ class StatusController extends Controller
 
         $dados      =  [
             "titulo"    => "Veículo",
-            "titulo_formulario" =>'Novo'
+            "titulo_formulario" =>'Novo',
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "status"
         ];
 
         return view('admin.status.formulario',$dados);
@@ -52,7 +56,9 @@ class StatusController extends Controller
 
         $dados      =  [
             "titulo"    => "Status",
-            "titulo_formulario" =>'Editar'
+            "titulo_formulario" =>'Editar',
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "status"
         ];
        $todosStatusHabilitados = Status::PesquisarPorHabilitados();
 

@@ -26,6 +26,7 @@ class DashboardController extends Controller
             "saidas"        =>  Saida::orderBy('data','desc')->take(5)->get(),
             "entradas_hj"   =>  Entrada::whereDate('data',Carbon::now())->sum('valor_total'),
             "saidas_hj"     =>  Saida::whereDate('data',Carbon::now())->sum('valor'),
+            "menu_open"     =>  "dashboard"
         ];
         return view('admin.dashboard.index',$dados);
     }
