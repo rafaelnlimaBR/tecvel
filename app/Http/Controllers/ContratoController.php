@@ -155,6 +155,7 @@ class ContratoController extends Controller
     {
 
         $contrato    =      Contrato::find($id);
+//        dd($contrato->valorTotalPagamentos());
         if($contrato == null){
             return redirect()->route('contrato.index')->with('alerta',['tipo'=>'warning','msg'=>"Nenhum contrato foi encontrato",'icon'=>'check','titulo'=>"Falha"]);
         }

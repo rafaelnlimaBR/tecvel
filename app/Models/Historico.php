@@ -118,11 +118,38 @@ class Historico extends Model
         return $valor_total_servicos_autorizado-($valor_total_servicos_autorizado *(($desconto/100)));
     }
 
+    public function ValorTotalServicosComDesconto()
+    {
+        $valor_total_servicos       =   $this->valorTotalServico();
+        $desconto                           =   $this->contrato->desconto_servico;
+        return $valor_total_servicos-($valor_total_servicos *(($desconto/100)));
+    }
+
     public function ValorTotalPecasAutorizadoComDesconto()
     {
-        $valor_total_pecas_autorizado       =   $this->valorTotalPecasAutorizado();
+        $valor_total_pecas       =   $this->valorTotalPecasAutorizado();
+        $desconto                           =   $this->contrato->desconto_peca;
+        return $valor_total_pecas-($valor_total_pecas *(($desconto/100)));
+    }
+
+    public function ValorTotalPecasComDesconto()
+    {
+        $valor_total_pecas_autorizado       =   $this->valorTotalPecas();
         $desconto                           =   $this->contrato->desconto_peca;
         return $valor_total_pecas_autorizado-($valor_total_pecas_autorizado *(($desconto/100)));
+    }
+
+    public function valorTotalServico()
+    {
+        $historico      =   $this;
+        $valorServicoTotal    =  0;
+
+        foreach ($historico->servicos as $s){
+
+                $valorServicoTotal += $s->pivot->valor;
+
+        }
+        return $valorServicoTotal;
     }
 
     public function valorTotalServicoAutorizado()
@@ -148,6 +175,18 @@ class Historico extends Model
             }
         }
         return $valorPecaTotalAutorizado;
+    }
+
+    public function valorTotalPecas()
+    {
+        $historico      =   $this;
+        $valorPecaTotal    =  0;
+
+        foreach ($historico->pecas as $s){
+                $valorPecaTotal += $s->pivot->valor*$s->pivot->qnt;
+
+        }
+        return $valorPecaTotal;
     }
 
     public function historico_pedido()

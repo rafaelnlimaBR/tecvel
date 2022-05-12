@@ -57,6 +57,89 @@ class Contrato extends Model
         return $this->belongsTo(Veiculo::class,'veiculo_id');
     }
 
+    public function totalServicoSemDesconto()
+    {
+        $valorTotalSemDesconto  =   0;
+        $desconto               =   $this->desconto_servico;
+
+        foreach ($this->historicos as $historico){
+            $valorTotalSemDesconto  += $historico->valorTotalServico();
+        }
+        return $valorTotalSemDesconto;
+    }
+
+    public function totalServicoComDesconto()
+    {
+        $valorTotalComDesconto  =   0;
+
+
+        foreach ($this->historicos as $historico){
+            $valorTotalComDesconto  += $historico->ValorTotalServicosComDesconto();
+        }
+        return $valorTotalComDesconto;
+    }
+
+    public function TotalPecasSemDesconto()
+    {
+
+        $valorPecaSemDesconto    =  0;
+
+        foreach ($this->historicos as $historico){
+            $valorPecaSemDesconto  += $historico->valorTotalPecas();
+        }
+
+        return $valorPecaSemDesconto;
+    }
+
+    public function TotalPecasComDesconto()
+    {
+
+        $valorPecaComDesconto    =  0;
+
+        foreach ($this->historicos as $historico){
+            $valorPecaComDesconto  += $historico->ValorTotalPecasComDesconto();
+        }
+
+        return $valorPecaComDesconto;
+    }
+
+    public function qntServicos()
+    {
+        $qnt    =   0;
+        foreach ($this->historicos as $historico){
+            $qnt    =+ $historico->servicos()->count();
+        }
+        return $qnt;
+    }
+
+    public function qntPagamentos()
+    {
+        $qnt    =   0;
+        foreach ($this->historicos as $historico){
+            $qnt    =+ $historico->pagamentos()->count();
+        }
+        return $qnt;
+    }
+
+    public function qntPecas()
+    {
+        $qnt    =   0;
+        foreach ($this->historicos as $historico){
+            $qnt    =+  $historico->pecas()->count();
+        }
+        return $qnt;
+    }
+
+    public function valorTotalPagamentos()
+    {
+        $totalPagamentos    =   0;
+        foreach ($this->historicos as $historico){
+            $totalPagamentos    +=  $historico->valorTotalPago();
+        }
+
+        return $totalPagamentos;
+    }
+
 
     public static function gravar(Request $r)
     {

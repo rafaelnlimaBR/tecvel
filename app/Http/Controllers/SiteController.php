@@ -26,7 +26,7 @@ class SiteController extends Controller
     public function home()
     {
 
-        return view('welcome');
+//        return view('welcome');
         $dados  =   [
             "titulo"        =>  "Tecvel - Eletrônica Automotiva",
             "post_mais_visto"   =>  Post::orderBy('visitas','desc')->take(1)->first(),
