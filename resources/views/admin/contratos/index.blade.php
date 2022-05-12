@@ -50,6 +50,7 @@
                         <th style="width: 15%">Tipo</th>
                         <th style="width: 10%">Status</th>
                         <th style="width: 10%">Pagamento</th>
+                        <th style="width: 10%">Invoice</th>
                         <th style="width: 5%">Entrar</th>
                     </tr>
                     </thead>
@@ -92,6 +93,11 @@
                                 }
                                 @endphp
 
+                            </td>
+                            <td>
+                                <a href="{{route('contrato.invoice',['id'=>$c->id])}}" class="btn btn-success btn-sm">
+                                    <i class="fa-solid fa-print fa-sm"></i>
+                                </a>
                             </td>
                             <td>
                                 <a href="{{route('contrato.editar',['id'=>$c->id,'historico_id'=>$c->historicos->last()->id,'tela'=>"dados"])}}" class="btn btn-block btn-primary btn-xs">
