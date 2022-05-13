@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
                 <h4>
-                    <i class="fas fa-globe"></i> {{$conf->nome_empresa}}
+                    <i class="fas fa-globe"></i> {{$historico->tipo->nome}}
                     <small class="float-right">{{date('d/m/Y', strtotime(\Carbon\Carbon::now()))}}</small>
                 </h4>
             </div>
@@ -28,16 +28,16 @@
             <div class="col-sm-4 invoice-col">
                 Cliente
                 <address>
-                    <strong>{{$contrato->cliente->nome}}</strong><br>
-                    {{$contrato->cliente->telefone01}}<br>
-                    Email: {{$contrato->cliente->email}}<br>
+                    <strong>{{$historico->contrato->cliente->nome}}</strong><br>
+                    {{$historico->contrato->cliente->telefone01}}<br>
+                    Email: {{$historico->contrato->cliente->email}}<br>
 
                 </address>
             </div>
 
             <div class="col-sm-4 invoice-col">
-                <b>ID #{{$contrato->id}}</b><br>
-                <b>Data: </b>{{date('d/m/Y', strtotime($contrato->data))}}
+                <b>ID #{{$historico->contrato->id}}</b><br>
+                <b>Data: </b>{{date('d/m/Y', strtotime($historico->contrato->data))}}
                 <br>
 
 
