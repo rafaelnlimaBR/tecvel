@@ -95,7 +95,7 @@
 
                             </td>
                             <td>
-                                <a href="{{route('contrato.invoice',['id'=>$c->id])}}" class="btn btn-success btn-sm">
+                                <a href="{{route('historico.invoice',['id'=>$c->id])}}" class="btn btn-success btn-sm">
                                     <i class="fa-solid fa-print fa-sm"></i>
                                 </a>
                             </td>
