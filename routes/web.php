@@ -202,6 +202,7 @@ Route::group(['prefix'=>'admin'],function(){
 });
 
 Route::get('/{titulo}/{id}', [App\Http\Controllers\SiteController::class, 'post'])->name('site.postagem');
+Route::get('/avaliacao', [App\Http\Controllers\SiteController::class, 'avaliacao'])->name('site.avaliacao');
 Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('site.inicio');
 Route::get('/contato', [App\Http\Controllers\SiteController::class, 'contato'])->name('site.contato');
 Route::post('/contato/enviar', [App\Http\Controllers\SiteController::class, 'cadastrarContato'])->name('site.contato.cadastrar');

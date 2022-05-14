@@ -154,4 +154,9 @@ class SiteController extends Controller
                 ]);
         }
     }
+
+    public function avaliacao()
+    {
+        return redirect()->to(Configuracao::find(1)->link_avaliacao);
+    }
 }

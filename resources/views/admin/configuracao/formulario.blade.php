@@ -132,7 +132,9 @@
                                     <img style="height: 100px" src="{{\Illuminate\Support\Facades\URL::asset('/imagens')."/".$conf->logo}}" name="{{str_replace(" ", "_", $conf->nome_empresa)}}" id="{{str_replace(" ", "_", $conf->nome_empresa)}}" >
                                 </div>
                             </div>
+                            <div class="row">
 
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="confi" role="tabpanel" aria-labelledby="confi">
                             <div class="row">

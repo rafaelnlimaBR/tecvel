@@ -36,6 +36,7 @@ $table->integer('ordem_servico')->nullable();*/
             'nao_autorizado'        =>  3,
             'retorno'               =>  4,
             'autorizado'            =>  5,
+            'link_avaliacao'    =>  "https://www.google.com/search?q=tecvel+fortaleza&rlz=1C1CHBD_pt-PTBR916BR916&oq=tecvel+fortaleza&aqs=chrome..69i57j46i175i199i512j69i60.2520j0j7&sourceid=chrome&ie=UTF-8#lrd=0x7c748571eaff129:0x9b9fca91feddd3d4,1,,,"
         ]);
     }
 }
