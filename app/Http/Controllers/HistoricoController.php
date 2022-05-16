@@ -41,9 +41,6 @@ class HistoricoController extends Controller
                 ->with('alerta',['tipo'=>'warning','msg'=>"Histórico não encontrado",'icon'=>'check','titulo'=>"Não permitido"]);
         }
 
-
-
-
         $total          =   $historico->valorTotalComDesconto()-$historico->valorTotalPago();
         $dados      =  [
             "titulo"    => "Faturar Contrato ".$historico->contrato->id,
