@@ -5,8 +5,8 @@
                 <div class="container h-100">
                     <div class="row align-items-center h-100">
                         <div class="col-md-12 text-center">
-                            <h2 class="slide-title" data-animation-in="slideInLeft">{{$banner->titulo}}</h2>
-                            <h3 class="slide-sub-title" data-animation-in="slideInRight">{{$banner->texto}}</h3>
+                            <h4 class="slide-title" data-animation-in="slideInLeft">{{$banner->titulo}}</h4>
+                            <h5 class="slide-sub-title" data-animation-in="slideInRight">{{$banner->texto}}</h5>
                             @if($banner->url != null)
                                 <p data-animation-in="slideInLeft" data-duration-in="1.2">
                                     <a href="{{$banner->url}}" class="slider btn btn-primary">Acessar</a>

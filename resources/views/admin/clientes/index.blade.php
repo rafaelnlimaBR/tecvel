@@ -47,7 +47,7 @@
                         <tr>
                             <td>{{$c->id}}</td>
                             <td>{{$c->nome}}</td>
-                            <td><a href="https://wa.me/55{{$c->telefone01}}" target="new">{{$c->telefone01}}</a> </td>
+                            <td><a href="https://wa.me/55{{str_replace(')','',str_replace('(','',$c->telefone01))}}" target="new">{{$c->telefone01}}</a> </td>
                             <td>{{$c->telefone02}}</td>
                             <td>
                                 <a href="{{route('cliente.editar',$c->id)}}" class="btn btn-block btn-warning btn-xs">

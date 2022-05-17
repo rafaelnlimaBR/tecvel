@@ -199,10 +199,19 @@ Route::group(['prefix'=>'admin'],function(){
     View::composer(['admin.entradas.includes.form'],function($view){
         $view->with(['tipos'=>\App\Models\TipoPagamentos::all()]);
     });
+
+    View::composer(['admin.home'],function($view){
+        $view->with(['comentarios'=>\App\Models\Comentario::visualizados(0)->get()]);
+    });
+
+    View::composer(['admin.home'],function($view){
+        $view->with(['contatos'=>\App\Models\Contato::visualizados(0)->get()]);
+    });
 });
 
 Route::get('/{titulo}/{id}', [App\Http\Controllers\SiteController::class, 'post'])->name('site.postagem');
 Route::get('/avaliacao', [App\Http\Controllers\SiteController::class, 'avaliacao'])->name('site.avaliacao');
+Route::get('/whatsapp-da-tecvel', [App\Http\Controllers\SiteController::class, 'whatsapp'])->name('site.whatsapp');
 Route::get('/', [App\Http\Controllers\SiteController::class, 'home'])->name('site.inicio');
 Route::get('/contato', [App\Http\Controllers\SiteController::class, 'contato'])->name('site.contato');
 Route::post('/contato/enviar', [App\Http\Controllers\SiteController::class, 'cadastrarContato'])->name('site.contato.cadastrar');

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -34,6 +35,11 @@ class Contato extends Model
     public function cliente()
     {
         return $this->belongsTo(Cliente::class,'cliente_id');
+    }
+
+    public function diferencaTempo()
+    {
+        return now()->diffForHumans(Carbon::parse($this->created_at));
     }
 
     public function visualizar()

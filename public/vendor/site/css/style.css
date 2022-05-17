@@ -10,6 +10,8 @@ Description: Constra - Construction Html5 Template
 @import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,500,500i,600,600i,700,700i,800|Open+Sans:400,400i,600,600i,700,700i,800&display=swap);
 /* Typography
 ================================================== */
+
+
 body {
   background: #fff;
   color: #555;
@@ -3545,3 +3547,7 @@ label {
 }
 
 /*# sourceMappingURL=maps/style.css.map */
+.slide-sub-title{
+  background-color: rgba(0,0,0,0.7);
+  margin: 0px;
+}

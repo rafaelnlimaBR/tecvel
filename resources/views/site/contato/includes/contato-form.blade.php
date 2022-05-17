@@ -24,7 +24,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Whatsapp</label>
-                        <input class="form-control form-control-subject @error('whatsapp') is-invalid @enderror" name="whatsapp" id="subject" placeholder="" value="{{old('whatsapp')}}" >
+                        <input class="form-control form-control-subject telefone @error('whatsapp') is-invalid @enderror" name="whatsapp" id="subject" placeholder="" value="{{old('whatsapp')}}" >
                     </div>
                 </div>
             </div>
@@ -38,40 +38,45 @@
         </form>
     </div>
     <script type="text/javascript">
-        $("form[name='contato-form']").submit(function () {
+        $(document).ready(function() {
+            $('.telefone').mask("(99)999999999");
+            $("form[name='contato-form']").submit(function () {
 
-            $("button[name=botao-cadastrar-contato]").attr("disabled", "true");
-            $("button[name=botao-cadastrar-contato]").html('Enviando');
-
-
-            var dados   = $(this).serialize();
-            var rota    =   this.action;
-
-            $.ajax({
-                type: "POST",
-                url: rota,
-                data: dados,
-                success: function( data )
-                {
+                $("button[name=botao-cadastrar-contato]").attr("disabled", "true");
+                $("button[name=botao-cadastrar-contato]").html('Enviando');
 
 
-                    if('erro' in data){
-                        console.log(data.erro);
-                        $('.form-contato').html(data.form);
-                    }else{
+                var dados   = $(this).serialize();
+                var rota    =   this.action;
 
-                        $('.form-contato').html(data.form);
+                $.ajax({
+                    type: "POST",
+                    url: rota,
+                    data: dados,
+                    success: function( data )
+                    {
+
+
+                        if('erro' in data){
+                            console.log(data.erro);
+                            $('.form-contato').html(data.form);
+                        }else{
+
+                            $('.form-contato').html(data.form);
+                        }
+                        $("button[name=botao-cadastrar-contato]").prop( "disabled", false );
+                        $("button[name=botao-cadastrar-contato]").html('Enviar Mensagem');
+                    },
+                    error:function (data,e) {
+                        console.log(data);
                     }
-                    $("button[name=botao-cadastrar-contato]").prop( "disabled", false );
-                    $("button[name=botao-cadastrar-contato]").html('Enviar Mensagem');
-                },
-                error:function (data,e) {
-                    console.log(data);
-                }
+                });
+                return false;
+
+
             });
-            return false;
-
-
         });
+
+
     </script>
 </div><!-- Content row -->

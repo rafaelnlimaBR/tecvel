@@ -17,7 +17,7 @@
                             <a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#horarios" role="tab" aria-controls="teste02" aria-selected="false">Informações</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#teste02" role="tab" aria-controls="teste02" aria-selected="false">Teste02</a>
+                            <a class="nav-link" id="custom-tabs-one-home-tab" data-toggle="pill" href="#notif" role="tab" aria-controls="teste02" aria-selected="false">Notificações</a>
                         </li>
                     </ul>
                 </div>
@@ -211,8 +211,26 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="teste02" role="tabpanel" aria-labelledby="teste02">
-                            teste
+                        <div class="tab-pane fade" id="notif" role="tabpanel" aria-labelledby="notif">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Novo Contato</label>
+                                            {{Form::select('not_novo_contato', [0=>'Não',1=>'Sim'], $conf->not_novo_contato,['class'=>'form-control'])}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Novo Comentário</label>
+                                            {{Form::select('not_novo_comentario', [0=>'Não',1=>'Sim'], $conf->not_novo_comentario,['class'=>'form-control'])}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 

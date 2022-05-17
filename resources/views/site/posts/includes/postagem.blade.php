@@ -17,7 +17,7 @@
                                 <i class="far fa-user"></i><a href="#"> {{$post->autor->name}}</a>
                             </span>
                 <span class="post-cat">
-                                        <i class="far fa-folder-open"></i><a href="#"> News</a>
+
                                     </span>
                 <span class="post-meta-date"><i class="far fa-calendar"></i>{{date('d/m/Y H:m', strtotime($post->data))}}</span>
                 <span class="post-comment"><i class="far fa-comment"></i> {{$post->comentarios()->habilitados(1)->count()}}<a href="#" class="comments-link">Comentários</a></span>

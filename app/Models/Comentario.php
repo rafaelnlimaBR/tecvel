@@ -63,6 +63,11 @@ class Comentario extends Model
         }
     }
 
+    public function diferencaTempo()
+    {
+        return now()->diffForHumans(Carbon::parse($this->data));
+    }
+
     public static function gravar(Request $r)
     {
         $cliente                    =   Cliente::firstOrCreate(['email'=>strtolower($r->get('email'))],['nome'=>strtoupper($r->get('nome')),'telefone01'=>$r->get('whatsapp')]);

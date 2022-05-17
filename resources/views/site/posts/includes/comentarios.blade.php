@@ -18,18 +18,21 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="name"  class="w-100"><input class="form-control @error('nome') is-invalid @enderror" name="nome" id="name" placeholder="Nome Completo" type="text"  ></label>
+                        <label for="name"  class="w-100">
+                            <input class="form-control @error('nome') is-invalid @enderror" name="nome" id="name" placeholder="Nome Completo" type="text"  ></label>
                     </div>
                 </div><!-- Col 4 end -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="name"  class="w-100 telefone"><input class="form-control @error('whatsapp') is-invalid @enderror" name="whatsapp" placeholder="Whatsapp" type="text"   ></label>
+                        <label for="name"  class="w-100 ">
+                            <input class="form-control telefone @error('whatsapp') is-invalid @enderror" name="whatsapp" placeholder="Whatsapp" type="text"   ></label>
                     </div>
                 </div><!-- Col 4 end -->
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="email" class="w-100"><input class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Seu Email" type="text"></label>
+                        <label for="email" class="w-100">
+                            <input class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Seu Email" type="text"></label>
                     </div>
                 </div>
 
@@ -93,46 +96,53 @@
 </div><!-- Post comment end -->
 
 
+    <script type="text/javascript">
 
+
+
+    </script>
 
 <script type="text/javascript">
 
-    // $('.telefone').mask("(99)999999999");
 
-    $("form[name='postar-comentario']").submit(function () {
+    $(document).ready(function() {
+        $('.telefone').mask("(99)999999999");
+        $("form[name='postar-comentario']").submit(function () {
 
-        $("button[name=postar-comentario]").attr("disabled", "true");
-        $("button[name=postar-comentario]").html('Enviando');
-
-
-        var dados   = $(this).serialize();
-        var rota    =   this.action;
-
-        $.ajax({
-            type: "POST",
-            url: rota,
-            data: dados,
-            success: function( data )
-            {
+            $("button[name=postar-comentario]").attr("disabled", "true");
+            $("button[name=postar-comentario]").html('Enviando');
 
 
-                if('erro' in data){
-                    console.log(data.erro);
-                    $('#comentarios').html(data.comentarios);
-                }else{
+            var dados   = $(this).serialize();
+            var rota    =   this.action;
 
-                    $('#comentarios').html(data.comentarios);
+            $.ajax({
+                type: "POST",
+                url: rota,
+                data: dados,
+                success: function( data )
+                {
+
+
+                    if('erro' in data){
+                        console.log(data.erro);
+                        $('#comentarios').html(data.comentarios);
+                    }else{
+
+                        $('#comentarios').html(data.comentarios);
+                    }
+                    $("button[name=postar-comentario]").prop( "disabled", false );
+                    $("button[name=postar-comentario]").html('Enviar Mensagem');
+                },
+                error:function (data,e) {
+                    console.log(data);
                 }
-                $("button[name=postar-comentario]").prop( "disabled", false );
-                $("button[name=postar-comentario]").html('Enviar Mensagem');
-            },
-            error:function (data,e) {
-                console.log(data);
-            }
+            });
+            return false;
+
+
         });
-        return false;
-
-
     });
+
 
 </script>

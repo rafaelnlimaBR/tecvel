@@ -39,7 +39,8 @@ class Configuracao extends Model
         $configuracao->tags                 =   $r->get('tags');
         $configuracao->horario_funcionamento=   $r->get('horarios');
         $configuracao->sobre_nos            =   $r->get('sobre_nos');
-
+        $configuracao->not_novo_contato     =   $r->get('not_novo_contato');
+        $configuracao->not_novo_comentario  =   $r->get('not_novo_comentario');
 
         if(\request()->hasFile('logo_empresa')){
             if(File::exists(public_path().'/imagens/'.$configuracao->logo)){

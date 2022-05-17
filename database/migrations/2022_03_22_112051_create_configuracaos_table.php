@@ -37,6 +37,8 @@ return new class extends Migration
             $table->integer('nao_autorizado')->nullable();
             $table->integer('autorizado')->nullable();
             $table->text('sobre_nos')->nullable();
+            $table->boolean('not_novo_contato')->default(1);
+            $table->boolean('not_novo_comentario')->default(1);
 
         });
     }

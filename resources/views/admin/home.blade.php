@@ -7,8 +7,10 @@
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <!-- Font Awesome Icons -->
-    {{--<script src="{{ asset('plugins/fontawesome-free/css/all.css') }}"></script>--}}
+
     <!-- IonIcons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -16,6 +18,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
     {{--<script src="{{ asset('dist/css/adminlte.css') }}"></script>--}}
     @include('admin.includes.css')
 
@@ -69,85 +73,56 @@
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-comments"></i>
-                    <span class="badge badge-danger navbar-badge">3</span>
+                    @if($comentarios->count() > 0)
+                    <span class="badge badge-danger navbar-badge">{{$comentarios->count()}}</span>
+                    @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            {{--<img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">--}}
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Brad Diesel
-                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">Call me whenever you can...</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                    @foreach($comentarios as $comentario)
+                        <a href="{{route('comentario.editar',['id'=>$comentario->id])}}" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        {{$comentario->autor->nome}}
+                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                    </h3>
+                                    <p class="text-sm">{{substr($comentario->texto,0,50)}}</p>
+                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> {{$comentario->diferencaTempo()}}</p>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
+                            <!-- Message End -->
+                        </a>
+                    @endforeach
+
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            {{--<img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">--}}
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    John Pierce
-                                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">I got your message bro</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            {{--<img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">--}}
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Nora Silvester
-                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">The subject goes here</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+
+                    <a href="" class="dropdown-item dropdown-footer">Veja todos</a>
                 </div>
             </li>
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
+
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">15</span>
+                    @if($contatos->count() > 0)
+                    <span class="badge badge-warning navbar-badge">{{$contatos->count()}}</span>
+                    @endif
                 </a>
+
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-item dropdown-header">15 Notifications</span>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> 4 new messages
-                        <span class="float-right text-muted text-sm">3 mins</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> 8 friend requests
-                        <span class="float-right text-muted text-sm">12 hours</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
-                        <span class="float-right text-muted text-sm">2 days</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+
+                    @foreach($contatos as $contato)
+                        <a href="{{route('contato.visualizar',['id'=>$contato->id])}}" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i> {{$contato->cliente->nome}}
+                            <p class="text-sm">{{substr($contato->mensagem,0,50)}}</p>
+                            <span class="float-right text-muted text-sm">{{$contato->diferencaTempo()}}</span>
+                        </a>
+
+                    @endforeach
+                    <a href="{{route('contato.index')}}" class="dropdown-item dropdown-footer">Ver todos</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -207,10 +182,10 @@
 
     <!-- Main Footer -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-        All rights reserved.
+        <strong>Copyright &copy; 2022-{{now()->year}} <a target="_new" href="https://www.instagram.com/rafael_nlima/">Rafael N. Lima</a>.</strong>
+        Todos direitos reservados
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.2.0
+            {{--<b>Version</b> 3.2.0--}}
         </div>
     </footer>
 </div>
@@ -228,15 +203,18 @@
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
 <!-- OPTIONAL SCRIPTS -->
 
-<script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
 <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
 <script src="{{ asset('vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js') }}"></script>
+
+<script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
 @include('admin.includes.scripts')
 
 <!-- AdminLTE for demo purposes -->

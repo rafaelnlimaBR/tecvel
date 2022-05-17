@@ -17,21 +17,21 @@ use function Symfony\Component\Mime\Header\all;
 
 class SiteController extends Controller
 {
-
+    private $conf    ;
     public function __construct()
     {
-
+        $this->conf =   Configuracao::find(1);
     }
 
     public function home()
     {
 
-        return view('welcome');
+//        return view('welcome');
         $dados  =   [
             "titulo"        =>  "Tecvel - Eletrônica Automotiva",
             "post_mais_visto"   =>  Post::orderBy('visitas','desc')->take(1)->first(),
             "posts"         =>  Post::habilitados(1)->orderBy('data', 'desc')->get(),
-            'dados'         =>  Configuracao::find(1),
+            'dados'         =>  $this->conf,
             'active'        =>  'inicio',
             'banners'       =>  Banner::habilitados(1)->Sequenciadas('asc')->get(),
             'avaliacoes'    =>  Avaliacao::habilitados(1)->Sequenciadas('asc')->get()
@@ -41,11 +41,11 @@ class SiteController extends Controller
 
     public function posts()
     {
-        $conf   =   Configuracao::find(1);
+        
         $dados  =   [
             "titulo"        =>  "Tecvel - Postagens",
             "posts"         =>  Post::PesuisarPorTitulo(\request('titulo'))->habilitados(1)->orderBy('data', 'desc')->paginate(1),
-            'dados'         =>  $conf,
+            'dados'         =>  $this->conf,
             'categorias'    =>  Categoria::all(),
             'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get(),
             'postagems_mais'    =>  Post::orderBy('visitas','desc')->take(5)->get(),
@@ -65,7 +65,7 @@ class SiteController extends Controller
             "titulo"        =>  "Tecvel - ".$post->titulo,
             "post"          =>  $post,
             "posts"         =>  Post::orderBy('data', 'desc'),
-            'dados'         =>  Configuracao::find(1),
+            'dados'         =>  $this->conf,
             'categorias'    =>  Categoria::all(),
             'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get(),
             'postagems_mais'    =>  Post::orderBy('visitas','desc')->take(5)->get(),
@@ -78,7 +78,7 @@ class SiteController extends Controller
 
     public function comentar()
     {
-        $conf   =   Configuracao::find(1);
+
         try{
             $validacao  =   Comentario::validacao(request()->all());
 
@@ -86,16 +86,16 @@ class SiteController extends Controller
 
             if($validacao->fails()){
 
-                return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('alerta',['tipo'=>'erro','mensagem'=>'Preencha os camos obrigatórios'])->with('dados',$conf)->with('post',$postagem)->withErrors($validacao)->render()]);
+                return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('alerta',['tipo'=>'erro','mensagem'=>'Preencha os camos obrigatórios'])->with('dados',$this->conf)->with('post',$postagem)->withErrors($validacao)->render()]);
             }
 
             $comentario = Comentario::gravar(\request());
-            Mail::send(new NotificacaoComentario($comentario,$conf->email));
-            return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('dados', $conf)->with('post',$postagem)->with('alerta',['tipo'=>'sucessro','mensagem'=>'Comentado com sucesso'])->render()]);
+            Mail::send(new NotificacaoComentario($comentario,$this->conf->email));
+            return response()->json(['comentarios'=>view('site.posts.includes.comentarios')->with('dados', $this->conf)->with('post',$postagem)->with('alerta',['tipo'=>'sucessro','mensagem'=>'Comentado com sucesso'])->render()]);
         }catch (\Exception $e){
             return response()->json(
                 [
-                    'comentarios'=>view('site.posts.includes.comentarios')->with('dados', $conf)->with('post',$postagem)->with('alerta',['tipo'=>'erro','mensagem'=>'Houve algum erro ao comentar esse post, favor informar nesse numero : '.$conf->telefone_movel])->render(),
+                    'comentarios'=>view('site.posts.includes.comentarios')->with('dados', $this->conf)->with('post',$postagem)->with('alerta',['tipo'=>'erro','mensagem'=>'Houve algum erro ao comentar esse post, favor informar nesse numero : '.$this->conf->telefone_movel])->render(),
                     'erro'      =>  $e->getMessage()
                 ]);
         }
@@ -111,7 +111,7 @@ class SiteController extends Controller
         $dados  =   [
             "titulo"        =>  "Tecvel - ".$categoria->nome,
             "posts"         =>  $categoria->posts(),
-            'dados'         =>  Configuracao::find(1),
+            'dados'         =>  $this->conf,
             'categorias'    =>  Categoria::all(),
             'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get(),
             'postagems_mais'    =>  Post::orderBy('visitas','desc')->take(5)->get()
@@ -124,7 +124,7 @@ class SiteController extends Controller
     {
         $dados  =   [
             "titulo"        =>  "Tecvel - Contato",
-            'dados'         =>  Configuracao::find(1),
+            'dados'         =>  $this->conf,
             'active'        =>  'contato',
         ];
         return view('site.contato.contato',$dados);
@@ -134,22 +134,22 @@ class SiteController extends Controller
     {
 
         try{
-            $conf   =   Configuracao::find(1);
+            $this->conf   =  $this->conf;
             $validacao  =   Contato::validacao(request()->all());
 
 
             if($validacao->fails()){
-                return response()->json(['form'=>view('site.contato.includes.contato-form')->with('alerta',['tipo'=>'erro','mensagem'=>'Preencha os camos obrigatórios'])->with('dados',$conf)->withInput(\request()->all())->withErrors($validacao)->render()]);
+                return response()->json(['form'=>view('site.contato.includes.contato-form')->with('alerta',['tipo'=>'erro','mensagem'=>'Preencha os camos obrigatórios'])->with('dados',$this->conf)->withInput(\request()->all())->withErrors($validacao)->render()]);
             }
 
             $contato    =   new Contato();
             $contato    =   $contato->gravar(\request());
-            Mail::send(new NotificacaoContato($contato,$conf->email,"Novo Contato"));
-            return response()->json(['form'=>view('site.contato.includes.contato-form')->with('dados', $conf)->with('alerta',['tipo'=>'sucessro','mensagem'=>'Obrigado pelo contato, logo entraremos com uma resposta'])->render()]);
+            Mail::send(new NotificacaoContato($contato,$this->conf->email,"Novo Contato"));
+            return response()->json(['form'=>view('site.contato.includes.contato-form')->with('dados', $this->conf)->with('alerta',['tipo'=>'sucessro','mensagem'=>'Obrigado pelo contato, logo entraremos com uma resposta'])->render()]);
         }catch (\Exception $e){
             return response()->json(
                 [
-                    'comentarios'=>view('site.contato.includes.contato-form')->with('dados', $conf)->with('alerta',['tipo'=>'erro','mensagem'=>'Houve algum erro ao comentar esse post, favor informar nesse numero : '.$conf->telefone_movel])->render(),
+                    'comentarios'=>view('site.contato.includes.contato-form')->with('dados', $this->conf)->with('alerta',['tipo'=>'erro','mensagem'=>'Houve algum erro ao comentar esse post, favor informar nesse numero : '.$this->conf->telefone_movel])->render(),
                     'erro'      =>  $e->getMessage()
                 ]);
         }
@@ -157,6 +157,11 @@ class SiteController extends Controller
 
     public function avaliacao()
     {
-        return redirect()->to(Configuracao::find(1)->link_avaliacao);
+        return redirect()->to($this->conf->link_avaliacao);
+    }
+
+    public function whatsapp()
+    {
+        return redirect()->to('https://wa.me/55'.str_replace('(','',str_replace(')','',$this->conf->telefone_movel)));
     }
 }

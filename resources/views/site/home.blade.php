@@ -113,7 +113,7 @@
                     <div class="row align-items-center">
                         <div class="logo col-lg-3 text-center text-lg-left mb-3 mb-md-5 mb-lg-0">
                             <a class="d-block" href="index.html">
-                                <img loading="lazy" src="{{url('imagens/'.$dados->logo)}}" alt="Constra">
+                                <img loading="lazy" style="height: 80px"  src="{{url('imagens/'.$dados->logo)}}" alt="logo-tecvel">
                             </a>
                         </div><!-- logo end -->
 
@@ -164,6 +164,7 @@
 
 
                                     <li class="nav-item {{isset($active)?$active == "contato"?"active":"":""}}"><a class="nav-link" href="{{route('site.contato')}}">Nosso Contato</a></li>
+                                    <li class="nav-item "><a target="_new" class="nav-link" href="{{$dados->link_avaliacao}}">Sua Avaliação</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -202,7 +203,7 @@
                     <div class="col-lg-4 col-md-6 footer-widget footer-about">
 
                         @if($dados->logo != null)
-                        <img style="height: 140px; width: 200px" loading="lazy" width="200px" class="footer-logo" src="{{url('imagens/'.$dados->logo)}}" alt="Constra">
+                        <img style="height: 150px; " loading="lazy"  class="footer-logo" src="{{url('imagens/'.$dados->logo)}}" alt="Constra">
                         @endif
 
                     </div><!-- Col end -->
@@ -238,21 +239,19 @@
                 <div class="row align-items-center">
                     <div class="col-md-6">
                         <div class="copyright-info text-center text-md-left">
-              <span>Copyright &copy; <script>
-                  document.write(new Date().getFullYear())
-                </script>, Rafael Lima <a href="">Themefisher</a></span>
+              <span>Copyright &copy; {{now()->year}},<a href="https://www.instagram.com/rafael_nlima/" target="_new"> Rafael Lima </a></span>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="footer-menu text-center text-md-right">
-                            <ul class="list-unstyled">
+                            {{--<ul class="list-unstyled">
                                 <li><a href="about.html">About</a></li>
                                 <li><a href="team.html">Our people</a></li>
                                 <li><a href="faq.html">Faq</a></li>
                                 <li><a href="news-left-sidebar.html">Blog</a></li>
                                 <li><a href="pricing.html">Pricing</a></li>
-                            </ul>
+                            </ul>--}}
                         </div>
                     </div>
                 </div><!-- Row end -->
@@ -272,7 +271,7 @@
     ================================================== -->
     <script src="{{ asset('vendor/jquery/jquery.js') }}"></script>
     <!-- Bootstrap jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
     <script src="{{ asset('vendor/site/plugins/bootstrap/bootstrap.min.js') }}" defer></script>
     <!-- Slick Carousel -->
     <script src="{{ asset('vendor/site/plugins/slick/slick.min.js') }}"></script>
@@ -287,11 +286,16 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" defer></script>
     <!-- Google Map Plugin-->
     <script src="{{ asset('vendor/site/plugins/google-map/map.js') }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
 
 
     <!-- Template custom -->
     <script src="{{ asset('vendor/site/js/script.js') }}"></script>
+
+    <script type="text/javascript">
+
+    </script>
 
 </div><!-- Body inner end -->
 </body>

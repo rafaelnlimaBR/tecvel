@@ -49,7 +49,7 @@
                 success: function( data )
                 {
                     if('erro' in data){
-                        alert(data.erro);
+                        alert(data);
                     }else{
                         var dropdown = $('#taxas-select');
                         dropdown.empty();
