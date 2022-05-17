@@ -112,7 +112,7 @@
                 <div class="logo-area">
                     <div class="row align-items-center">
                         <div class="logo col-lg-3 text-center text-lg-left mb-3 mb-md-5 mb-lg-0">
-                            <a class="d-block" href="index.html">
+                            <a class="d-block" href="#">
                                 <img loading="lazy" style="height: 80px"  src="{{url('imagens/'.$dados->logo)}}" alt="logo-tecvel">
                             </a>
                         </div><!-- logo end -->
