@@ -142,6 +142,12 @@
                                 <p>Avaliações</p>
                             </a>
                         </li>
+                        <li class="nav-item ">
+                            <a href="{{route('categoria.index')}}" class="nav-link {{isset($menu_active)?$menu_active=="categorias"?"active":"":""}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Categorias</p>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>

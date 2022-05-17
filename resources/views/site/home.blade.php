@@ -160,7 +160,7 @@
                                 <ul class="nav navbar-nav mr-auto">
                                     <li class="nav-item {{isset($active)?$active == "inicio"?"active":"":""}}"><a class="nav-link" href="{{route('site.inicio')}}">Início</a></li>
 
-                                    <li class="nav-item {{isset($active)?$active == "post"?"active":"":""}}"><a class="nav-link" href="{{route('site.postagens')}}">Postagens</a></li>
+                                    <li class="nav-item {{isset($active)?$active == "post"?"active":"":""}}"><a class="nav-link" href="{{route('site.postagens')}}">Serviços</a></li>
 
 
                                     <li class="nav-item {{isset($active)?$active == "contato"?"active":"":""}}"><a class="nav-link" href="{{route('site.contato')}}">Nosso Contato</a></li>
