@@ -69,12 +69,14 @@
                     <tbody>
                     @if($contrato->historicos->last()->tipo->id != $conf->orcamento)
                         @foreach($contrato->historicos as $h)
-                            @foreach($h->servicos as $servico)
-                                <tr>
-                                    <td style="{{$servico->pivot->autorizado == 0?"text-decoration:line-through":""}};">{{$servico->descricao}}</td>
-                                   <td style="{{$servico->pivot->autorizado == 0?"text-decoration:line-through":""}};">R$ {{$servico->pivot->valor}}</td>
-                                </tr>
-                            @endforeach
+                            @if($h->tipo->id != $conf->orcamento)
+                                @foreach($h->servicos as $servico)
+                                    <tr>
+                                        <td style="{{$servico->pivot->autorizado == 0?"text-decoration:line-through":""}};">{{$servico->descricao}}</td>
+                                       <td style="{{$servico->pivot->autorizado == 0?"text-decoration:line-through":""}};">R$ {{$servico->pivot->valor}}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         @endforeach
                     @else
                         @foreach($contrato->historicos->last()->servicos as $servico)

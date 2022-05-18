@@ -170,10 +170,7 @@ class Contrato extends Model
         return $qnt;
     }
 
-    public function estaPago()
-    {
-        
-    }
+
 
     public function qntPecas()
     {
