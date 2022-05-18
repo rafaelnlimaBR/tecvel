@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
                 <h4>
-                    <i class="fas fa-globe"></i> {{$historico->tipo->nome}}
+                    <i class="fas fa-globe"></i> {{$contrato->historicos->last()->tipo->descricao}}
                     <small class="float-right">{{date('d/m/Y', strtotime(\Carbon\Carbon::now()))}}</small>
                 </h4>
             </div>
@@ -14,7 +14,12 @@
         </div>
 
         <div class="row invoice-info">
-            <div class="col-sm-4 invoice-col">
+            <div class="col-sm-3 invoice-col">
+                @if($conf->logo != "")
+                    <img loading="lazy" style="height: 100px; margin:35px 0 0 15px"  src="{{url('imagens/'.$conf->logo)}}" alt="logo-tecvel">
+                @endif
+            </div>
+            <div class="col-sm-3 invoice-col">
                 Dados
                 <address>
                     <strong>{{$conf->nome_empresa}}</strong><br>
@@ -25,80 +30,113 @@
                 </address>
             </div>
 
-            <div class="col-sm-4 invoice-col">
+            <div class="col-sm-3 invoice-col">
                 Cliente
                 <address>
-                    <strong>{{$historico->contrato->cliente->nome}}</strong><br>
-                    {{$historico->contrato->cliente->telefone01}}<br>
-                    Email: {{$historico->contrato->cliente->email}}<br>
+                    <strong>{{$contrato->cliente->nome}}</strong><br>
+                    {{$contrato->cliente->telefone01}}<br>
+                    Email: {{$contrato->cliente->email}}<br>
 
                 </address>
             </div>
 
-            <div class="col-sm-4 invoice-col">
-                <b>ID #{{$historico->contrato->id}}</b><br>
-                <b>Data: </b>{{date('d/m/Y', strtotime($historico->contrato->data))}}
+            <div class="col-sm-3 invoice-col">
+                <b>ID #{{$contrato->id}}</b><br>
+                <b>Data: </b>{{date('d/m/Y', strtotime($contrato->data))}}
                 <br>
 
 
             </div>
 
         </div>
-
-
+        @if($contrato->qntServicos() >= 1)
         <div class="row">
             <div class="col-12 table-responsive">
-                <h5>Serviços | <b>TOTAL: R$ {{$contrato->totalServicoSemDesconto()}}</b></h5>
+
+
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>Serviço</th>
+                        <th>Serviço
+                            @if($contrato->historicos->last()->tipo->id != $conf->orcamento)
+                                | <b>TOTAL: R$ {{$contrato->TotalServicoAutorizadoSemDesconto()}}</b>
+                            @endif
+                        </th>
                         <th style="width: 20%">Valor</th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($contrato->historicos as $h)
-                        @foreach($h->servicos as $s)
+                    @if($contrato->historicos->last()->tipo->id != $conf->orcamento)
+                        @foreach($contrato->historicos as $h)
+                            @foreach($h->servicos as $servico)
+                                <tr>
+                                    <td style="{{$servico->pivot->autorizado == 0?"text-decoration:line-through":""}};">{{$servico->descricao}}</td>
+                                   <td style="{{$servico->pivot->autorizado == 0?"text-decoration:line-through":""}};">R$ {{$servico->pivot->valor}}</td>
+                                </tr>
+                            @endforeach
+                        @endforeach
+                    @else
+                        @foreach($contrato->historicos->last()->servicos as $servico)
                             <tr>
-                                <td>{{$s->descricao}}</td>
-                               <td>R$ {{$s->pivot->valor}}</td>
+                                <td>{{$servico->descricao}}</td>
+                                <td>R$ {{$servico->pivot->valor}}</td>
                             </tr>
                         @endforeach
-                    @endforeach
+                    @endif
                     </tbody>
                 </table>
             </div>
 
         </div>
+        @endif
+        @if($contrato->qntPecas() >= 1)
         <div class="row">
             <div class="col-12 table-responsive">
-                <h5>Peças | <b>TOTAL: R$ {{$contrato->TotalPecasSemDesconto()}}</b></h5>
+
+
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>Peça</th>
+                        <th>Peça
+                            @if($contrato->historicos->last()->tipo->id != $conf->orcamento)
+                                | <b>TOTAL: R$ {{$contrato->TotalPecasAutorizadoSemDesconto()}}</b>
+                            @endif
+                        </th>
                         <th>Qnt</th>
                         <th>Valor</th>
                         <th>Total</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($contrato->historicos as $h)
-                        @foreach($h->pecas as $p)
+                    @if($contrato->historicos->last()->tipo->id != $conf->orcamento)
+                        @foreach($contrato->historicos as $h)
+                            @foreach($h->pecas as $peca)
+                                <tr>
+                                    <td style="{{$peca->pivot->autorizado == 0?"text-decoration:line-through":""}};">{{$peca->descricao}}</td>
+                                    <td style="{{$peca->pivot->autorizado == 0?"text-decoration:line-through":""}};">{{$peca->pivot->qnt}}</td>
+                                    <td style="{{$peca->pivot->autorizado == 0?"text-decoration:line-through":""}};">R$ {{$peca->pivot->valor}}</td>
+                                    <td style="{{$peca->pivot->autorizado == 0?"text-decoration:line-through":""}};">R$ {{$peca->pivot->valor*$peca->pivot->qnt}}</td>
+                                </tr>
+                            @endforeach
+                        @endforeach
+                    @else
+                        @foreach($contrato->historicos->last()->pecas as $peca)
                             <tr>
-                                <td>{{$p->descricao}}</td>
-                                <td>{{$p->pivot->qnt}}</td>
-                                <td>R$ {{$p->pivot->valor}}</td>
-                                <td>R$ {{$p->pivot->valor*$p->pivot->qnt}}</td>
+                                <td>{{$peca->descricao}}</td>
+                                <td>{{$peca->pivot->qnt}}</td>
+                                <td>R$ {{$peca->pivot->valor}}</td>
+                                <td>R$ {{$peca->pivot->valor*$peca->pivot->qnt}}</td>
                             </tr>
                         @endforeach
-                    @endforeach
+
+                    @endif
                     </tbody>
                 </table>
             </div>
 
         </div>
+        @endif
         <div class="row">
 
             <div class="col-6">
@@ -114,23 +152,23 @@
                         <tbody>
                             <tr>
                                 <th style="width:50%">Subtotal:</th>
-                                <td>R$ {{$contrato->totalServicoSemDesconto()+$contrato->TotalPecasSemDesconto()}}</td>
+                                <td>R$ {{$contrato->totalServicoAutorizadoSemDesconto()+$contrato->TotalPecasAutorizadoSemDesconto()}}</td>
                             </tr>
                             @if($contrato->qntServicos() >= 1)
                             <tr>
                                 <th>Serviços {{$contrato->desconto_servico == 0?"":'('.$contrato->desconto_servico.'%)'}}</th>
-                                <td>R$ {{$contrato->totalServicoComDesconto() .' (R$ '.$contrato->TotalServicoSemDesconto().')'}} </td>
+                                <td>R$ {{$contrato->totalServicoAutorizadoComDesconto() .' (R$ '.$contrato->TotalPecasAutorizadoSemDesconto().')'}} </td>
                             </tr>
                             @endif
                             @if($contrato->qntPecas() >= 1)
                             <tr>
                                 <th>Peças {{$contrato->desconto_peca == 0?"":'('.$contrato->desconto_peca.'%)'}}</th>
-                                <td>R$ {{$contrato->totalPecasComDesconto()}} (R$ {{$contrato->TotalPecasSemDesconto()}})</td>
+                                <td>R$ {{$contrato->TotalPecasAutorizadoComDesconto()}} (R$ {{$contrato->TotalPecasAutorizadoSemDesconto()}})</td>
                             </tr>
                             @endif
                             <tr>
                                 <th>Total:</th>
-                                <td>R$ {{$contrato->totalPecasComDesconto()+$contrato->totalServicoComDesconto()}}</td>
+                                <td>R$ {{$contrato->totalPecasAutorizadoComDesconto()+$contrato->totalServicoAutorizadoComDesconto()}}</td>
                             </tr>
                             <tr>
                                 @if($contrato->qntPagamentos() >= 1)

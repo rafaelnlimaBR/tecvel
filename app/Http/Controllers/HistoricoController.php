@@ -14,24 +14,7 @@ use Illuminate\Support\Facades\DB;
 class HistoricoController extends Controller
 {
 
-    public function invoice($id)
-    {
 
-        $historico    =      Historico::find($id);
-//        dd($contrato->valorTotalPagamentos());
-        if($historico == null){
-            return redirect()->back(200)->with('alerta',['tipo'=>'warning','msg'=>"Nenhum contrato foi encontrato",'icon'=>'check','titulo'=>"Falha"]);
-        }
-        $dados      =  [
-            "titulo"    => "Contrato",
-            "contrato"          =>  $historico,
-            'conf'              => Configuracao::find(1),
-            "menu_open"     =>  "contratos",
-            "menu_active"   =>  "contratos"
-        ];
-
-        return view('admin.contratos.includes.invoice',$dados);
-    }
 
     public function faturar($historico_id)
     {
