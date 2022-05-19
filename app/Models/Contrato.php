@@ -170,7 +170,15 @@ class Contrato extends Model
         return $qnt;
     }
 
+    public function verificarPagamento()
+    {
+        $total_pecas    =   $this->TotalPecasAutorizadoComDesconto();
+        $total_servicos =   $this->totalServicoAutorizadoComDesconto();
+        $total_pagamentos=  $this->valorTotalPagamentos();
+        $valor_total    =   $total_servicos+$total_pecas;
 
+        return $valor_total - $total_pagamentos;
+    }
 
     public function qntPecas()
     {

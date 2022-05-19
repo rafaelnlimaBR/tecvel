@@ -66,33 +66,14 @@
                             <td>{{$c->historicos->last()->tipo->descricao}}</td>
                             <td><span class="badge" style="background: {{$c->status->last()->cor}}; color: white" >{{$c->status->last()->nome}}</span></td>
                             <td>
-                                @php
-                                $total_pago     =   0;
-                                $total_pecas    =   0;
-                                $total_servicos =   0;
-                                $total          =   0;
+                                @if($c->verificarPagamento() == 0)
+                                    <span class='badge' style='background: #148f14 ; color: white' >PAGO</span>
+                                @elseif($c->verificarPagamento()> 0)
+                                    <span class='badge' style='background: #bb291a ; color: white' >PENDENTE</span>
 
-                                    foreach ($c->historicos as $h){
-                                        $total_pago     +=      $h->pagamentos()->sum('valor');
-                                        $total_servicos +=      $h->servicos->sum('pivot.valor');
-                                        foreach ($h->pecas as $p){
-                                            $total_pecas    +=      $p->pivot->valor * $p->pivot->qnt;
-                                        }
-
-                                    }
-                                $total_pecas    =   $total_pecas-($total_pecas*$c->desconto_peca/100);
-                                $total_servicos =   $total_servicos-($total_servicos*$c->desconto_servico/100);
-                                $total          = $total_servicos + $total_pecas;
-                                if($total_pago == $total){
-                                    echo "<span class='badge' style='background: #148f14 ; color: white' >PAGO</span>";
-                                }elseif($total_pago < $total){
-
-                                    echo "<span class='badge' style='background: #bb291a ; color: white' >PENDENTE</span>";
-                                }else{
-                                    echo " <span class='badge' style='background: #3878ab ; color: white' >SUPER</span>";
-                                }
-                                @endphp
-
+                                @else
+                                    <span class='badge' style='background: #3878ab ; color: white' >SUPER</span>
+                                @endif
                             </td>
                             <td>
                                 <a href="{{route('historico.invoice',['id'=>$c->id])}}" class="btn btn-success btn-sm">
