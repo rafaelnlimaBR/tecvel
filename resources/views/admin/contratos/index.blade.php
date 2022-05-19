@@ -50,6 +50,7 @@
                         <th style="width: 15%">Tipo</th>
                         <th style="width: 10%">Status</th>
                         <th style="width: 10%">Pagamento</th>
+                        <th style="width: 10%">Total</th>
                         <th style="width: 10%">Invoice</th>
                         <th style="width: 5%">Entrar</th>
                     </tr>
@@ -74,6 +75,9 @@
                                 @else
                                     <span class='badge' style='background: #3878ab ; color: white' >SUPER</span>
                                 @endif
+                            </td>
+                            <td>
+                                {{$c->valorTotal()}}
                             </td>
                             <td>
                                 <a href="{{route('historico.invoice',['id'=>$c->id])}}" class="btn btn-success btn-sm">

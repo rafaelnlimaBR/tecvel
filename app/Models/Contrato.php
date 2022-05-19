@@ -57,6 +57,11 @@ class Contrato extends Model
         return $this->belongsTo(Veiculo::class,'veiculo_id');
     }
 
+    public function valorTotal()
+    {
+        return $this->TotalPecasAutorizadoComDesconto() + $this->totalServicoAutorizadoComDesconto();
+    }
+
     public function totalServicoSemDesconto()
     {
         $valorTotalSemDesconto  =   0;
