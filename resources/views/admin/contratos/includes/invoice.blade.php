@@ -163,13 +163,13 @@
                             @if($contrato->qntServicos() >= 1)
                             <tr>
                                 <th>Serviços {{$contrato->desconto_servico == 0?"":'('.$contrato->desconto_servico.'%)'}}</th>
-                                <td>R$ {{$contrato->totalServicoAutorizadoComDesconto() .' (R$ '.$contrato->TotalPecasAutorizadoSemDesconto().')'}} </td>
+                                <td>R$ {{$contrato->totalServicoAutorizadoComDesconto() .($contrato->desconto_servico==0?"":" (R$ ".$contrato->TotalServicoAutorizadoSemDesconto().")")}} </td>
                             </tr>
                             @endif
                             @if($contrato->qntPecas() >= 1)
                             <tr>
                                 <th>Peças {{$contrato->desconto_peca == 0?"":'('.$contrato->desconto_peca.'%)'}}</th>
-                                <td>R$ {{$contrato->TotalPecasAutorizadoComDesconto()}} (R$ {{$contrato->TotalPecasAutorizadoSemDesconto()}})</td>
+                                <td>R$ {{$contrato->TotalPecasAutorizadoComDesconto()}} {{($contrato->desconto_peca==0?"":" (R$ ".$contrato->$contrato->TotalPecasAutorizadoSemDesconto().")")}}</td>
                             </tr>
                             @endif
                             <tr>
