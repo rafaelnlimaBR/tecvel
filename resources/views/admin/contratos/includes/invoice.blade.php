@@ -43,6 +43,10 @@
             <div class="col-sm-3 invoice-col">
                 <b>ID #{{$contrato->id}}</b><br>
                 <b>Data: </b>{{date('d/m/Y', strtotime($contrato->data))}}
+                @if($contrato->historicos->last()->tipo->id != $conf->orcamento)
+                <br>
+                 <b>Garantia: </b> {{date('d/m/Y', strtotime($contrato->data_fim_garantia))}}
+                @endif
                 <br>
 
 
