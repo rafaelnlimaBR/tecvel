@@ -21,11 +21,11 @@
                             <ul class="list-unstyled">
                                 @foreach($postagems_mais as  $p)
                                     <li class="d-flex align-items-center">
-
+                                        @if($p->imagens->count() != 0)
                                             <div class="posts-thumb">
                                                 <a href="{{route('site.postagem',['titulo'=>strtolower(str_replace(' ','-',$p->titulo)),'id'=>$p->id])}}"><img loading="lazy" alt="img" src="{{url('imagens/posts/'.$p->imagens->first()->img)}}"></a>
                                             </div>
-
+                                        @endif
                                         <div class="post-info">
                                             <h4 class="entry-title">
                                                 <a href="#">{{$p->titulo}}</a>

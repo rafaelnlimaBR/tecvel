@@ -4,11 +4,11 @@
 
     @foreach($posts as $p)
         <div class="post">
-            @if($p->imagens->count() != 0)
+            {{--@if($p->imagens->count() != 0)--}}
                 <div class="post-media post-image">
                     <img loading="lazy" src="{{url('imagens/posts/'.$p->imagens->first()->img)}}" class="img-fluid" alt="{{$p->imagens->first()->img}}">
                 </div>
-            @endif
+            {{--@endif--}}
             <div class="post-body">
                 <div class="entry-header">
                     <div class="post-meta">
