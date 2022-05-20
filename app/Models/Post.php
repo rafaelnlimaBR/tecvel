@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class Post extends Model
@@ -90,11 +91,14 @@ class Post extends Model
 
     public function adicionarVisita()
     {
-        $post       =   $this;
-        $post->visitas  += 1;
-        if($post->save() == false){
-            throw new \Exception('Não foi possível adicionar visita',200);
+        if(Auth::guest()){
+            $post       =   $this;
+            $post->visitas  += 1;
+            if($post->save() == false){
+                throw new \Exception('Não foi possível adicionar visita',200);
+            }
         }
+
     }
 
     public function gravar(Request $r)
