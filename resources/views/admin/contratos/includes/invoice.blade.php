@@ -151,7 +151,7 @@
 
             </div>
 
-            <div class="col-6">
+            <div class="col-6" >
                 <p class="lead">Valores</p>
                 <div class="table-responsive">
                     <table class="table">
