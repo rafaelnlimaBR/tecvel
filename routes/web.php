@@ -23,6 +23,12 @@ use App\Http\Controllers\ClienteController;
 
 Route::group(['prefix'=>'admin','middleware'=>'auth:web'],function(){
 
+    Route::get('emailteste',function (){
+       $email   =   "rafaelnlima@live.com";
+       \Illuminate\Support\Facades\Mail::send(new \App\Mail\NotificacaoTeste($email));
+
+    });
+
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');
     Route::get('/sair', [App\Http\Controllers\DashboardController::class, 'sair'])->name('sair');
 
