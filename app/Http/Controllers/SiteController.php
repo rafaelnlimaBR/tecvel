@@ -110,12 +110,13 @@ class SiteController extends Controller
         }
         $dados  =   [
             "titulo"        =>  "Tecvel - ".$categoria->nome,
-            "posts"         =>  $categoria->posts(),
+            "posts"         =>  $categoria->posts()->paginate(20),
             'dados'         =>  $this->conf,
             'categorias'    =>  Categoria::all(),
             'postagem_recentes' =>  Post::orderBy('data','desc')->take(3)->get(),
             'postagems_mais'    =>  Post::orderBy('visitas','desc')->take(5)->get()
         ];
+
         return view('site.posts.includes.todas-postagens',$dados);
 
     }

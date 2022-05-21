@@ -16,28 +16,23 @@ use App\Http\Controllers\ClienteController;
 |
 */
 
-Route::get('/teste', function () {
-    try{
-        $comentario =   \App\Models\Comentario::find(1);
-//    dd(env('MAIL_USERNAME'));
-        \Illuminate\Support\Facades\Mail::send(new \App\Mail\NotificacaoComentario($comentario,"rafael@tecvelautomotiva.com.br"));
-    }catch (Exception $e){
-        return$e->getMessage();
-    }
-
-});
-
-
-Auth::routes();
 
 
 
 
-//Route::group(['prefix'=>'admin','middleware'=>'auth:web'],function(){
-Route::group(['prefix'=>'admin'],function(){
 
+Route::group(['prefix'=>'admin','middleware'=>'auth:web'],function(){
+
+    Route::get('emailteste',function (){
+       $email   =   "rafaelnlima@live.com";
+       \Illuminate\Support\Facades\Mail::send(new \App\Mail\NotificacaoTeste($email));
+
+    });
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'home'])->name('home');
+    Route::get('/sair', [App\Http\Controllers\DashboardController::class, 'sair'])->name('sair');
+
+
 
     Route::get('/configuracao/', [App\Http\Controllers\ConfiguracaoController::class, 'editar'])->name('configuracao.editar');
     Route::post('/configuracao/atualizar', [App\Http\Controllers\ConfiguracaoController::class, 'atualizar'])->name('configuracao.atualizar');
@@ -49,7 +44,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('/contrato/atualizar', [App\Http\Controllers\ContratoController::class, 'atualizar'])->name('contrato.atualizar');
     Route::post('/contrato/excluir', [App\Http\Controllers\ContratoController::class, 'excluir'])->name('contrato.excluir');
     Route::post('/contrato/atualizar/status', [App\Http\Controllers\ContratoController::class, 'atualizarStatus'])->name('contrato.atualizar.status');
-    Route::get('/historico/invoice/{id}', [App\Http\Controllers\HistoricoController::class, 'invoice'])->name('historico.invoice');
+    Route::get('/historico/invoice/{id}', [App\Http\Controllers\ContratoController::class, 'invoice'])->name('historico.invoice');
 
     Route::post('/contrato/pagar', [App\Http\Controllers\HistoricoController::class, 'pagar'])->name('historico.pagar');
     Route::get('/contrato/historico/{historico_id}/faturar/', [App\Http\Controllers\HistoricoController::class, 'faturar'])->name('historico.faturar');
@@ -218,4 +213,10 @@ Route::post('/contato/enviar', [App\Http\Controllers\SiteController::class, 'cad
 Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])->name('site.postagens');
 Route::get('/categoria/{nome}/{id}', [App\Http\Controllers\SiteController::class, 'categoria'])->name('site.categoria');
 Route::post('/comentar/postagem', [App\Http\Controllers\SiteController::class, 'comentar'])->name('site.postagem.comentar');
+Route::get('/entrar', [App\Http\Controllers\SiteController::class, 'entrar'])->name('site.entrar');
 
+
+
+
+
+Auth::routes();

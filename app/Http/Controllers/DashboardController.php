@@ -10,6 +10,7 @@ use App\Models\Entrada;
 use App\Models\Saida;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -29,5 +30,12 @@ class DashboardController extends Controller
             "menu_open"     =>  "dashboard"
         ];
         return view('admin.dashboard.index',$dados);
+    }
+
+    public function sair()
+    {
+        Auth::logout();
+
+        return redirect()->route('site.inicio');
     }
 }

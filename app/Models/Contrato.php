@@ -57,6 +57,11 @@ class Contrato extends Model
         return $this->belongsTo(Veiculo::class,'veiculo_id');
     }
 
+    public function valorTotal()
+    {
+        return $this->TotalPecasAutorizadoComDesconto() + $this->totalServicoAutorizadoComDesconto();
+    }
+
     public function totalServicoSemDesconto()
     {
         $valorTotalSemDesconto  =   0;
@@ -68,6 +73,19 @@ class Contrato extends Model
         return $valorTotalSemDesconto;
     }
 
+    public function totalServicoAutorizadoSemDesconto()
+    {
+        $valorTotalAutorizadoSemDesconto  =   0;
+
+
+
+        foreach ($this->historicos as $historico){
+
+            $valorTotalAutorizadoSemDesconto  += $historico->valorTotalServicoAutorizado();
+        }
+        return $valorTotalAutorizadoSemDesconto;
+    }
+
     public function totalServicoComDesconto()
     {
         $valorTotalComDesconto  =   0;
@@ -75,6 +93,17 @@ class Contrato extends Model
 
         foreach ($this->historicos as $historico){
             $valorTotalComDesconto  += $historico->ValorTotalServicosComDesconto();
+        }
+        return $valorTotalComDesconto;
+    }
+
+    public function totalServicoAutorizadoComDesconto()
+    {
+        $valorTotalComDesconto  =   0;
+
+
+        foreach ($this->historicos as $historico){
+            $valorTotalComDesconto  += $historico->ValorTotalServicosAutorizadoComDesconto();
         }
         return $valorTotalComDesconto;
     }
@@ -91,6 +120,18 @@ class Contrato extends Model
         return $valorPecaSemDesconto;
     }
 
+    public function TotalPecasAutorizadoSemDesconto()
+    {
+
+        $valorPecaAutorizadoSemDesconto    =  0;
+
+        foreach ($this->historicos as $historico){
+            $valorPecaAutorizadoSemDesconto  += $historico->valorTotalPecasAutorizado();
+        }
+
+        return $valorPecaAutorizadoSemDesconto;
+    }
+
     public function TotalPecasComDesconto()
     {
 
@@ -103,11 +144,24 @@ class Contrato extends Model
         return $valorPecaComDesconto;
     }
 
+    public function TotalPecasAutorizadoComDesconto()
+    {
+
+        $valorPecaComDesconto    =  0;
+
+        foreach ($this->historicos as $historico){
+            $valorPecaComDesconto  += $historico->ValorTotalPecasAutorizadoComDesconto();
+        }
+
+        return $valorPecaComDesconto;
+    }
+
     public function qntServicos()
     {
         $qnt    =   0;
         foreach ($this->historicos as $historico){
-            $qnt    =+ $historico->servicos()->count();
+
+            $qnt    += $historico->servicos()->count();
         }
         return $qnt;
     }
@@ -116,16 +170,26 @@ class Contrato extends Model
     {
         $qnt    =   0;
         foreach ($this->historicos as $historico){
-            $qnt    =+ $historico->pagamentos()->count();
+            $qnt    += $historico->pagamentos()->count();
         }
         return $qnt;
+    }
+
+    public function verificarPagamento()
+    {
+        $total_pecas    =   $this->TotalPecasAutorizadoComDesconto();
+        $total_servicos =   $this->totalServicoAutorizadoComDesconto();
+        $total_pagamentos=  $this->valorTotalPagamentos();
+        $valor_total    =   $total_servicos+$total_pecas;
+
+        return $valor_total - $total_pagamentos;
     }
 
     public function qntPecas()
     {
         $qnt    =   0;
         foreach ($this->historicos as $historico){
-            $qnt    =+  $historico->pecas()->count();
+            $qnt    +=  $historico->pecas()->count();
         }
         return $qnt;
     }

@@ -151,5 +151,22 @@ class ContratoController extends Controller
         }
     }
 
+    public function invoice($id)
+    {
 
+        $contrato    =      Contrato::find($id);
+//        dd($contrato->valorTotalPagamentos());
+        if($contrato == null){
+            return redirect()->back(200)->with('alerta',['tipo'=>'warning','msg'=>"Nenhum contrato foi encontrato",'icon'=>'check','titulo'=>"Falha"]);
+        }
+        $dados      =  [
+            "titulo"    => "Contrato",
+            "contrato"          =>  $contrato,
+            'conf'              => Configuracao::find(1),
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "contratos"
+        ];
+
+        return view('admin.contratos.includes.invoice',$dados);
+    }
 }

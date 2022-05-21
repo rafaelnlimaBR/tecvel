@@ -77,6 +77,7 @@
                     <span class="badge badge-danger navbar-badge">{{$comentarios->count()}}</span>
                     @endif
                 </a>
+
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     @foreach($comentarios as $comentario)
                         <a href="{{route('comentario.editar',['id'=>$comentario->id])}}" class="dropdown-item">
@@ -131,10 +132,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                    <i class="fas fa-th-large"></i>
+                <a class="nav-link" href="{{route('sair')}}" role="button">
+                  Sair
                 </a>
             </li>
+            {{--<li class="nav-item">--}}
+                {{--<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">--}}
+                    {{--<i class="fas fa-th-large"></i>--}}
+                {{--</a>--}}
+            {{--</li>--}}
         </ul>
     </nav>
     <!-- /.navbar -->

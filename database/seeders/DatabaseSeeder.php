@@ -21,27 +21,27 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsuarioSeeder::class,
             ConfiguracaoSeeder::class,
-            ComentarioSeeder::class,
-            ClienteSeeder::class,
-            VeiculoSeeder::class,
-            ServicoSeeder::class,
+//            ComentarioSeeder::class,
+//            ClienteSeeder::class,
+//            VeiculoSeeder::class,
+//            ServicoSeeder::class,
             StatusSeeder::class,
-            FornecedorSeeder::class,
-            ContratoSeeder::class,
+//            FornecedorSeeder::class,
+//            ContratoSeeder::class,
             TipoSeeder::class,
-            HistoricoSeeder::class,
-            PedidoSeeder::class,
+//            HistoricoSeeder::class,
+//            PedidoSeeder::class,
 
 
-            TerceirizadosSeeder::class,
-            PecasSeeder::class,
-            TrabalhoSeeder::class,
+//            TerceirizadosSeeder::class,
+//            PecasSeeder::class,
+//            TrabalhoSeeder::class,
             TipoPagamentosSeeder::class,
             TaxaSeeder::class,
-            SaidaSeeder::class,
+//            SaidaSeeder::class,
 
-            PostSeeder::class,
-            CategoriaSeeder::class,
+//            PostSeeder::class,
+//            CategoriaSeeder::class,
             AvaliacaoSeeder::class
         ]);
     }

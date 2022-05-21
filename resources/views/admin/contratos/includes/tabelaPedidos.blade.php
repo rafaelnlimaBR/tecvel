@@ -24,12 +24,15 @@
             <td>R$ {{$s->valorTotalDesconto()}}</td>
             <td>
 
-                @if($s->pagamentos()->sum('valor') == $s->valorTotalDesconto())
+
+
+                @if($s->verificarPagamento() == 0)
                     <span class="badge" style="background: #148f14 ; color: white" >PAGO</span>
-                @elseif($s->pagamentos()->sum('valor') > $s->valorTotalDesconto())
-                    <span class="badge" style="background: #3878ab ; color: white" >SUPER</span>
-                @else
+                @elseif($s->verificarPagamento() > 0)
                     <span class="badge" style="background: #bb291a ; color: white" >PENDENTE</span>
+                @else
+                    <span class="badge" style="background: #3878ab ; color: white" >SUPER</span>
+
                 @endif
             </td>
             <td><a class="btn btn-warning btn-sm" href="{{route('pedido.editar',['id'=>$contrato->id,'historico_id'=>$historico->id,'pedido_id'=>$s->id])}}"><i class="fa fa-edit"></i></a></td>

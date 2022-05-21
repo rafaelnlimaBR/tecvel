@@ -46,13 +46,22 @@ class Pedido extends Model
 
     public function valorTotalDesconto()
     {
-        $valorTotal =   0;
+        $valorTotal =   $this->valorTotal();
         $desconto   =   $this->desconto;
-        foreach ($this->pecas as $p){
-            $valorTotal     +=   $p->valor_fornecedor*$p->qnt;
-        }
-        return $valorTotal*(100-$desconto)/100;
 
+        return number_format(   $valorTotal*(100-$desconto)/100,2,'.');
+
+    }
+
+    public function totalPagamento()
+    {
+        $totalPagamento     =   $this->pagamentos()->sum('valor');
+        return $totalPagamento;
+    }
+
+    public function verificarPagamento()
+    {
+        return $this->valorTotalDesconto()-$this->totalPagamento();
     }
 
     public static function gravar(Request $r)
