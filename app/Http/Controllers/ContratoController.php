@@ -76,6 +76,7 @@ class ContratoController extends Controller
     public function editar($id,$historico_id)
     {
         $contrato    =   Contrato::find($id);
+       
         $dados      =  [
             "titulo"    => "Contrato",
             "titulo_formulario" =>'Editar',
