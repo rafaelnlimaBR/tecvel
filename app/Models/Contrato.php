@@ -38,7 +38,9 @@ class Contrato extends Model
             ->withPivot('obs')
             ->withPivot('tipo_id')
             ->withPivot('id')
-            ->withTimestamps();
+            ->withPivot('created_at')
+            ->withPivot('updated_at');
+
     }
 
 

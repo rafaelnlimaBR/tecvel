@@ -65,7 +65,7 @@
                             <td>{{$c->veiculo->placa}}</td>
                             <td><span style="font-size: 14px">{{date('d/m/Y H:m', strtotime($c->data))}}</span></td>
                             <td>{{$c->historicos->last()->tipo->descricao}}</td>
-                            <td><span class="badge" style="background: {{$c->status->last()->cor}}; color: white" >{{$c->status->last()->nome}}</span></td>
+                            <td><span class="badge" style="background: {{$c->historicos->last()->status->cor}}; color: white" >{{$c->historicos->last()->status->nome}}</span></td>
                             <td>
                                 @if($c->verificarPagamento() == 0)
                                     <span class='badge' style='background: #148f14 ; color: white' >PAGO</span>

@@ -317,7 +317,8 @@
                         {{--    Tela Não autorizado--}}
 
                     @else
-                        @foreach($contrato->status->last()->proximos as $status)
+
+                        @foreach($contrato->historicos->last()->status->proximos as $status)
 
                             <button status_id="{{$status->id}}" type="button" class="btn btn-primary modalAtualizarStatus" data-toggle="modal" data-target="#modalStatus" style="background-color: {{$status->cor}}; border-color: rgba(105,105,106,0.85); color: white; font-weight: bolder; box-shadow: 5px 5px 5px rgba(5, 0, 0, 0.3)">
                                 {{$status->nome}}
