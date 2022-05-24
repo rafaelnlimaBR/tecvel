@@ -207,11 +207,12 @@ Route::group(['prefix'=>'admin','middleware'=>'auth:web'],function(){
 
     View::composer(['admin.home'],function($view){
         $view->with(['comentarios'=>\App\Models\Comentario::visualizados(0)->get()]);
+        $view->with(['contatos'=>\App\Models\Contato::visualizados(0)->get()]);
+        $view->with(['conf'=>\App\Models\Configuracao::find(1)]);
     });
 
-    View::composer(['admin.home'],function($view){
-        $view->with(['contatos'=>\App\Models\Contato::visualizados(0)->get()]);
-    });
+
+
 });
 
 Route::get('/{titulo}/{id}', [App\Http\Controllers\SiteController::class, 'post'])->name('site.postagem');
