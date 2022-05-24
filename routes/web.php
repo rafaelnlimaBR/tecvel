@@ -47,6 +47,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth:web'],function(){
     Route::post('/configuracao/atualizar', [App\Http\Controllers\ConfiguracaoController::class, 'atualizar'])->name('configuracao.atualizar');
 
     Route::get('/contratos', [App\Http\Controllers\ContratoController::class, 'index'])->name('contrato.index');
+    Route::get('/contratos/mobile', [App\Http\Controllers\ContratoController::class, 'indexMobile'])->name('contrato.index.mobile');
     Route::get('/contrato/novo/{tipo}', [App\Http\Controllers\ContratoController::class, 'novo'])->name('contrato.novo');
     Route::get('/contrato/editar/{id}/historico/{historico_id}', [App\Http\Controllers\ContratoController::class, 'editar'])->name('contrato.editar');
     Route::post('/contrato/cadastrar', [App\Http\Controllers\ContratoController::class, 'cadastrar'])->name('contrato.cadastrar');

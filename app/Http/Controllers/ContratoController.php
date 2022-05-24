@@ -13,6 +13,13 @@ use function PHPUnit\Framework\isEmpty;
 
 class ContratoController extends Controller
 {
+    private $conf   ;
+
+    public function __construct()
+    {
+        $this->conf =   Configuracao::find(1);
+    }
+
     public function index()
     {
         $contratos = Contrato::orderby('id','desc')->paginate(30);;
@@ -20,11 +27,25 @@ class ContratoController extends Controller
             "titulo"            =>  "Contratos",
             "titulo_tabela"     =>  "Lista de Contratos",
             "menu_open"     =>  "contratos",
-            "menu_active"   =>  "contratos"
+            "menu_active"   =>  "contratos",
+            'conf'          =>   $this->conf
         ];
 
         return view('admin.contratos.index',$dados)->with('contratos',$contratos);
 
+    }
+
+    public function indexMobile()
+    {
+        $dados      =  [
+            "titulo"            =>  "Contratos",
+            "titulo_tabela"     =>  "Lista de Contratos",
+            "menu_open"     =>  "contratos",
+            "menu_active"   =>  "contratos",
+            'conf'          =>   $this->conf
+        ];
+
+        return view('admin.contratos.index-mobile',$dados);
     }
 
     public function novo($tipo)
