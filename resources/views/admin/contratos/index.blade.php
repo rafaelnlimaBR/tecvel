@@ -46,10 +46,10 @@
                         <th style="width: 5%">ID</th>
                         <th style="width: 40%">Cliente</th>
                         <th style="width: 20%">Veículo</th>
-                        <th style="width: 25%">Data</th>
+                        <th style="width: 15%">Data</th>
                         <th style="width: 15%">Tipo</th>
                         <th style="width: 10%">Status</th>
-                        <th style="width: 10%">Pagamento</th>
+                        <th style="width: 5%">Pag.</th>
                         <th style="width: 10%">Total</th>
                         <th style="width: 10%">Invoice</th>
                         <th style="width: 5%">Entrar</th>
@@ -62,8 +62,8 @@
 
                             <td>{{$c->id}}</td>
                             <td>{{$c->cliente->nome}}</td>
-                            <td>{{$c->veiculo->placa}}</td>
-                            <td><span style="font-size: 14px">{{date('d/m/Y H:m', strtotime($c->data))}}</span></td>
+                            <td style="font-size: 12px">{{$c->veiculo->placa.' | '.$c->veiculo->modelo}}</td>
+                            <td><span style="font-size: 14px">{{date('d/m/Y', strtotime($c->data))}}</span></td>
                             <td>{{$c->historicos->last()->tipo->descricao}}</td>
                             <td><span class="badge" style="background: {{$c->historicos->last()->status->cor}}; color: white" >{{$c->historicos->last()->status->nome}}</span></td>
                             <td>
