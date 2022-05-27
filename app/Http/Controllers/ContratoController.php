@@ -22,7 +22,7 @@ class ContratoController extends Controller
 
     public function index()
     {
-        $contratos = Contrato::orderby('id','desc')->paginate(30);;
+        $contratos = Contrato::orderby('id','desc')->get();
         $dados      =  [
             "titulo"            =>  "Contratos",
             "titulo_tabela"     =>  "Lista de Contratos",

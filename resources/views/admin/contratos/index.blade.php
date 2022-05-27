@@ -40,7 +40,7 @@
                         </div>
                     </form>--}}
                 </div>
-                <table class="table table-bordered " id="tabela-contratos">
+                <table class="table table-bordered " id="tabela-contratos" data-order='[[ 3, "desc" ]]' data-page-length='25'>
                     <thead>
                     <tr>
                         <th style="width: 5%">ID</th>
@@ -61,7 +61,7 @@
                         <tr>
 
                             <td>{{$c->id}}</td>
-                            <td>{{$c->cliente->nome}}</td>
+                            <td><a href="https://wa.me/55{{str_replace(')','',str_replace('(','',$c->cliente->telefone01))}}" target="new">{{$c->cliente->nome}}</a></td>
                             <td style="font-size: 12px">{{$c->veiculo->placa.' | '.$c->veiculo->modelo}}</td>
                             <td><span style="font-size: 14px">{{date('d/m/Y', strtotime($c->data))}}</span></td>
                             <td>{{$c->historicos->last()->tipo->descricao}}</td>
