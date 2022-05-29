@@ -225,7 +225,9 @@ Route::get('/postagens', [App\Http\Controllers\SiteController::class, 'posts'])-
 Route::get('/categoria/{nome}/{id}', [App\Http\Controllers\SiteController::class, 'categoria'])->name('site.categoria');
 Route::post('/comentar/postagem', [App\Http\Controllers\SiteController::class, 'comentar'])->name('site.postagem.comentar');
 Route::get('/entrar', [App\Http\Controllers\SiteController::class, 'entrar'])->name('site.entrar');
-
+View::composer(['auth.login'],function($view){
+    $view->with(['dados'=>\App\Models\Configuracao::find(1)]);
+});
 
 
 
