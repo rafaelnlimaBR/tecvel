@@ -14,16 +14,16 @@
     </tr>
     </thead>
     <tbody>
-
-    @foreach($historico->pagamentos as $s)
-        <tr>
-            <td>{{$s->valor}}</td>
-            <td>{{$s->valor_total}}</td>
-            <td>{{$s->taxa->formaPagamento->nome." / ".$s->taxa->nome}}</td>
-            <td>{{date('d/m/Y H:i',strtotime($s->data))}}</td>
-            <td><a class="btn btn-warning btn-sm" href="{{route('historico.faturar.editar',['historico_id'=>$historico->id,'fatura_id'=>$s->id])}}"><i class="fa fa-edit"></i></a></td>
-        </tr>
+    @foreach($contrato->historicos as $h)
+        @foreach($h->pagamentos as $s)
+            <tr>
+                <td>{{$s->valor}}</td>
+                <td>{{$s->valor_total}}</td>
+                <td>{{$s->taxa->formaPagamento->nome." / ".$s->taxa->nome}}</td>
+                <td>{{date('d/m/Y H:i',strtotime($s->data))}}</td>
+                <td><a class="btn btn-warning btn-sm" href="{{route('historico.faturar.editar',['historico_id'=>$historico->id,'fatura_id'=>$s->id])}}"><i class="fa fa-edit"></i></a></td>
+            </tr>
+        @endforeach
     @endforeach
-
     </tbody>
 </table>
