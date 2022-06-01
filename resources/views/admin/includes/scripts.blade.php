@@ -368,7 +368,7 @@
         var diasGarantia   =   $(this).val();
         $('.input-fim-garantia').val(diasGarantia);
     });
-
+    $.fn.dataTable.moment( 'MM/DD/YYYY' );
     $('#tabela-contratos').dataTable({
 
         "language":{
