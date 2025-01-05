@@ -20,7 +20,7 @@
                 @endif
             </div>
             <div class="col-sm-3 invoice-col">
-                Dados
+
                 <address>
                     <strong>{{$conf->nome_empresa}}</strong><br>
                     {{$conf->endereco}}<br>
@@ -31,11 +31,12 @@
             </div>
 
             <div class="col-sm-3 invoice-col">
-                Cliente
+
                 <address>
                     <strong>{{$contrato->cliente->nome}}</strong><br>
                     {{$contrato->cliente->telefone01}}<br>
-                    Email: {{$contrato->cliente->email}}<br>
+                    Veículo: {{$contrato->veiculo->modelo}}<br>
+                    Placa:<strong> {{$contrato->veiculo->placa}}</strong><br>
 
                 </address>
             </div>
@@ -179,7 +180,7 @@
                             <tr>
                                 @if($contrato->qntPagamentos() >= 1)
 
-                                   <th>Pagamento:</th>
+                                   <th>Pago:</th>
                                     <td>R$ {{$contrato->valorTotalPagamentos()}}</td>
                                 @endif
 
