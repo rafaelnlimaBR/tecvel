@@ -206,7 +206,7 @@
 
                                     <div class="form-group">
                                         <label>Descrição </label>
-                                        <input type="text" class="form-control" name="descricao" placeholder="Descrição" value="teste">
+                                        <input type="text" class="form-control" name="descricao" placeholder="Descrição" value=" ">
                                         {{csrf_field()}}
                                         <input type="hidden" name="historico_id" value="{{$historico->id}}">
                                         <input type="hidden" name="contrato_id" value="{{$contrato->id}}">
@@ -215,19 +215,19 @@
                                 <div class="col-sm-2">
                                     <div class="form-group" style="">
                                         <label>Valor Fornecedor</label>
-                                        <input class="form-control dinheiro" type="text" value="10.00" name="valor_fornecedor" id="" placeholder="Valor Fornecedor">
+                                        <input class="form-control dinheiro" type="text" value="0.00" name="valor_fornecedor" id="" placeholder="Valor Fornecedor">
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Valor</label>
-                                        <input class="form-control dinheiro" type="text" value="15.00" name="valor" id="valorPeca" placeholder="Valor">
+                                        <input class="form-control dinheiro" type="text" value="0.00" name="valor" id="valorPeca" placeholder="Valor">
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Qnt</label>
-                                        <input class="form-control" type="number" name="qnt" value="4" placeholder="Qnt">
+                                        <input class="form-control" type="number" name="qnt" value="1" placeholder="Qnt">
                                     </div>
                                 </div>
                                 <div class="col-sm-1">
